@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.ruidaoexam.dao.TradeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.ruidaoexam.entity.TradeRecord" >
+    <id column="trade_id" property="tradeId" jdbcType="INTEGER" />
+    <result column="seller_id" property="sellerId" jdbcType="INTEGER" />
+    <result column="points" property="points" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="product_type" property="productType" jdbcType="INTEGER" />
+    <result column="bank_id" property="bankId" jdbcType="INTEGER" />
+    <result column="paper_id" property="paperId" jdbcType="INTEGER" />
+    <result column="buyer_type" property="buyerType" jdbcType="INTEGER" />
+    <result column="buyer_s_id" property="buyerSId" jdbcType="INTEGER" />
+    <result column="buyer_t_id" property="buyerTId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    trade_id, seller_id, points, time, product_type, bank_id, paper_id, buyer_type, buyer_s_id, 
+    buyer_t_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.TradeRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from trade_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from trade_record
+    where trade_id = #{tradeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from trade_record
+    where trade_id = #{tradeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.ruidaoexam.entity.TradeRecordExample" >
+    delete from trade_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.TradeRecord" >
+    insert into trade_record (trade_id, seller_id, points, 
+      time, product_type, bank_id, 
+      paper_id, buyer_type, buyer_s_id, 
+      buyer_t_id)
+    values (#{tradeId,jdbcType=INTEGER}, #{sellerId,jdbcType=INTEGER}, #{points,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP}, #{productType,jdbcType=INTEGER}, #{bankId,jdbcType=INTEGER}, 
+      #{paperId,jdbcType=INTEGER}, #{buyerType,jdbcType=INTEGER}, #{buyerSId,jdbcType=INTEGER}, 
+      #{buyerTId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.TradeRecord" >
+    insert into trade_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tradeId != null" >
+        trade_id,
+      </if>
+      <if test="sellerId != null" >
+        seller_id,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="productType != null" >
+        product_type,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="paperId != null" >
+        paper_id,
+      </if>
+      <if test="buyerType != null" >
+        buyer_type,
+      </if>
+      <if test="buyerSId != null" >
+        buyer_s_id,
+      </if>
+      <if test="buyerTId != null" >
+        buyer_t_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tradeId != null" >
+        #{tradeId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=INTEGER},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null" >
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerType != null" >
+        #{buyerType,jdbcType=INTEGER},
+      </if>
+      <if test="buyerSId != null" >
+        #{buyerSId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerTId != null" >
+        #{buyerTId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.ruidaoexam.entity.TradeRecordExample" resultType="java.lang.Integer" >
+    select count(*) from trade_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update trade_record
+    <set >
+      <if test="record.tradeId != null" >
+        trade_id = #{record.tradeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellerId != null" >
+        seller_id = #{record.sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.points != null" >
+        points = #{record.points,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productType != null" >
+        product_type = #{record.productType,jdbcType=INTEGER},
+      </if>
+      <if test="record.bankId != null" >
+        bank_id = #{record.bankId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paperId != null" >
+        paper_id = #{record.paperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyerType != null" >
+        buyer_type = #{record.buyerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyerSId != null" >
+        buyer_s_id = #{record.buyerSId,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyerTId != null" >
+        buyer_t_id = #{record.buyerTId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update trade_record
+    set trade_id = #{record.tradeId,jdbcType=INTEGER},
+      seller_id = #{record.sellerId,jdbcType=INTEGER},
+      points = #{record.points,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      product_type = #{record.productType,jdbcType=INTEGER},
+      bank_id = #{record.bankId,jdbcType=INTEGER},
+      paper_id = #{record.paperId,jdbcType=INTEGER},
+      buyer_type = #{record.buyerType,jdbcType=INTEGER},
+      buyer_s_id = #{record.buyerSId,jdbcType=INTEGER},
+      buyer_t_id = #{record.buyerTId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.ruidaoexam.entity.TradeRecord" >
+    update trade_record
+    <set >
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productType != null" >
+        product_type = #{productType,jdbcType=INTEGER},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null" >
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerType != null" >
+        buyer_type = #{buyerType,jdbcType=INTEGER},
+      </if>
+      <if test="buyerSId != null" >
+        buyer_s_id = #{buyerSId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerTId != null" >
+        buyer_t_id = #{buyerTId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where trade_id = #{tradeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.ruidaoexam.entity.TradeRecord" >
+    update trade_record
+    set seller_id = #{sellerId,jdbcType=INTEGER},
+      points = #{points,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      product_type = #{productType,jdbcType=INTEGER},
+      bank_id = #{bankId,jdbcType=INTEGER},
+      paper_id = #{paperId,jdbcType=INTEGER},
+      buyer_type = #{buyerType,jdbcType=INTEGER},
+      buyer_s_id = #{buyerSId,jdbcType=INTEGER},
+      buyer_t_id = #{buyerTId,jdbcType=INTEGER}
+    where trade_id = #{tradeId,jdbcType=INTEGER}
+  </update>
+</mapper>

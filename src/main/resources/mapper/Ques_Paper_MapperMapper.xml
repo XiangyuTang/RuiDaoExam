@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.ruidaoexam.dao.Ques_Paper_MapperMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.ruidaoexam.entity.Ques_Paper_Mapper" >
+    <id column="mapper_id" property="mapperId" jdbcType="INTEGER" />
+    <result column="paper_id" property="paperId" jdbcType="INTEGER" />
+    <result column="ques_type" property="quesType" jdbcType="INTEGER" />
+    <result column="cq_id" property="cqId" jdbcType="INTEGER" />
+    <result column="eq_id" property="eqId" jdbcType="INTEGER" />
+    <result column="jq_id" property="jqId" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mapper_id, paper_id, ques_type, cq_id, eq_id, jq_id, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.Ques_Paper_MapperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ques_paper_mapper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ques_paper_mapper
+    where mapper_id = #{mapperId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ques_paper_mapper
+    where mapper_id = #{mapperId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.ruidaoexam.entity.Ques_Paper_MapperExample" >
+    delete from ques_paper_mapper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.Ques_Paper_Mapper" >
+    insert into ques_paper_mapper (mapper_id, paper_id, ques_type, 
+      cq_id, eq_id, jq_id, score
+      )
+    values (#{mapperId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{quesType,jdbcType=INTEGER}, 
+      #{cqId,jdbcType=INTEGER}, #{eqId,jdbcType=INTEGER}, #{jqId,jdbcType=INTEGER}, #{score,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.Ques_Paper_Mapper" >
+    insert into ques_paper_mapper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mapperId != null" >
+        mapper_id,
+      </if>
+      <if test="paperId != null" >
+        paper_id,
+      </if>
+      <if test="quesType != null" >
+        ques_type,
+      </if>
+      <if test="cqId != null" >
+        cq_id,
+      </if>
+      <if test="eqId != null" >
+        eq_id,
+      </if>
+      <if test="jqId != null" >
+        jq_id,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mapperId != null" >
+        #{mapperId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null" >
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="quesType != null" >
+        #{quesType,jdbcType=INTEGER},
+      </if>
+      <if test="cqId != null" >
+        #{cqId,jdbcType=INTEGER},
+      </if>
+      <if test="eqId != null" >
+        #{eqId,jdbcType=INTEGER},
+      </if>
+      <if test="jqId != null" >
+        #{jqId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.ruidaoexam.entity.Ques_Paper_MapperExample" resultType="java.lang.Integer" >
+    select count(*) from ques_paper_mapper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ques_paper_mapper
+    <set >
+      <if test="record.mapperId != null" >
+        mapper_id = #{record.mapperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paperId != null" >
+        paper_id = #{record.paperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.quesType != null" >
+        ques_type = #{record.quesType,jdbcType=INTEGER},
+      </if>
+      <if test="record.cqId != null" >
+        cq_id = #{record.cqId,jdbcType=INTEGER},
+      </if>
+      <if test="record.eqId != null" >
+        eq_id = #{record.eqId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jqId != null" >
+        jq_id = #{record.jqId,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ques_paper_mapper
+    set mapper_id = #{record.mapperId,jdbcType=INTEGER},
+      paper_id = #{record.paperId,jdbcType=INTEGER},
+      ques_type = #{record.quesType,jdbcType=INTEGER},
+      cq_id = #{record.cqId,jdbcType=INTEGER},
+      eq_id = #{record.eqId,jdbcType=INTEGER},
+      jq_id = #{record.jqId,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.ruidaoexam.entity.Ques_Paper_Mapper" >
+    update ques_paper_mapper
+    <set >
+      <if test="paperId != null" >
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="quesType != null" >
+        ques_type = #{quesType,jdbcType=INTEGER},
+      </if>
+      <if test="cqId != null" >
+        cq_id = #{cqId,jdbcType=INTEGER},
+      </if>
+      <if test="eqId != null" >
+        eq_id = #{eqId,jdbcType=INTEGER},
+      </if>
+      <if test="jqId != null" >
+        jq_id = #{jqId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mapper_id = #{mapperId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.ruidaoexam.entity.Ques_Paper_Mapper" >
+    update ques_paper_mapper
+    set paper_id = #{paperId,jdbcType=INTEGER},
+      ques_type = #{quesType,jdbcType=INTEGER},
+      cq_id = #{cqId,jdbcType=INTEGER},
+      eq_id = #{eqId,jdbcType=INTEGER},
+      jq_id = #{jqId,jdbcType=INTEGER},
+      score = #{score,jdbcType=VARCHAR}
+    where mapper_id = #{mapperId,jdbcType=INTEGER}
+  </update>
+</mapper>

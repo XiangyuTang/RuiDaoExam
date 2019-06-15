@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.ruidaoexam.dao.ChoiceQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.ruidaoexam.entity.ChoiceQuestion" >
+    <id column="choice_ques_id" property="choiceQuesId" jdbcType="INTEGER" />
+    <result column="ques_type_id" property="quesTypeId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="choice1" property="choice1" jdbcType="VARCHAR" />
+    <result column="choice2" property="choice2" jdbcType="VARCHAR" />
+    <result column="choice3" property="choice3" jdbcType="VARCHAR" />
+    <result column="choice4" property="choice4" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="difficulty" property="difficulty" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    choice_ques_id, ques_type_id, content, choice1, choice2, choice3, choice4, answer, 
+    difficulty
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from choice_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from choice_question
+    where choice_ques_id = #{choiceQuesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from choice_question
+    where choice_ques_id = #{choiceQuesId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestionExample" >
+    delete from choice_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestion" >
+    insert into choice_question (choice_ques_id, ques_type_id, content, 
+      choice1, choice2, choice3, 
+      choice4, answer, difficulty
+      )
+    values (#{choiceQuesId,jdbcType=INTEGER}, #{quesTypeId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{choice1,jdbcType=VARCHAR}, #{choice2,jdbcType=VARCHAR}, #{choice3,jdbcType=VARCHAR}, 
+      #{choice4,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{difficulty,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestion" >
+    insert into choice_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="choiceQuesId != null" >
+        choice_ques_id,
+      </if>
+      <if test="quesTypeId != null" >
+        ques_type_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="choice1 != null" >
+        choice1,
+      </if>
+      <if test="choice2 != null" >
+        choice2,
+      </if>
+      <if test="choice3 != null" >
+        choice3,
+      </if>
+      <if test="choice4 != null" >
+        choice4,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="difficulty != null" >
+        difficulty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="choiceQuesId != null" >
+        #{choiceQuesId,jdbcType=INTEGER},
+      </if>
+      <if test="quesTypeId != null" >
+        #{quesTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null" >
+        #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null" >
+        #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null" >
+        #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null" >
+        #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null" >
+        #{difficulty,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestionExample" resultType="java.lang.Integer" >
+    select count(*) from choice_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update choice_question
+    <set >
+      <if test="record.choiceQuesId != null" >
+        choice_ques_id = #{record.choiceQuesId,jdbcType=INTEGER},
+      </if>
+      <if test="record.quesTypeId != null" >
+        ques_type_id = #{record.quesTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choice1 != null" >
+        choice1 = #{record.choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choice2 != null" >
+        choice2 = #{record.choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choice3 != null" >
+        choice3 = #{record.choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choice4 != null" >
+        choice4 = #{record.choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.difficulty != null" >
+        difficulty = #{record.difficulty,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update choice_question
+    set choice_ques_id = #{record.choiceQuesId,jdbcType=INTEGER},
+      ques_type_id = #{record.quesTypeId,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      choice1 = #{record.choice1,jdbcType=VARCHAR},
+      choice2 = #{record.choice2,jdbcType=VARCHAR},
+      choice3 = #{record.choice3,jdbcType=VARCHAR},
+      choice4 = #{record.choice4,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      difficulty = #{record.difficulty,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestion" >
+    update choice_question
+    <set >
+      <if test="quesTypeId != null" >
+        ques_type_id = #{quesTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null" >
+        choice1 = #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null" >
+        choice2 = #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null" >
+        choice3 = #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null" >
+        choice4 = #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null" >
+        difficulty = #{difficulty,jdbcType=INTEGER},
+      </if>
+    </set>
+    where choice_ques_id = #{choiceQuesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestion" >
+    update choice_question
+    set ques_type_id = #{quesTypeId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      choice1 = #{choice1,jdbcType=VARCHAR},
+      choice2 = #{choice2,jdbcType=VARCHAR},
+      choice3 = #{choice3,jdbcType=VARCHAR},
+      choice4 = #{choice4,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=INTEGER}
+    where choice_ques_id = #{choiceQuesId,jdbcType=INTEGER}
+  </update>
+</mapper>

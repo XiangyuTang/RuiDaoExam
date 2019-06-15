@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.ruidaoexam.dao.AnsweredQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.ruidaoexam.entity.AnsweredQuestion" >
+    <id column="answer_id" property="answerId" jdbcType="INTEGER" />
+    <result column="paper_result_id" property="paperResultId" jdbcType="INTEGER" />
+    <result column="ques_type" property="quesType" jdbcType="INTEGER" />
+    <result column="cq_id" property="cqId" jdbcType="INTEGER" />
+    <result column="eq_id" property="eqId" jdbcType="INTEGER" />
+    <result column="jq_id" property="jqId" jdbcType="INTEGER" />
+    <result column="answer" property="answer" jdbcType="INTEGER" />
+    <result column="right_answer" property="rightAnswer" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    answer_id, paper_result_id, ques_type, cq_id, eq_id, jq_id, answer, right_answer, 
+    score, total_score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.AnsweredQuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from answered_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from answered_question
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from answered_question
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.ruidaoexam.entity.AnsweredQuestionExample" >
+    delete from answered_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.AnsweredQuestion" >
+    insert into answered_question (answer_id, paper_result_id, ques_type, 
+      cq_id, eq_id, jq_id, answer, 
+      right_answer, score, total_score
+      )
+    values (#{answerId,jdbcType=INTEGER}, #{paperResultId,jdbcType=INTEGER}, #{quesType,jdbcType=INTEGER}, 
+      #{cqId,jdbcType=INTEGER}, #{eqId,jdbcType=INTEGER}, #{jqId,jdbcType=INTEGER}, #{answer,jdbcType=INTEGER}, 
+      #{rightAnswer,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{totalScore,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.AnsweredQuestion" >
+    insert into answered_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="answerId != null" >
+        answer_id,
+      </if>
+      <if test="paperResultId != null" >
+        paper_result_id,
+      </if>
+      <if test="quesType != null" >
+        ques_type,
+      </if>
+      <if test="cqId != null" >
+        cq_id,
+      </if>
+      <if test="eqId != null" >
+        eq_id,
+      </if>
+      <if test="jqId != null" >
+        jq_id,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="rightAnswer != null" >
+        right_answer,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="totalScore != null" >
+        total_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="answerId != null" >
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="paperResultId != null" >
+        #{paperResultId,jdbcType=INTEGER},
+      </if>
+      <if test="quesType != null" >
+        #{quesType,jdbcType=INTEGER},
+      </if>
+      <if test="cqId != null" >
+        #{cqId,jdbcType=INTEGER},
+      </if>
+      <if test="eqId != null" >
+        #{eqId,jdbcType=INTEGER},
+      </if>
+      <if test="jqId != null" >
+        #{jqId,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=INTEGER},
+      </if>
+      <if test="rightAnswer != null" >
+        #{rightAnswer,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="totalScore != null" >
+        #{totalScore,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.ruidaoexam.entity.AnsweredQuestionExample" resultType="java.lang.Integer" >
+    select count(*) from answered_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update answered_question
+    <set >
+      <if test="record.answerId != null" >
+        answer_id = #{record.answerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paperResultId != null" >
+        paper_result_id = #{record.paperResultId,jdbcType=INTEGER},
+      </if>
+      <if test="record.quesType != null" >
+        ques_type = #{record.quesType,jdbcType=INTEGER},
+      </if>
+      <if test="record.cqId != null" >
+        cq_id = #{record.cqId,jdbcType=INTEGER},
+      </if>
+      <if test="record.eqId != null" >
+        eq_id = #{record.eqId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jqId != null" >
+        jq_id = #{record.jqId,jdbcType=INTEGER},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=INTEGER},
+      </if>
+      <if test="record.rightAnswer != null" >
+        right_answer = #{record.rightAnswer,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalScore != null" >
+        total_score = #{record.totalScore,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update answered_question
+    set answer_id = #{record.answerId,jdbcType=INTEGER},
+      paper_result_id = #{record.paperResultId,jdbcType=INTEGER},
+      ques_type = #{record.quesType,jdbcType=INTEGER},
+      cq_id = #{record.cqId,jdbcType=INTEGER},
+      eq_id = #{record.eqId,jdbcType=INTEGER},
+      jq_id = #{record.jqId,jdbcType=INTEGER},
+      answer = #{record.answer,jdbcType=INTEGER},
+      right_answer = #{record.rightAnswer,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=INTEGER},
+      total_score = #{record.totalScore,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.ruidaoexam.entity.AnsweredQuestion" >
+    update answered_question
+    <set >
+      <if test="paperResultId != null" >
+        paper_result_id = #{paperResultId,jdbcType=INTEGER},
+      </if>
+      <if test="quesType != null" >
+        ques_type = #{quesType,jdbcType=INTEGER},
+      </if>
+      <if test="cqId != null" >
+        cq_id = #{cqId,jdbcType=INTEGER},
+      </if>
+      <if test="eqId != null" >
+        eq_id = #{eqId,jdbcType=INTEGER},
+      </if>
+      <if test="jqId != null" >
+        jq_id = #{jqId,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=INTEGER},
+      </if>
+      <if test="rightAnswer != null" >
+        right_answer = #{rightAnswer,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="totalScore != null" >
+        total_score = #{totalScore,jdbcType=INTEGER},
+      </if>
+    </set>
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.ruidaoexam.entity.AnsweredQuestion" >
+    update answered_question
+    set paper_result_id = #{paperResultId,jdbcType=INTEGER},
+      ques_type = #{quesType,jdbcType=INTEGER},
+      cq_id = #{cqId,jdbcType=INTEGER},
+      eq_id = #{eqId,jdbcType=INTEGER},
+      jq_id = #{jqId,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=INTEGER},
+      right_answer = #{rightAnswer,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      total_score = #{totalScore,jdbcType=INTEGER}
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+</mapper>

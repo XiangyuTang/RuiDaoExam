@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.ruidaoexam.dao.ReportMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.ruidaoexam.entity.Report" >
+    <id column="report_id" property="reportId" jdbcType="INTEGER" />
+    <result column="paper_id" property="paperId" jdbcType="INTEGER" />
+    <result column="stu_name" property="stuName" jdbcType="VARCHAR" />
+    <result column="acquired_score" property="acquiredScore" jdbcType="INTEGER" />
+    <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="begin_timestamp" property="beginTimestamp" jdbcType="TIMESTAMP" />
+    <result column="end_timestamp" property="endTimestamp" jdbcType="TIMESTAMP" />
+    <result column="switch_times" property="switchTimes" jdbcType="INTEGER" />
+    <result column="is_allowed_to_see" property="isAllowedToSee" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    report_id, paper_id, stu_name, acquired_score, total_score, comment, begin_timestamp, 
+    end_timestamp, switch_times, is_allowed_to_see
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.ReportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from report
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.ruidaoexam.entity.ReportExample" >
+    delete from report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.Report" >
+    insert into report (report_id, paper_id, stu_name, 
+      acquired_score, total_score, comment, 
+      begin_timestamp, end_timestamp, switch_times, 
+      is_allowed_to_see)
+    values (#{reportId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{stuName,jdbcType=VARCHAR}, 
+      #{acquiredScore,jdbcType=INTEGER}, #{totalScore,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
+      #{beginTimestamp,jdbcType=TIMESTAMP}, #{endTimestamp,jdbcType=TIMESTAMP}, #{switchTimes,jdbcType=INTEGER}, 
+      #{isAllowedToSee,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.Report" >
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportId != null" >
+        report_id,
+      </if>
+      <if test="paperId != null" >
+        paper_id,
+      </if>
+      <if test="stuName != null" >
+        stu_name,
+      </if>
+      <if test="acquiredScore != null" >
+        acquired_score,
+      </if>
+      <if test="totalScore != null" >
+        total_score,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="beginTimestamp != null" >
+        begin_timestamp,
+      </if>
+      <if test="endTimestamp != null" >
+        end_timestamp,
+      </if>
+      <if test="switchTimes != null" >
+        switch_times,
+      </if>
+      <if test="isAllowedToSee != null" >
+        is_allowed_to_see,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportId != null" >
+        #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null" >
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="stuName != null" >
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="acquiredScore != null" >
+        #{acquiredScore,jdbcType=INTEGER},
+      </if>
+      <if test="totalScore != null" >
+        #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTimestamp != null" >
+        #{beginTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTimestamp != null" >
+        #{endTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="switchTimes != null" >
+        #{switchTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isAllowedToSee != null" >
+        #{isAllowedToSee,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.ruidaoexam.entity.ReportExample" resultType="java.lang.Integer" >
+    select count(*) from report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update report
+    <set >
+      <if test="record.reportId != null" >
+        report_id = #{record.reportId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paperId != null" >
+        paper_id = #{record.paperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuName != null" >
+        stu_name = #{record.stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquiredScore != null" >
+        acquired_score = #{record.acquiredScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalScore != null" >
+        total_score = #{record.totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginTimestamp != null" >
+        begin_timestamp = #{record.beginTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTimestamp != null" >
+        end_timestamp = #{record.endTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.switchTimes != null" >
+        switch_times = #{record.switchTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.isAllowedToSee != null" >
+        is_allowed_to_see = #{record.isAllowedToSee,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update report
+    set report_id = #{record.reportId,jdbcType=INTEGER},
+      paper_id = #{record.paperId,jdbcType=INTEGER},
+      stu_name = #{record.stuName,jdbcType=VARCHAR},
+      acquired_score = #{record.acquiredScore,jdbcType=INTEGER},
+      total_score = #{record.totalScore,jdbcType=INTEGER},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      begin_timestamp = #{record.beginTimestamp,jdbcType=TIMESTAMP},
+      end_timestamp = #{record.endTimestamp,jdbcType=TIMESTAMP},
+      switch_times = #{record.switchTimes,jdbcType=INTEGER},
+      is_allowed_to_see = #{record.isAllowedToSee,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.ruidaoexam.entity.Report" >
+    update report
+    <set >
+      <if test="paperId != null" >
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="stuName != null" >
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="acquiredScore != null" >
+        acquired_score = #{acquiredScore,jdbcType=INTEGER},
+      </if>
+      <if test="totalScore != null" >
+        total_score = #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTimestamp != null" >
+        begin_timestamp = #{beginTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTimestamp != null" >
+        end_timestamp = #{endTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="switchTimes != null" >
+        switch_times = #{switchTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isAllowedToSee != null" >
+        is_allowed_to_see = #{isAllowedToSee,jdbcType=INTEGER},
+      </if>
+    </set>
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.ruidaoexam.entity.Report" >
+    update report
+    set paper_id = #{paperId,jdbcType=INTEGER},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      acquired_score = #{acquiredScore,jdbcType=INTEGER},
+      total_score = #{totalScore,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=VARCHAR},
+      begin_timestamp = #{beginTimestamp,jdbcType=TIMESTAMP},
+      end_timestamp = #{endTimestamp,jdbcType=TIMESTAMP},
+      switch_times = #{switchTimes,jdbcType=INTEGER},
+      is_allowed_to_see = #{isAllowedToSee,jdbcType=INTEGER}
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+</mapper>

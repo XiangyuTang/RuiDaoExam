@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!--连接mysql数据库的驱动 ，改location="自己工程下数据库的jar包"-->
+	<classPathEntry location="C:\myEclipseProjects\RuiDaoExam\src\main\resources\mybatieCodeAutoGenerate\mysql-connector-java-5.1.6-bin.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!--数据库的用户名，密码   改jdbcConnection="自己工程的数据库连接"-->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/ruidaoexam" userId="root" password="5046513">
+		</jdbcConnection>
+		
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		
+		<!--自动生成实体类的文件    ，改targetPackage="放置自动生成文件的目录"  -->
+		<javaModelGenerator targetPackage="com.neuedu.ruidaoexam.entity" targetProject="../../../../src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!--自动生成表的操作语句(映射文件)    ，改targetPackage="放置自动生成文件的目录"  -->
+		<sqlMapGenerator targetPackage="mapper" targetProject="../../../../src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--自动生成dao类()          ，改targetPackage="放置自动生成的DAO文件的目录"  -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.neuedu.ruidaoexam.dao" targetProject="../../../../src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+		<!-- 要新生成的数据库表，注意：已经生成成功的,一定要注释掉,否则会覆盖.我们只生成新表！ -->		
+         <table tableName="teacher" domainObjectName="Teacher"/>
+         <table tableName="student" domainObjectName="Student"/>
+         <table tableName="paper" domainObjectName="Paper"/>
+         <table tableName="answered_paper" domainObjectName="AnsweredPaper"/>
+         <table tableName="answered_question" domainObjectName="AnsweredQuestion"/>
+         <table tableName="choice_question" domainObjectName="ChoiceQuestion"/>
+         <table tableName="essay_question" domainObjectName="EssayQuestion"/>
+         <table tableName="judge_question" domainObjectName="JudgeQuestion"/>
+         <table tableName="ques_bank_mapper" domainObjectName="Ques_Bank_Mapper"/>
+         <table tableName="ques_paper_mapper" domainObjectName="Ques_Paper_Mapper"/>
+         <table tableName="question_bank" domainObjectName="QuestionBank"/>
+         <table tableName="question_type" domainObjectName="QuestionType"/>
+         <table tableName="report" domainObjectName="Report"/>
+         <table tableName="trade_record" domainObjectName="TradeRecord"/>
+	</context>
+
+</generatorConfiguration>

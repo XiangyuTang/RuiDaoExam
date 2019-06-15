@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link type="text/css" rel="styleSheet"  href="css/style1.css" th:href="@{static/css/style1.css}" />
+<script type="text/javascript" src="js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>
+<script type="text/javascript">
+$(function(){
+	alert(1);
+});
+
+</script>
+</head>
+<body>
+webapp下的网页 
+<img alt="" src="img/box.png" th:src="@{static/img/box.png}">
+</body>
+</html>

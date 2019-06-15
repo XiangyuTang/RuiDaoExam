@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 这个文件是mybatis的系统配置文件 ,里面定义了要连接什么数据库 ,用户名,密码,等等信息 -->
+<configuration>
+	<!-- 设置mybatis信息都显示在控制台上 -->
+	<settings>
+  		<setting name="logImpl" value="STDOUT_LOGGING" />
+  	</settings>
+  	
+  	<!-- 短语 -->
+	<typeAliases>
+		<!-- 批量别名定义，扫描整个包下的类，别名为类名（首字母大写或小写都可以）,在xml中增删改查里的parameterType可以直接填类名，就不用写具体的包了 -->
+        <package name="com.neu.RuiDaoExam.entity"/>
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+		<transactionManager type="JDBC"/>
+		<dataSource type="POOLED">
+			<property name="driver" value="com.mysql.jdbc.Driver"/>
+			<property name="url" value="jdbc:mysql://localhost:3306/ruidaoexam"/>
+			<property name="username" value="root"/>
+			<property name="password" value="5046513"/>
+		</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 注册映射文件 *****.xml 文件  ,将dao包中的所有接口都注册到mybatis框架中,将xml和对应的接口文件放在一个包内 -->
+	<mappers>
+		<package name="com.neu.RuiDaoExam.dao"></package>
+	</mappers>
+	
+
+</configuration>
