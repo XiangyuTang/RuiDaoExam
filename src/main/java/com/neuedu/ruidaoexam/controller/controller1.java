@@ -10,8 +10,12 @@ public class controller1 {
 	//这个controller测试放行静态资源的
 	@RequestMapping("/to11")
 	public String to111(){
-		System.out.println("f-----------------");
+		//System.out.println("f-----------------");
 		return "11";
 	}
-	
+	@RequestMapping("/test")
+	public String test()
+	{
+		return "examOver";
+	}
 }

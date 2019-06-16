@@ -5,15 +5,62 @@
 <title>Insert title here</title>
 <link type="text/css" rel="styleSheet"  href="css/style1.css" th:href="@{static/css/style1.css}" />
 <script type="text/javascript" src="js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>
-<script type="text/javascript">
-$(function(){
-	alert(1);
-});
-
-</script>
 </head>
 <body>
-webapp下的网页 
-<img alt="" src="img/box.png" th:src="@{static/img/box.png}">
+	webapp下的网页 
+	<img alt="" src="img/box.png" th:src="@{static/img/box.png}">	
+	<input type="text" name="mss" id="mss" />
+    <form name="emm" action="test" method="post">
+    	<input type="text" value="name" name="name"/>   
+    </form>
+
 </body>
+    <script>  
+    document.addEventListener('visibilitychange',function(){  
+	    if(document.visibilityState=='hidden') {  
+	    	normal_title=document.title;  
+	    	document.title='(づ￣ 3￣)づ';
+	    	//alert("想不到吧，被抓到切屏了！！")
+	    }  
+	    else  
+	    	document.title=normal_title;  
+    });  
+    </script>
+	<script type="text/javascript">
+
+   	window.onload=function(){
+        daojishi();
+    }
+
+ 	var counttime=0.1*60;//总秒钟
+     
+    function daojishi(){
+    	if(counttime>=0){
+        	var ms = counttime%60;//余数 89%60==29秒
+            var mis = Math.floor(counttime/60);//分钟
+            if(mis>=60){
+            	var hour=Math.floor(mis/60);
+
+     			mis=Math.floor((counttime-hour*60*60)/60);
+
+              	document.getElementById("mss").value="考试时间剩余"+hour+"小时"+mis+"分"+ms+"秒";
+             }else if(mis>=1){
+              	document.getElementById("mss").value="考试时间剩余"+mis+"分"+ms+"秒"; 
+             }else{
+              	document.getElementById("mss").value="考试时间剩余"+ms+"秒"; 
+             }
+             counttime--;
+             vartt =  window.setTimeout("daojishi()",1000);
+	  	}else{
+	      	window.clearTimeout(vartt);
+	      	window.confirm("考试时间结束,请单击提交"); 
+	      	tijiao();
+	  	}
+     }
+     
+     function tijiao(){
+        //document.forms[0].submit();
+        $("form[name='emm']").submit();
+     }
+	</script>
 </html>
