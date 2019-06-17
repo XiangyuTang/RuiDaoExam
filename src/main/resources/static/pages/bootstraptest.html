@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- <%@ page contentType="text/html;charset=UTF-8" language="java" %> -->
+<html>
+<head>
+    <!DOCTYPE HTML>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <title>Title</title>
+</head>
+<body>
+<link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+<link href="/bootstrap-3.3.7-dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
+<div class="controls input-append date form_date" data-date="" data-date-format="yyyy-mm-dd hh:ii " data-link-field="dtp_input1" data-link-format="yyyy-mm-dd hh:ii">
+    <input size="16"   placeholder="开始时间"  type="text" ng-model="startDate" height="10px" readonly="true" />
+    <span class="add-on"><i class="icon-remove" ng-click="clearDate()"></i></span>
+    <span class="add-on"><i class="icon-th"></i></span>
+</div>
+ 
+<script type="text/javascript" src="/jquery-1.9.1/jquery.min.js"></script>
+ 
+<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/locales/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+ 
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+    $('.form_date').datetimepicker({
+        language:  'en',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+ 
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+ 
+ 
+</script>
+</body>
+</html>
