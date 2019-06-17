@@ -19,6 +19,8 @@ public class ChoiceQuestion {
 
     private Integer difficulty;
 
+    private String analysis;
+
     public Integer getChoiceQuesId() {
         return choiceQuesId;
     }
@@ -89,5 +91,13 @@ public class ChoiceQuestion {
 
     public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public String getAnalysis() {
+        return analysis;
+    }
+
+    public void setAnalysis(String analysis) {
+        this.analysis = analysis == null ? null : analysis.trim();
     }
 }

@@ -703,6 +703,76 @@ public class ChoiceQuestionExample {
             addCriterion("difficulty not between", value1, value2, "difficulty");
             return (Criteria) this;
         }
+
+        public Criteria andAnalysisIsNull() {
+            addCriterion("analysis is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisIsNotNull() {
+            addCriterion("analysis is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisEqualTo(String value) {
+            addCriterion("analysis =", value, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisNotEqualTo(String value) {
+            addCriterion("analysis <>", value, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisGreaterThan(String value) {
+            addCriterion("analysis >", value, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisGreaterThanOrEqualTo(String value) {
+            addCriterion("analysis >=", value, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisLessThan(String value) {
+            addCriterion("analysis <", value, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisLessThanOrEqualTo(String value) {
+            addCriterion("analysis <=", value, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisLike(String value) {
+            addCriterion("analysis like", value, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisNotLike(String value) {
+            addCriterion("analysis not like", value, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisIn(List<String> values) {
+            addCriterion("analysis in", values, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisNotIn(List<String> values) {
+            addCriterion("analysis not in", values, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisBetween(String value1, String value2) {
+            addCriterion("analysis between", value1, value2, "analysis");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnalysisNotBetween(String value1, String value2) {
+            addCriterion("analysis not between", value1, value2, "analysis");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
