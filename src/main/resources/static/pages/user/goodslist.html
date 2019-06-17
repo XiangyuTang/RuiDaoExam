@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>商品列表</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="../../css/layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../css/layuiadmin/style/admin.css" media="all">
+		<link rel="stylesheet" href="../../css/layuiadmin/style/template.css" media="all">
+		<link rel="stylesheet" type="text/css" href="../../css/layuiadmin/style/goodslist.css"/>
+	
+		<script type="text/javascript">
+			$(function(){
+				$(".goodslist-left-item").hover(function(){
+					//$(this).slideToggle();
+				})
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="admin-login-box">
+					<a class="logo" style="left: 0;" href="#">
+						<span style="width: 50px;height: 100px;">
+								<img src="../../layuiadmin/style/res/logo.png" style="width: 200px; height: 50px;">
+							</span>
+					</a>
+					<div class="admin-side-toggle">
+						<i class="fa fa-bars" aria-hidden="true"></i>
+					</div>
+				</div>
+
+				<!-- 头部区域 -->
+				<ul class="layui-nav layui-layout-left">
+
+					<li class="layui-nav-item layui-hide-xs" lay-unselect>
+						<input style="background-color: #f2f2f2; width: 250px;" type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords=">
+					</li>
+				</ul>
+				<ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+
+					<li class="layui-nav-item" lay-unselect>
+						<a lay-href="user/homePage.html" layadmin-event="message" lay-text="首页">
+
+							<!--
+              	作者：1173073908@qq.com
+              	时间：2019-06-13
+              	描述：<i class="layui-icon layui-icon-notice"></i>  
+              	<span class="layui-badge-dot"></span>
+              -->
+							首页
+							<!-- 如果有新消息，则显示小圆点 -->
+
+						</a>
+					</li>
+					<li class="layui-nav-item layui-hide-xs" lay-unselect>
+						<a style="color: #75dd6e;" lay-href="user/goodslist.html" href="javascript:;" layadmin-event="theme">
+							<!--
+                	作者：1173073908@qq.com
+                	时间：2019-06-13
+                	描述：<i class="layui-icon layui-icon-theme"></i>
+                -->
+							商城
+						</a>
+					</li>
+					<li class="layui-nav-item layui-hide-xs" lay-unselect>
+						<a href="javascript:;" layadmin-event="note">
+							<!--
+              	作者：1173073908@qq.com
+              	时间：2019-06-13
+              	描述：<i class="layui-icon layui-icon-note"></i>
+              -->
+							个人中心
+						</a>
+					</li>
+					<li class="layui-nav-item layui-hide-xs" lay-unselect>
+						<a href="javascript:;" layadmin-event="fullscreen">
+							<i class="layui-icon layui-icon-screen-full"></i>
+						</a>
+					</li>
+					<li class="layui-nav-item" lay-unselect>
+						<a href="javascript:;">
+							<cite>hiki</cite>
+						</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a lay-href="set/user/info.html">基本资料</a>
+							</dd>
+							<dd>
+								<a lay-href="set/user/password.html">修改密码</a>
+							</dd>
+							<hr>
+							<dd layadmin-event="logout" style="text-align: center;">
+								<a>退出</a>
+							</dd>
+						</dl>
+					</li>
+
+					<li class="layui-nav-item layui-hide-xs" lay-unselect>
+						<a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
+					</li>
+					<li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+						<a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<div class="layui-row" style="margin-top: 50px;">
+			<div class="layui-col-md1">
+				&nbsp;
+			</div>
+			<div class="layui-col-md2">
+				<!--左侧选择标签的导航栏-->
+				<div class="goodslist-left">
+					<div class="goodslist-left-item">
+						<a href="">IT技术</a>
+						<p></p>
+					</div>
+					<div class="goodslist-left-item">
+						<a href="">IT技术</a>
+						<p></p>
+					</div>
+					<div class="goodslist-left-item">
+						<a href="">IT技术</a>
+						<p></p>
+					</div>
+					<div class="goodslist-left-item">
+						<a href="">IT技术</a>
+						<p></p>
+					</div>
+					<div class="goodslist-left-item">
+						<a href="">IT技术</a>
+						<p></p>
+					</div>
+					<div class="goodslist-left-item">
+						<a href="">IT技术</a>
+						<p></p>
+					</div>
+					<div class="goodslist-left-item">
+						<a href="">IT技术</a>
+						<p></p>
+					</div>
+				</div>
+				
+			</div>
+			<div class="layui-col-md8">
+				<div class="layui-fluid layadmin-cmdlist-fluid">
+					<div>
+						<span class="layui-breadcrumb" lay-separator=">">
+ 							<a href="">全部分类</a>
+							<a href="">软件开发</a>
+							<a><cite>共5个题库</cite></a>
+						</span>
+					<div class="goodslist-nav">
+
+						<table class="layui-table" lay-skin="line" style="margin-bottom: 0px;">
+								<colgroup>
+									<col width="100">
+									<col width="80">
+									<col width="80">
+								</colgroup>
+								<tbody>
+									<tr>
+										<td style="color: gray;">排序方式</td>
+										<td>
+											<a href="">最新</a>
+										</td>
+										<td>
+											<a href="">最热</a>
+										</td>
+										<td>
+											<a href="">相关度</a>
+										</td>
+									</tr>
+								</tbody>
+
+							</table>
+					<table class="layui-table" lay-skin="line" style="margin-top: 0px;">
+								<colgroup>
+									<col width="100">
+									<col width="100">
+									<col width="100">
+									<col width="100">
+								</colgroup>
+								<tbody>
+									<tr>
+										<td style="color: gray;">相关标签</td>
+										<td>
+											<a href="">IT技术<span>8</span></a>
+										</td>
+										<td>
+											<a href="">前端开发<span>3</span></a>
+										</td>
+										<td>
+											<a href="">后端开发<span>5</span></a>
+										</td>
+										<td>
+											<a href="">软件开发<span>8</span></a>
+										</td>
+									</tr>
+								</tbody>
+
+							</table>
+				
+					</div>
+					</div>
+
+					<!--
+			----------------------------此处为右侧商品列表----------------------------------------
+			-->
+
+					<div class="layui-row layui-col-space30" style="margin-top: 10px;">
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md4 layui-col-sm4">
+							<div class="cmdlist-container">
+								<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+								<a href="javascript:;">
+									<div class="cmdlist-text">
+										<p class="info">《五年编程三年脱发》精选题库</p>
+										<div class="price">
+											<b>￥79</b>
+											<p>
+												¥
+												<del>130</del>
+											</p>
+											<span class="flow">
+                      <i class="layui-icon layui-icon-rate"></i>
+                      433
+                    </span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-md12 layui-col-sm12">
+							<div id="demo0"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="layui-col-md1">
+				&nbsp;
+			</div>
+		</div>
+
+  <script src="../../js/layui.js"></script>  
+		<script>
+			layui.config({
+				base: '../../css/layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index']);
+			layui.use(['laypage', 'layer'], function() {
+				var laypage = layui.laypage,
+					layer = layui.layer;
+
+				//总页数低于页码总数
+				laypage.render({
+					elem: 'demo0',
+					count: 50 //数据总数
+				});
+			});
+		</script>
+	</body>
+
+</html>
