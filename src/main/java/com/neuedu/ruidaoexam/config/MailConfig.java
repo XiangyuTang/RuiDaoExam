@@ -61,7 +61,7 @@ public class MailConfig {
 		// 邮件的标题
 		message.setSubject("*睿道测评通知：有老师邀请你进行考试~");
 		// 邮件的文本内容
-		message.setContent("<font style='color:red'>JavaMail发送邮件成功！</font>", "text/html;charset=UTF-8");
+		message.setContent("<font style='color:red'>JavaMail发送邮件成功！</font><br><a href='https://www.baidu.com/' >百度一下</a>", "text/html;charset=UTF-8");
 		// 返回创建好的邮件对象
 		return message;
 	}
