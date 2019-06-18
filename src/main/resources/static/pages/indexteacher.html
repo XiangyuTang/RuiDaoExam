@@ -100,13 +100,27 @@
 
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
             lay-filter="layadmin-system-side-menu">
-            <li data-name="home" class="layui-nav-item layui-nav-itemed">
+            <li data-name="home" class="layui-nav-item ">
               <a href="javascript:;" lay-tips="考试" lay-direction="2">
                 <i class="layui-icon layui-icon-home"></i>
                 <cite>考试</cite>
               </a>
               <dl class="layui-nav-child">
-
+              	<dd data-name="console">
+                  <li data-name="home" class="layui-nav-item ">
+              			<a href="javascript:;" lay-tips="考试" lay-direction="2">
+                		<i></i>
+                		<cite>创建考试</cite>
+              		</a>
+              		<dl class="layui-nav-child">
+              			<dd data-name="console">
+                  		<a lay-href="password.html">手工组卷</a>
+                		</dd>
+                		<dd data-name="console">
+                  		<a lay-href="shouye.html">智能组卷</a>
+                		</dd>
+            			</li>
+                </dd>
                 <dd data-name="console">
                   <a lay-href="baseinfo.html">我的考试</a>
                 </dd>
@@ -127,7 +141,7 @@
                 </dd>
               </dl>
             </li>
-            <li data-name="home" class="layui-nav-item layui-nav-itemed">
+            <li data-name="home" class="layui-nav-item ">
               <a href="javascript:;" lay-tips="个人资料" lay-direction="2">
                 <i class="layui-icon layui-icon-home"></i>
                 <cite>题库</cite>
