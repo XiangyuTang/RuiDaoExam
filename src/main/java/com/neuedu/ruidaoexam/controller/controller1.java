@@ -18,4 +18,17 @@ public class controller1 {
 	{
 		return "examOver";
 	}
+	
+	@RequestMapping("/toinvite")
+	public String toinvite()
+	{
+		return "inviteStudents";
+	}
+	
+	@RequestMapping("/toindex")
+	public String toindex()
+	{
+		return "index";
+	}
+	
 }

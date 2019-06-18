@@ -1,0 +1,341 @@
+.wrapper {
+	overflow: hidden;
+	position: relative;
+}
+
+.main-wrapper {
+    float: left;
+    width: 50%;
+    margin-left: 20%;
+    padding: 20px;
+    min-width: 600px;
+    background-color: #FFF;
+    position: relative;
+    z-index: 20;
+    -webkit-transition: box-shadow .2s ease-in-out, margin-left .2s
+    ease-in-out .4s;
+    -moz-transition: box-shadow .2s ease-in-out, margin-left .2s ease-in-out
+    .4s;
+    -o-transition: box-shadow .2s ease-in-out, margin-left .2s ease-in-out
+    .4s;
+    -ms-transition: box-shadow .2s ease-in-out, margin-left .2s ease-in-out
+    .4s;
+    transition: box-shadow .2s ease-in-out, margin-left .2s ease-in-out .4s;
+}
+
+.sub-wrapper {
+    position: absolute;
+    z-index: 0;
+    left: 20%;
+    top: 0;
+    background-color: #FFF;
+    overflow: hidden;
+    width: 45%;
+    width: -moz-calc(50% - 20px);
+    width: -webkit-calc(50% - 20px);
+    width: calc(50% - 20px);
+    height: 100%;
+    -webkit-transition: left .2s ease-in-out .4s;
+    -moz-transition: left .2s ease-in-out .4s;
+    -ms-transition: left .2s ease-in-out .4s;
+    -o-transition: left .2s ease-in-out .4s;
+    transition: left .2s ease-in-out .4s;
+}
+
+.wrapper.open-email .main-wrapper {
+	box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.2);
+	margin-left: 0;
+}
+
+.wrapper.open-email .sub-wrapper {
+	right: 20px;
+	left: 50%;
+}
+
+.wrapper .indent {
+	padding-left: 20px;
+}
+
+.main-wrapper>.invite-part {
+	margin-bottom: 15px;
+}
+
+.main-wrapper>.invite-part>h4, .sub-wrapper h4 {
+	padding: 10px;
+	background-color: #F5F7FA;
+	border-radius: 4px;
+}
+
+/*** 考试设置 ****/
+.invite-advanced-setting-wrapper>li {
+	line-height: 45px;
+	height: 45px;
+	border-bottom: 1px dotted #AFC6DA;
+}
+
+.invite-advanced-setting-wrapper input {
+	height: 30px;
+	margin-top: -5px;
+}
+
+.invite-advanced-setting-wrapper .range-tooltip {
+	color: #E9573F;
+}
+
+.invite-advanced-setting-wrapper .check-icon {
+	margin-top: 2px;
+}
+
+/*** 通知考生 ****/
+.send-type-wrapper .control-label {
+	font-weight: normal;
+}
+.send-type-wrapper .btn{
+    display: none;
+    position: absolute;
+}
+.send-type-wrapper .btn.emailEditBtn{
+    display: inline-block;
+    margin-top: -4px;
+}
+.send-type-wrapper .toggle-wrapper {
+	padding: 5px 0;
+    float: left;
+    width:50%;
+}
+
+.send-type-wrapper .toggle-wrapper .toggle-label {
+	vertical-align: sub;
+	min-width: 120px;
+}
+
+.send-type-wrapper .toggle-wrapper.disabled .toggle-label {
+	filter: alpha(opacity = 60);
+	opacity: .6;
+}
+
+.send-type-wrapper .toggle input[type=checkbox]:checked+.handle:before {
+	background-color: #009EE7;
+}
+
+/*** 录入考生 ****/
+.invite-wrapper .nav-tabs li.single.active {
+	border-top: 2px solid #009EE7;
+	border-right: 2px solid #009EE7;
+	border-left: 2px solid #009EE7;
+	border-bottom: 2px solid #fff;
+}
+
+.invite-wrapper .nav-tabs li.single.active a {
+	color: #009EE7;
+}
+
+.invite-wrapper .nav-tabs li.multi.active {
+	border-top: 2px solid #FFA400;
+	border-left: 2px solid #FFA400;
+	border-right: 2px solid #FFA400;
+	border-bottom: 2px solid #fff;
+}
+
+.invite-wrapper .nav-tabs li.multi.active a {
+	color: #FFA400;
+}
+
+.wrapper table {
+	width: 100%;
+}
+
+.wrapper table td {
+	vertical-align: middle;
+	padding: 15px 0 10px 0;
+}
+
+.wrapper table td>span {
+	font-weight: normal;
+	color: #656D78;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-right: 10px;
+}
+
+.wrapper table label i {
+	display: inline-block;
+	width: 22px;
+	text-align: center;
+}
+
+.invite-wrapper .btn-invite {
+	min-width: 100px;
+}
+
+.invite-wrapper .invite-list {
+	box-shadow: none;
+}
+
+.invite-wrapper .invite-list>li.reciever-info>span {
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #656D78;
+}
+
+.invite-wrapper .invite-list>li>span.name {
+	width: 25%;
+}
+
+.invite-wrapper .invite-list>li>span.email {
+	padding-left: 10px;
+	width: 73%;
+}
+
+.sub-wrapper>div {
+    overflow-y: auto;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+}
+
+.sub-wrapper .editable-section {
+	word-break: break-word;
+	word-wrap: break-word;
+	text-align: left;
+	min-height: 100px;
+	border-radius: 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+	border: 1px dashed #009EE7;
+    border-top: solid 1px #C1C1C1;
+	outline: none;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #656D78;
+	-webkit-transition: all 0.15s ease-in-out 0s;
+	-moz-transition: all 0.15s ease-in-out 0s;
+	-ms-transition: all 0.15s ease-in-out 0s;
+	-o-transition: all 0.15s ease-in-out 0s;
+	transition: all 0.15s ease-in-out 0s;
+}
+
+.sub-wrapper .editable-section:focus {
+	border-style: solid;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.sub-wrapper .email-attention-info {
+	min-height: 50px;
+}
+
+.sub-wrapper .insert-btn{
+    font-size: 12px;
+    margin-left: 3px;
+    margin-top: 2px;
+    float: left;
+    padding: 0 7px;
+    height: 25px;
+    color:#009ee7;
+}
+#inviteEmailEditModal .modal-footer{
+    padding: 15px 25px;
+}
+.insert-btn-container{
+    overflow: hidden;
+    margin-top:6px;
+    padding: 5px;
+    border:1px dashed #009EE7;
+    border-bottom: none;
+    background-color: #FBFBFB;
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+}
+.insert-btn-container.focus{
+    border:1px solid #009EE7;
+    border-bottom: none;
+}
+.insert-btn-container>p{
+    float: left;
+    line-height: 2;
+    opacity: 0.7;
+}
+.import-num{
+    background: #37BC9B;
+    border-radius: 25px;
+    padding: 1px 5px;
+    color: white;
+    font-size: 15px;
+
+}
+#confirm{
+    margin-right: 25px;
+}
+table.import-list td{
+    border-top:1px solid #DADADA;
+    padding: 10px 8px;
+    color: #656D78;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+#inviteCandiDateMultiImport {
+    position: relative;
+}
+.max-invite {
+    background-color: #f7ddde;
+    padding: 15px 10px;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+/* .wrapper {
+	overflow: hidden;
+}
+
+.section {
+	float: left;
+	position: relative;
+	padding: 25px;Ï
+}
+
+.email-wrapper {
+	width: 60%;
+	border-right: 1px dotted #CCD1D9;
+}
+
+.invite-wrapper {
+	margin-left: -1px;
+	border-left: 1px dotted #CCD1D9;
+	width: 40%;
+	border-left: 1px dotted #CCD1D9;
+}
+
+********** 邮件部分 ***********************
+
+.email-wrapper .editable-section {
+	min-height: 100px;
+	border-radius: 4px;
+	border: 1px dashed #009EE7;
+	outline: none;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #656D78;
+	-webkit-transition: all 0.15s ease-in-out 0s;
+	-moz-transition: all 0.15s ease-in-out 0s;
+	-ms-transition: all 0.15s ease-in-out 0s;
+	-o-transition: all 0.15s ease-in-out 0s;
+	transition: all 0.15s ease-in-out 0s;
+}
+
+.email-wrapper .editable-section:focus {
+	border-style: solid;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.email-wrapper .email-attention-info {
+	min-height: 50px;
+} */

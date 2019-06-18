@@ -1,0 +1,289 @@
+/* 我的资料 */
+.user-info-wrapper {
+}
+
+.user-info-wrapper .left-nav ul > li {
+    background-color: #ffffff;
+    border: 0px;
+
+}
+
+.user-info-wrapper .left-nav ul > li > a {
+    height: 55px;
+    line-height: 55px;
+    padding-top: 0px;
+    text-align: center;
+}
+
+.user-info-wrapper .left-nav ul > li.active > a,
+.user-info-wrapper .left-nav ul > li.active > a:hover,
+.user-info-wrapper .left-nav ul > li.active > a:focus {
+    border-radius: 0px;
+    color: #25a5e9;
+    border-left: 4px solid #25a5e9;
+}
+
+.user-info-wrapper .right-content {
+    background: #ffffff;
+    border-radius: 0;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.user-info-wrapper .right-content .title {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+}
+
+.user-info-wrapper .right-content .sub-title {
+    font-size: 18px;
+    margin: 20px 0 0 10px;
+}
+
+.user-info-wrapper .right-content .section {
+    border-top: solid 1px #E6E9ED;
+}
+
+.user-info-wrapper .right-content span.err {
+    padding: 6px 12px;
+}
+
+.user-info-wrapper .basic-info .email {
+    cursor: default;
+    background-color: #F5F7FA;
+}
+
+.user-info-wrapper .basic-info .head {
+    width: 80px;
+    height: 80px;
+}
+
+.user-info-wrapper form label.control-label {
+    color: #777777;
+    font-weight: normal;
+}
+
+.user-info-wrapper .sns-bind .sns-list {
+    margin-left: 110px;
+}
+
+.user-info-wrapper .sns-bind .sns-icon {
+    font-size: 20px;
+    color: #656D78;
+}
+
+.user-info-wrapper .sns-bind .sns-icon.weibo.binded {
+    color: #EB192D;
+}
+
+.user-info-wrapper .sns-bind .sns-icon.weixin.binded {
+    color: #51C332;
+}
+
+.user-info-wrapper .sns-bind .sns-icon.qq.binded {
+    color: #24A6DC;
+}
+
+.company-info {
+}
+
+.company-info .title {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+}
+
+.company-info .basic-info label {
+    color: #777777;
+    font-weight: normal;
+}
+
+.company-info .logo-wrapper {
+    border: 1px solid #CCD1D9;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.company-info .logo {
+    /*width: 180px;*/
+    max-height: 100px;
+    margin: auto;
+    max-width: 200px;
+}
+
+.company-info .bg {
+    margin: auto;
+    max-width: 100%;
+}
+
+.company-info .logo.empty {
+    line-height: 120px;
+    color: #AAB2BD;
+    font-size: 1.3em;
+    font-weight: 500;
+    display: block;
+}
+
+.company-info .logo-upload-disabled {
+    background: #37bc9b;
+    opacity: 0.7;
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 4px;
+}
+
+.company-info a.success,
+.company-info a.success:focus {
+    color: #8CC152;
+}
+
+.company-info a.danger,
+.company-info a.danger:focus {
+    color: #DA4453;
+}
+
+.company-info .dropdown-menu > li.normal {
+    color: #fff;
+    padding: 5px 20px;
+}
+
+.teacher-list li:hover, .student-list li:hover{
+    background-color: #EFF9FD;
+}
+.teacher-list li.active, .student-list li.active {
+    background-color: #EEEEEE;
+}
+.teacher-list li, .student-list li {
+    cursor: pointer;
+}
+
+/*菜单设置*/
+.head-info .title .fa-stack {
+    font-size: 15px;
+    margin-top: -4px
+}
+
+.head-info .basic-info .pad {
+    -webkit-box-shadow: 0 0px 2px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 0px 2px rgba(0, 0, 0, .2);
+    box-shadow: 0 0px 2px rgba(0, 0, 0, .2);
+}
+
+.head-info .basic-info .ext-title {
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
+.head-info .basic-info .action-bar {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+}
+
+.head-info .basic-info .action-bar .btn-link {
+    padding: 10px 8px;
+    float: right;
+    height: 100%;
+}
+
+.head-info .basic-info .list-wrapper {
+    min-height: 165px;
+    position: relative;
+}
+
+.head-info .basic-info .ext-list {
+    display: table;
+    width: 100%;
+    padding: 0;
+}
+
+.head-info .basic-info .ext-list .ext-info-item {
+    display: table-row;
+    -webkit-transition: all 0.15s ease-in-out 0s;
+    -moz-transition: all 0.15s ease-in-out 0s;
+    -ms-transition: all 0.15s ease-in-out 0s;
+    -o-transition: all 0.15s ease-in-out 0s;
+    transition: all 0.15s ease-in-out 0s;
+}
+
+.head-info .menu-checkbox {
+    margin: 0;
+    padding: 10px 30px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.head-info .menu-checkbox.disabled {
+    cursor: not-allowed;
+}
+
+.weixinBinded {
+    color: #56C13D;
+}
+
+.weiboBinded {
+    color: #E91E34;
+}
+
+.qqBinded {
+    color: #217DC6;
+}
+
+.dingBinded {
+    color: #217DC6;
+}
+
+.sns-img.mingdao{
+    opacity: .5;
+}
+.sns-img.mingdao.binded{
+    opacity: 1;
+}
+
+.text-theme {
+    color: #42ca8e;
+}
+.register-form{
+    padding: 10px 40px;
+}
+.wrap {
+    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    border: 1px solid #e5e5e5;
+    padding: 25px 30px 10px;
+    border-radius: 2px;
+}
+
+.wrap .form-switch {
+    display: block;
+}
+
+.wrap .form-switch input:checked + .icon {
+    background-color: #42ca8e;
+    border-color: #42ca8e;
+}
+
+.wrap .alert {
+    padding: 10px 20px;
+}
+
+.wrap .title {
+    font-size: 14px;
+    background: #fff;
+    position: absolute;
+    top: -10px;
+    padding: 0 10px;
+    left: 10px;
+}
+.company-info .alert .btn-link{
+    color: #009ee7;
+}
