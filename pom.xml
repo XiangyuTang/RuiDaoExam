@@ -8,8 +8,8 @@
 		<version>2.1.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.neu</groupId>
-	<artifactId>RuiDaoExam</artifactId>
+	<groupId>com.neuedu</groupId>
+	<artifactId>ruidaoexam</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>RuiDaoExam</name>
@@ -69,11 +69,11 @@
 			<version>1.1.41</version>
 		</dependency>
 		
-		<dependency>
+		<denpendency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
-		</dependency>
+		</denpendency>
 		
 		<!-- springboot2.* 之后的新的依赖文件 -->
 		<dependency>
@@ -87,6 +87,17 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- 添加邮件发送依赖 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
