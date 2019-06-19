@@ -14,7 +14,7 @@ import com.sun.mail.util.MailSSLSocketFactory;
  * JavaMail发送邮件:前提是QQ邮箱里帐号设置要开启POP3/SMTP协议
  */
 public class MailConfig {
-
+	
 	public static void main(String[] args) throws Exception {
  
 		Properties prop = new Properties();

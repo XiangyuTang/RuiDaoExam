@@ -26,6 +26,7 @@ import static com.googlecode.javacv.cpp.opencv_core.cvReleaseImage;
  * 2) capture camera images by mouse-clicking anywhere in the JFrame, 
  * the jpg file is saved in a hard-coded path. 
  * 
+ * 
  * @author ljs 
  * 2011-08-19 
  * 
