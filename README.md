@@ -6,6 +6,6 @@
 ### 3.代码push到github前记得先备份一下自己本地的
 ### 4.开启项目记得改application.properties里的相关配置，启动application前记得打开activemq.bat和mybatis的startup.bat
 ### 5.application.properties如果有模板语句报错，点击小红叉的ignore即可，如果自己注释掉了，就不要上传这个文件，防止其他人pull下来出错
-
+### 6.在controller包下的PageJumpController写页面跳转的功能
 # 笔记
 ### 1.记得在逆向生成后添加mapper注解
