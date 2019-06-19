@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class controller1 {
+public class PageJumpController {
 
 	//这个controller测试放行静态资源的
 	@RequestMapping("/to11")
@@ -19,12 +19,6 @@ public class controller1 {
 		return "examOver";
 	}
 	
-	@RequestMapping("/toinvite")
-	public String toinvite()
-	{
-		return "inviteStudents";
-	}
-	
 	@RequestMapping("/toindex")
 	public String toindex()
 	{
@@ -35,6 +29,12 @@ public class controller1 {
 	public String toindexteacher()
 	{
 		return "indexteacher";
+	}
+	
+	@RequestMapping("/toinvite")
+	public String toinvite()
+	{
+		return "invite";
 	}
 	
 	

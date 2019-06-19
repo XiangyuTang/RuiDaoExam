@@ -3,8 +3,10 @@ package com.neuedu.ruidaoexam.dao;
 import com.neuedu.ruidaoexam.entity.QuestionType;
 import com.neuedu.ruidaoexam.entity.QuestionTypeExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface QuestionTypeMapper {
     int countByExample(QuestionTypeExample example);
 

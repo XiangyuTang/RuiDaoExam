@@ -7,30 +7,30 @@
     	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 		<title></title>
 		<link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" th:href="@{static/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
-		<script src="../js/jquery-1.9.1.min.js" th:href="@{static/js/jquery-1.9.1.min.js}"></script>
+		<script src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
 		<!--<link rel="stylesheet" href="invite_files/app.css" />-->
-		<link rel="stylesheet" href="invite_files/base.css" />
+		<link rel="stylesheet" href="invite_files/base.css" th:href="@{static/pages/invite_files/base.css}" />
 		<!--<link rel="stylesheet" href="invite_files/bootstrap-datetimepicker.css" />-->
-		<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css" />
-		<link rel="stylesheet" href="invite_files/frontsearch.css" />
-		<link rel="stylesheet" href="invite_files/index.css" />
-		<link rel="stylesheet" href="invite_files/invite.css" />
+		<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}" />
+		<link rel="stylesheet" href="invite_files/frontsearch.css" th:href="@{static/pages/invite_files/frontsearch.css}"/>
+		<link rel="stylesheet" href="invite_files/index.css" th:href="@{static/pages/invite_files/index.css}"/>
+		<link rel="stylesheet" href="invite_files/invite.css" th:href="@{static/pages/invite_files/invite.css}"/>
 		<!--<link rel="stylesheet" href="invite_files/login.css" />-->
 		<!--<link rel="stylesheet" href="invite_files/moon.css" />-->
 		<!--<link rel="stylesheet" href="invite_files/msg.css" />-->
-		<link rel="stylesheet" href="invite_files/sets.css" />
-		<link rel="stylesheet" href="invite_files/sets.min.css" />
+		<link rel="stylesheet" href="invite_files/sets.css" th:href="@{static/pages/invite_files/sets.css}"/>
+		<link rel="stylesheet" href="invite_files/sets.min.css" th:href="@{static/pages/invite_files/sets.min.css}"/>
 		<!--<link rel="stylesheet" href="invite_files/upload.css" />-->
 		<!--<link rel="stylesheet" href="invite_files/user-info.css" />-->
 		<!--<link rel="stylesheet" href="invite_files/moon_002.css" />-->
-		<link href="../../static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" media="screen"/>
-		<link href="../../static/bootstrap-3.3.7-dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
-		<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="../../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../static/bootstrap-3.3.7-dist/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="../../static/bootstrap-3.3.7-dist/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+		<link href="../../static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" media="screen" th:href="@{static/bootstrap-3.3.7-dist/css/bootstrap.css}"/>
+		<link href="../../static/bootstrap-3.3.7-dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" th:href="@{static/bootstrap-3.3.7-dist/css/bootstrap-datetimepicker.min.css}"/>
+		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
+		<script type="text/javascript" src="../../static/bootstrap-3.3.7-dist/js/bootstrap.min.js" th:src="@{static/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" src="../../static/bootstrap-3.3.7-dist/js/bootstrap-datetimepicker.js" charset="UTF-8" th:src="@{static/bootstrap-3.3.7-dist/js/bootstrap-datetimepicker.js}"></script>
+		<script type="text/javascript" src="../../static/bootstrap-3.3.7-dist/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8" th:src="@{static/bootstrap-3.3.7-dist/js/locales/bootstrap-datetimepicker.fr.js}"></script>
 	
-		<link rel="stylesheet" href="../css/res/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/res/layui/css/layui.css" th:href="@{static/css/res/layui/css/layui.css}" media="all">
 
   <!--<script src="layui/layui.js"></script>-->
   <!--<script type="text/javascript" src="../css/res/static/js/jquery-1.8.3.min.js"></script>-->
@@ -106,14 +106,14 @@
                 <h4>通知考生</h4>
                 <form class="indent send-type-wrapper mt10">
                     <div class="toggle-wrapper disabled" data-link="class{merge:!sendEmail toggle='disabled'}">
-                        <label class="control-label toggle-label">给考生发送邮件：</label>
-                        <label class="toggle email-hint" data-toggle="tooltip" data-placement="right">
+                        <!--<label id="sendemail" class="control-label toggle-label">-->给考生发送邮件：<!--</label>-->
+                        <label  class="toggle email-hint" data-toggle="tooltip" data-placement="right">
                             <input type="checkbox" data-link="{:sendEmail:} disabled{:!emailEnabled}">
-                            <span class="handle"></span>
+                            <span id="sendemail" class="handle"></span>
                         </label>
                     </div>
                     <div class="toggle-wrapper disabled" data-link="class{merge:!sendMessage toggle='disabled'}">
-                        <label class="control-label toggle-label">给考生发送短信：</label>
+                        <!--<label class="control-label toggle-label">-->给考生发送短信：<!--</label>-->
                         <label class="toggle message-hint" data-toggle="tooltip" data-placement="right" data-original-title="" title="">
                             <input type="checkbox" data-link="{:sendMessage:} disabled{:!messageEnabled}" disabled="disabled">
                             <span class="handle"></span>
@@ -134,14 +134,14 @@
 						    	<tbody>
 						    		<tr>
 						    			<td style="width:10%;"><span><i class="fa fa-user fa-fw"></i> 姓名</span></td>
-						    			<td><input type="text" class="form-control tl" placeholder="考生的姓名" data-link="{:candidateName:trim} disabled{:isSending}">
+						    			<td><input type="text" id="s_name" class="form-control tl" placeholder="考生的姓名" data-link="{:candidateName:trim} disabled{:isSending}">
 						    			</td>
 						    		</tr>
 						    		
 						    		<tr>
 						    			<td style="width:10%;"><span><i class="fa fa-envelope-o fa-fw"></i><script type="jsv#104^">
 						    				
-						    			</script>邮箱<script type="jsv/104^"></script></span></td><td><input type="text" class="form-control tl" placeholder="考生的邮箱" data-link="{:candidateUid:trim} placeholder{:'考生的' + uidName} disabled{:isSending}"></td></tr>
+						    			</script>邮箱<script type="jsv/104^"></script></span></td><td><input type="text" id="s_email" class="form-control tl" placeholder="考生的邮箱" data-link="{:candidateUid:trim} placeholder{:'考生的' + uidName} disabled{:isSending}"></td></tr>
 						    			<tr data-link="css-display{:sendMessage&amp;&amp;!isUidPhone?'table-row':'none'}" style="display: none;"><td style="width:1%;">
 						    				<span><i class="fa fa-phone"></i> 手机号码</span></td><td><input type="text" class="form-control" placeholder="手机号码（11位）" data-link="{:phone:trim} disabled{:isSending}"></td></tr>
 						    				<tr><td style="width:1%;"></td><td>
@@ -151,9 +151,17 @@
 						            </a></td></tr>
 						    	</tbody>
 						    </table>
-							    <ul class="list-group invite-list mt20" data-link="visible{: list^length}" data-jsv-df="" style="display: none;"><li class="list-group-item"><span class="badge badge-success"><script type="jsv#107^"></script>0<script type="jsv/107^"></script></span>已录入列表 <a target="_blank" style="font-size:13px;" data-link="href{:'invitation/' + paperId}" href="invitation/453900">查看更多已录入</a>
-							        </li></ul>
-									<script type="jsv/23_"></script>
+						    <ul class="list-group invite-list mt20" data-link="visible{: list^length}" data-jsv-df="" style="display: block;"><li class="list-group-item" data-link=""><span class="badge badge-success">
+						    	<script type="jsv#107^"></script>2<script type="jsv/107^"></script></span>已录入列表 <a target="_blank" style="font-size:13px;" data-link="href{:'invitation/' + paperId}" href="invitation/453900">查看更多已录入</a>
+					        </li><li data-jsv="#108^#25_#40_" class="list-group-item reciever-info">
+					            <span class="name">123123</span>
+					            <span class="email">123@qq.com</span>
+					        </li><li data-jsv="/40_#43_" class="list-group-item reciever-info">
+					            <span class="name">123123123123</span>
+					            <span class="email">1@qq.com</span>
+					        </li>
+						    </ul>
+							    
                         </div>
                         <div class="tab-pane fade" id="inviteCandiDateMultiImport">
 							<script type="jsv#26_"></script>
@@ -180,7 +188,7 @@
         </div>
     
 	</body>
-	
+	<!--<script type="text/javascript" src="../js/jquery-1.8.3.min.js" th:src="@{../js/jquery-1.8.3.min.js}"></script>--> 
 	<script type="text/javascript">
 		//datetimepicker初始化
 		$(function(){
@@ -198,9 +206,41 @@
 		//点击录入，通过邮件添加考生
 		$(function(){
 			$('#enter').click(function(){
-				alert('emm');
+				var sname = $('#s_name').val();
+				var semail = $('#s_email').val();
+				//alert(sname+semail);
+				
+				var pararms ={'name':sname,'email':semail};// 定义一个js对象				
+				
+				if($("#sendemail").prev().is(":checked")){
+			        $.ajax({
+						url:'sendEmail',
+						type:'post',
+						contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+						data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+						success:function(e){//e变量就是后台返回的Map对象
+							alert("回来了");
+							/*if(e.flag){
+								console.log(e.msg);
+								$('#top').html("");
+								$('#demo').html(e.msg);
+							}else{
+								$('#demo').html(e.msg);
+							}*/
+						},
+						error:function(e){
+							console.log(e);
+							//$('#demo').html('字符串格式错误');
+						}
+					});
+			   	}else{
+			        //当前是show状态
+					alert("hidden");
+			   	}
 			})
+			
 		})
+		
 		
 	</script>
 	
