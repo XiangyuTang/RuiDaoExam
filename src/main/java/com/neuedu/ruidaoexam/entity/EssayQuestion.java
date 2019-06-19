@@ -11,6 +11,8 @@ public class EssayQuestion {
 
     private Integer difficulty;
 
+    private Integer abilityTypeId;
+
     public Integer getQuesAnsId() {
         return quesAnsId;
     }
@@ -49,5 +51,13 @@ public class EssayQuestion {
 
     public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Integer getAbilityTypeId() {
+        return abilityTypeId;
+    }
+
+    public void setAbilityTypeId(Integer abilityTypeId) {
+        this.abilityTypeId = abilityTypeId;
     }
 }

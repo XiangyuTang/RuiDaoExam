@@ -11,6 +11,8 @@ public class JudgeQuestion {
 
     private Integer difficulty;
 
+    private Integer abilityTypeId;
+
     public Integer getJudgeId() {
         return judgeId;
     }
@@ -49,5 +51,13 @@ public class JudgeQuestion {
 
     public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Integer getAbilityTypeId() {
+        return abilityTypeId;
+    }
+
+    public void setAbilityTypeId(Integer abilityTypeId) {
+        this.abilityTypeId = abilityTypeId;
     }
 }

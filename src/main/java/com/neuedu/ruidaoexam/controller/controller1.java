@@ -30,5 +30,12 @@ public class controller1 {
 	{
 		return "index";
 	}
+
+	@RequestMapping("/toindexteacher")
+	public String toindexteacher()
+	{
+		return "indexteacher";
+	}
+	
 	
 }

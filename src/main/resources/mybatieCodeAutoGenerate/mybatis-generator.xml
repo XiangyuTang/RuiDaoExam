@@ -48,8 +48,12 @@
          <table tableName="question_bank" domainObjectName="QuestionBank"/>
          <table tableName="question_type" domainObjectName="QuestionType"/>
          <table tableName="report" domainObjectName="Report"/>
-         <table tableName="trade_record" domainObjectName="TradeRecord"/> -->
+         <table tableName="trade_record" domainObjectName="TradeRecord"/> 
+         <table tableName="choice_question" domainObjectName="ChoiceQuestion"/>-->
          <table tableName="choice_question" domainObjectName="ChoiceQuestion"/>
+         <table tableName="essay_question" domainObjectName="EssayQuestion"/>
+         <table tableName="judge_question" domainObjectName="JudgeQuestion"/>
+         <table tableName="ability_type" domainObjectName="AbilityType"/>
 	</context>
 
 </generatorConfiguration>

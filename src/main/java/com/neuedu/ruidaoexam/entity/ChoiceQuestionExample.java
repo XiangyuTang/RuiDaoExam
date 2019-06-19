@@ -773,6 +773,66 @@ public class ChoiceQuestionExample {
             addCriterion("analysis not between", value1, value2, "analysis");
             return (Criteria) this;
         }
+
+        public Criteria andAbilityTypeIdIsNull() {
+            addCriterion("ability_type_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdIsNotNull() {
+            addCriterion("ability_type_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdEqualTo(Integer value) {
+            addCriterion("ability_type_id =", value, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdNotEqualTo(Integer value) {
+            addCriterion("ability_type_id <>", value, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdGreaterThan(Integer value) {
+            addCriterion("ability_type_id >", value, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ability_type_id >=", value, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdLessThan(Integer value) {
+            addCriterion("ability_type_id <", value, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("ability_type_id <=", value, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdIn(List<Integer> values) {
+            addCriterion("ability_type_id in", values, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdNotIn(List<Integer> values) {
+            addCriterion("ability_type_id not in", values, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("ability_type_id between", value1, value2, "abilityTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbilityTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("ability_type_id not between", value1, value2, "abilityTypeId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

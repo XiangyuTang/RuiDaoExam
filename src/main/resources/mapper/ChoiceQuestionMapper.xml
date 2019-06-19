@@ -12,6 +12,7 @@
     <result column="answer" property="answer" jdbcType="VARCHAR" />
     <result column="difficulty" property="difficulty" jdbcType="INTEGER" />
     <result column="analysis" property="analysis" jdbcType="VARCHAR" />
+    <result column="ability_type_id" property="abilityTypeId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List" >
     choice_ques_id, ques_type_id, content, choice1, choice2, choice3, choice4, answer, 
-    difficulty, analysis
+    difficulty, analysis, ability_type_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestionExample" >
     select
@@ -109,11 +110,11 @@
     insert into choice_question (choice_ques_id, ques_type_id, content, 
       choice1, choice2, choice3, 
       choice4, answer, difficulty, 
-      analysis)
+      analysis, ability_type_id)
     values (#{choiceQuesId,jdbcType=INTEGER}, #{quesTypeId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
       #{choice1,jdbcType=VARCHAR}, #{choice2,jdbcType=VARCHAR}, #{choice3,jdbcType=VARCHAR}, 
       #{choice4,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{difficulty,jdbcType=INTEGER}, 
-      #{analysis,jdbcType=VARCHAR})
+      #{analysis,jdbcType=VARCHAR}, #{abilityTypeId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestion" >
     insert into choice_question
@@ -148,6 +149,9 @@
       <if test="analysis != null" >
         analysis,
       </if>
+      <if test="abilityTypeId != null" >
+        ability_type_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="choiceQuesId != null" >
@@ -179,6 +183,9 @@
       </if>
       <if test="analysis != null" >
         #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityTypeId != null" >
+        #{abilityTypeId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -221,6 +228,9 @@
       <if test="record.analysis != null" >
         analysis = #{record.analysis,jdbcType=VARCHAR},
       </if>
+      <if test="record.abilityTypeId != null" >
+        ability_type_id = #{record.abilityTypeId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -237,7 +247,8 @@
       choice4 = #{record.choice4,jdbcType=VARCHAR},
       answer = #{record.answer,jdbcType=VARCHAR},
       difficulty = #{record.difficulty,jdbcType=INTEGER},
-      analysis = #{record.analysis,jdbcType=VARCHAR}
+      analysis = #{record.analysis,jdbcType=VARCHAR},
+      ability_type_id = #{record.abilityTypeId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -272,6 +283,9 @@
       <if test="analysis != null" >
         analysis = #{analysis,jdbcType=VARCHAR},
       </if>
+      <if test="abilityTypeId != null" >
+        ability_type_id = #{abilityTypeId,jdbcType=INTEGER},
+      </if>
     </set>
     where choice_ques_id = #{choiceQuesId,jdbcType=INTEGER}
   </update>
@@ -285,7 +299,8 @@
       choice4 = #{choice4,jdbcType=VARCHAR},
       answer = #{answer,jdbcType=VARCHAR},
       difficulty = #{difficulty,jdbcType=INTEGER},
-      analysis = #{analysis,jdbcType=VARCHAR}
+      analysis = #{analysis,jdbcType=VARCHAR},
+      ability_type_id = #{abilityTypeId,jdbcType=INTEGER}
     where choice_ques_id = #{choiceQuesId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -21,6 +21,8 @@ public class ChoiceQuestion {
 
     private String analysis;
 
+    private Integer abilityTypeId;
+
     public Integer getChoiceQuesId() {
         return choiceQuesId;
     }
@@ -99,5 +101,13 @@ public class ChoiceQuestion {
 
     public void setAnalysis(String analysis) {
         this.analysis = analysis == null ? null : analysis.trim();
+    }
+
+    public Integer getAbilityTypeId() {
+        return abilityTypeId;
+    }
+
+    public void setAbilityTypeId(Integer abilityTypeId) {
+        this.abilityTypeId = abilityTypeId;
     }
 }
