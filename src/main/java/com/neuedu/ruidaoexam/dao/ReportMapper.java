@@ -3,10 +3,8 @@ package com.neuedu.ruidaoexam.dao;
 import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface ReportMapper {
     int countByExample(ReportExample example);
 

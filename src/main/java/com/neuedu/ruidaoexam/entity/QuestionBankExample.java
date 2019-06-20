@@ -353,6 +353,66 @@ public class QuestionBankExample {
             addCriterion("createdByTeacherId not between", value1, value2, "createdbyteacherid");
             return (Criteria) this;
         }
+
+        public Criteria andPointPriceIsNull() {
+            addCriterion("point_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceIsNotNull() {
+            addCriterion("point_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceEqualTo(Integer value) {
+            addCriterion("point_price =", value, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceNotEqualTo(Integer value) {
+            addCriterion("point_price <>", value, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceGreaterThan(Integer value) {
+            addCriterion("point_price >", value, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("point_price >=", value, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceLessThan(Integer value) {
+            addCriterion("point_price <", value, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceLessThanOrEqualTo(Integer value) {
+            addCriterion("point_price <=", value, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceIn(List<Integer> values) {
+            addCriterion("point_price in", values, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceNotIn(List<Integer> values) {
+            addCriterion("point_price not in", values, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceBetween(Integer value1, Integer value2) {
+            addCriterion("point_price between", value1, value2, "pointPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointPriceNotBetween(Integer value1, Integer value2) {
+            addCriterion("point_price not between", value1, value2, "pointPrice");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

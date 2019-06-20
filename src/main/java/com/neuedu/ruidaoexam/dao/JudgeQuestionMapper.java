@@ -3,11 +3,8 @@ package com.neuedu.ruidaoexam.dao;
 import com.neuedu.ruidaoexam.entity.JudgeQuestion;
 import com.neuedu.ruidaoexam.entity.JudgeQuestionExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface JudgeQuestionMapper {
     int countByExample(JudgeQuestionExample example);
 

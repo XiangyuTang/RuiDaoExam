@@ -1,13 +1,10 @@
 package com.neuedu.ruidaoexam.dao;
 
 import com.neuedu.ruidaoexam.entity.AbilityType;
-
 import com.neuedu.ruidaoexam.entity.AbilityTypeExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface AbilityTypeMapper {
     int countByExample(AbilityTypeExample example);
 

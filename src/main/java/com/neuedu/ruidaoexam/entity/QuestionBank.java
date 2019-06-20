@@ -9,6 +9,8 @@ public class QuestionBank {
 
     private Integer createdbyteacherid;
 
+    private Integer pointPrice;
+
     public Integer getQuesBankId() {
         return quesBankId;
     }
@@ -39,5 +41,13 @@ public class QuestionBank {
 
     public void setCreatedbyteacherid(Integer createdbyteacherid) {
         this.createdbyteacherid = createdbyteacherid;
+    }
+
+    public Integer getPointPrice() {
+        return pointPrice;
+    }
+
+    public void setPointPrice(Integer pointPrice) {
+        this.pointPrice = pointPrice;
     }
 }

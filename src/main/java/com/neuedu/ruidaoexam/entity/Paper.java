@@ -13,6 +13,8 @@ public class Paper {
 
     private Integer totalScore;
 
+    private Integer pointPrice;
+
     public Integer getPaperId() {
         return paperId;
     }
@@ -59,5 +61,13 @@ public class Paper {
 
     public void setTotalScore(Integer totalScore) {
         this.totalScore = totalScore;
+    }
+
+    public Integer getPointPrice() {
+        return pointPrice;
+    }
+
+    public void setPointPrice(Integer pointPrice) {
+        this.pointPrice = pointPrice;
     }
 }
