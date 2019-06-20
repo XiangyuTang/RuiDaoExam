@@ -37,5 +37,15 @@ public class PageJumpController {
 		return "invite";
 	}
 	
+	@RequestMapping("/toRegister")
+	public String toRegister() {
+		return "user/reg";
+	}
+	
+	
+	@RequestMapping("tologin")
+	public String toLogin() {
+		return "user/login";
+	}
 	
 }

@@ -19,6 +19,7 @@
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="../../js/Particleground.js" th:src="@{static/js/Particleground.js}"></script>
   <style>
+    
     body {
       height: 100%;
       overflow: hidden;
@@ -41,7 +42,6 @@
 </head>
 
 <body>
-
 
   <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
@@ -88,8 +88,31 @@
           <input type="text" name="nickname" id="LAY-user-login-nickname" lay-verify="nickname" placeholder="昵称"
             class="layui-input">
         </div>
-        <div class="layui-form-item">
-          <input type="checkbox" name="agreement" lay-skin="primary" title="同意用户协议" checked>
+        <div class="layui-form-item" > 
+            <label class="layui-form-label" style="text-align: center">选择角色</label>
+            <div class="layui-input-block" style="
+            display: flex;
+            justify-content: center;
+            align-items: center;">
+              <input type="radio" name="sex" value="男" title="男" checked="">
+              <input type="radio" name="sex" value="女" title="女">
+            
+            </div>
+        <!-- <div class="layui-row" >
+          <div class="layui-col-md6">
+              <label  class="layui-form-label" style="text-align: center">选择角色</label>
+          </div>
+          <div class="layui-col-md6">
+              <input type="radio" name="character" value="teacher" title="教师">
+              <input type="radio" name="charecter" value="student" title="学生">
+          </div>
+          
+        </div> -->
+            
+           
+            <!-- <input type="checkbox" name="character" lay-skin="switch" lay-text="老师|学生"  checked> -->
+
+          <!-- <input type="checkbox" name="agreement" lay-skin="primary" title="同意用户协议" checked> -->
         </div>
         <div class="layui-form-item">
           <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">注 册</button>
@@ -109,11 +132,11 @@
 
     <div class="layui-trans layadmin-user-login-footer">
 
-      <p>© 2018 <a href="http://www.layui.com/" target="_blank">layui.com</a></p>
+      <p>© 2018 <a href="#" target="_blank">layui.com</a></p>
       <p>
-        <span><a href="http://www.layui.com/admin/#get" target="_blank">获取授权</a></span>
-        <span><a href="http://www.layui.com/admin/pro/" target="_blank">在线演示</a></span>
-        <span><a href="http://www.layui.com/admin/" target="_blank">前往官网</a></span>
+        <span><a href="#" target="_blank">获取授权</a></span>
+        <span><a href="#" target="_blank">在线演示</a></span>
+        <span><a href="#" target="_blank">前往官网</a></span>
       </p>
     </div>
 
@@ -121,7 +144,7 @@
 
   <script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
   <script>
-     //获取验证码的动画
+    //获取验证码的动画
     function showtTime(nums) {
 
       if (nums == 0) {
@@ -162,10 +185,25 @@
           return
         } else {
           $.ajax({
-            url:""
+            url: "/getverifyemail",
+            type: "POST",
+            data: { "receiver": mailinput },
+            dataType: "text",
+            success: function (data) {
+              if (data == "1") {
+                var nums = 60;
+                showtTime(nums);
+              }else{
+                layer.msg("啊偶，系统出现了一丝丝小问题~")
+              }
+
+
+            },
+            error:function(){
+              layer.msg("啊偶，系统出现了一丝丝小问题~")
+            }
           })
-          var nums = 60;
-          showtTime(nums);
+
 
 
 
@@ -173,37 +211,65 @@
         }
       })
 
+
+
       //提交
       form.on('submit(LAY-user-reg-submit)', function (obj) {
         var field = obj.field;
-
+        console.log(JSON.stringify(field))
         //确认密码
         if (field.password !== field.repass) {
           return layer.msg('两次密码输入不一致');
         }
 
-        //是否同意用户协议
-        if (!field.agreement) {
-          return layer.msg('你必须同意用户协议才能注册');
-        }
+        
 
-        //请求接口
-        admin.req({
-          url: layui.setter.base + 'json/user/reg.js' //实际使用请改成服务端真实接口
-          , data: field
-          , done: function (res) {
-            layer.msg('注册成功', {
-              offset: '15px'
-              , icon: 1
-              , time: 1000
-            }, function () {
-              location.hash = '/user/login'; //跳转到登入页
-            });
-          }
-        });
+        // //请求接口
+        // admin.req({
+        //   url: layui.setter.base + 'json/user/reg.js' //实际使用请改成服务端真实接口
+        //   , data: field
+        //   , done: function (res) {
+        //     layer.msg('注册成功', {
+        //       offset: '15px'
+        //       , icon: 1
+        //       , time: 1000
+        //     }, function () {
+        //       location.hash = '/user/login'; //跳转到登入页
+        //     });
+        //   }
+        // });
+        var email=field.email
+        var vercode=field.vercode
+        var password=field.password
+        var repass=field.repass
+        var nickname=field.nickname
+        var charcter=field.charcter
+					console.log(vercode);
+					$.ajax({
+						url: "/checkverifyemail",
+						type: "POST",
+						dataType: "text",
+						data: {
+							"newcode" : vercode 
+						},
+						success: function(data) {
+							if(data == 1){
+								alert("验证码正确");
+							}else{
+								alert("验证码错误");
+							}
+						},
+						error : function(e) {
+				            alert("系统异常");
+				        }
+					});
+      
 
         return false;
       });
+
+ 
+
     });
   </script>
 </body>
