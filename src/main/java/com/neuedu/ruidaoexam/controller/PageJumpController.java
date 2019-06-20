@@ -1,6 +1,7 @@
 package com.neuedu.ruidaoexam.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -47,5 +48,9 @@ public class PageJumpController {
 	public String toLogin() {
 		return "user/login";
 	}
-	
+	@RequestMapping("/toshoudong")
+	public String toshoudong(Model model) {
+		
+		return "shoudongzujuan";
+	}
 }
