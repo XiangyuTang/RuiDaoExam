@@ -8,21 +8,17 @@
 		<title></title>
 		<link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" th:href="@{static/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
 		<script src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
-		<!--<link rel="stylesheet" href="invite_files/app.css" />-->
+
 		<link rel="stylesheet" href="invite_files/base.css" th:href="@{static/pages/invite_files/base.css}" />
-		<!--<link rel="stylesheet" href="invite_files/bootstrap-datetimepicker.css" />-->
+
 		<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}" />
 		<link rel="stylesheet" href="invite_files/frontsearch.css" th:href="@{static/pages/invite_files/frontsearch.css}"/>
 		<link rel="stylesheet" href="invite_files/index.css" th:href="@{static/pages/invite_files/index.css}"/>
 		<link rel="stylesheet" href="invite_files/invite.css" th:href="@{static/pages/invite_files/invite.css}"/>
-		<!--<link rel="stylesheet" href="invite_files/login.css" />-->
-		<!--<link rel="stylesheet" href="invite_files/moon.css" />-->
-		<!--<link rel="stylesheet" href="invite_files/msg.css" />-->
+
 		<link rel="stylesheet" href="invite_files/sets.css" th:href="@{static/pages/invite_files/sets.css}"/>
 		<link rel="stylesheet" href="invite_files/sets.min.css" th:href="@{static/pages/invite_files/sets.min.css}"/>
-		<!--<link rel="stylesheet" href="invite_files/upload.css" />-->
-		<!--<link rel="stylesheet" href="invite_files/user-info.css" />-->
-		<!--<link rel="stylesheet" href="invite_files/moon_002.css" />-->
+
 		<link href="../../static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" media="screen" th:href="@{static/bootstrap-3.3.7-dist/css/bootstrap.css}"/>
 		<link href="../../static/bootstrap-3.3.7-dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" th:href="@{static/bootstrap-3.3.7-dist/css/bootstrap-datetimepicker.min.css}"/>
 		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
@@ -32,7 +28,7 @@
 	
 		<link rel="stylesheet" href="../css/res/layui/css/layui.css" th:href="@{static/css/res/layui/css/layui.css}" media="all">
   		<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
-  <!--<script type="text/javascript" src="../css/res/static/js/jquery-1.8.3.min.js"></script>-->
+		<script type="text/javascript" src="../js/template.js" th:src="@{static/js/template.js}"></script>
 	</head>
 	<body>
 
@@ -158,10 +154,7 @@
 					            <span class="name">123123</span>
 					            <span class="email">123@qq.com</span>
 					        </li>
-					        <li class="list-group-item reciever-info">
-					            <span class="name">123123123123</span>
-					            <span class="email">1@qq.com</span>
-					        </li>-->
+					        -->
 						    </ul>
 							    
                         </div>
@@ -173,10 +166,25 @@
 							        <ul style="padding-left: 20px;"><li style="list-style: unset;">如果有多个考生，您可以先<a href="http://101test-public.oss-cn-beijing.aliyuncs.com/template/xls/invitation.xls" class="text-primary">下载模板</a>输入后再导入。</li><li style="list-style: unset;">建议每个模板不要超过500人，如考生数量多，可拆分多个模板分批次导入。</li><li data-link="visible{:sendEmail}" style="list-style: unset; display: none;">免费用户每日可批量发送邀请1000次，vip用户每日可批量发送邀请3000次，企业版用户每日可批量发送邀请5000次。如有特殊需求请联系我们 010-82167778。</li></ul>
 							    </div>
 							    
-							    <form method="post" action="importexcel" enctype="multipart/form-data">
+							    <form method="post" action="" enctype="multipart/form-data" id="fileform">
 								    <input type="file" name="file"><br>
-								    <span class="uploadText"><input type="submit" value="提交"></span>
+								    <!--<span id="ajaxsubmit" class="uploadText">-->
+								    <botton id="ajaxsubmit" value="提交"> </botton>
+								   <!-- </span>-->
 								</form>
+								
+								<ul id='InformedList1' class="list-group invite-list mt20" data-link="visible{: list^length}" data-jsv-df="" style="display: block;">
+						    	<li id='listGroup1' class='list-group-item' data-link=''>
+						    		<span class='badge badge-success'>😏</span>已录入通知列表 
+						    	</li>
+						        
+						        <!--<li class="list-group-item reciever-info">
+						            <span class="name">123123</span>
+						            <span class="email">123@qq.com</span>
+						        </li>
+						        -->
+							    </ul>
+								
 								
 							    <!--<div class="btn btn-warning multi-import-btn" style="position: relative; overflow: hidden; cursor: default;">
 							    	<span class="uploadText">导入文件</span>
@@ -203,7 +211,15 @@
         </div>
     
 	</body>
-	<!--<script type="text/javascript" src="../js/jquery-1.8.3.min.js" th:src="@{../js/jquery-1.8.3.min.js}"></script>--> 
+	<script type="text/html" id="template1">
+	<h1>{{title}}</h1>
+	{{each informedList as student}}	
+		<li class="list-group-item reciever-info">
+	        <span class="name">student.name</span>
+	        <span class="email">student.email</span>
+	    </li>
+	{{/each}}
+	</script>
 	<script type="text/javascript">
 		//datetimepicker初始化
 		$(function(){
@@ -216,6 +232,25 @@
 			    forceParse: 0,
 			    showMeridian: 1
 			});
+		})
+		
+		//在批量导入excel模板后显示通知列表到前台
+		$(function(){
+			$("#ajaxsubmit").click(function(){
+				//alert(233);
+				var a = {'param1':1,'param2':'~O(∩_∩)O哈哈~'};
+				$.ajax({
+				url:'/importexcel2',
+				post:'get',
+				data:a,
+				success:function(e){
+					var obj = JSON.parse(e);//将字符串转换成json对象
+					var new_html= template("template1",obj);//将json对象绑定到artTemplate模板上
+					$('#listGroup1').append(new_html);
+					
+			}
+		});
+			})
 		})
 		
 		//点击录入，通过邮件添加考生
