@@ -167,7 +167,7 @@
 							    </div>
 							    
 							    <form method="post" action="" enctype="multipart/form-data" id="fileform">
-								    <input type="file" name="file"><br>
+								    <input id="the_file" type="file" name="file"><br>
 								    <!--<span id="ajaxsubmit" class="uploadText">-->
 								    <botton id="ajaxsubmit" value="提交"> </botton>
 								   <!-- </span>-->
@@ -238,10 +238,11 @@
 		$(function(){
 			$("#ajaxsubmit").click(function(){
 				//alert(233);
-				var a = {'param1':1,'param2':'~O(∩_∩)O哈哈~'};
+				var data = new FormData($("#fileform")[0]);
+				var a = {'file':data};
 				$.ajax({
 				url:'/importexcel2',
-				post:'get',
+				type:'post',
 				data:a,
 				success:function(e){
 					var obj = JSON.parse(e);//将字符串转换成json对象
