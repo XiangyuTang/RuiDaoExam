@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,7 +35,7 @@ public class VerifyCodeController {
 		session.setAttribute("receiver", "success4094");
 		return "sss";
 	}
-	@RequestMapping("/checkverifyemail")
+	@PostMapping("/checkverifyemail")
 	@ResponseBody
 	//@RequestParam("receiver")
 	public String checkVerifyemail(String newcode, HttpSession session) {
@@ -46,7 +47,7 @@ public class VerifyCodeController {
 			return "0";
 		}
 	}
-	@RequestMapping("/getverifyemail")
+	@PostMapping("/getverifyemail")
 	@ResponseBody
 	//HttpServletRequest req
 	public String sendVerifyemail(
