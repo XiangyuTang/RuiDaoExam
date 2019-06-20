@@ -9,7 +9,7 @@ public class Teacher {
 
     private String password;
 
-    private String points;
+    private Integer points;
 
     public Integer getTeacherId() {
         return teacherId;
@@ -43,11 +43,11 @@ public class Teacher {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getPoints() {
+    public Integer getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
-        this.points = points == null ? null : points.trim();
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 }

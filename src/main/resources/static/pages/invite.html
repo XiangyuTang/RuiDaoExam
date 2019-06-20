@@ -169,7 +169,7 @@
 							    <form method="post" action="" enctype="multipart/form-data" id="fileform">
 								    <input id="the_file" type="file" name="file"><br>
 								    <!--<span id="ajaxsubmit" class="uploadText">-->
-								    <botton id="ajaxsubmit" value="提交"> </botton>
+								    <input type="button" id="ajaxsubmit" value="提交">
 								   <!-- </span>-->
 								</form>
 								
@@ -215,8 +215,9 @@
 	<h1>{{title}}</h1>
 	{{each informedList as student}}	
 		<li class="list-group-item reciever-info">
-	        <span class="name">student.name</span>
-	        <span class="email">student.email</span>
+	        <span class="name">{{student.name}}</span>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        <span class="email">{{student.email}}</span>
 	    </li>
 	{{/each}}
 	</script>
@@ -237,13 +238,20 @@
 		//在批量导入excel模板后显示通知列表到前台
 		$(function(){
 			$("#ajaxsubmit").click(function(){
-				//alert(233);
-				var data = new FormData($("#fileform")[0]);
-				var a = {'file':data};
+				alert(233);
+				var filedata = new FormData();
+				var file = $("#the_file")[0].files[0];
+				if(file!="")
+				{
+					filedata.append("file",file);
+				}
+				//var a = {'file':data};
 				$.ajax({
 				url:'/importexcel2',
 				type:'post',
-				data:a,
+				processData:false,
+				contentType:false,
+				data:filedata,
 				success:function(e){
 					var obj = JSON.parse(e);//将字符串转换成json对象
 					var new_html= template("template1",obj);//将json对象绑定到artTemplate模板上

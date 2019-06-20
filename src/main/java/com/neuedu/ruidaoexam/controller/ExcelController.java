@@ -41,9 +41,10 @@ public class ExcelController {
 	
 	@RequestMapping("/importexcel2")
     @ResponseBody
-    public String importexceltoshow(@RequestParam("file") MultipartFile file,HttpServletRequest request) {        
+    public String importexceltoshow(@RequestParam(value = "file", required = false) MultipartFile file,HttpServletRequest request) {        
 		List<Object> list = ExcelUtil.readExcel(file, new PersonDTO(),1);		
-		HashMap map = new HashMap();		
+		HashMap map = new HashMap();	
+		
 		for (Object o : list) {
 			System.out.println(o.toString());
 		}

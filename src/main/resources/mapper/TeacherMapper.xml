@@ -6,7 +6,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="points" property="points" jdbcType="VARCHAR" />
+    <result column="points" property="points" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -103,7 +103,7 @@
     insert into teacher (teacher_id, name, email, 
       password, points)
     values (#{teacherId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{points,jdbcType=VARCHAR})
+      #{password,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.Teacher" >
     insert into teacher
@@ -138,7 +138,7 @@
         #{password,jdbcType=VARCHAR},
       </if>
       <if test="points != null" >
-        #{points,jdbcType=VARCHAR},
+        #{points,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -164,7 +164,7 @@
         password = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.points != null" >
-        points = #{record.points,jdbcType=VARCHAR},
+        points = #{record.points,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -177,7 +177,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      points = #{record.points,jdbcType=VARCHAR}
+      points = #{record.points,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -195,7 +195,7 @@
         password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="points != null" >
-        points = #{points,jdbcType=VARCHAR},
+        points = #{points,jdbcType=INTEGER},
       </if>
     </set>
     where teacher_id = #{teacherId,jdbcType=INTEGER}
@@ -205,7 +205,7 @@
     set name = #{name,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      points = #{points,jdbcType=VARCHAR}
+      points = #{points,jdbcType=INTEGER}
     where teacher_id = #{teacherId,jdbcType=INTEGER}
   </update>
 </mapper>

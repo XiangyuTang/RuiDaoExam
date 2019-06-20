@@ -384,62 +384,52 @@ public class TeacherExample {
             return (Criteria) this;
         }
 
-        public Criteria andPointsEqualTo(String value) {
+        public Criteria andPointsEqualTo(Integer value) {
             addCriterion("points =", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotEqualTo(String value) {
+        public Criteria andPointsNotEqualTo(Integer value) {
             addCriterion("points <>", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsGreaterThan(String value) {
+        public Criteria andPointsGreaterThan(Integer value) {
             addCriterion("points >", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsGreaterThanOrEqualTo(String value) {
+        public Criteria andPointsGreaterThanOrEqualTo(Integer value) {
             addCriterion("points >=", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsLessThan(String value) {
+        public Criteria andPointsLessThan(Integer value) {
             addCriterion("points <", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsLessThanOrEqualTo(String value) {
+        public Criteria andPointsLessThanOrEqualTo(Integer value) {
             addCriterion("points <=", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsLike(String value) {
-            addCriterion("points like", value, "points");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointsNotLike(String value) {
-            addCriterion("points not like", value, "points");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointsIn(List<String> values) {
+        public Criteria andPointsIn(List<Integer> values) {
             addCriterion("points in", values, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotIn(List<String> values) {
+        public Criteria andPointsNotIn(List<Integer> values) {
             addCriterion("points not in", values, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsBetween(String value1, String value2) {
+        public Criteria andPointsBetween(Integer value1, Integer value2) {
             addCriterion("points between", value1, value2, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotBetween(String value1, String value2) {
+        public Criteria andPointsNotBetween(Integer value1, Integer value2) {
             addCriterion("points not between", value1, value2, "points");
             return (Criteria) this;
         }
