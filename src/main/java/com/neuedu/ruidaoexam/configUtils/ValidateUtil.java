@@ -1,4 +1,4 @@
-package com.neuedu.ruidaoexam.config;
+package com.neuedu.ruidaoexam.configUtils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.neuedu.ruidaoexam.config;
+package com.neuedu.ruidaoexam.configUtils;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

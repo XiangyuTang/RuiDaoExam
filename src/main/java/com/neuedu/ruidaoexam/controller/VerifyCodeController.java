@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.neuedu.ruidaoexam.config.SendEmailUtils;
+import com.neuedu.ruidaoexam.configUtils.SendEmailUtils;
 
 @Controller
 public class VerifyCodeController {

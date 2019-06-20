@@ -1,3 +1,4 @@
+package com.neuedu.ruidaoexam.configUtils;
 /*package com.neuedu.ruidaoexam.config;
 
 import java.awt.Graphics2D; 

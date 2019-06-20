@@ -4,8 +4,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.neuedu.ruidaoexam.config.MailConfig;
+import com.neuedu.ruidaoexam.configUtils.MailConfig;
 import com.neuedu.ruidaoexam.dao.StudentMapper;
+import com.neuedu.ruidaoexam.entity.MsgOfInvite;
 import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.service.InviteService;
 
@@ -15,12 +16,12 @@ public class InviteServiceimpl implements InviteService{
 	@Autowired
 	StudentMapper studentMapper;//暂时不起作用	
 	@Override
-	public void sendEmail(Student stu) {
+	public void sendEmail(MsgOfInvite msg,String invitecode) {
 		// TODO Auto-generated method stub
 		try {
-			MailConfig.send(stu);
-			Student student = studentMapper.selectByPrimaryKey(1);
-			System.out.println("学生的名字："+student.getName());
+			MailConfig.send(msg,invitecode);
+			/*Student student = studentMapper.selectByPrimaryKey(1);
+			System.out.println("学生的名字："+student.getName());*/
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

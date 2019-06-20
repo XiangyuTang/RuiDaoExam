@@ -48,7 +48,7 @@
 											<div class="form-group">
 												<label class="control-label" for="beginDate">考试时间从</label>
 								                <div class="input-group date form_datetime " data-date="" data-date-format="yyyy-mm-dd hh:ii" data-link="beginDate" data-link-field="dtp_input1">
-								                    <input class="form-control" size="12" placeholder="开始时间"  type="text" value="" readonly>
+								                    <input id="begintime" class="form-control" size="12" placeholder="开始时间"  type="text" value="" readonly>
 								                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove" ></span></span>
 								                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 								                </div>
@@ -59,7 +59,7 @@
 										<label class="control-label" for="endDate">至</label>
 										<div class="form-group">
 								                <div class="input-group date form_datetime " data-date="" data-date-format="yyyy-mm-dd hh:ii" data-link="beginDate" data-link-field="dtp_input1">
-								                    <input class="form-control" size="12" placeholder="结束时间"  type="text" value="" readonly>
+								                    <input id="endtime" class="form-control" size="12" placeholder="结束时间"  type="text" value="" readonly>
 								                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove" ></span></span>
 								                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 								                </div>
@@ -87,9 +87,8 @@
                         	<span class="fa-stack check-icon"> 
                         		<i class="fa fa-square-o fa-stack-2x"></i>
                         		<i class="fa fa-check-square fa-stack-1x check"></i>
-                        	</span> <script type="jsv#102^"></script>页面切换次数超过<script type="jsv/102^"></script></label>
-                        	<script type="jsv/22_"></script><script type="jsv/103^"></script>
-                            <div class="form-group"><input type="text" class="form-control tc" style="width:80px;" placeholder="次数" data-link="{:switchLimit:} disabled{:!switchLimitSwitcher}">
+                        	</span> 页面切换次数超过</label>
+                            <div class="form-group"><input id="cheattimes" type="text" class="form-control tc" style="width:80px;" placeholder="次数" data-link="{:switchLimit:} disabled{:!switchLimitSwitcher}">
                             </div>
                             	次时终止测试
                         </form>
@@ -238,7 +237,7 @@
 		//在批量导入excel模板后显示通知列表到前台
 		$(function(){
 			$("#ajaxsubmit").click(function(){
-				alert(233);
+				//alert(233);
 				var filedata = new FormData();
 				var file = $("#the_file")[0].files[0];
 				if(file!="")
@@ -262,15 +261,22 @@
 			})
 		})
 		
-		//点击录入，通过邮件添加考生
+		//点击录入，可通过邮件添加考生
 		$(function(){
 			var enter_stu_num = 0;
 			$('#enter').click(function(){
 				var sname = $('#s_name').val();
 				var semail = $('#s_email').val();
 				//alert(sname+semail);
-				
-				var pararms ={'name':sname,'email':semail};// 定义一个js对象				
+				var begintime = $('#begintime').val();
+				var endtime = $('#endtime').val();
+				var cheattimes = $('#cheattimes').val();
+				var pararms ={"name":sname,
+							  "email":semail,
+							  "begintime":begintime,
+							  "endtime":endtime,
+							  "cheattimes":cheattimes
+				};// 定义一个js对象
 				
 				if($("#sendemail").prev().is(":checked")){
 			        $.ajax({
@@ -315,7 +321,6 @@
 				  			,form = layui.form;
 				  			layer.msg('已向对方发送消息！');
 					});
-					
 			   	}
 			})
 			
