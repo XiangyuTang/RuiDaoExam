@@ -13,7 +13,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.junit.Test;
+//import org.junit.Test;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -97,7 +97,7 @@ public class SendEmailUtils {
         System.out.println("发送成功");
 	}
     
-    @Test
+    //@Test
 	public void ts() throws MessagingException {
 		SendEmailUtils seu = new SendEmailUtils("409478176@qq.com", "hh");
 		//seu.mailSend();

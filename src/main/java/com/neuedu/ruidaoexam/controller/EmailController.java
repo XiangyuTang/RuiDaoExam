@@ -5,8 +5,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.service.InviteService;
@@ -22,23 +24,16 @@ public class EmailController {
 	 * @param vo
 	 * @return
 	 */
-	@RequestMapping("/sendEmail")
+	//@RequestMapping("/sendEmail")
+	@PostMapping("/sendEmail")
+	@ResponseBody
 	public String sendemail(@RequestBody Student stu){
 		
 		//HashMap<String,Object> map = new HashMap<String,Object>();
 		System.out.println(stu.getName()+stu.getEmail());
 		inviteService.sendEmail(stu);
 		System.out.println("邮件发送成功！");
-		//map.put("hehe", stu);
-		/*
-		if ("ligp".equals(stu.getRegistName())&&"1".equals(stu.getRegistPwd().toString())) {
-			map.put("flag", "true");
-			map.put("msg", "你好"+stu.getRegistName());
-		}else{
-			map.put("flag", "false");
-			map.put("msg", "错误");
-		}*/
-		//return map;
+		
 		return "invite";
 	}
 }

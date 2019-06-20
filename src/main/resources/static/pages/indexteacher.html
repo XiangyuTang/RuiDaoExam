@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
     <link rel="stylesheet" href="../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
-  <script src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>  
+  <script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>  
   <script>
     // /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');a
     $(document).ready(function () {
@@ -120,7 +120,7 @@
                   		<a lay-href="/static/pages/shouye.html">智能组卷</a>
                 		</dd>
                 		<dd data-name="console">
-                  		<a lay-href="/static/pages/invite.html">录入考生（后期删掉）</a>
+                  		<a lay-href="toinvite" lay-text="录入考生" >录入考生（后期删掉）</a>
                 		</dd>
             			</li>
                 </dd>

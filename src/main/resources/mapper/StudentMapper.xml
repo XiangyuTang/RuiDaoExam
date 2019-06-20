@@ -6,7 +6,6 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="school" property="school" jdbcType="VARCHAR" />
     <result column="points" property="points" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    student_id, name, email, password, school, points
+    student_id, name, email, password, points
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.StudentExample" >
     select
@@ -102,11 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.Student" >
     insert into student (student_id, name, email, 
-      password, school, points
-      )
+      password, points)
     values (#{studentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER}
-      )
+      #{password,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.Student" >
     insert into student
@@ -122,9 +119,6 @@
       </if>
       <if test="password != null" >
         password,
-      </if>
-      <if test="school != null" >
-        school,
       </if>
       <if test="points != null" >
         points,
@@ -142,9 +136,6 @@
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="school != null" >
-        #{school,jdbcType=VARCHAR},
       </if>
       <if test="points != null" >
         #{points,jdbcType=INTEGER},
@@ -172,9 +163,6 @@
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.school != null" >
-        school = #{record.school,jdbcType=VARCHAR},
-      </if>
       <if test="record.points != null" >
         points = #{record.points,jdbcType=INTEGER},
       </if>
@@ -189,7 +177,6 @@
       name = #{record.name,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      school = #{record.school,jdbcType=VARCHAR},
       points = #{record.points,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -207,9 +194,6 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="school != null" >
-        school = #{school,jdbcType=VARCHAR},
-      </if>
       <if test="points != null" >
         points = #{points,jdbcType=INTEGER},
       </if>
@@ -221,7 +205,6 @@
     set name = #{name,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      school = #{school,jdbcType=VARCHAR},
       points = #{points,jdbcType=INTEGER}
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>

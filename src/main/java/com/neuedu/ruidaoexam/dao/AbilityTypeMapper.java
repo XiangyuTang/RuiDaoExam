@@ -1,6 +1,7 @@
 package com.neuedu.ruidaoexam.dao;
 
 import com.neuedu.ruidaoexam.entity.AbilityType;
+
 import com.neuedu.ruidaoexam.entity.AbilityTypeExample;
 import java.util.List;
 

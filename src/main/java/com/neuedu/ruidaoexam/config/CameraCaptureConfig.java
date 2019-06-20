@@ -1,4 +1,4 @@
-package com.neuedu.ruidaoexam.config;
+/*package com.neuedu.ruidaoexam.config;
 
 import java.awt.Graphics2D; 
 import java.awt.event.ActionEvent; 
@@ -17,7 +17,7 @@ import com.googlecode.javacv.OpenCVFrameGrabber;
 import com.googlecode.javacv.cpp.opencv_core.IplImage; 
 import static com.googlecode.javacv.cpp.opencv_core.cvReleaseImage; 
 //import com.googlecode.javacpp.Pointer;
-/** 
+*//** 
  * 
  * Use JavaCV/OpenCV to capture camera images 
  * 
@@ -30,7 +30,7 @@ import static com.googlecode.javacv.cpp.opencv_core.cvReleaseImage;
  * @author ljs 
  * 2011-08-19 
  * 
- */
+ *//*
 public class CameraCaptureConfig { 
   public static String savedImageFile = "C:\\myEclipseProjects\\RuiDaoExam\\src\\main\\webapp\\upload"; 
     
@@ -119,3 +119,4 @@ public class CameraCaptureConfig {
 } 
 
 
+*/

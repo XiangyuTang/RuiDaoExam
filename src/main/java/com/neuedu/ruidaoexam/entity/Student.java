@@ -9,8 +9,6 @@ public class Student {
 
     private String password;
 
-    private String school;
-
     private Integer points;
 
     public Integer getStudentId() {
@@ -43,14 +41,6 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
-    }
-
-    public String getSchool() {
-        return school;
-    }
-
-    public void setSchool(String school) {
-        this.school = school == null ? null : school.trim();
     }
 
     public Integer getPoints() {

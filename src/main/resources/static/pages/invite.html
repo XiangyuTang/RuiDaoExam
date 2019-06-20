@@ -31,8 +31,7 @@
 		<script type="text/javascript" src="../../static/bootstrap-3.3.7-dist/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8" th:src="@{static/bootstrap-3.3.7-dist/js/locales/bootstrap-datetimepicker.fr.js}"></script>
 	
 		<link rel="stylesheet" href="../css/res/layui/css/layui.css" th:href="@{static/css/res/layui/css/layui.css}" media="all">
-
-  <!--<script src="layui/layui.js"></script>-->
+  		<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
   <!--<script type="text/javascript" src="../css/res/static/js/jquery-1.8.3.min.js"></script>-->
 	</head>
 	<body>
@@ -51,9 +50,9 @@
 										
 										<!--<input data-link="beginDate" class="form-control date-picker" type="text" placeholder="开始时间" readonly="" style="width: 160px;">-->
 											<div class="form-group">
-												<label class="control-label" for="beginDate">测试时间从</label>
+												<label class="control-label" for="beginDate">考试时间从</label>
 								                <div class="input-group date form_datetime " data-date="" data-date-format="yyyy-mm-dd hh:ii" data-link="beginDate" data-link-field="dtp_input1">
-								                    <input class="form-control" size="10" placeholder="开始时间"  type="text" value="" readonly>
+								                    <input class="form-control" size="12" placeholder="开始时间"  type="text" value="" readonly>
 								                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove" ></span></span>
 								                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 								                </div>
@@ -64,7 +63,7 @@
 										<label class="control-label" for="endDate">至</label>
 										<div class="form-group">
 								                <div class="input-group date form_datetime " data-date="" data-date-format="yyyy-mm-dd hh:ii" data-link="beginDate" data-link-field="dtp_input1">
-								                    <input class="form-control" size="10" placeholder="结束时间"  type="text" value="" readonly>
+								                    <input class="form-control" size="12" placeholder="结束时间"  type="text" value="" readonly>
 								                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove" ></span></span>
 								                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 								                </div>
@@ -105,14 +104,14 @@
                 <h4>通知考生</h4>
                 <form class="indent send-type-wrapper mt10">
                     <div class="toggle-wrapper disabled" data-link="class{merge:!sendEmail toggle='disabled'}">
-                        <!--<label id="sendemail" class="control-label toggle-label">-->给考生发送邮件：<!--</label>-->
+                        	给考生发送邮件：
                         <label  class="toggle email-hint" data-toggle="tooltip" data-placement="right">
                             <input type="checkbox" data-link="{:sendEmail:} disabled{:!emailEnabled}">
                             <span id="sendemail" class="handle"></span>
                         </label>
                     </div>
                     <div class="toggle-wrapper disabled" data-link="class{merge:!sendMessage toggle='disabled'}">
-                        <!--<label class="control-label toggle-label">-->给考生发送短信：<!--</label>-->
+                        <label class="control-label toggle-label">给考生发送短信：</label>
                         <label class="toggle message-hint" data-toggle="tooltip" data-placement="right" data-original-title="" title="">
                             <input type="checkbox" data-link="{:sendMessage:} disabled{:!messageEnabled}" disabled="disabled">
                             <span class="handle"></span>
@@ -145,20 +144,24 @@
 						    				<span><i class="fa fa-phone"></i> 手机号码</span></td><td><input type="text" class="form-control" placeholder="手机号码（11位）" data-link="{:phone:trim} disabled{:isSending}"></td></tr>
 						    				<tr><td style="width:1%;"></td><td>
 						    					<a id="enter" class="btn btn-primary btn-invite" data-link="disabled{:isSending}">
-						                	录入
+						                	录入并通知
 						                	
 						            </a></td></tr>
 						    	</tbody>
 						    </table>
-						    <ul class="list-group invite-list mt20" data-link="visible{: list^length}" data-jsv-df="" style="display: block;"><li class="list-group-item" data-link=""><span class="badge badge-success">
-						    	<script type="jsv#107^"></script>2<script type="jsv/107^"></script></span>已录入列表 <a target="_blank" style="font-size:13px;" data-link="href{:'invitation/' + paperId}" href="invitation/453900">查看更多已录入</a>
-					        </li><li data-jsv="#108^#25_#40_" class="list-group-item reciever-info">
+						    <ul id='InformedList' class="list-group invite-list mt20" data-link="visible{: list^length}" data-jsv-df="" style="display: block;">
+					    	<li id='listGroup' class='list-group-item' data-link=''>
+					    		<span class='badge badge-success'>😏</span>已录入通知列表 
+					    	</li>
+					        
+					        <!--<li class="list-group-item reciever-info">
 					            <span class="name">123123</span>
 					            <span class="email">123@qq.com</span>
-					        </li><li data-jsv="/40_#43_" class="list-group-item reciever-info">
+					        </li>
+					        <li class="list-group-item reciever-info">
 					            <span class="name">123123123123</span>
 					            <span class="email">1@qq.com</span>
-					        </li>
+					        </li>-->
 						    </ul>
 							    
                         </div>
@@ -169,7 +172,20 @@
 							        <p>重要提示：</p>
 							        <ul style="padding-left: 20px;"><li style="list-style: unset;">如果有多个考生，您可以先<a href="http://101test-public.oss-cn-beijing.aliyuncs.com/template/xls/invitation.xls" class="text-primary">下载模板</a>输入后再导入。</li><li style="list-style: unset;">建议每个模板不要超过500人，如考生数量多，可拆分多个模板分批次导入。</li><li data-link="visible{:sendEmail}" style="list-style: unset; display: none;">免费用户每日可批量发送邀请1000次，vip用户每日可批量发送邀请3000次，企业版用户每日可批量发送邀请5000次。如有特殊需求请联系我们 010-82167778。</li></ul>
 							    </div>
-							    <div class="btn btn-warning multi-import-btn" style="position: relative; overflow: hidden; cursor: default;"><span class="uploadText">导入文件</span><form method="POST" action="invitation/importInvitations?t=1560848529260" enctype="multipart/form-data" style="margin: 0px; padding: 0px;"><input type="file" id="ajax-upload-id-1560848529261" name="file" accept=".xls,.xlsx" multiple="" style="position: absolute; cursor: pointer; top: 0px; width: 100%; height: 100%; left: 0px; z-index: 100; opacity: 0;"></form></div><div class="mt10 multi-import-wrapper" style="display: none; border: 1px solid red;">导入文件</div><div class="upload-error-log"></div>
+							    
+							    <form method="post" action="importexcel" enctype="multipart/form-data">
+								    <input type="file" name="file"><br>
+								    <span class="uploadText"><input type="submit" value="提交"></span>
+								</form>
+								
+							    <!--<div class="btn btn-warning multi-import-btn" style="position: relative; overflow: hidden; cursor: default;">
+							    	<span class="uploadText">导入文件</span>
+							    </div>
+							    <form method="POST" action="upload" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+							    	<input type="file" id="uploadid" name="file" accept=".xls,.xlsx" style="position: absolute; cursor: pointer; top: 0px; width: 100%; height: 100%; left: 0px; z-index: 100; opacity: 0;">
+							    	<input type="submit" class="uploadText"/>
+							    </form>-->
+							    <div class="mt10 multi-import-wrapper" style="display: none; border: 1px solid red;">导入文件</div><div class="upload-error-log"></div>
 							    <div class="mt10 alert alert-danger multi-import-alert" data-link="visible{:errorMsg}" style="display: none;">
 							        <p><script type="jsv#109^"></script><script type="jsv/109^"></script></p>
 							        <p data-link="visible{:errorFileName}" style="display: none;">请下载包含了错误信息的文件，修改后重新导入</p>
@@ -204,6 +220,7 @@
 		
 		//点击录入，通过邮件添加考生
 		$(function(){
+			var enter_stu_num = 0;
 			$('#enter').click(function(){
 				var sname = $('#s_name').val();
 				var semail = $('#s_email').val();
@@ -218,31 +235,49 @@
 						contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
 						data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
 						success:function(e){//e变量就是后台返回的Map对象
-							alert("回来了");
-							/*if(e.flag){
-								console.log(e.msg);
-								$('#top').html("");
-								$('#demo').html(e.msg);
-							}else{
-								$('#demo').html(e.msg);
-							}*/
+							//alert("回来了");
+							enter_stu_num = enter_stu_num+1;							
+							layui.use(['layer', 'form'], function(){
+						  		var layer = layui.layer
+						  			,form = layui.form;
+						  			layer.msg('已通过邮件通知对方！');
+							});
+							var $headList=$("<li id='listGroup' class='list-group-item' data-link=''><span class='badge badge-success'>"+
+						    	enter_stu_num+"</span>已录入列表" +
+					        "</li>"
+					        );
+							var $informedList=$("<li class='list-group-item reciever-info'>"+
+						            "<span class='name'>"+sname+"</span>"+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+						            "<span class='email'>"+semail+"</span>"+
+						        "</li>")
+					        //$('#InformedList').html($headList);
+							$('#listGroup').append($informedList);
 						},
 						error:function(e){
 							console.log(e);
-							//$('#demo').html('字符串格式错误');
 						}
 					});
 			   	}else{
 			        //当前是show状态
-					alert("hidden");
+					//alert("hidden");
+					var $informedList=$("<li class='list-group-item reciever-info'>"+
+				            "<span class='name'>"+sname+"</span>"+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+				            "<span class='email'>"+semail+"</span>"+
+				        "</li>")
+			        //$('#InformedList').html($headList);
+					$('#listGroup').append($informedList);
+					 layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('已向对方发送消息！');
+					});
+					
 			   	}
 			})
 			
 		})
-		
-		
+	
 	</script>
 	
 </html>
 
-<!--<div class="datetimepicker-days" style="display: block;"><table class=" table-condensed"><thead><tr><th class="prev" style="visibility: hidden;"><span class="glyphicon glyphicon-arrow-left"></span> </th><th colspan="5" class="switch">2019年 六月</th><th class="next" style="visibility: visible;"><span class="glyphicon glyphicon-arrow-right"></span> </th></tr><tr><th class="dow">一</th><th class="dow">二</th><th class="dow">三</th><th class="dow">四</th><th class="dow">五</th><th class="dow">六</th><th class="dow">日</th></tr></thead><tbody><tr><td class="day old disabled">27</td><td class="day old disabled">28</td><td class="day old disabled">29</td><td class="day old disabled">30</td><td class="day old disabled">31</td><td class="day disabled">1</td><td class="day disabled">2</td></tr><tr><td class="day disabled">3</td><td class="day disabled">4</td><td class="day disabled">5</td><td class="day disabled">6</td><td class="day disabled">7</td><td class="day disabled">8</td><td class="day disabled">9</td></tr><tr><td class="day disabled">10</td><td class="day disabled">11</td><td class="day disabled">12</td><td class="day disabled">13</td><td class="day disabled">14</td><td class="day disabled">15</td><td class="day disabled">16</td></tr><tr><td class="day disabled">17</td><td class="day today active">18</td><td class="day">19</td><td class="day">20</td><td class="day">21</td><td class="day">22</td><td class="day">23</td></tr><tr><td class="day">24</td><td class="day">25</td><td class="day">26</td><td class="day">27</td><td class="day">28</td><td class="day">29</td><td class="day">30</td></tr><tr><td class="day new">1</td><td class="day new">2</td><td class="day new">3</td><td class="day new">4</td><td class="day new">5</td><td class="day new">6</td><td class="day new">7</td></tr></tbody><tfoot><tr><th colspan="7" class="today">今天</th></tr></tfoot></table></div>-->

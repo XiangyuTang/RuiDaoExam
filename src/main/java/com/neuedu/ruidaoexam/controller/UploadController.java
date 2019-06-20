@@ -34,9 +34,10 @@ public class UploadController {
      * @return
      */
 	@PostMapping("/upload")
-    @ResponseBody
+    //@ResponseBody  //加了这个注解，return直接返回到一个新的页面，该页面就是字符串内容
     public String upload(@RequestParam("file") MultipartFile file,HttpServletRequest request) {
-        if (file.isEmpty()) {
+        System.out.println(666);
+		if (file.isEmpty()) {
             return "上传失败，请选择文件";
         }
         //fileName可以用自己的生成方案，我这里只简单用的原始文件名称
@@ -52,7 +53,7 @@ public class UploadController {
         File dest=new File(filePath,fileName);
         try {
             file.transferTo(dest);// transferTo() 将二进制流写入到某个目标文件上
-            return "上传成功";
+            return "invite";
         } catch (IOException e) {
         	e.printStackTrace();
         }
