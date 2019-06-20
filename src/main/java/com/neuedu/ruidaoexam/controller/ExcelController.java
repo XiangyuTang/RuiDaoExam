@@ -2,17 +2,20 @@ package com.neuedu.ruidaoexam.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.neuedu.ruidaoexam.excel.ExcelUtil;
 import com.neuedu.ruidaoexam.excel.PersonDTO;
 
@@ -26,15 +29,27 @@ public class ExcelController {
 	
 	@RequestMapping("/importexcel")
     @ResponseBody
-    public Object test2(@RequestParam("file") MultipartFile file,HttpServletRequest request) {
+    public Object test2(Model m,@RequestParam("file") MultipartFile file,HttpServletRequest request) {
         
 		List<Object> list = ExcelUtil.readExcel(file, new PersonDTO(),1);
-		
 		for (Object o : list) {
 			System.out.println(o.toString());
 		}
 		
 		return "exceltest-import-success";
+    }
+	
+	@RequestMapping("/importexcel2")
+    @ResponseBody
+    public String importexceltoshow(@RequestParam("file") MultipartFile file,HttpServletRequest request) {        
+		List<Object> list = ExcelUtil.readExcel(file, new PersonDTO(),1);		
+		HashMap map = new HashMap();		
+		for (Object o : list) {
+			System.out.println(o.toString());
+		}
+		map.put("informedList", list);
+		String str = JSON.toJSONString(map); // 利用fastjson转换字符串
+		return str; //返回字符串
     }
 	
     /**
