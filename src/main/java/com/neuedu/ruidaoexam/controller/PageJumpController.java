@@ -30,12 +30,14 @@ public class PageJumpController {
 		return "examOver";
 	}
 	
+	//学生个人中心
 	@RequestMapping("/toindex")
 	public String toindex()
 	{
 		return "index";
 	}
 
+	//教师个人中心
 	@RequestMapping("/toindexteacher")
 	public String toindexteacher()
 	{
@@ -48,6 +50,7 @@ public class PageJumpController {
 		return "invite";
 	}
 	
+	//注册页
 	@RequestMapping("/toRegister")
 	public String toRegister() {
 		return "user/reg";
@@ -83,5 +86,14 @@ public class PageJumpController {
 		System.out.println("我被调了");
 		return "news";
 	}
-	
+	//主页
+	@RequestMapping("/tohomePage")
+	public String tohomepage(){
+		return "user/homePage";
+	}
+	//教师主页(展示/欢迎页)
+	@RequestMapping("/toteacherhome")
+	public String toteacherhome(){
+		return "teacher/teacherhome";
+	}
 }

@@ -8,8 +8,8 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
-  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
+  <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
+  <link rel="stylesheet" href="../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
   
   <script>
   ///^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
@@ -22,7 +22,8 @@
       	<div class="admin-login-box">
 						<a class="logo" style="left: 0;" href="#">
 							<span style="width: 50px;height: 100px;">
-								<img src="../../layuiadmin/style/res/logo.png" style="width: 200px; height: 50px;">
+								
+								<img src="../static/layuiadmin/style/res/logo.png" style="width: 200px; height: 50px;">
 							</span>
 						</a>
 						<div class="admin-side-toggle">
@@ -42,7 +43,7 @@
         <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
           
           <li class="layui-nav-item" lay-unselect>
-            <a style="color: #75dd6e;" lay-href="user/homePage.html" layadmin-event="message" lay-text="首页">
+            <a style="color: #75dd6e;" lay-href="tohomePage" layadmin-event="message" lay-text="首页">
               
               <!--
               	作者：1173073908@qq.com
@@ -274,7 +275,7 @@
               </li>
               <li class="layui-col-xs6">
                 <a lay-href="https://www.layui.com/doc/modules/rate.html">
-                  <span class="layui-team-img"><img src="../../css/layuiadmin/style/res/logo.png"></span> 
+                  <span class="layui-team-img"><img src="../css/layuiadmin/style/res/logo.png"></span> 
                   <span>评分</span>
                 </a>
               </li>
@@ -285,7 +286,7 @@
     </div>
   </div>
 
-<script src="../../layuiadmin/layui/layui.js"  th:src="@{static/layuiadmin/layui/layui.js}" ></script>
+<script src="../layuiadmin/layui/layui.js"  th:src="@{static/layuiadmin/layui/layui.js}" ></script>
   <script>
   layui.config({
     base: '/static/layuiadmin/'  //静态资源所在路径
