@@ -26,7 +26,5 @@ public class InviteServiceimpl implements InviteService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-
+	}	
 }

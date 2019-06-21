@@ -48,9 +48,17 @@ public class PageJumpController {
 	public String toLogin() {
 		return "user/login";
 	}
+	
 	@RequestMapping("/toshoudong")
 	public String toshoudong(Model model) {
 		
 		return "shoudongzujuan";
 	}
+	
+	@RequestMapping("/toentercode")
+	public String toentercode() {
+		
+		return "examEntrance";
+	}
+	
 }
