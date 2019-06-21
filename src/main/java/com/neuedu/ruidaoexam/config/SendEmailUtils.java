@@ -37,6 +37,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class SendEmailUtils {
  
+	
 	//发件人，官方邮箱账号
 	private String MailSender = "hikiwang626@163.com";
 	//授权码，第三方邮件，pop3/smtp/imap服务
