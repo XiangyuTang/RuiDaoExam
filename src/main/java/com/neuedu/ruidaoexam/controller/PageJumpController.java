@@ -72,7 +72,7 @@ public class PageJumpController {
 		return "shoudongzujuan";
 	}
 	
-	@RequestMapping("/toentercode")
+	@RequestMapping("/toentrance")
 	public String toentercode() {
 		
 		return "examEntrance";
