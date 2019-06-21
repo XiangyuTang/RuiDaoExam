@@ -19,7 +19,6 @@
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="../../js/Particleground.js" th:src="@{static/js/Particleground.js}"></script>
   <style>
-    
     body {
       height: 100%;
       overflow: hidden;
@@ -54,7 +53,7 @@
           <!-- 刘斌 改变固有的图标-->
           <label class="layadmin-user-login-icon layui-icon mailicon icon-tubiao209"
             for="LAY-user-login-cellphone"></label>
-          <input type="text" name="eamil" id="LAY-user-login-cellphone" lay-verify="email" placeholder="邮箱"
+          <input type="text" name="email" id="LAY-user-login-cellphone" lay-verify="email" placeholder="邮箱"
             class="layui-input">
         </div>
         <div class="layui-form-item">
@@ -88,17 +87,17 @@
           <input type="text" name="nickname" id="LAY-user-login-nickname" lay-verify="nickname" placeholder="昵称"
             class="layui-input">
         </div>
-        <div class="layui-form-item" > 
-            <label class="layui-form-label" style="text-align: center">选择角色</label>
-            <div class="layui-input-block" style="
+        <div class="layui-form-item">
+          <label class="layui-form-label" style="text-align: center">选择角色</label>
+          <div class="layui-input-block" style="
             display: flex;
             justify-content: center;
             align-items: center;">
-              <input type="radio" name="sex" value="男" title="男" checked="">
-              <input type="radio" name="sex" value="女" title="女">
-            
-            </div>
-        <!-- <div class="layui-row" >
+            <input type="radio" name="character" value="teacher" title="教师">
+            <input type="radio" name="character" value="student" title="学生" checked="">
+
+          </div>
+          <!-- <div class="layui-row" >
           <div class="layui-col-md6">
               <label  class="layui-form-label" style="text-align: center">选择角色</label>
           </div>
@@ -108,9 +107,9 @@
           </div>
           
         </div> -->
-            
-           
-            <!-- <input type="checkbox" name="character" lay-skin="switch" lay-text="老师|学生"  checked> -->
+
+
+          <!-- <input type="checkbox" name="character" lay-skin="switch" lay-text="老师|学生"  checked> -->
 
           <!-- <input type="checkbox" name="agreement" lay-skin="primary" title="同意用户协议" checked> -->
         </div>
@@ -123,8 +122,8 @@
           <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>
           <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>
 
-          <a href="login.html" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
-          <a href="login.html"
+          <a href="tologin" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
+          <a href="tologin"
             class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">登入</a>
         </div>
       </div>
@@ -174,6 +173,7 @@
 
       form.render();
       $("#getEmailCode").click(function () {
+
         var mailverify = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
         var mailinput = $("#LAY-user-login-cellphone").val()
         if (mailinput == "") {
@@ -184,22 +184,21 @@
           layer.msg("邮箱格式不正确")
           return
         } else {
+          var nums = 60;
+          showtTime(nums);
           $.ajax({
             url: "/getverifyemail",
             type: "POST",
             data: { "receiver": mailinput },
             dataType: "text",
             success: function (data) {
-              if (data == "1") {
-                var nums = 60;
-                showtTime(nums);
-              }else{
+              if (data != "1") {
                 layer.msg("啊偶，系统出现了一丝丝小问题~")
               }
 
 
             },
-            error:function(){
+            error: function () {
               layer.msg("啊偶，系统出现了一丝丝小问题~")
             }
           })
@@ -216,13 +215,13 @@
       //提交
       form.on('submit(LAY-user-reg-submit)', function (obj) {
         var field = obj.field;
-        console.log(JSON.stringify(field))
+        //  console.log(JSON.stringify(field))
         //确认密码
         if (field.password !== field.repass) {
           return layer.msg('两次密码输入不一致');
         }
 
-        
+
 
         // //请求接口
         // admin.req({
@@ -238,37 +237,46 @@
         //     });
         //   }
         // });
-        var email=field.email
-        var vercode=field.vercode
-        var password=field.password
-        var repass=field.repass
-        var nickname=field.nickname
-        var charcter=field.charcter
-					console.log(vercode);
-					$.ajax({
-						url: "/checkverifyemail",
-						type: "POST",
-						dataType: "text",
-						data: {
-							"newcode" : vercode 
-						},
-						success: function(data) {
-							if(data == 1){
-								alert("验证码正确");
-							}else{
-								alert("验证码错误");
-							}
-						},
-						error : function(e) {
-				            alert("系统异常");
-				        }
-					});
-      
+        var email = field.email
+        var vercode = field.vercode
+        var password = field.password
+        var repass = field.repass
+        var nickname = field.nickname
+        var character = field.character
+        console.log(vercode);
+        $.ajax({
+          url: "/checkRegister",
+          type: "POST",
+          dataType: "text",
+          data: {
+            "email": email,
+            "vercode": vercode,
+            "password": password,
+            "repass": repass,
+            "nickname": nickname,
+            "character": character
+          },
+          success: function (data) {
+            if (data == 1) {
+              layer.msg("注册成功。正在转向登录界面");
+              setTimeout(function(){
+                window.location.href="tologin"
+              },20)
+              
+            } else {
+              layer.msg("验证码错误");
+            }
+          },
+          error: function (e) {
+            layer.msg("系统异常");
+          }
+        });
+
 
         return false;
       });
 
- 
+
 
     });
   </script>

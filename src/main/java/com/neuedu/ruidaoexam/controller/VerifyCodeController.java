@@ -4,6 +4,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.neuedu.ruidaoexam.configUtils.SendEmailUtils;
 
+import com.neuedu.ruidaoexam.entity.Student;
+import com.neuedu.ruidaoexam.entity.Teacher;
+import com.neuedu.ruidaoexam.service.StudentService;
+import com.neuedu.ruidaoexam.service.TeacherService;
+
+
 @Controller
 public class VerifyCodeController {
 
+   @Autowired StudentService studentservice;
+   @Autowired TeacherService teacherservice;
 	/*
 	 * 作用：邮箱验证码发送
 	 * 详细：生成一个6位随机验证码(String)，调用service.SendEmailUtils的方法发送
@@ -29,6 +38,13 @@ public class VerifyCodeController {
 		return "TestPage";
 	}
 	
+	@PostMapping("/checkEmail")
+	@ResponseBody
+	public String checkEmail(String email) {
+		return "1";
+		
+	}
+	
 	//@RequestParam("receiver")
 	public String fucku(String receiver,
 			HttpSession session) {
@@ -36,17 +52,46 @@ public class VerifyCodeController {
 		session.setAttribute("receiver", "success4094");
 		return "sss";
 	}
-	@PostMapping("/checkverifyemail")
+	@PostMapping("/checkRegister")
 	@ResponseBody
 	//@RequestParam("receiver")
-	public String checkVerifyemail(String newcode, HttpSession session) {
-		String verifycode = String.valueOf(session.getValue("verifycode"));
-		System.out.println("收到verifycode："+verifycode);
-		if(newcode.equals(verifycode)) {
-			return "1";			
-		}else {
-			return "0";
+	public String checkVerifyemail(String email,String vercode,String password,String nickname,String character, HttpSession session) {
+		String verifycode = String.valueOf(session.getValue("verifycode"));//验证码的获取
+		if(!vercode.equals(verifycode)) {
+			return "0";	
 		}
+		if(character.equals("学生"))
+		{
+		Student student=new Student();
+		student.setEmail(email);
+		student.setName(nickname);
+		student.setPassword(password);
+		student.setPoints(0);
+		int i=studentservice.registStudent(student);
+		System.out.println(character+"表记录+"+i);
+		
+		}else {
+			
+			Teacher teacher=new Teacher();
+			teacher.setEmail(email);
+			teacher.setName(nickname);
+			teacher.setPassword(password);
+			teacher.setPoints(0);
+			int i=teacherservice.registTeacher(teacher);
+			System.out.println(character+"表记录+"+i);
+		
+		}
+		
+		System.out.println("注册邮箱："+email);
+		System.out.println("收到verifycode："+verifycode);
+		System.out.println("角色："+character);
+			
+			
+		return "1";
+		
+		
+		
+	
 	}
 	@PostMapping("/getverifyemail")
 	@ResponseBody

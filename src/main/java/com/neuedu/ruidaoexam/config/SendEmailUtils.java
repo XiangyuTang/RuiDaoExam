@@ -1,4 +1,4 @@
-package com.neuedu.ruidaoexam.configUtils;
+package com.neuedu.ruidaoexam.config;
 
 import java.io.File;
 import java.util.Properties;

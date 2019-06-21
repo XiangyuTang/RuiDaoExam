@@ -1,5 +1,8 @@
 package com.neuedu.ruidaoexam.service;
 
-public interface StudentService {
+import com.neuedu.ruidaoexam.entity.Student;
 
+public interface StudentService {
+	
+	int registStudent(Student stu);
 }
