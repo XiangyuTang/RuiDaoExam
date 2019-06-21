@@ -303,4 +303,10 @@
       ability_type_id = #{abilityTypeId,jdbcType=INTEGER}
     where choice_ques_id = #{choiceQuesId,jdbcType=INTEGER}
   </update>
+  <select id="selectByidInList" resultMap="BaseResultMap">
+  	select * from choice_question where choice_ques_id in
+  	<foreach collection="list" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </select>
 </mapper>

@@ -78,4 +78,10 @@ public class PageJumpController {
 		return "examEntrance";
 	}
 	
+	@RequestMapping("/toquestion1")
+	public String toquestion() {
+		System.out.println("我被调了");
+		return "news";
+	}
+	
 }
