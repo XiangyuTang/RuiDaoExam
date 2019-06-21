@@ -11,9 +11,9 @@ import com.neuedu.ruidaoexam.entity.QuestionBank;
 import com.neuedu.ruidaoexam.entity.QuestionBankExample;
 import com.neuedu.ruidaoexam.entity.QuestionBankExample.Criteria;
 import com.neuedu.ruidaoexam.entity.TradeRecordExample;
-import com.neuedu.ruidaoexam.service.PaperService;
+import com.neuedu.ruidaoexam.service.QuestionBankService;
 @Service
-public class PaperServiceimpl implements PaperService {
+public class QuestionBankServiceimpl implements QuestionBankService {
 	@Autowired
 	TradeRecordMapper tradeRecordMapper;
 	@Autowired
