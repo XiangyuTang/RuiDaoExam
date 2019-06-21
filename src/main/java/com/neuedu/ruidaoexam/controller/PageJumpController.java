@@ -53,7 +53,7 @@ public class PageJumpController {
 		return "user/reg";
 	}
 	
-	
+	//登录页
 	@RequestMapping("tologin")
 	public String toLogin() {
 		return "user/login";
