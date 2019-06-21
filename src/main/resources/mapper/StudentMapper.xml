@@ -232,4 +232,34 @@
     where email = #{email,jdbcType=VARCHAR}
   </select>
   
+    <!-- 
+  19/6/21 by王重阳
+  备注：增加了selectByEmail,selectByName,selectByEmailPassword,
+ selectByNamePassword
+   -->
+  <select id="selectByEmail" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmailPassword" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where email = #{email,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByNamePassword" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where name = #{name,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>

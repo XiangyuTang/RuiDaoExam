@@ -1,5 +1,6 @@
 package com.neuedu.ruidaoexam.dao;
 
+import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.entity.Teacher;
 import com.neuedu.ruidaoexam.entity.TeacherExample;
 import java.util.List;
@@ -29,4 +30,18 @@ public interface TeacherMapper {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+    
+    /*
+     * 19/6/21 by王重阳
+     * 备注：增加了selectByEmail,selectByName,selectByEmailPassword,
+     * selectByNamePassword
+     * 
+     */
+    Teacher selectByEmail(String email);
+    
+    Teacher selectByName(String name);
+    
+    Teacher selectByEmailPassword(String email,String password);
+    
+    Teacher selectByNamePassword(String name,String password);
 }

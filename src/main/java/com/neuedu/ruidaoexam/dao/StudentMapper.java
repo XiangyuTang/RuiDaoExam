@@ -31,4 +31,19 @@ public interface StudentMapper {
     int updateByPrimaryKey(Student record);
 
 	Student getStudentByEmail(String email);
+	
+	
+    /*
+     * 19/6/21 by王重阳
+     * 备注：增加了selectByEmail,selectByName,selectByEmailPassword,
+     * selectByNamePassword
+     * 
+     */
+    Student selectByEmail(String email);
+    
+    Student selectByName(String name);
+    
+    Student selectByEmailPassword(String email,String password);
+    
+    Student selectByNamePassword(String name,String password);
 }

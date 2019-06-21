@@ -1,5 +1,6 @@
 package com.neuedu.ruidaoexam.dao;
 
+import com.neuedu.ruidaoexam.entity.EssayQuestion;
 import com.neuedu.ruidaoexam.entity.JudgeQuestion;
 import com.neuedu.ruidaoexam.entity.JudgeQuestionExample;
 import java.util.List;
@@ -29,4 +30,6 @@ public interface JudgeQuestionMapper {
     int updateByPrimaryKeySelective(JudgeQuestion record);
 
     int updateByPrimaryKey(JudgeQuestion record);
+  //根据在list中的id值选取问题
+    List<JudgeQuestion> selectByidInList(List<Integer> judge_id_list);
 }

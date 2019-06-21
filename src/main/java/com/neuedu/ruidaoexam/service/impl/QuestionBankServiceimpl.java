@@ -18,6 +18,8 @@ public class QuestionBankServiceimpl implements QuestionBankService {
 	TradeRecordMapper tradeRecordMapper;
 	@Autowired
 	QuestionBankMapper questionBankMapper;
+	
+	//通过老师id查询其创建的题库
 	@Override
 	public List<QuestionBank> getQusetionBankByTeacherid(Integer Teacher_id) {
 		QuestionBankExample questionBankExample = new QuestionBankExample();

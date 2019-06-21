@@ -19,7 +19,8 @@ public class Trade_recordServiceimpl implements Trade_recordService {
 	TradeRecordMapper tradeRecordMapper;
 	@Autowired
 	QuestionBankMapper questionBankMapper;
-
+	
+	//通过老师的id查询其购买的题库
 	@Override
 	public List<QuestionBank> getQusetionBankByTeacherid(Integer Teacher_id) {
 		TradeRecordExample tradeRecordExample = new TradeRecordExample();
