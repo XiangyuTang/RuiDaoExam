@@ -10,6 +10,21 @@ public class MsgOfInvite {
 	private String name;
 	private String email;
 	
+	public MsgOfInvite() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public MsgOfInvite(String name, String email, Date begintime, Date endtime, Integer cheattimes, Integer teacherid,
+			Integer paperid) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.begintime = begintime;
+		this.endtime = endtime;
+		this.cheattimes = cheattimes;
+		this.teacherid = teacherid;
+		this.paperid = paperid;
+	}
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date begintime;
@@ -18,6 +33,20 @@ public class MsgOfInvite {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date endtime;
 	private Integer cheattimes;
+	private Integer teacherid;
+	public Integer getTeacherid() {
+		return teacherid;
+	}
+	public void setTeacherid(Integer teacherid) {
+		this.teacherid = teacherid;
+	}
+	public Integer getPaperid() {
+		return paperid;
+	}
+	public void setPaperid(Integer paperid) {
+		this.paperid = paperid;
+	}
+	private Integer paperid;
 	public String getName() {
 		return name;
 	}

@@ -18,7 +18,7 @@ import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.service.InviteService;
 
 @Controller
-public class EmailController {
+public class InviteController {
 	
 	@Autowired
 	InviteService inviteService;
@@ -38,18 +38,45 @@ public class EmailController {
 			@RequestParam(value="endtime",required=false) String end_time,
 			@RequestParam(value="cheattimes",required=false,defaultValue="0") Integer cheat_times*/){		
 		//HashMap<String,Object> map = new HashMap<String,Object>();
-		//System.out.println(stu.getName()+stu.getEmail());
 		System.out.println(msg.getName()+"---"+msg.getEmail());
 		System.out.println(msg.getBegintime()+"---"+msg.getEndtime()+"---"+msg.getCheattimes());
-		
 		String invitecode = "";
-		for(int i=0; i<6; i++) {
-			invitecode += (int)(Math.random()*10);
+		if(session.getAttribute("invitecode")==null)//如果session中没有邀请码
+		{
+			for(int i=0; i<6; i++) {
+				invitecode += (int)(Math.random()*10);
+			}
+			session.setAttribute("invitecode", invitecode);
 		}
-		session.setAttribute("invitecode", invitecode);
+		else
+		{
+			invitecode = session.getAttribute("invitecode").toString();
+		}
 		inviteService.sendEmail(msg,invitecode);
+		inviteService.addInviteMsg(msg,invitecode);
 		System.out.println("邮件发送成功！");
 		
 		return "invite";
 	}
+	
+	@PostMapping("/informOne")
+	@ResponseBody
+	public String inform(@RequestBody MsgOfInvite msg,HttpSession session)
+	{
+		String invitecode = "";
+		if(session.getAttribute("invitecode")==null)
+		{
+			for(int i=0; i<6; i++) {
+				invitecode += (int)(Math.random()*10);
+			}
+			session.setAttribute("invitecode", invitecode);
+		}
+		else
+		{
+			invitecode = session.getAttribute("invitecode").toString();
+		}
+		inviteService.addInviteMsg(msg,invitecode);
+		return "invite";
+	}
+	
 }

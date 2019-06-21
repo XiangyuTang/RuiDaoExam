@@ -8,7 +8,7 @@
     <result column="student_id" property="studentId" jdbcType="INTEGER" />
     <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-    <result column="invite_code" property="inviteCode" jdbcType="INTEGER" />
+    <result column="invite_code" property="inviteCode" jdbcType="VARCHAR" />
     <result column="isReaded" property="isreaded" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -108,7 +108,7 @@
       invite_code, isReaded)
     values (#{inviteId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
       #{studentId,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{inviteCode,jdbcType=INTEGER}, #{isreaded,jdbcType=INTEGER})
+      #{inviteCode,jdbcType=VARCHAR}, #{isreaded,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.InviteStudent" >
     insert into invite_student
@@ -158,7 +158,7 @@
         #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="inviteCode != null" >
-        #{inviteCode,jdbcType=INTEGER},
+        #{inviteCode,jdbcType=VARCHAR},
       </if>
       <if test="isreaded != null" >
         #{isreaded,jdbcType=INTEGER},
@@ -193,7 +193,7 @@
         end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.inviteCode != null" >
-        invite_code = #{record.inviteCode,jdbcType=INTEGER},
+        invite_code = #{record.inviteCode,jdbcType=VARCHAR},
       </if>
       <if test="record.isreaded != null" >
         isReaded = #{record.isreaded,jdbcType=INTEGER},
@@ -211,7 +211,7 @@
       student_id = #{record.studentId,jdbcType=INTEGER},
       begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
-      invite_code = #{record.inviteCode,jdbcType=INTEGER},
+      invite_code = #{record.inviteCode,jdbcType=VARCHAR},
       isReaded = #{record.isreaded,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +236,7 @@
         end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="inviteCode != null" >
-        invite_code = #{inviteCode,jdbcType=INTEGER},
+        invite_code = #{inviteCode,jdbcType=VARCHAR},
       </if>
       <if test="isreaded != null" >
         isReaded = #{isreaded,jdbcType=INTEGER},
@@ -251,8 +251,10 @@
       student_id = #{studentId,jdbcType=INTEGER},
       begin_time = #{beginTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
-      invite_code = #{inviteCode,jdbcType=INTEGER},
+      invite_code = #{inviteCode,jdbcType=VARCHAR},
       isReaded = #{isreaded,jdbcType=INTEGER}
     where invite_id = #{inviteId,jdbcType=INTEGER}
   </update>
+ 
+  
 </mapper>

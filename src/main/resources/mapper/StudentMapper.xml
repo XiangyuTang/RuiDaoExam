@@ -225,4 +225,11 @@
       face_data = #{faceData,jdbcType=VARCHAR}
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getStudentByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from student
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>

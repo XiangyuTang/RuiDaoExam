@@ -5,4 +5,6 @@ import com.neuedu.ruidaoexam.entity.Student;
 
 public interface InviteService {
 	void sendEmail(MsgOfInvite msg,String inviteCode);
+
+	int addInviteMsg(MsgOfInvite msg, String invitecode);
 }

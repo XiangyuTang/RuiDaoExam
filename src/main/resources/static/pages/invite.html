@@ -220,7 +220,7 @@
 	    </li>
 	{{/each}}
 	</script>
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
 		//datetimepicker初始化
 		$(function(){
 			$('.form_datetime').datetimepicker({
@@ -238,12 +238,32 @@
 		$(function(){
 			$("#ajaxsubmit").click(function(){
 				//alert(233);
+				var begintime = $('#begintime').val();
+				var endtime = $('#endtime').val();
+				var cheattimes = $('#cheattimes').val();
+				var teacher_id = 1;//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
+				var paper_id = 1;//先写死
+				//判断是否需要通过邮件进行批量通知
+				var informflag;
+				if($("#sendemail").prev().is(":checked")){
+					informflag=1;//需要通过邮件进行批量通知
+				}
+				else
+				{
+					informflag=0;
+				}
 				var filedata = new FormData();
 				var file = $("#the_file")[0].files[0];
 				if(file!="")
 				{
 					filedata.append("file",file);
 				}
+				filedata.append("begintime",begintime);
+				filedata.append("endtime",endtime);
+				filedata.append("cheattimes",cheattimes);
+				filedata.append("teacherid",teacher_id);
+				filedata.append("paperid",paper_id);
+				filedata.append("informflag",informflag);
 				//var a = {'file':data};
 				$.ajax({
 				url:'/importexcel2',
@@ -255,30 +275,46 @@
 					var obj = JSON.parse(e);//将字符串转换成json对象
 					var new_html= template("template1",obj);//将json对象绑定到artTemplate模板上
 					$('#listGroup1').append(new_html);
-					
-			}
-		});
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('批量通知成功！');
+					});
+				},
+						error:function(e){
+							console.log(e);
+							layui.use(['layer', 'form'], function(){
+						  		var layer = layui.layer
+						  			,form = layui.form;
+						  			layer.msg('发送邮件出错了，可能是邮箱未注册！');
+							});
+						}
+				});
 			})
 		})
 		
-		//点击录入，可通过邮件添加考生
+		//点击单个录入，可通过邮件添加考生
 		$(function(){
-			var enter_stu_num = 0;
 			$('#enter').click(function(){
 				var sname = $('#s_name').val();
 				var semail = $('#s_email').val();
-				//alert(sname+semail);
 				var begintime = $('#begintime').val();
 				var endtime = $('#endtime').val();
 				var cheattimes = $('#cheattimes').val();
+				var teacher_id = 1;//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
+				var paper_id = 1;//先写死
 				var pararms ={"name":sname,
 							  "email":semail,
 							  "begintime":begintime,
 							  "endtime":endtime,
-							  "cheattimes":cheattimes
+							  "cheattimes":cheattimes,
+							  "teacherid":teacher_id,
+							  "paperid":paper_id
 				};// 定义一个js对象
 				
 				if($("#sendemail").prev().is(":checked")){
+					
+					
 			        $.ajax({
 						url:'sendEmail',
 						type:'post',
@@ -286,14 +322,13 @@
 						data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
 						success:function(e){//e变量就是后台返回的Map对象
 							//alert("回来了");
-							enter_stu_num = enter_stu_num+1;							
 							layui.use(['layer', 'form'], function(){
 						  		var layer = layui.layer
 						  			,form = layui.form;
 						  			layer.msg('已通过邮件通知对方！');
 							});
 							var $headList=$("<li id='listGroup' class='list-group-item' data-link=''><span class='badge badge-success'>"+
-						    	enter_stu_num+"</span>已录入列表" +
+						    	"</span>已录入列表" +
 					        "</li>"
 					        );
 							var $informedList=$("<li class='list-group-item reciever-info'>"+
@@ -305,22 +340,45 @@
 						},
 						error:function(e){
 							console.log(e);
+							layui.use(['layer', 'form'], function(){
+						  		var layer = layui.layer
+						  			,form = layui.form;
+						  			layer.msg('发送邮件出错了，可能是邮箱未注册！');
+							});
 						}
 					});
 			   	}else{
-			        //当前是show状态
 					//alert("hidden");
 					var $informedList=$("<li class='list-group-item reciever-info'>"+
 				            "<span class='name'>"+sname+"</span>"+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
 				            "<span class='email'>"+semail+"</span>"+
 				        "</li>")
-			        //$('#InformedList').html($headList);
-					$('#listGroup').append($informedList);
-					 layui.use(['layer', 'form'], function(){
-				  		var layer = layui.layer
-				  			,form = layui.form;
-				  			layer.msg('已向对方发送消息！');
-					});
+
+					$.ajax({
+			        	type:"post",
+			        	url:"informOne",
+			        	async:true,
+			        	contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+						data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+						success:function(e){
+							$('#listGroup').append($informedList);
+							layui.use(['layer', 'form'], function(){
+						  		var layer = layui.layer
+						  			,form = layui.form;
+						  			layer.msg('已向对方发送消息！');
+							});
+						},
+						error:function(e){
+							console.log(e);
+							layui.use(['layer', 'form'], function(){
+						  		var layer = layui.layer
+						  			,form = layui.form;
+						  			layer.msg('发送邮件出错了，可能是邮箱未注册！');
+							});
+						}
+			        });
+			        
+					
 			   	}
 			})
 			

@@ -13,9 +13,22 @@ public class InviteStudent {
 
     private Date beginTime;
 
-    private Date endTime;
+    public InviteStudent(Integer inviteId, Integer paperId, Integer teacherId, Integer studentId, Date beginTime,
+			Date endTime, String inviteCode, Integer isreaded) {
+		super();
+		this.inviteId = inviteId;
+		this.paperId = paperId;
+		this.teacherId = teacherId;
+		this.studentId = studentId;
+		this.beginTime = beginTime;
+		this.endTime = endTime;
+		this.inviteCode = inviteCode;
+		this.isreaded = isreaded;
+	}
 
-    private Integer inviteCode;
+	private Date endTime;
+
+    private String inviteCode;
 
     private Integer isreaded;
 
@@ -67,12 +80,12 @@ public class InviteStudent {
         this.endTime = endTime;
     }
 
-    public Integer getInviteCode() {
+    public String getInviteCode() {
         return inviteCode;
     }
 
-    public void setInviteCode(Integer inviteCode) {
-        this.inviteCode = inviteCode;
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode == null ? null : inviteCode.trim();
     }
 
     public Integer getIsreaded() {
