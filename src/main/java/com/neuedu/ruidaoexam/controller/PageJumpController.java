@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.neuedu.ruidaoexam.entity.QuestionBank;
-import com.neuedu.ruidaoexam.service.PaperService;
+import com.neuedu.ruidaoexam.service.QuestionBankService;
 import com.neuedu.ruidaoexam.service.Trade_recordService;
 
 
 @Controller
 public class PageJumpController {
 	@Autowired
-	PaperService paperService;
+	QuestionBankService questionBankService;
 	@Autowired
 	Trade_recordService trade_recordService;
 	//这个controller测试放行静态资源的
@@ -61,7 +61,7 @@ public class PageJumpController {
 	
 	@RequestMapping("/toshoudong")
 	public String toshoudong(Model model) {
-		List<QuestionBank> questionBanks = paperService.getQusetionBankByTeacherid(1);
+		List<QuestionBank> questionBanks = questionBankService.getQusetionBankByTeacherid(1);
 		List<QuestionBank> questionBanks2 = trade_recordService.getQusetionBankByTeacherid(1);
 		for (QuestionBank questionbank:questionBanks2) {
 			questionBanks.add(questionbank);
