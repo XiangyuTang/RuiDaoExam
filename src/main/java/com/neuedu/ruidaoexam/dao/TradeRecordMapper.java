@@ -29,4 +29,5 @@ public interface TradeRecordMapper {
     int updateByPrimaryKeySelective(TradeRecord record);
 
     int updateByPrimaryKey(TradeRecord record);
+    
 }
