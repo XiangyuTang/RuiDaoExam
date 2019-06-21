@@ -11,6 +11,8 @@ public class Student {
 
     private Integer points;
 
+    private String faceData;
+
     public Integer getStudentId() {
         return studentId;
     }
@@ -49,5 +51,13 @@ public class Student {
 
     public void setPoints(Integer points) {
         this.points = points;
+    }
+
+    public String getFaceData() {
+        return faceData;
+    }
+
+    public void setFaceData(String faceData) {
+        this.faceData = faceData == null ? null : faceData.trim();
     }
 }

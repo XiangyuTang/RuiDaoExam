@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.neuedu.ruidaoexam.entity.Report" >
     <id column="report_id" property="reportId" jdbcType="INTEGER" />
     <result column="paper_id" property="paperId" jdbcType="INTEGER" />
-    <result column="stu_name" property="stuName" jdbcType="VARCHAR" />
+    <result column="stu_id" property="stuId" jdbcType="INTEGER" />
     <result column="acquired_score" property="acquiredScore" jdbcType="INTEGER" />
     <result column="total_score" property="totalScore" jdbcType="INTEGER" />
     <result column="comment" property="comment" jdbcType="VARCHAR" />
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    report_id, paper_id, stu_name, acquired_score, total_score, comment, begin_timestamp, 
+    report_id, paper_id, stu_id, acquired_score, total_score, comment, begin_timestamp, 
     end_timestamp, switch_times, is_allowed_to_see
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.ReportExample" >
@@ -106,11 +106,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.Report" >
-    insert into report (report_id, paper_id, stu_name, 
+    insert into report (report_id, paper_id, stu_id, 
       acquired_score, total_score, comment, 
       begin_timestamp, end_timestamp, switch_times, 
       is_allowed_to_see)
-    values (#{reportId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{stuName,jdbcType=VARCHAR}, 
+    values (#{reportId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, 
       #{acquiredScore,jdbcType=INTEGER}, #{totalScore,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
       #{beginTimestamp,jdbcType=TIMESTAMP}, #{endTimestamp,jdbcType=TIMESTAMP}, #{switchTimes,jdbcType=INTEGER}, 
       #{isAllowedToSee,jdbcType=INTEGER})
@@ -124,8 +124,8 @@
       <if test="paperId != null" >
         paper_id,
       </if>
-      <if test="stuName != null" >
-        stu_name,
+      <if test="stuId != null" >
+        stu_id,
       </if>
       <if test="acquiredScore != null" >
         acquired_score,
@@ -156,8 +156,8 @@
       <if test="paperId != null" >
         #{paperId,jdbcType=INTEGER},
       </if>
-      <if test="stuName != null" >
-        #{stuName,jdbcType=VARCHAR},
+      <if test="stuId != null" >
+        #{stuId,jdbcType=INTEGER},
       </if>
       <if test="acquiredScore != null" >
         #{acquiredScore,jdbcType=INTEGER},
@@ -197,8 +197,8 @@
       <if test="record.paperId != null" >
         paper_id = #{record.paperId,jdbcType=INTEGER},
       </if>
-      <if test="record.stuName != null" >
-        stu_name = #{record.stuName,jdbcType=VARCHAR},
+      <if test="record.stuId != null" >
+        stu_id = #{record.stuId,jdbcType=INTEGER},
       </if>
       <if test="record.acquiredScore != null" >
         acquired_score = #{record.acquiredScore,jdbcType=INTEGER},
@@ -230,7 +230,7 @@
     update report
     set report_id = #{record.reportId,jdbcType=INTEGER},
       paper_id = #{record.paperId,jdbcType=INTEGER},
-      stu_name = #{record.stuName,jdbcType=VARCHAR},
+      stu_id = #{record.stuId,jdbcType=INTEGER},
       acquired_score = #{record.acquiredScore,jdbcType=INTEGER},
       total_score = #{record.totalScore,jdbcType=INTEGER},
       comment = #{record.comment,jdbcType=VARCHAR},
@@ -248,8 +248,8 @@
       <if test="paperId != null" >
         paper_id = #{paperId,jdbcType=INTEGER},
       </if>
-      <if test="stuName != null" >
-        stu_name = #{stuName,jdbcType=VARCHAR},
+      <if test="stuId != null" >
+        stu_id = #{stuId,jdbcType=INTEGER},
       </if>
       <if test="acquiredScore != null" >
         acquired_score = #{acquiredScore,jdbcType=INTEGER},
@@ -278,7 +278,7 @@
   <update id="updateByPrimaryKey" parameterType="com.neuedu.ruidaoexam.entity.Report" >
     update report
     set paper_id = #{paperId,jdbcType=INTEGER},
-      stu_name = #{stuName,jdbcType=VARCHAR},
+      stu_id = #{stuId,jdbcType=INTEGER},
       acquired_score = #{acquiredScore,jdbcType=INTEGER},
       total_score = #{totalScore,jdbcType=INTEGER},
       comment = #{comment,jdbcType=VARCHAR},

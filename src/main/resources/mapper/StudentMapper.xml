@@ -7,6 +7,7 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="points" property="points" jdbcType="INTEGER" />
+    <result column="face_data" property="faceData" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    student_id, name, email, password, points
+    student_id, name, email, password, points, face_data
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.ruidaoexam.entity.StudentExample" >
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.Student" >
     insert into student (student_id, name, email, 
-      password, points)
+      password, points, face_data
+      )
     values (#{studentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER})
+      #{password,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER}, #{faceData,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.Student" >
     insert into student
@@ -123,6 +126,9 @@
       <if test="points != null" >
         points,
       </if>
+      <if test="faceData != null" >
+        face_data,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="studentId != null" >
@@ -139,6 +145,9 @@
       </if>
       <if test="points != null" >
         #{points,jdbcType=INTEGER},
+      </if>
+      <if test="faceData != null" >
+        #{faceData,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +175,9 @@
       <if test="record.points != null" >
         points = #{record.points,jdbcType=INTEGER},
       </if>
+      <if test="record.faceData != null" >
+        face_data = #{record.faceData,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +189,8 @@
       name = #{record.name,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      points = #{record.points,jdbcType=INTEGER}
+      points = #{record.points,jdbcType=INTEGER},
+      face_data = #{record.faceData,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +210,9 @@
       <if test="points != null" >
         points = #{points,jdbcType=INTEGER},
       </if>
+      <if test="faceData != null" >
+        face_data = #{faceData,jdbcType=VARCHAR},
+      </if>
     </set>
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
@@ -205,7 +221,8 @@
     set name = #{name,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      points = #{points,jdbcType=INTEGER}
+      points = #{points,jdbcType=INTEGER},
+      face_data = #{faceData,jdbcType=VARCHAR}
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
 </mapper>

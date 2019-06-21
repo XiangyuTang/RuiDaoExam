@@ -225,73 +225,63 @@ public class ReportExample {
             return (Criteria) this;
         }
 
-        public Criteria andStuNameIsNull() {
-            addCriterion("stu_name is null");
+        public Criteria andStuIdIsNull() {
+            addCriterion("stu_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameIsNotNull() {
-            addCriterion("stu_name is not null");
+        public Criteria andStuIdIsNotNull() {
+            addCriterion("stu_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameEqualTo(String value) {
-            addCriterion("stu_name =", value, "stuName");
+        public Criteria andStuIdEqualTo(Integer value) {
+            addCriterion("stu_id =", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameNotEqualTo(String value) {
-            addCriterion("stu_name <>", value, "stuName");
+        public Criteria andStuIdNotEqualTo(Integer value) {
+            addCriterion("stu_id <>", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameGreaterThan(String value) {
-            addCriterion("stu_name >", value, "stuName");
+        public Criteria andStuIdGreaterThan(Integer value) {
+            addCriterion("stu_id >", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameGreaterThanOrEqualTo(String value) {
-            addCriterion("stu_name >=", value, "stuName");
+        public Criteria andStuIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("stu_id >=", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameLessThan(String value) {
-            addCriterion("stu_name <", value, "stuName");
+        public Criteria andStuIdLessThan(Integer value) {
+            addCriterion("stu_id <", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameLessThanOrEqualTo(String value) {
-            addCriterion("stu_name <=", value, "stuName");
+        public Criteria andStuIdLessThanOrEqualTo(Integer value) {
+            addCriterion("stu_id <=", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameLike(String value) {
-            addCriterion("stu_name like", value, "stuName");
+        public Criteria andStuIdIn(List<Integer> values) {
+            addCriterion("stu_id in", values, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameNotLike(String value) {
-            addCriterion("stu_name not like", value, "stuName");
+        public Criteria andStuIdNotIn(List<Integer> values) {
+            addCriterion("stu_id not in", values, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameIn(List<String> values) {
-            addCriterion("stu_name in", values, "stuName");
+        public Criteria andStuIdBetween(Integer value1, Integer value2) {
+            addCriterion("stu_id between", value1, value2, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andStuNameNotIn(List<String> values) {
-            addCriterion("stu_name not in", values, "stuName");
-            return (Criteria) this;
-        }
-
-        public Criteria andStuNameBetween(String value1, String value2) {
-            addCriterion("stu_name between", value1, value2, "stuName");
-            return (Criteria) this;
-        }
-
-        public Criteria andStuNameNotBetween(String value1, String value2) {
-            addCriterion("stu_name not between", value1, value2, "stuName");
+        public Criteria andStuIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("stu_id not between", value1, value2, "stuId");
             return (Criteria) this;
         }
 

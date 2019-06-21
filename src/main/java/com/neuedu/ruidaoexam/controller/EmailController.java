@@ -41,6 +41,7 @@ public class EmailController {
 		//System.out.println(stu.getName()+stu.getEmail());
 		System.out.println(msg.getName()+"---"+msg.getEmail());
 		System.out.println(msg.getBegintime()+"---"+msg.getEndtime()+"---"+msg.getCheattimes());
+		
 		String invitecode = "";
 		for(int i=0; i<6; i++) {
 			invitecode += (int)(Math.random()*10);

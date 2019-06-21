@@ -7,7 +7,7 @@ public class Report {
 
     private Integer paperId;
 
-    private String stuName;
+    private Integer stuId;
 
     private Integer acquiredScore;
 
@@ -39,12 +39,12 @@ public class Report {
         this.paperId = paperId;
     }
 
-    public String getStuName() {
-        return stuName;
+    public Integer getStuId() {
+        return stuId;
     }
 
-    public void setStuName(String stuName) {
-        this.stuName = stuName == null ? null : stuName.trim();
+    public void setStuId(Integer stuId) {
+        this.stuId = stuId;
     }
 
     public Integer getAcquiredScore() {

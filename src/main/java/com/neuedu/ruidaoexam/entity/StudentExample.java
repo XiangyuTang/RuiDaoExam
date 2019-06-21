@@ -433,6 +433,76 @@ public class StudentExample {
             addCriterion("points not between", value1, value2, "points");
             return (Criteria) this;
         }
+
+        public Criteria andFaceDataIsNull() {
+            addCriterion("face_data is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataIsNotNull() {
+            addCriterion("face_data is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataEqualTo(String value) {
+            addCriterion("face_data =", value, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataNotEqualTo(String value) {
+            addCriterion("face_data <>", value, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataGreaterThan(String value) {
+            addCriterion("face_data >", value, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataGreaterThanOrEqualTo(String value) {
+            addCriterion("face_data >=", value, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataLessThan(String value) {
+            addCriterion("face_data <", value, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataLessThanOrEqualTo(String value) {
+            addCriterion("face_data <=", value, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataLike(String value) {
+            addCriterion("face_data like", value, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataNotLike(String value) {
+            addCriterion("face_data not like", value, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataIn(List<String> values) {
+            addCriterion("face_data in", values, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataNotIn(List<String> values) {
+            addCriterion("face_data not in", values, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataBetween(String value1, String value2) {
+            addCriterion("face_data between", value1, value2, "faceData");
+            return (Criteria) this;
+        }
+
+        public Criteria andFaceDataNotBetween(String value1, String value2) {
+            addCriterion("face_data not between", value1, value2, "faceData");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
