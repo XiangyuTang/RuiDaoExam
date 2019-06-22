@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的题库</title>
+		<link rel="stylesheet" type="text/css" href="../../layuiadmin/style/teacher/myLibraryTch.css" th:href="@{static/layuiadmin/style/teacher/myLibraryTch.css}" />
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/template.css" th:href="@{static/layuiadmin/style/template.css}" media="all">
+		<link rel="stylesheet" type="text/css" href="../../layuiadmin/style/teacher/myLibraryTch.css" th:href="@{static/layuiadmin/style/teacher/myLibraryTch.css}" media="all"/>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<!--变量定义-->
+		<script type="text/javascript">
+		</script>
+		<script type="text/javascript">
+			$(function() {
+
+			}),
+		</script>
+
+	</head>
+
+	<body>
+
+		<div id="item" class="layui-row layui-col-space30">
+
+			<div class="layui-col-md4 layui-col-sm4">
+				<div class="cmdlist-container">
+					<!--
+								<a href="javascript:;">
+									<img src="../layuiadmin/style/res/template/portrait.png">
+								</a>
+								-->
+					<a href="javascript:;">
+						<div class="cmdlist-text">
+							<p class="info">《五年编程三年脱发》精选题库</p>
+							<div class="price">
+								<b>￥79</b>
+								<p>
+									¥
+									<del>130</del>
+								</p>
+								<span class="flow">
+						       		<i class="layui-icon layui-icon-rate"></i>
+						        	433
+						  	 	</span>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="layui-col-md12 layui-col-sm12">
+				<ul id="biuuu_city_list"></ul>
+				<div id="demo0"></div>
+			</div>
+
+		</div>
+		<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
+		<script>
+			layui.config({
+				base: '/static/layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index']);
+			layui.use(['laypage', 'layer'], function() {
+				var laypage = layui.laypage,
+					layer = layui.layer;
+
+				//测试数据
+				var data = [
+					'北京',
+					'上海',
+					'广州',
+					'深圳',
+					'杭州',
+					'长沙',
+					'合肥',
+					'宁夏',
+					'成都',
+					'西安',
+					'南昌',
+					'上饶',
+					'沈阳',
+					'济南',
+					'厦门',
+					'福州',
+					'九江',
+					'宜春',
+					'赣州',
+					'宁波',
+					'绍兴',
+					'无锡',
+					'苏州',
+					'徐州',
+					'东莞',
+					'佛山',
+					'中山',
+					'成都',
+					'武汉',
+					'青岛',
+					'天津',
+					'重庆',
+					'南京',
+					'九江',
+					'香港',
+					'澳门',
+					'台北'
+				];
+				//调用分页
+				laypage.render({
+					elem: 'demo0',
+					count: data.length,
+					jump: function(obj) {
+						//模拟渲染
+						document.getElementById('biuuu_city_list').innerHTML = function() {
+							var arr = [],
+								thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+							layui.each(thisData, function(index, item) {
+								arr.push('<li>' + item + '</li>');
+							});
+							return arr.join('');
+						}();
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

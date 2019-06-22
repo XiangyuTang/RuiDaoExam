@@ -3,13 +3,17 @@ package com.neuedu.ruidaoexam.configUtils;
 import java.security.MessageDigest;
 
 /**
- * Created by 木木高 on 2017/7/26.
+ * 密码MD5加密工具类
  */
 public class MD5Util {
 	public static void main(String[] args) {
 		System.out.println(MD5Util.md5Encode("123456"));
 	}
 
+	/*
+	 * 方法：密码加密
+	 * 详细：参数是密码，返回是加密的密码
+	 */
 	public static String md5Encode(String inStr) {
 		MessageDigest md5 = null;
 		try {
