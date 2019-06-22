@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.neuedu.ruidaoexam.configUtils.MD5Util;
 import com.neuedu.ruidaoexam.configUtils.SendEmailUtils;
 
 import com.neuedu.ruidaoexam.entity.Student;
@@ -75,14 +76,14 @@ public class VerifyCodeController {
 		if(!vercode.equals(verifycode)) {
 			return "0";	
 		}
-		if(character.equals("学生"))
+		if(character.equals("student"))
 		{
 		Student student=new Student();
 		student.setEmail(email);
 		student.setName(nickname);
-		student.setPassword(password);
+		student.setPassword(MD5Util.md5Encode(password));
 		student.setPoints(0);
-		int i=studentservice.registStudent(student);
+		int i=logandregservice.register(student);
 		System.out.println(character+"表记录+"+i);
 		
 		}else {
@@ -90,9 +91,9 @@ public class VerifyCodeController {
 			Teacher teacher=new Teacher();
 			teacher.setEmail(email);
 			teacher.setName(nickname);
-			teacher.setPassword(password);
+			teacher.setPassword(MD5Util.md5Encode(password));
 			teacher.setPoints(0);
-			int i=teacherservice.registTeacher(teacher);
+			int i=logandregservice.register(teacher);
 			System.out.println(character+"表记录+"+i);
 		
 		}

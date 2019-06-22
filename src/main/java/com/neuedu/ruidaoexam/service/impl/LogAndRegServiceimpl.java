@@ -21,7 +21,13 @@ public class LogAndRegServiceimpl implements LogAndRegService {
 	
 	@Override
 	public int register(Object o) {
-		return 0;
+		if(o instanceof Teacher) {
+			int i=teachermapper.insertSelective((Teacher)o);
+			return i;
+		}else {
+			int i=studentmapper.insertSelective((Student)o);
+			return i;
+		}
 	}
 
 	/*
