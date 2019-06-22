@@ -28,7 +28,7 @@
 
 	<div class="wrapper">
 
-	    <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+	    <div class="sidebar" data-color="purple">
 			<!--
 		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -37,20 +37,20 @@
 
 			<div class="logo">
 				<a href="#" class="simple-text">
-					网站管理后台
+					手动组卷
 				</a>
 			</div>
 
 	    	<div class="sidebar-wrapper">
 	            <ul class="nav">
-	                <li class="active">
-	                    <a href="/toquestion1" target="right">
-	                        <i class="material-icons" id=1>dashboard</i>
-	                        <p>产品管理</p>
+ 	                <li th:each="questionbank:${questionbanks}">
+	                    <a href="/toquestion1" target="right" th:href="@{/toquestion1(quesbankid=${questionbank.quesBankId})}">
+	                        <i class="material-icons" th:id="${questionbankStat.count}" ></i>
+ 	                        <p th:text="${questionbank.quesBankName}">题库</p>
 	                    </a>
 	                </li>
-	                <li>
-	                    <a href="newsType.html" target="right" >
+<!--  	                <li>
+	                    <a href="/toquestion1" target="right" >
 	                        <i class="material-icons">person</i>
 	                        <p>资讯类别管理</p>
 	                    </a>
@@ -84,8 +84,7 @@
 	                        <i class="material-icons">person</i>
 	                        <p>404错误页面</p>
 	                    </a>
-	                </li>
-	              
+	                </li>	 -->              
 	            </ul>
 	    	</div>
 	    </div>
@@ -126,18 +125,12 @@
 				</div>
 			</nav>
 
-			<div class="content">
+ 			<div class="content">
 				<div class="container-fluid">
-					<div class="row" style="margin-top: -15px;">
-						
-				
-						<iframe src="product.html" width="100%" height="900" name="right" style="border: none;"></iframe>
-
-				
+					<div class="row" style="margin-top: -15px;">				
+						<iframe src="/static/pages/news.html" width="100%" height="900" name="right" style="border: none;" th:src="@{/static/pages/news.html}"></iframe>				
 				</div>
-			</div>
-
-		
+			</div>		
 		</div>
 	</div>
 
@@ -169,9 +162,10 @@
 					url: "updatePwd.html"
 				});
 			}
-			$(function () {
-				$('[class="material-icons"][id=1]').trigger("click")
-			})
+ 			$(function () {
+ 				$('[class="material-icons"][id=1]').trigger("click");
+				$('[class="material-icons"][id=1]').parent().parent().addClass("active");
+			}) 
 		</script>
 
 

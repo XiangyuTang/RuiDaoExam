@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.neuedu.ruidaoexam.configUtils.MD5Util;
 import com.neuedu.ruidaoexam.configUtils.SendEmailUtils;
 
 import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.entity.Teacher;
+import com.neuedu.ruidaoexam.service.LogAndRegService;
 import com.neuedu.ruidaoexam.service.StudentService;
 import com.neuedu.ruidaoexam.service.TeacherService;
 
@@ -26,6 +28,7 @@ public class VerifyCodeController {
 
    @Autowired StudentService studentservice;
    @Autowired TeacherService teacherservice;
+   @Autowired LogAndRegService logandregservice;
 	/*
 	 * 作用：邮箱验证码发送
 	 * 详细：生成一个6位随机验证码(String)，调用service.SendEmailUtils的方法发送
@@ -41,10 +44,23 @@ public class VerifyCodeController {
 	@PostMapping("/checkEmail")
 	@ResponseBody
 	public String checkEmail(String email) {
-		return "1";
+		if(!logandregservice.checkEmail(email)) {
+			return "1";//1代表邮件在数据库里不存在 可以加入
+		}
+		return "0";
 		
 	}
-	
+	@PostMapping("/checkNickname")
+	@ResponseBody
+	public String checkNickname(String nickname) {
+		if(!logandregservice.checkUsername(nickname)) {
+			return "1";//1代表用户名在数据库里不存在 可以加入
+		}
+		return "0";
+		
+		
+		
+	}
 	//@RequestParam("receiver")
 	public String fucku(String receiver,
 			HttpSession session) {
@@ -60,14 +76,14 @@ public class VerifyCodeController {
 		if(!vercode.equals(verifycode)) {
 			return "0";	
 		}
-		if(character.equals("学生"))
+		if(character.equals("student"))
 		{
 		Student student=new Student();
 		student.setEmail(email);
 		student.setName(nickname);
-		student.setPassword(password);
+		student.setPassword(MD5Util.md5Encode(password));
 		student.setPoints(0);
-		int i=studentservice.registStudent(student);
+		int i=logandregservice.register(student);
 		System.out.println(character+"表记录+"+i);
 		
 		}else {
@@ -75,9 +91,9 @@ public class VerifyCodeController {
 			Teacher teacher=new Teacher();
 			teacher.setEmail(email);
 			teacher.setName(nickname);
-			teacher.setPassword(password);
+			teacher.setPassword(MD5Util.md5Encode(password));
 			teacher.setPoints(0);
-			int i=teacherservice.registTeacher(teacher);
+			int i=logandregservice.register(teacher);
 			System.out.println(character+"表记录+"+i);
 		
 		}

@@ -64,6 +64,7 @@ public class PageJumpController {
 	
 	@RequestMapping("/toshoudong")
 	public String toshoudong(Model model) {
+		//此处的teacher_id应该是session中的内容
 		List<QuestionBank> questionBanks = questionBankService.getQusetionBankByTeacherid(1);
 		List<QuestionBank> questionBanks2 = trade_recordService.getQusetionBankByTeacherid(1);
 		for (QuestionBank questionbank:questionBanks2) {
@@ -72,6 +73,8 @@ public class PageJumpController {
 		for(QuestionBank questionBank:questionBanks) {
 			System.out.println(questionBank.getQuesBankName());
 		}
+		model.addAttribute("questionbanks",questionBanks);
+		model.addAttribute("test", "我被取用了");
 		return "shoudongzujuan";
 	}
 	
