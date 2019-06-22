@@ -20,6 +20,8 @@ import com.neuedu.ruidaoexam.jms.queue.Producer;
 @Service
 public class InviteServiceimpl implements InviteService{
 
+	@Autowired
+	InviteStudentMapper inviteStudentMapper;
 
 	@Autowired
 	Producer producer;//注入一个queue的生产者
@@ -43,5 +45,14 @@ public class InviteServiceimpl implements InviteService{
 		// TODO Auto-generated method stub
 		producer.send(msg, invitecode);
 		return 1;
+	}
+
+	@Override
+	public int verifyPerson(String email, String invitecode) {
+		// TODO Auto-generated method stub
+		InviteStudent inviteStudent  = inviteStudentMapper.selectByEmailAndInvitecode(email, invitecode);
+		if(inviteStudent!=null)
+			return 1;
+		return 0;
 	}	
 }

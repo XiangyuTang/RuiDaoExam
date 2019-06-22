@@ -256,5 +256,13 @@
     where invite_id = #{inviteId,jdbcType=INTEGER}
   </update>
  
+	<select id="selectByEmailAndInvitecode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	   select i.*
+	   from invite_student i,student s
+	   where i.student_id = s.student_id
+	   and s.email=#{email,jdbcType=VARCHAR}
+	   and i.invite_code=#{invitecode,jdbcType=VARCHAR}
+	 </select>
+ 
   
 </mapper>

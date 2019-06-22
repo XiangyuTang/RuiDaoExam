@@ -29,4 +29,6 @@ public interface InviteStudentMapper {
     int updateByPrimaryKeySelective(InviteStudent record);
 
     int updateByPrimaryKey(InviteStudent record);
+
+	InviteStudent selectByEmailAndInvitecode(String email, String invitecode);
 }

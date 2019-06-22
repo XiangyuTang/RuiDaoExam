@@ -7,4 +7,6 @@ public interface InviteService {
 	void sendEmail(MsgOfInvite msg,String inviteCode);
 
 	int addInviteMsg(MsgOfInvite msg, String invitecode);
+
+	int verifyPerson(String email, String invitecode);
 }

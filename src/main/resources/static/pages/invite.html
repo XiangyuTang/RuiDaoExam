@@ -29,9 +29,22 @@
 		<link rel="stylesheet" href="../css/res/layui/css/layui.css" th:href="@{static/css/res/layui/css/layui.css}" media="all">
   		<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<script type="text/javascript" src="../js/template.js" th:src="@{static/js/template.js}"></script>
+		<script src="../js/ban.js" th:src="@{static/js/ban.js}"></script>
+		<style>
+		    body {
+		      height: 100%;
+		      overflow: hidden;
+		    }
+		
+		    canvas {
+		      z-index: 0;
+		      position: absolute;
+		    }
+		 </style>
+		
 	</head>
 	<body>
-
+		<canvas></canvas>
 		<div class="main-wrapper" style="box-shadow: 5px 5px 5px  #000000; border-radius:60px;" >
             <div class="invite-part" >
             	<br />

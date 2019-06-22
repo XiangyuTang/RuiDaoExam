@@ -1,5 +1,6 @@
 package com.neuedu.ruidaoexam.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class InviteStudent {
@@ -13,6 +14,25 @@ public class InviteStudent {
 
     private Date beginTime;
 
+	private Date endTime;
+
+    private String inviteCode;
+
+    private Integer isreaded;
+    
+    public InviteStudent(Integer inviteId, Integer paperId, Integer teacherId, Integer studentId, Timestamp beginTime,
+			Timestamp endTime, String inviteCode, Integer isreaded) {
+    	super();
+		this.inviteId = inviteId;
+		this.paperId = paperId;
+		this.teacherId = teacherId;
+		this.studentId = studentId;
+		this.beginTime = beginTime;
+		this.endTime = endTime;
+		this.inviteCode = inviteCode;
+		this.isreaded = isreaded;
+    }
+
     public InviteStudent(Integer inviteId, Integer paperId, Integer teacherId, Integer studentId, Date beginTime,
 			Date endTime, String inviteCode, Integer isreaded) {
 		super();
@@ -25,12 +45,6 @@ public class InviteStudent {
 		this.inviteCode = inviteCode;
 		this.isreaded = isreaded;
 	}
-
-	private Date endTime;
-
-    private String inviteCode;
-
-    private Integer isreaded;
 
     public Integer getInviteId() {
         return inviteId;

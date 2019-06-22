@@ -96,4 +96,10 @@ public class PageJumpController {
 	public String toteacherhome(){
 		return "teacher/teacherhome";
 	}
+	
+	//考试页
+	@RequestMapping("/toexam")
+	public String toexam(){
+		return "examing";
+	}
 }

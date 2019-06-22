@@ -9,3 +9,4 @@
 ### 6.在controller包下的PageJumpController写页面跳转的功能
 # 笔记
 ### 1.记得在逆向生成后添加mapper注解
+### 2.ajax如果只通过post传递参数,dataType:'json',而不能加contentType:’application/json;charset=UTF-8’，不然后台接收的数据为空，参考examEntrance.html
