@@ -1,5 +1,6 @@
 package com.neuedu.ruidaoexam.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.neuedu.ruidaoexam.entity.QuestionBank;
 import com.neuedu.ruidaoexam.service.QuestionBankService;
 import com.neuedu.ruidaoexam.service.Trade_recordService;
+import com.neuedu.ruidaoexam.service.impl.QuestionServiceimpl;
 
 @Controller
 public class PageJumpController {
@@ -19,6 +21,8 @@ public class PageJumpController {
 	QuestionBankService questionBankService;
 	@Autowired
 	Trade_recordService trade_recordService;
+	@Autowired
+	QuestionServiceimpl questionServiceimpl;
 
 	// 这个controller测试放行静态资源的
 	@RequestMapping("/to11")
@@ -77,9 +81,14 @@ public class PageJumpController {
 		return "examEntrance";
 	}
 
-	@RequestMapping("/toquestion1")
-	public String toquestion() {
-		System.out.println("我被调了");
+	@RequestMapping("/toquestion")//通过题库id选取题库中的题，并向前台呈现
+	public String toquestion(HttpServletRequest request,Model model) {
+//		System.out.println(quesbankid);
+//		System.out.println(request.getParameter("quesbankid"));
+		int Bank_id = Integer.parseInt(request.getParameter("quesbankid"));
+		HashMap<String,Object> questionByBankid = questionServiceimpl.getQuestionByBankid(Bank_id);
+		model.addAttribute("questions", questionByBankid);
+//		System.out.println("我被调了");
 		return "news";
 	}
 

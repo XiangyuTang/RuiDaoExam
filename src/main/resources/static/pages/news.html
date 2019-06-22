@@ -41,26 +41,29 @@
 					<form class="am-form">
 						<table class="am-table am-table-striped am-table-hover table-main">
 							<thead>
+								<div>
 								<tr>
 									<th class="table-check"><input type="checkbox"></th>
-									<th class="table-id">ID</th>
-									<th class="table-title">标题</th>
+									<th class="table-id">序号</th>
+									<th class="table-title">题干</th>
 									<th class="table-type">类别</th>
-									<th class="table-author am-hide-sm-only">作者</th>
-									<th class="table-date am-hide-sm-only">修改日期</th>
+									<th class="table-author am-hide-sm-only"></th>
+									<th class="table-date am-hide-sm-only"></th>
 									<th class="table-set">操作</th>
 								</tr>
+								</div>
 							</thead>
 							<tbody>
-								<tr>
+								<div th:remove="(${questions.choiceQuestions} == null)? all:none">
+								<tr th:each="choicequestion:${questions.choiceQuestions}">
 									<td><input type="checkbox"></td>
-									<td>1</td>
+									<td th:text="${choicequestionStat.count}">1</td>
 									<td>
-										<a href="#">麦蒂正式入名人堂 勇士老板暗示或拆4巨头</a>
+										<a href="#" th:text="${choicequestion.content}" alt="查看详情">选择题题干</a>
 									</td>
-									<td>体育</td>
-									<td class="am-hide-sm-only">管理员</td>
-									<td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+									<td th:text="(${choicequestion.quesTypeId} == '1')? '单选题':'多选题'">选择题</td>
+ 									<td class="am-hide-sm-only"></td>
+									<td class="am-hide-sm-only"></td>
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
@@ -70,15 +73,17 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
+								</div>
+								<div th:remove="(${questions.judgeQuestions} == null)? all:none">
+ 								<tr th:each="judgequestion:${questions.judgeQuestions}">
 									<td><input type="checkbox"></td>
-									<td>2</td>
+									<td th:text="${judgequestionStat.count}">2</td>
 									<td>
-										<a href="#">麦蒂正式入名人堂 勇士老板暗示或拆4巨头</a>
+										<a href="#" th:text="${judgequestion.content}" alt="查看详情">填空题题干</a>
 									</td>
-									<td>体育</td>
-									<td class="am-hide-sm-only">管理员</td>
-									<td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+									<td th:text="(${judgequestion.quesTypeId} == '4')? '判断题':'类别错误'">判断题</td>
+									<td class="am-hide-sm-only"></td>
+									<td class="am-hide-sm-only"></td>
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
@@ -88,15 +93,17 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
+								</div>
+								<div th:remove="(${questions.essayQuestions} == null)? all:none">
+							<tr th:each="essayquestion:${questions.essayQuestions}">
 									<td><input type="checkbox"></td>
-									<td>3</td>
+									<td th:text="${essayquestionStat.count}">3</td>
 									<td>
-										<a href="#">麦蒂正式入名人堂 勇士老板暗示或拆4巨头</a>
+										<a href="#" th:text="${essayquestion.content}" alt="查看详情">简答题题干</a>
 									</td>
-									<td>体育</td>
-									<td class="am-hide-sm-only">管理员</td>
-									<td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+									<td th:text="(${essayquestion.quesTypeId} == '3')? '简答题':'填空'">判断题</td>
+									<td class="am-hide-sm-only"></td>
+									<td class="am-hide-sm-only"></td>
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
@@ -105,8 +112,9 @@
 											</div>
 										</div>
 									</td>
-								</tr>
-								<tr>
+								</tr> 
+								</div>
+						<!-- 		<tr>
 									<td><input type="checkbox"></td>
 									<td>4</td>
 									<td>
@@ -321,7 +329,7 @@
 											</div>
 										</div>
 									</td>
-								</tr>
+								</tr> -->
 							</tbody>
 						</table>
 						<div class="am-cf">

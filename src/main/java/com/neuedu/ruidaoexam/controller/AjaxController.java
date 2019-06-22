@@ -17,7 +17,7 @@ public class AjaxController {
 	QuestionServiceimpl questionServiceimpl;
 	
 	//通过bank_id查询其所属的所有题目并返回前端
-	@RequestMapping("/toquestion")
+	@RequestMapping("/toquestion1")
 	public Map<String, List<Object>> test(){
 		questionServiceimpl.getQuestionByBankid(2);
 		return null;
