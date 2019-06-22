@@ -49,7 +49,7 @@
 									<th class="table-type">类别</th>
 									<th class="table-author am-hide-sm-only"></th>
 									<th class="table-date am-hide-sm-only"></th>
-									<th class="table-set">操作</th>
+									<th class="table-set">分值</th>
 								</tr>
 								</div>
 							</thead>
@@ -67,8 +67,9 @@
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
-												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+												<input type="text"  name="score" style="width: 70px;" id="" value="5">
+<!-- 												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 											</div>
 										</div>
 									</td>
@@ -79,7 +80,7 @@
 									<td><input type="checkbox"></td>
 									<td th:text="${judgequestionStat.count}">2</td>
 									<td>
-										<a href="#" th:text="${judgequestion.content}" alt="查看详情">填空题题干</a>
+										<a href="#" th:text="${judgequestion.content}" alt="查看详情">判断题题干</a>
 									</td>
 									<td th:text="(${judgequestion.quesTypeId} == '4')? '判断题':'类别错误'">判断题</td>
 									<td class="am-hide-sm-only"></td>
@@ -87,28 +88,30 @@
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
-												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+												<input type="text"  name="score" style="width: 70px;" value="5">
+<!-- 												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 											</div>
 										</div>
 									</td>
 								</tr>
 								</div>
 								<div th:remove="(${questions.essayQuestions} == null)? all:none">
-							<tr th:each="essayquestion:${questions.essayQuestions}">
+								<tr th:each="essayquestion:${questions.essayQuestions}">
 									<td><input type="checkbox"></td>
 									<td th:text="${essayquestionStat.count}">3</td>
 									<td>
 										<a href="#" th:text="${essayquestion.content}" alt="查看详情">简答题题干</a>
 									</td>
-									<td th:text="(${essayquestion.quesTypeId} == '3')? '简答题':'填空'">判断题</td>
+									<td th:text="(${essayquestion.quesTypeId} == '3')? '简答题':'填空'">简答题</td>
 									<td class="am-hide-sm-only"></td>
 									<td class="am-hide-sm-only"></td>
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
-												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+												<input type="text"  name="score" style="width: 70px;" id="" value="10">
+<!-- 												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 											</div>
 										</div>
 									</td>

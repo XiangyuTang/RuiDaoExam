@@ -71,7 +71,7 @@ public class PageJumpController {
 			System.out.println(questionBank.getQuesBankName());
 		}
 		model.addAttribute("questionbanks", questionBanks);
-		model.addAttribute("test", "我被取用了");
+//		model.addAttribute("test", "我被取用了");
 		return "shoudongzujuan";
 	}
 
@@ -134,5 +134,10 @@ public class PageJumpController {
 	@RequestMapping("/toexam")
 	public String toexam() {
 		return "examing";
+	}
+	
+	@RequestMapping("/toshoudongjuan")
+	public String toshoudong() {
+		return "indexteacher";
 	}
 }
