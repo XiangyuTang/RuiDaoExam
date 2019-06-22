@@ -38,6 +38,7 @@
       });
     });
   </script>
+
 </head>
 
 <body>
@@ -160,6 +161,53 @@
         showtTime(nums)
       }, 1000)
     }
+
+
+    function checkEmail(){
+      var mailinput = $("#LAY-user-login-cellphone").val()
+      var flag=false;
+      $.ajax({
+          type:"POST",
+          async:false,
+          dataType:"text",
+          data:{"email":mailinput},
+          url:"/checkEmail",
+          success:function(data){
+            if(data=="1"){
+              flag=true
+              
+            }else{
+              layer.msg("邮箱已存在")
+            }
+
+          }
+
+        })
+        return flag;
+    }
+
+    function checkNickName(){
+      var nicknameinput=$("#LAY-user-login-nickname").val()
+      var flag=false;
+      $.ajax({
+          type:"POST",
+          async:false,
+          dataType:"text",
+         data:{"nickname":nicknameinput},
+          url:"/checkNickname",
+          success:function(data){
+            if(data=="1"){
+              flag=true
+              
+            }else{
+              layer.msg("昵称已存在")
+            }
+
+          }
+
+        })
+        return flag;
+    }
     layui.config({
       base: '/static/layuiadmin/'  //静态资源所在路径
     }).extend({
@@ -210,7 +258,9 @@
         }
       })
 
-
+  
+      $("#LAY-user-login-cellphone").blur(checkEmail)
+      $("#LAY-user-login-nickname").blur(checkNickName)
 
       //提交
       form.on('submit(LAY-user-reg-submit)', function (obj) {
@@ -220,8 +270,13 @@
         if (field.password !== field.repass) {
           return layer.msg('两次密码输入不一致');
         }
-
-
+        if(!checkEmail()){
+          return false
+        }
+        if(!checkNickName()){
+          return false
+        }
+  
 
         // //请求接口
         // admin.req({
@@ -261,7 +316,7 @@
               layer.msg("注册成功。正在转向登录界面");
               setTimeout(function(){
                 window.location.href="tologin"
-              },20)
+              },1000)
               
             } else {
               layer.msg("验证码错误");

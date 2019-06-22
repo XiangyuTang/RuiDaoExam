@@ -43,12 +43,14 @@ public class LogAndRegServiceimpl implements LogAndRegService {
 	 */
 	@Override
 	public Boolean checkEmail(String email) {
-		if(studentmapper.selectByEmail(email) != null &&
-				teachermapper.selectByEmail(email) != null) {
-			return true;
-		}else {
+		Student student=studentmapper.selectByEmail(email);
+		Teacher teacher=teachermapper.selectByEmail(email);
+		if(student==null&&teacher==null) {
 			return false;
+			
 		}
+		
+		return true;
 	}
 
 	/*
@@ -85,12 +87,13 @@ public class LogAndRegServiceimpl implements LogAndRegService {
 	 */
 	@Override
 	public Boolean checkUsername(String username) {
-		if(studentmapper.selectByName(username) != null &&
-				teachermapper.selectByName(username) != null) {
-			return true;
-		}else {
+		Student student=studentmapper.selectByName(username);
+		Teacher teacher=teachermapper.selectByName(username);
+		if(student==null&&teacher==null) {
 			return false;
+			
 		}
+		return true;
 	}
 
 	/*

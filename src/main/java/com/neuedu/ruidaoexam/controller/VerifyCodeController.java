@@ -17,6 +17,7 @@ import com.neuedu.ruidaoexam.configUtils.SendEmailUtils;
 
 import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.entity.Teacher;
+import com.neuedu.ruidaoexam.service.LogAndRegService;
 import com.neuedu.ruidaoexam.service.StudentService;
 import com.neuedu.ruidaoexam.service.TeacherService;
 
@@ -26,6 +27,7 @@ public class VerifyCodeController {
 
    @Autowired StudentService studentservice;
    @Autowired TeacherService teacherservice;
+   @Autowired LogAndRegService logandregservice;
 	/*
 	 * 作用：邮箱验证码发送
 	 * 详细：生成一个6位随机验证码(String)，调用service.SendEmailUtils的方法发送
@@ -41,10 +43,23 @@ public class VerifyCodeController {
 	@PostMapping("/checkEmail")
 	@ResponseBody
 	public String checkEmail(String email) {
-		return "1";
+		if(!logandregservice.checkEmail(email)) {
+			return "1";//1代表邮件在数据库里不存在 可以加入
+		}
+		return "0";
 		
 	}
-	
+	@PostMapping("/checkNickname")
+	@ResponseBody
+	public String checkNickname(String nickname) {
+		if(!logandregservice.checkUsername(nickname)) {
+			return "1";//1代表用户名在数据库里不存在 可以加入
+		}
+		return "0";
+		
+		
+		
+	}
 	//@RequestParam("receiver")
 	public String fucku(String receiver,
 			HttpSession session) {

@@ -39,9 +39,9 @@ public class SendEmailUtils {
  
 	
 	//发件人，官方邮箱账号
-	private String MailSender = "hikiwang626@163.com";
+	private String MailSender = "1661690249@qq.com";
 	//授权码，第三方邮件，pop3/smtp/imap服务
-	private String AuthorizationCode = "ruidao163";
+	private String AuthorizationCode = "vvdodwkkgrihcfii";
 	
 	//收信人，实例对象时初始化
 	private String MailReceiver;
@@ -72,7 +72,7 @@ public class SendEmailUtils {
     public void mailSend() throws MessagingException {
     	System.out.println("开始发送");
         Properties prop = new Properties();
-        prop.setProperty("mail.host","smtp.163.com");
+        prop.setProperty("mail.host","smtp.qq.com");
         prop.setProperty("mail.smtp.auth","true");
  
         Authenticator aut = new Authenticator() {
