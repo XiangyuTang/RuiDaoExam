@@ -511,7 +511,6 @@
 		<button type="button" class="layui-btn layui-btn-normal layui-btn-sm"><i class="layui-icon"></i></button></div>
 	<ul class="log-list">
         <li id="comment" class="mb5">
-        <!-- <li id="comment" class="mb5"  > -->
         	暂无评语
         </li>
    </ul>
@@ -674,7 +673,7 @@
 	时间：2019-06-20
 	描述：PDF下载
 -->
-<script>
+<!--<script>
 	$(function(){
 		$('#xiazai').click(function(){
 			 var pdf = new jsPDF('p','pt','a4');
@@ -689,7 +688,7 @@
      		});
 		})
 	})
-</script>
+</script>-->
 
 <script>
 	$(function(){
@@ -741,10 +740,76 @@
 
 <script>
   
-/*layui.use('layer', function(){ //独立版的layer无需执行这一句
+layui.use('layer', function(){ //独立版的layer无需执行这一句
 	var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
 	
-	$('#pingyu').click(function(){
+	$('#shanchu').click(function(){
+	    layer.open({
+		    type: 1
+		    ,title: '报告删除'
+	        ,offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+	        ,area: ['300px', '157px']
+	        ,content: '<div style="padding: 20px 10px; text-align: center"><p> 确定删除本报告吗？ </p></div>'
+	        ,btn: ['删除', '取消']
+	        ,btnAlign: 'r' //按钮居中
+	        ,shade: 0.6 //不显示遮罩
+	        ,yes: function(){
+	        	var report_id = '2';
+	        	var pararms ={'val':report_id};// 定义一个js对象
+	        	alert(report_id)
+		        $.ajax({
+			  		url:'deleteReport',
+			  		type:'POST',
+			  		traditional:true,//这使json格式的字符不会被转码
+			  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+			  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+			  		async : false,
+			  		dataType: "text",		  		
+			  		success:function(e){//e变量就是后台返回的Map对象
+			  		},
+			  		error:function(e){
+			  		}
+  				});
+	        	layer.closeAll();
+	        	self.location='home';
+	        }
+	        ,btn2: function(index, layero){
+		    	layer.closeAll();
+		  	}
+		})
+	})
+	
+	$('#xiazai').click(function(){
+	    layer.open({
+		    type: 1
+		    ,title: '报告下载'
+	        ,offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+	        ,area: ['300px', '157px']
+	        ,content: '<div style="padding: 20px 10px; text-align: center"><p> 确定下载本报告吗？ </p></div>'
+	        ,btn: ['下载', '取消']
+	        ,btnAlign: 'r' //按钮居中
+	        ,shade: 0.6 //不显示遮罩
+	        ,yes: function(){
+	        	var pdf = new jsPDF('p','pt','a4');
+				 pdf.internal.scaleFactor = 2;
+				 var options = {
+	           		pagesplit: true, //设置是否自动分页
+	          		"background": '#FFFFFF'   //如果导出的pdf为黑色背景，需要将导出的html模块内容背景 设置成白色。
+	      		};
+	      		var printHtml = $('#PDF').get(0);
+	      		pdf.addHTML(printHtml,15, 15, options,function() {
+	          		pdf.save('目标.pdf');
+	     		});
+	     		layer.closeAll();
+		    }
+	        ,btn2: function(index, layero){
+		    	layer.closeAll();
+		  	}
+		})
+	})
+})
+	
+/*	$('#pingyu').click(function(){
 	    layer.open({
 		    type: 1
 		    ,title: '报告评语'
@@ -820,26 +885,6 @@
 		})
 	})*/
 	
-	$('#shanchu').click(function(){
-	    layer.open({
-		    type: 1
-		    ,title: '报告删除'
-	        ,offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-	        ,area: ['300px', '157px']
-	        /*,id: 'pingyu' //防止重复弹出*/
-	        ,content: '<div style="padding: 20px 10px; text-align: center"><p> 确定删除本报告吗？ </p></div>'
-	        ,btn: ['删除', '取消']
-	        ,btnAlign: 'r' //按钮居中
-	        ,shade: 0.6 //不显示遮罩
-	        ,yes: function(){
-	        	return false
-	        }
-	        ,btn2: function(index, layero){
-		    	layer.closeAll();
-		  	}
-		})
-	})
-
 </script>
 
 <style>

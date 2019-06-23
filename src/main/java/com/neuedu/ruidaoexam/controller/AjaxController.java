@@ -69,4 +69,23 @@ public class AjaxController {
 		
 		return val.get("val").toString();
 	}
+	
+	/**
+	 * 教师删除报告
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteReport", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteReport(@RequestBody Map val, HttpServletRequest request) {
+		
+		request.getSession().setAttribute("report_id", val.get("val").toString());
+		
+	    String reportId = request.getSession().getAttribute("report_id").toString();
+	    
+	    int report_id = Integer.parseInt(reportId);
+	    
+		reportServiceimpl.deleteReport(report_id);
+		
+		return val.get("val").toString();
+	}
 }

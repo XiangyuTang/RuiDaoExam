@@ -53,5 +53,13 @@ public class ReportServiceimpl implements ReportService{
 		
 	}
 
+	@Override
+	public void deleteReport(int report_id) {
+		
+		reportMapper.deleteByPrimaryKey(report_id);
+		
+		
+	}
+
 
 }
