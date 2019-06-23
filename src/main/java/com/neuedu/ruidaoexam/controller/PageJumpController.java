@@ -140,4 +140,29 @@ public class PageJumpController {
 	public String toshoudong() {
 		return "indexteacher";
 	}
+	
+	 //学生主页
+		@RequestMapping("tohomeStu")
+		public String tostudenthome() {
+			return "student/homeStu";
+			}
+		//学生 我的考试
+		@RequestMapping("toMyExam")
+		public String toMyExam() {
+			return "detail";
+			
+		}
+		
+	    //学生 个人中心
+		@RequestMapping("toStuBaseInfo")
+		public String toStuBaseInfo() {
+			return "student/baseinfo";
+		}
+		
+		
+		//学生忘记密码
+		@RequestMapping("toStuForget")
+		public String toStuForget() {
+			return "student/forget";
+		}
 }
