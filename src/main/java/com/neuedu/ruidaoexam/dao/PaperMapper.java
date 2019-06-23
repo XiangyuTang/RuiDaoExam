@@ -29,4 +29,6 @@ public interface PaperMapper {
     int updateByPrimaryKeySelective(Paper record);
 
     int updateByPrimaryKey(Paper record);
+    //添加卷子并返回新添加卷子的id值
+    int addPaper(Paper paper);
 }

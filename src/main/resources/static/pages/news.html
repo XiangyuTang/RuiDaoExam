@@ -6,6 +6,51 @@
 		<title></title>
 		<link rel="stylesheet" href="/static/css/amazeui.min.css" />
 		<link rel="stylesheet" href="/static/css/admin.css" />
+		<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
+    	<link rel="stylesheet" href="../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
+  		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
+  		<script type="text/javascript" src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
+  		<script type="text/javascript">
+  			$(function(){
+  				$("input[type=checkbox]").click(function(){
+/*   					var questype = $(this).find("input[type=hidden]").attr("questype");
+  					var quesid = $(this).find("input[type=hidden]").attr("quesid");
+  					var score = $(this).find("input[type=text]").attr("value"); */
+  					var questype = $(this).parent().prev().attr("questype");
+  					var quesid = $(this).parent().prev().attr("quesid");
+  					var score = $(this).parent().parent().find("input[id=quesscore]").val();
+  					$.ajax({
+  						type:"get",
+  						url:"/addquestomapper",
+  						data:{
+  							"questype":questype,
+  							"quesid":quesid,
+  							"score":score
+  						},
+  						dataType:"text",
+  						success:function(e){
+  							if(e == 'true'){
+  								
+  							}else{
+								layui.use(['layer'], function(){
+	  							var layer = layui.layer
+	  							layer.msg('你已添加过该题');
+								});
+  							}
+  						}
+  					})
+/*   					alert(quesid);
+  					alert(questype);
+  					alert(score); */
+  				})
+/*   				$("[id=quesscore]").click(function(){
+  					$(this).removeAttr("value");
+  				})
+  				$("[id=quesscore]").blur(function(){
+  					$(this).
+  				}) */
+  			})
+  		</script>  
 	</head>
 
 	<body>
@@ -20,7 +65,7 @@
 				<div class="am-u-sm-12 am-u-md-6">
 					<div class="am-btn-toolbar">
 						<div class="am-btn-group am-btn-group-xs">
-							<button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+							<button type="button" class="am-btn am-btn-default"><span class="am-icon-plus">添加试卷</span></button>
 						</div>
 					</div>
 				</div>
@@ -55,7 +100,8 @@
 							</thead>
 							<tbody>
 								<div th:remove="(${questions.choiceQuestions} == null)? all:none">
-								<tr th:each="choicequestion:${questions.choiceQuestions}">
+								<tr th:each="choicequestion:${questions.choiceQuestions}" class="question">
+								<input type="hidden" th:questype="${choicequestion.quesTypeId}" th:quesid="${choicequestion.choiceQuesId}">
 									<td><input type="checkbox"></td>
 									<td th:text="${choicequestionStat.count}">1</td>
 									<td>
@@ -67,7 +113,7 @@
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
-												<input type="text"  name="score" style="width: 70px;" id="" value="5">
+												<input type="text"  name="score" style="width: 70px;" id="quesscore" value="5"><span></span>
 <!-- 												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
 												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 											</div>
@@ -76,7 +122,8 @@
 								</tr>
 								</div>
 								<div th:remove="(${questions.judgeQuestions} == null)? all:none">
- 								<tr th:each="judgequestion:${questions.judgeQuestions}">
+ 								<tr th:each="judgequestion:${questions.judgeQuestions}" class="question">
+ 								<input type="hidden" th:questype="${judgequestion.quesTypeId}" th:quesid="${judgequestion.judgeId}">
 									<td><input type="checkbox"></td>
 									<td th:text="${judgequestionStat.count}">2</td>
 									<td>
@@ -88,7 +135,7 @@
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
-												<input type="text"  name="score" style="width: 70px;" value="5">
+												<input type="text"  name="score" style="width: 70px;" id="quesscore" value="5">
 <!-- 												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
 												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 											</div>
@@ -97,7 +144,8 @@
 								</tr>
 								</div>
 								<div th:remove="(${questions.essayQuestions} == null)? all:none">
-								<tr th:each="essayquestion:${questions.essayQuestions}">
+								<tr th:each="essayquestion:${questions.essayQuestions}" class="question">
+								<input type="hidden" th:questype="${essayquestion.quesTypeId}" th:quesid="${essayquestion.quesAnsId}">
 									<td><input type="checkbox"></td>
 									<td th:text="${essayquestionStat.count}">3</td>
 									<td>
@@ -109,7 +157,7 @@
 									<td>
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
-												<input type="text"  name="score" style="width: 70px;" id="" value="10">
+												<input type="text"  name="score" style="width: 70px;" id="quesscore" value="10">
 <!-- 												<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
 												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 											</div>
