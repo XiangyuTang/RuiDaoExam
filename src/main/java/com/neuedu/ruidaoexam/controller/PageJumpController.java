@@ -135,7 +135,7 @@ public class PageJumpController {
 	public String toexam() {
 		return "examing";
 	}
-	
+	//到达教师主页，测试时使用，后续删除即可
 	@RequestMapping("/toshoudongjuan")
 	public String toshoudong() {
 		return "indexteacher";

@@ -20,6 +20,7 @@ public class PaperController {
 	@Autowired
 	PaperService paperService;
 	
+	//记录选取了哪些题目（此处防止重复选题，前台很难实现刷新是记录已选题目）
 	@RequestMapping("/addquestomapper")
 	@ResponseBody
 	public String addquestomapper(Integer questype, Integer quesid, String score) {
@@ -51,6 +52,8 @@ public class PaperController {
 		}
 		return "true";
 	}
+	
+	//添加试卷，此处可以尝试使用activemq
 	@RequestMapping("/addpaper")
 	@ResponseBody
 	public String addpaper() {
