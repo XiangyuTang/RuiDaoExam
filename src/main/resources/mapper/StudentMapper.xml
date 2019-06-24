@@ -261,5 +261,7 @@
     from student
     where name = #{name,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
+  <select id="showNotAnswered" parameterType="Integer" resultType="Integer">
+ select a.paper_id from ((select paper_id from invite_student where student_id=#{stuid}) union all (select paper_id from trade_record where buyer_type=2 and buyer_s_id=#{stuid})) a  where a.paper_id not in(select b.paper_id from answered_paper b where b.stu_id=#{stuid});  </select>
   
 </mapper>
