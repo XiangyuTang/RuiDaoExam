@@ -18,6 +18,7 @@ public class ReportServiceimpl implements ReportService{
 	@Autowired
 	ReportMapper reportMapper;
 	
+	
 	@Override
 	public void addComment(ArrayList<String> reportArray) {
 		
@@ -59,6 +60,12 @@ public class ReportServiceimpl implements ReportService{
 		reportMapper.deleteByPrimaryKey(report_id);
 		
 		
+	}
+
+	@Override
+	public int getPaper_id(int report_id) {
+		int i=reportMapper.getPaper_id(report_id);
+		return i;
 	}
 
 

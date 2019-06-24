@@ -53,28 +53,7 @@
 
 
             </div>
-            <script type="text/javascript">
-                echarts.init(document.getElementById('datasource')).setOption({
-                    series: {
-                        color: ['red', 'orange'],
-                        type: 'pie',
-                        data: [
-                            { name: '已完成', value: 1212 },
-                            { name: '待作答', value: 2323 },
-
-                        ],
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    formatter: '{b} : {c}  ({d}%)'
-                                },
-                                labelLine: { show: true }
-                            }
-                        }
-                    }
-                });
-            </script>
+        
             <div class="layui-col-md3">
                 <div class="layui-card" style="height: 123px">
 
@@ -113,8 +92,8 @@
                 </div>
 
             </div>
-            <div class="layui-col-md12">
-                <div class="layui-card" style="height: 266px">
+            <div class="layui-col-md12"  style="height: auto"> 
+                <div class="layui-card">
                     <div class="layui-card-header layui-form">
                         待作答
 
@@ -152,6 +131,63 @@
                             </div>
                         </div>
 
+                        <div class="layui-card"
+                            style="height: 130px;margin-top:10px;border-top:2px solid aqua;border-left:1px solid #e2e2e2;border-right:1px solid #e2e2e2;border-bottom: 1px solid #e2e2e2">
+                            <div class="layui-card-body">
+
+                                <div class="layui-row layui-col-space15">
+                                    <div class="layui-col-md9">
+                                        <p>考试名称</p>
+                                        <p><i class="iconfont icon-time"
+                                                style="color:rgb(0,150,136);font-size: 18px"></i>  时长</p>
+                                        <p><i class="layui-icon layui-icon-about"
+                                                style="color:rgb(0,150,136);font-size: 20px"></i> 考试要求</p>
+                                    </div>
+                                    <div class="layui-col-md3" style=" float: left;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;">
+                                        <div style="border:1px solid rgb(239,249,253);width: 130px;height: 40px;margin-top:25px;background-color:rgb(239,249,253);text-align: center">
+                                        <p style="margin-top:7px;">未作答  <a class="layui-icon layui-icon-edit" style="color: rgb(0,158,231);font-size: 20px;cursor: pointer;"></a></p>
+                                       
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12" >
+                                        <div class="layui-bg-gray">  dasdas</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-card"
+                            style="height: 130px;margin-top:10px;border-top:2px solid aqua;border-left:1px solid #e2e2e2;border-right:1px solid #e2e2e2;border-bottom: 1px solid #e2e2e2">
+                            <div class="layui-card-body">
+
+                                <div class="layui-row layui-col-space15">
+                                    <div class="layui-col-md9">
+                                        <p>考试名称</p>
+                                        <p><i class="iconfont icon-time"
+                                                style="color:rgb(0,150,136);font-size: 18px"></i>  时长</p>
+                                        <p><i class="layui-icon layui-icon-about"
+                                                style="color:rgb(0,150,136);font-size: 20px"></i> 考试要求</p>
+                                    </div>
+                                    <div class="layui-col-md3" style=" float: left;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;">
+                                        <div style="border:1px solid rgb(239,249,253);width: 130px;height: 40px;margin-top:25px;background-color:rgb(239,249,253);text-align: center">
+                                        <p style="margin-top:7px;">未作答  <a class="layui-icon layui-icon-edit" style="color: rgb(0,158,231);font-size: 20px;cursor: pointer;"></a></p>
+                                       
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12" >
+                                        <div class="layui-bg-gray">  dasdas</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div id="middlepage" class="layui-col-md4 layui-col-md-offset5"></div>
                 </div>
@@ -159,7 +195,7 @@
 
             </div>
             <div class="layui-col-md12">
-                <div class="layui-card" style="height: 266px;">
+                <div class="layui-card" style="height:auto;">
 
 
                     <div class="layui-card-header">
@@ -169,7 +205,7 @@
 
                     </div>
                     <div class="layui-card-body">
-                        <ul class="layui-timeline">
+                        <ul class="layui-timeline" id="showgradelist">
                             <li class="layui-timeline-item">
                                 <i class="layui-icon layui-timeline-axis"></i>
                                 <div class="layui-timeline-content layui-text">
@@ -195,7 +231,56 @@
 
                                 </div>
                             </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <h3 class="layui-timeline-title">8月18日</h3>
+                                    <div class="gradelist" style="border:1px solid #e2e2e2;height: 40px;width:25%;">
+                                        <p>考试名称</p>
+                                    </div>
+                                    <div class="gradelist"
+                                        style="border:1px solid #e2e2e2;height: 40px;width:60px;margin-left: 15px;">
+                                        <p>考试分数</p>
+                                    </div>
+                                    <div class="gradelist"
+                                        style="border:1px solid #e2e2e2;height: 40px;width:60px;margin-left: 15px">
+                                        <i class="layui-icon layui-icon-file-b"
+                                            style="font-size: 20px;color: #FF5722;"></i>
+                                    </div>
 
+
+
+                                    <hr>
+                                    <button class="layui-btn layui-btn-normal">显示更多</button>
+
+
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <h3 class="layui-timeline-title">8月18日</h3>
+                                    <div class="gradelist" style="border:1px solid #e2e2e2;height: 40px;width:25%;">
+                                        <p>考试名称</p>
+                                    </div>
+                                    <div class="gradelist"
+                                        style="border:1px solid #e2e2e2;height: 40px;width:60px;margin-left: 15px;">
+                                        <p>考试分数</p>
+                                    </div>
+                                    <div class="gradelist"
+                                        style="border:1px solid #e2e2e2;height: 40px;width:60px;margin-left: 15px">
+                                        <i class="layui-icon layui-icon-file-b"
+                                            style="font-size: 20px;color: #FF5722;"></i>
+                                    </div>
+
+
+
+                                    <hr>
+                                    <button class="layui-btn layui-btn-normal">显示更多</button>
+
+
+                                </div>
+                            </li>
                         </ul>
                     </div>
 
@@ -211,25 +296,56 @@
 
     <script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
     <script>
-
-
+    
         layui.use(['laypage', 'form'], function () {
             var laypage = layui.laypage;
-            var form = layui.form
+            var form = layui.form;
+            var $=layui.$;
+
+
 
             form.render();
-
 
             //执行一个laypage实例
             laypage.render({
                 elem: 'middlepage' //注意，这里的 test1 是 ID，不用加 # 号
                 , count: 10 //数据总数，从服务端得到
             });
+            $.ajax({
+            url:"/getGradelist",
+            type:"POST",
+            dataType:"json",
+            success:function(data){
+                console.log(data)
+
+            }
+        })
         });
 
     </script>
 
+<script type="text/javascript">
+    echarts.init(document.getElementById('datasource')).setOption({
+        series: {
+            color: ['red', 'orange'],
+            type: 'pie',
+            data: [
+                { name: '已完成', value: 1212 },
+                { name: '待作答', value: 2323 },
 
+            ],
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        formatter: '{b} : {c}  ({d}%)'
+                    },
+                    labelLine: { show: true }
+                }
+            }
+        }
+    });
+</script>
 
     <script>
         layui.config({
