@@ -19,3 +19,8 @@
   content: "\e63f";
 }
 
+.icon-time:before {
+  content: "\e60d";
+}
+
+

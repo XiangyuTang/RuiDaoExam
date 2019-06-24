@@ -13,13 +13,15 @@ public class AnsweredQuestion {
 
     private Integer jqId;
 
-    private Integer answer;
+    private String answer;
 
-    private Integer rightAnswer;
+    private String rightAnswer;
 
     private Integer score;
 
     private Integer totalScore;
+
+    private Integer iscorrect;
 
     public Integer getAnswerId() {
         return answerId;
@@ -69,20 +71,20 @@ public class AnsweredQuestion {
         this.jqId = jqId;
     }
 
-    public Integer getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Integer answer) {
-        this.answer = answer;
+    public void setAnswer(String answer) {
+        this.answer = answer == null ? null : answer.trim();
     }
 
-    public Integer getRightAnswer() {
+    public String getRightAnswer() {
         return rightAnswer;
     }
 
-    public void setRightAnswer(Integer rightAnswer) {
-        this.rightAnswer = rightAnswer;
+    public void setRightAnswer(String rightAnswer) {
+        this.rightAnswer = rightAnswer == null ? null : rightAnswer.trim();
     }
 
     public Integer getScore() {
@@ -99,5 +101,13 @@ public class AnsweredQuestion {
 
     public void setTotalScore(Integer totalScore) {
         this.totalScore = totalScore;
+    }
+
+    public Integer getIscorrect() {
+        return iscorrect;
+    }
+
+    public void setIscorrect(Integer iscorrect) {
+        this.iscorrect = iscorrect;
     }
 }

@@ -474,52 +474,62 @@ public class AnsweredQuestionExample {
             return (Criteria) this;
         }
 
-        public Criteria andAnswerEqualTo(Integer value) {
+        public Criteria andAnswerEqualTo(String value) {
             addCriterion("answer =", value, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerNotEqualTo(Integer value) {
+        public Criteria andAnswerNotEqualTo(String value) {
             addCriterion("answer <>", value, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerGreaterThan(Integer value) {
+        public Criteria andAnswerGreaterThan(String value) {
             addCriterion("answer >", value, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAnswerGreaterThanOrEqualTo(String value) {
             addCriterion("answer >=", value, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerLessThan(Integer value) {
+        public Criteria andAnswerLessThan(String value) {
             addCriterion("answer <", value, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerLessThanOrEqualTo(Integer value) {
+        public Criteria andAnswerLessThanOrEqualTo(String value) {
             addCriterion("answer <=", value, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerIn(List<Integer> values) {
+        public Criteria andAnswerLike(String value) {
+            addCriterion("answer like", value, "answer");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnswerNotLike(String value) {
+            addCriterion("answer not like", value, "answer");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnswerIn(List<String> values) {
             addCriterion("answer in", values, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerNotIn(List<Integer> values) {
+        public Criteria andAnswerNotIn(List<String> values) {
             addCriterion("answer not in", values, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerBetween(Integer value1, Integer value2) {
+        public Criteria andAnswerBetween(String value1, String value2) {
             addCriterion("answer between", value1, value2, "answer");
             return (Criteria) this;
         }
 
-        public Criteria andAnswerNotBetween(Integer value1, Integer value2) {
+        public Criteria andAnswerNotBetween(String value1, String value2) {
             addCriterion("answer not between", value1, value2, "answer");
             return (Criteria) this;
         }
@@ -534,52 +544,62 @@ public class AnsweredQuestionExample {
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerEqualTo(Integer value) {
+        public Criteria andRightAnswerEqualTo(String value) {
             addCriterion("right_answer =", value, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerNotEqualTo(Integer value) {
+        public Criteria andRightAnswerNotEqualTo(String value) {
             addCriterion("right_answer <>", value, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerGreaterThan(Integer value) {
+        public Criteria andRightAnswerGreaterThan(String value) {
             addCriterion("right_answer >", value, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerGreaterThanOrEqualTo(Integer value) {
+        public Criteria andRightAnswerGreaterThanOrEqualTo(String value) {
             addCriterion("right_answer >=", value, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerLessThan(Integer value) {
+        public Criteria andRightAnswerLessThan(String value) {
             addCriterion("right_answer <", value, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerLessThanOrEqualTo(Integer value) {
+        public Criteria andRightAnswerLessThanOrEqualTo(String value) {
             addCriterion("right_answer <=", value, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerIn(List<Integer> values) {
+        public Criteria andRightAnswerLike(String value) {
+            addCriterion("right_answer like", value, "rightAnswer");
+            return (Criteria) this;
+        }
+
+        public Criteria andRightAnswerNotLike(String value) {
+            addCriterion("right_answer not like", value, "rightAnswer");
+            return (Criteria) this;
+        }
+
+        public Criteria andRightAnswerIn(List<String> values) {
             addCriterion("right_answer in", values, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerNotIn(List<Integer> values) {
+        public Criteria andRightAnswerNotIn(List<String> values) {
             addCriterion("right_answer not in", values, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerBetween(Integer value1, Integer value2) {
+        public Criteria andRightAnswerBetween(String value1, String value2) {
             addCriterion("right_answer between", value1, value2, "rightAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andRightAnswerNotBetween(Integer value1, Integer value2) {
+        public Criteria andRightAnswerNotBetween(String value1, String value2) {
             addCriterion("right_answer not between", value1, value2, "rightAnswer");
             return (Criteria) this;
         }
@@ -701,6 +721,66 @@ public class AnsweredQuestionExample {
 
         public Criteria andTotalScoreNotBetween(Integer value1, Integer value2) {
             addCriterion("total_score not between", value1, value2, "totalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectIsNull() {
+            addCriterion("isCorrect is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectIsNotNull() {
+            addCriterion("isCorrect is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectEqualTo(Integer value) {
+            addCriterion("isCorrect =", value, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectNotEqualTo(Integer value) {
+            addCriterion("isCorrect <>", value, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectGreaterThan(Integer value) {
+            addCriterion("isCorrect >", value, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectGreaterThanOrEqualTo(Integer value) {
+            addCriterion("isCorrect >=", value, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectLessThan(Integer value) {
+            addCriterion("isCorrect <", value, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectLessThanOrEqualTo(Integer value) {
+            addCriterion("isCorrect <=", value, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectIn(List<Integer> values) {
+            addCriterion("isCorrect in", values, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectNotIn(List<Integer> values) {
+            addCriterion("isCorrect not in", values, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectBetween(Integer value1, Integer value2) {
+            addCriterion("isCorrect between", value1, value2, "iscorrect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIscorrectNotBetween(Integer value1, Integer value2) {
+            addCriterion("isCorrect not between", value1, value2, "iscorrect");
             return (Criteria) this;
         }
     }
