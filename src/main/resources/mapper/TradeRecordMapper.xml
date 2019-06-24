@@ -288,4 +288,7 @@
       buyer_t_id = #{buyerTId,jdbcType=INTEGER}
     where trade_id = #{tradeId,jdbcType=INTEGER}
   </update>
+  <select id="getTradesbyTeacherId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select * from trade_record where buyer_t_id = #{Teacherid}
+  </select>
 </mapper>

@@ -70,6 +70,7 @@ public class PageJumpController {
 		for (QuestionBank questionBank : questionBanks) {
 			System.out.println(questionBank.getQuesBankName());
 		}
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWW");
 		model.addAttribute("questionbanks", questionBanks);
 //		model.addAttribute("test", "我被取用了");
 		return "shoudongzujuan";
