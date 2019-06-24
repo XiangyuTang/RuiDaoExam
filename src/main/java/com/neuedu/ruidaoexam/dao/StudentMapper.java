@@ -49,5 +49,5 @@ public interface StudentMapper {
     
     Student selectByNamePassword(String name,String password);
     
-    List<Integer> showNotAnswered(Integer stuid);
+    List<Integer> showNotAnswered(Integer stuid);//19/06/24 by lb 获得未答试卷的id
 }
