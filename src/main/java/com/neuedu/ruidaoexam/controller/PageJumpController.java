@@ -58,7 +58,7 @@ public class PageJumpController {
 	public String toLogin() {
 		return "user/login";
 	}
-
+	//跳转到组卷界面
 	@RequestMapping("/toshoudong")
 	public String toshoudong(Model model) {
 		// 此处的teacher_id应该是session中的内容
@@ -89,7 +89,7 @@ public class PageJumpController {
 		HashMap<String,Object> questionByBankid = questionServiceimpl.getQuestionByBankid(Bank_id);
 		model.addAttribute("questions", questionByBankid);
 //		System.out.println("我被调了");
-		return "news";
+		return "chioceques";
 	}
 
 	// 主页
@@ -165,4 +165,15 @@ public class PageJumpController {
 		public String toStuForget() {
 			return "student/forget";
 		}
+		//跳转到添加填写试卷信息页面
+		@RequestMapping("/toaddpaper")
+		public String toaddpaper() {
+			return "addpaper";
+		}
+		//跳转到我的卷子界面
+		@RequestMapping("/toMyPaper")
+		public String toMyPaper() {
+			return "invite";
+		}
+		
 }

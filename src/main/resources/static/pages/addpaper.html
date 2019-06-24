@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	    <link rel="stylesheet" href="static/css/amazeui.min.css" th:href="@{/static/css/amazeui.min.css}" media="all">
+		<link rel="stylesheet" href="static/css/admin.css" th:href="@{/static/css/admin.css}" media="all">
+		<link rel="stylesheet" href="static/css/app.css" th:href="@{/static/css/app.css}" media="all">
+		<style>
+			.admin-main{
+				padding-top: 0px;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("[class='am-btn am-btn-success']").click(function(){
+					var papername = $("[id='doc-vld-pwd-1']").val();
+					var papertime = $("[id='doc-vld-pwd-2']").val();
+					alert(papername);
+					alert(papertime);
+					$.ajax({
+						type:"get",
+						url:"addpaper",
+						async:true,
+						dataType:"text",
+						data:{'papername':papername,'papertime':papertime},
+						success:function(e){
+							if(e == "true"){
+								alert("添加成功")
+							}else if(e == "false1"){
+								alert("未选择题目，添加失败")
+							}else{
+								alert("服务异常")
+							}
+						parent.layer.closeAll();
+//						parent.location.href="toMyPaper"
+
+						},
+						
+					});
+				/*alert("haha");*/
+			})
+			})
+		</script>
+	</head>
+	<body class="addpaper">
+		<div class="am-cf admin-main">
+		<!-- content start -->
+		<div class="admin-content">
+			<div class="admin-content-body">
+				<div class="am-g">
+					<form class="am-form am-form-horizontal" method="post" style="padding-top:30px;" data-am-validator >
+						<div class="am-form-group" align="left" >
+							<label for="user-name" class="am-u-sm-3 am-form-label">
+							试卷名: </label>
+							<div class="am-u-sm-9">
+								<input type="text" id="doc-vld-pwd-1" required placeholder="请输入试卷名称" 
+									style="width: 300px;" name="papername"> <small></small>
+							</div>
+						</div>
+						<div class="am-form-group" align="left" style="margin-top: 10%">
+							<label for="user-name" class="am-u-sm-3 am-form-label">
+								考试时长:</label>
+							<div class="am-u-sm-9">
+								<input type="text" id="doc-vld-pwd-2" required placeholder="请输入考试时长（以分钟为单位）" 
+									 style="width: 300px;" name="papertime" > <small></small>
+							</div>
+						</div>
+						<div class="am-form-group" style="margin-left: 20%; margin-top: 10%">
+							<div class="am-u-sm-9 am-u-sm-push-3">
+								<input type="submit" class="am-btn am-btn-success" value="确认添加" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	<script type="text/javascript"
+		src="assets/js/libs/jquery-1.10.2.min.js">
+	</script> -->
+	<script type="text/javascript" src="static/myplugs/js/plugs.js" th:src="@{static/myplugs/js/plugs.js}">
+	</script>
+	</body>
+</html>

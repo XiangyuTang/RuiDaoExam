@@ -7,18 +7,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Ques_Paper_Mapper;
+import com.neuedu.ruidaoexam.service.PaperMapperService;
 import com.neuedu.ruidaoexam.service.PaperService;
 @Controller
 public class PaperController {
 	List<Ques_Paper_Mapper> Mappers = new ArrayList<Ques_Paper_Mapper>();
 	@Autowired
 	PaperService paperService;
+	@Autowired
+	PaperMapperService paperMapperService;
 	
 	//记录选取了哪些题目（此处防止重复选题，前台很难实现刷新是记录已选题目）
 	@RequestMapping("/addquestomapper")
@@ -56,23 +60,27 @@ public class PaperController {
 	//添加试卷，此处可以尝试使用activemq
 	@RequestMapping("/addpaper")
 	@ResponseBody
-	public String addpaper() {
-		String paper_name = "哈哈哈";
-		Integer paper_time = 60;
-		Integer total_score = 20;
+	public String addpaper(String papername, Integer papertime) {
+		Integer total_score = 0;
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+		if (Mappers.isEmpty()) {
+			return "false1";
+		}
 		for (Ques_Paper_Mapper mapper:Mappers) {
 			Integer score = Integer.parseInt(mapper.getScore());
 			total_score += score;
 		}
 		Paper paper = new Paper();
-		paper.setPaperName(paper_name);
+		paper.setPaperName(papername);
 		paper.setCreatedbyteacherid(1);
-		paper.setPaperTime(paper_time);
+		paper.setPaperTime(papertime);
 		paper.setTotalScore(total_score);
 		Integer paperid = paperService.addPaper(paper);
 		for (Ques_Paper_Mapper mapper:Mappers) {
 			mapper.setPaperId(paperid);
+			int i = paperMapperService.addMapper(mapper);
 		}
-		return null;
+		Mappers.clear();
+		return "true";
 	}
 }
