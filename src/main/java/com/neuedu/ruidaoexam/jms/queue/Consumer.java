@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
-
 /**
  * 定义点对点模式的消费者
  * @author Administrator
