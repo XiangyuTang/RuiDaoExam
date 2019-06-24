@@ -102,10 +102,13 @@
             lay-filter="layadmin-system-side-menu">
             <li data-name="home" class="layui-nav-item ">
               <a href="javascript:;" lay-tips="考试" lay-direction="2">
-                <i class="layui-icon layui-icon-home"></i>
+                <i class="layui-icon layui-icon-survey"></i>
                 <cite>考试</cite>
               </a>
+              
               <dl class="layui-nav-child">
+              	
+              	
               	<dd data-name="console">
                   <li data-name="home" class="layui-nav-item ">
               			<a href="javascript:;" lay-tips="考试" lay-direction="2">
@@ -124,49 +127,55 @@
                 		</dd>
             			</li>
                 </dd>
+                
+                
+                
                 <dd data-name="console">
                   <a lay-href="baseinfo.html">我的考试</a>
                 </dd>
                 <dd data-name="console">
-                  <a>正在进行</a>
+                  <a lay-href="baseinfo.html">正在进行</a>
                 </dd>
                 <dd data-name="console">
-                  <a>我的分享</a>
-                </dd>
-                <dd data-name="console">
-                  <a>我的邀请</a>
-                </dd>
-                <dd data-name="console">
-                  <a>归档考试</a>
-                </dd>
-                <dd data-name="console">
-                  <a>回收站</a>
+                  <a lay-href="baseinfo.html">我的邀请</a>
                 </dd>
               </dl>
             </li>
             <li data-name="home" class="layui-nav-item ">
-              <a href="javascript:;" lay-tips="个人资料" lay-direction="2">
-                <i class="layui-icon layui-icon-home"></i>
+              <a href="javascript:;" lay-tips="题库" lay-direction="2">
+                <i class="layui-icon layui-icon-read"></i>
                 <cite>题库</cite>
               </a>
               <dl class="layui-nav-child">
 
                 <dd data-name="console">
 
-                  <a lay-href="set/user/info.html">我的题库</a>
+                  <a lay-href="tomyLibraryTch">我的题库</a>
                 </dd>
                 <dd data-name="console">
                   <a lay-href="set/user/password.html">我的分享</a>
                 </dd>
                 <dd data-name="console">
-
-                  <a lay-href="set/user/info.html">归档题库</a>
-                </dd>
-                <dd data-name="console">
-                  <a lay-href="set/user/password.html">回收站</a>
+                  <a lay-href="set/user/info.html">我的商户</a>
                 </dd>
               </dl>
             </li>
+          
+          	<li data-name="home" class="layui-nav-item layui-nav-item ">
+								<a href="javascript:;" lay-tips="个人资料" lay-direction="2">
+									<i class="layui-icon layui-icon-user"></i>
+									<cite>个人资料</cite>
+								</a>
+								<dl class="layui-nav-child">
+
+									<dd data-name="console">
+										<a lay-href="baseinfo.html">基本信息</a>
+									</dd>
+									<dd data-name="console">
+										<a lay-href="password.html">修改密码</a>
+									</dd>
+								</dl>
+							</li>
           </ul>
 
         </div>
@@ -200,7 +209,7 @@
       <!-- 主体内容 -->
       <div class="layui-body" id="LAY_app_body">
         <div class="layadmin-tabsbody-item layui-show">
-          <iframe src="toteacherhome" frameborder="0" class="layadmin-iframe"></iframe>
+          <iframe src="tohomeTch" frameborder="0" class="layadmin-iframe"></iframe>
         </div>
       </div>
 

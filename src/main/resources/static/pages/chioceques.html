@@ -4,8 +4,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" href="/static/css/amazeui.min.css" />
-		<link rel="stylesheet" href="/static/css/admin.css" />
+		<link rel="stylesheet" href="/static/css/amazeui.min.css" th:href="@{/static/css/amazeui.min.css}" media="all"/>
+		<link rel="stylesheet" href="/static/css/admin.css" th:href="@{/static/css/admin.css}" media="all"/>
 		<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
     	<link rel="stylesheet" href="../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
   		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
@@ -56,7 +56,7 @@
 	<body>
 		<div class="admin-content-body">
 			<div class="am-cf am-padding am-padding-bottom-0">
-				<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新闻管理</strong><small></small></div>
+				<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">选择题目</strong></div>
 			</div>
 
 			<hr>
@@ -65,7 +65,7 @@
 				<div class="am-u-sm-12 am-u-md-6">
 					<div class="am-btn-toolbar">
 						<div class="am-btn-group am-btn-group-xs">
-							<button type="button" class="am-btn am-btn-default"><span class="am-icon-plus">添加试卷</span></button>
+							<button type="button" class="am-btn am-btn-default" onclick="addpaper('添加试卷',5)"><span class="am-icon-plus">组建试卷</span></button>
 						</div>
 					</div>
 				</div>
@@ -384,7 +384,7 @@
 							</tbody>
 						</table>
 						<div class="am-cf">
-							共 15 条记录
+							
 							<div class="am-fr">
 								<ul class="am-pagination">
 									<li class="am-disabled">
@@ -417,4 +417,50 @@
 			</div>
 		</div>
 	</body>
+	<script src="/static/js/jquery-3.1.0.min.js" type="text/javascript" th:src="@{/static/js/jquery-3.1.0.min.js}" media="all"></script>
+	<script src="/static/js/bootstrap.min.js" type="text/javascript" th:src="@{/static/js/bootstrap.min.js}" media="all"></script>
+	<script src="/static/js/material.min.js" type="text/javascript" th:src="@{/static/js/material.min.js}" media="all"></script>
+
+	<!--  Charts Plugin -->
+	<script src="/static/js/chartist.min.js" th:src="@{/static/js/chartist.min.js}" media="all"></script>
+
+
+
+	<script src="/static/js/material-dashboard.js" th:src="@{/static/js/material-dashboard.js}" media="all"></script>
+
+	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
+	
+	<script type="text/javascript" src="/static/myplugs/js/plugs.js" th:src="@{/static/myplugs/js/plugs.js}" media="all">
+		</script>
+		<script type="text/javascript">
+			//添加编辑弹出层
+			function addpaper(title, id) {
+				$.jq_Panel({
+					title: title,
+					iframeWidth: 500,
+					iframeHeight: 300,
+					url: "/toaddpaper"
+				});
+			}
+/*  			$(function () {
+ 				$('[class="material-icons"][id=1]').trigger("click");
+				$('[class="material-icons"][id=1]').parent().parent().addClass("active");
+			})  */
+		</script>
+
+
+<!-- 	<script type="text/javascript">
+    	$(document).ready(function(){
+
+$(".nav li").click(function(){
+	
+	$(".nav li").removeClass("active");
+	$(this).addClass("active");
+	
+})
+
+			// Javascript method's body can be found in assets/js/demos.js
+
+    	});
+	</script> -->
 </html>

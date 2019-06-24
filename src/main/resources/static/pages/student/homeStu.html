@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>教师首页</title>
+<style type="text/css">
+	.show-welcome
+	{
+		width:500px;
+		border: 1px solid red;
+      	margin:100px auto;
+	}
+	.wrap h1{
+	    margin:0;
+	    line-height:150px;
+	    background:#ccc;
+	}
+	
+</style>
+</head>
+<body>
+	<div class="show-welcome">
+		<h1>亲爱的同学：<span th:text="${session.name}"></span>,</h1>
+		<h1>欢迎进入学生个人中心</h1>
+	</div>
+
+</body>
+</html>

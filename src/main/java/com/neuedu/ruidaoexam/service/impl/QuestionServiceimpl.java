@@ -52,17 +52,35 @@ public class QuestionServiceimpl implements QuestionService {
 				essay_id_list.add(ques_Bank_Mapper.getEqId());
 			}
 		}
-		List<ChoiceQuestion> choiceQuestions = choiceQuestionMapper.selectByidInList(choice_id_list);
-//		for (ChoiceQuestion choiceQuestion:choiceQuestions) {
-//			System.out.println(choiceQuestion.getContent());
-//		}
-		List<JudgeQuestion> judgeQuestions = judgeQuestionMapper.selectByidInList(judge_id_list);
-		List<EssayQuestion> essayQuestions = essayQuestionMapper.selectByidInList(essay_id_list);
-//		System.out.println("haha");
 		HashMap<String, Object> questionHashMap = new HashMap<>();
-		questionHashMap.put("choiceQuestions", choiceQuestions);
-		questionHashMap.put("judgeQuestions", judgeQuestions);
-		questionHashMap.put("essayQuestions", essayQuestions);
+		if (!choice_id_list.isEmpty()) {
+			List<ChoiceQuestion> choiceQuestions = choiceQuestionMapper.selectByidInList(choice_id_list);
+			questionHashMap.put("choiceQuestions", choiceQuestions);
+		}else {
+			questionHashMap.put("choiceQuestions", choice_id_list);
+		}
+		if (!judge_id_list.isEmpty()) {
+			List<JudgeQuestion> judgeQuestions = judgeQuestionMapper.selectByidInList(judge_id_list);
+			questionHashMap.put("judgeQuestions", judgeQuestions);
+		}else {
+			questionHashMap.put("judgeQuestions", judge_id_list);
+		}
+		if (!essay_id_list.isEmpty()) {
+			List<EssayQuestion> essayQuestions = essayQuestionMapper.selectByidInList(essay_id_list);
+			questionHashMap.put("essayQuestions", essayQuestions);
+		}else {
+			questionHashMap.put("essayQuestions", essay_id_list);
+		}
+		/*
+		 * List<ChoiceQuestion> choiceQuestions =
+		 * choiceQuestionMapper.selectByidInList(choice_id_list); List<JudgeQuestion>
+		 * judgeQuestions = judgeQuestionMapper.selectByidInList(judge_id_list);
+		 * List<EssayQuestion> essayQuestions =
+		 * essayQuestionMapper.selectByidInList(essay_id_list);
+		 * questionHashMap.put("choiceQuestions", choiceQuestions);
+		 * questionHashMap.put("judgeQuestions", judgeQuestions);
+		 * questionHashMap.put("essayQuestions", essayQuestions);
+		 */
 //		for (JudgeQuestion judgeQuestion:judgeQuestions) {
 //		System.out.println(judgeQuestion.getContent());
 //	}
@@ -70,6 +88,12 @@ public class QuestionServiceimpl implements QuestionService {
 //			System.out.println(essayQuestion.getContent());
 //		}
 		return questionHashMap;
+	}
+
+	@Override
+	public List<Object> getQuestionsByBankid(Integer Bank_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

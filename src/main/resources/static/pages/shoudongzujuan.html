@@ -37,14 +37,14 @@
 
 			<div class="logo">
 				<a href="#" class="simple-text">
-					手动组卷
+					我的题库
 				</a>
 			</div>
 
 	    	<div class="sidebar-wrapper">
 	            <ul class="nav">
  	                <li th:each="questionbank:${questionbanks}">
-	                    <a href="/toquestion1" target="right" th:href="@{/toquestion1(quesbankid=${questionbank.quesBankId})}">
+	                    <a href="/toquestion" target="right" th:href="@{/toquestion(quesbankid=${questionbank.quesBankId})}">
 	                        <i class="material-icons" th:id="${questionbankStat.count}" ></i>
  	                        <p th:text="${questionbank.quesBankName}">题库</p>
 	                    </a>

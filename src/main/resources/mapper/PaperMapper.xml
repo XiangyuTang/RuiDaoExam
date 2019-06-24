@@ -240,4 +240,11 @@
       point_price = #{pointPrice,jdbcType=INTEGER}
     where paper_id = #{paperId,jdbcType=INTEGER}
   </update>
+  
+	<insert id="addPaper" parameterType="com.neuedu.ruidaoexam.entity.Paper">
+   		<selectKey order="AFTER" keyProperty="paperId" resultType="int">
+   			select LAST_INSERT_ID()
+   		</selectKey>
+   		insert into paper (paper_name, createdByTeacherId, paper_time, total_score) values(#{paperName},#{createdbyteacherid},#{paperTime},#{totalScore})
+  </insert>
 </mapper>

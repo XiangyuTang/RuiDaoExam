@@ -98,7 +98,7 @@
           
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
             <li data-name="home" class="layui-nav-item layui-nav-itemed">
-              <a lay-href="detail.html" lay-tips="我的考试" lay-direction="2">
+              <a lay-href="toMyExam" lay-tips="我的考试" lay-direction="2">
                 <i class="layui-icon layui-icon-file" ></i>
                 <cite>我的考试</cite>
               </a>
@@ -109,21 +109,7 @@
                 <cite>考试入口</cite>
               </a>
             </li>
-            <li data-name="home" class="layui-nav-item layui-nav-itemed">
-              <a href="javascript:;" lay-tips="未答试卷" lay-direction="2">
-                <i class="layui-icon layui-icon-file-b"></i>
-                <cite>未答试卷</cite>
-              </a>
-      
-            </li>
             
-            <li data-name="home" class="layui-nav-item layui-nav-itemed">
-              <a href="javascript:;" lay-tips="成绩列表" lay-direction="2">
-                <i class="layui-icon layui-icon-form"></i>
-                <cite>成绩列表</cite>
-              </a>
-      
-            </li>
             <li data-name="home" class="layui-nav-item layui-nav-itemed">
                 <a href="javascript:;" lay-tips="个人资料" lay-direction="2">
                   <i class="layui-icon layui-icon-home"></i>
@@ -132,10 +118,10 @@
                 <dl class="layui-nav-child">
                 
                   <dd data-name="console">
-                    <a lay-href="baseinfo.html">基本信息</a>
+                    <a lay-href="toStuBaseInfo">基本信息</a>
                   </dd>
                   <dd data-name="console">
-                    <a lay-href="password.html">修改密码</a>
+                    <a lay-href="toStuForget">修改密码</a>
                   </dd>
                 </dl>
               </li>
@@ -175,7 +161,7 @@
       <!-- 主体内容 -->
       <div class="layui-body" id="LAY_app_body">
         <div class="layadmin-tabsbody-item layui-show">
-          <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+          <iframe src="tohomeStu" frameborder="0" class="layadmin-iframe"></iframe>
         </div>
       </div>
       
