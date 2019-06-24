@@ -10,3 +10,4 @@
 # 笔记
 ### 1.记得在逆向生成后添加mapper注解
 ### 2.ajax如果只通过post传递参数,dataType:'json',而不能加contentType:’application/json;charset=UTF-8’，不然后台接收的数据为空，参考examEntrance.html
+### 3.一个类中同时只能引入一个criteria类，无法同时引入两个（即逆向生成的数据库xml代码的数据库操作只有在执行单表查询时才能使用，联合查询无法使用，虽然example类强大，但是仅能用于单表查询），应该是由于criteria类是example类的静态内部类的原因，具体不清楚。
