@@ -41,7 +41,7 @@ public class StudentServiceimpl implements StudentService{
 	public int getNumberOfAnsweredPaper(Integer stuid) {
 		List<Paper> papers=stumapper.showNotAnswered(stuid);
 		for(Paper paper:papers ) {
-			System.out.println(paper.getPaperId());
+			System.out.println(paper.getPaperName());
 		}
 		AnsweredPaperExample answeredPaperExample=new AnsweredPaperExample();
 		com.neuedu.ruidaoexam.entity.AnsweredPaperExample.Criteria criteria=answeredPaperExample.createCriteria();

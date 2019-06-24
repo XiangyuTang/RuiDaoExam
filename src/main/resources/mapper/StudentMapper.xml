@@ -9,6 +9,7 @@
     <result column="points" property="points" jdbcType="INTEGER" />
     <result column="face_data" property="faceData" jdbcType="VARCHAR" />
   </resultMap>
+  
    <resultMap id="BaseResultMap2" type="com.neuedu.ruidaoexam.entity.Paper" >
     <id column="paper_id" property="paperId" jdbcType="INTEGER" />
     <result column="paper_name" property="paperName" jdbcType="VARCHAR" />
