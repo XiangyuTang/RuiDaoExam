@@ -110,7 +110,11 @@
         label_mm: '',
         label_ss: '',
         separator: ':',
-        separator_days: ','
+        separator_days: ',',
+        callback: function() {
+				alert("hahaha");
+				console.log('亲，活动结束啦，请继续关注哦!');
+			}
     };
 
     function CountDown(element, options) {
