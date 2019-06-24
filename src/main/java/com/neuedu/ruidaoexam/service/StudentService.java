@@ -9,4 +9,5 @@ public interface StudentService {
 	
 	int registStudent(Student stu);
 	List<Report> getGradeList(Integer stuid);
+	int getNumberOfAnsweredPaper(Integer stuid);
 }

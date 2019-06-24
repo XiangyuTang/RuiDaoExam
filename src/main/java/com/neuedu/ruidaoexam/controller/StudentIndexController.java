@@ -44,5 +44,12 @@ public class StudentIndexController {
 	
 		
 	}
+	
+	@PostMapping("/getNumberOfAnswered")
+	@ResponseBody
+	public int getNumberOfAnswered(HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		return studentservice.getNumberOfAnsweredPaper((Integer)session.getAttribute("uid"));
+	}
 
 }
