@@ -9,6 +9,7 @@ import com.neuedu.ruidaoexam.dao.AnsweredPaperMapper;
 import com.neuedu.ruidaoexam.dao.ReportMapper;
 import com.neuedu.ruidaoexam.dao.StudentMapper;
 import com.neuedu.ruidaoexam.entity.AnsweredPaperExample;
+import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportExample;
 import com.neuedu.ruidaoexam.entity.ReportExample.Criteria;
@@ -38,6 +39,10 @@ public class StudentServiceimpl implements StudentService{
 	}
 	@Override
 	public int getNumberOfAnsweredPaper(Integer stuid) {
+		List<Paper> papers=stumapper.showNotAnswered(stuid);
+		for(Paper paper:papers ) {
+			System.out.println(paper.getPaperId());
+		}
 		AnsweredPaperExample answeredPaperExample=new AnsweredPaperExample();
 		com.neuedu.ruidaoexam.entity.AnsweredPaperExample.Criteria criteria=answeredPaperExample.createCriteria();
 		criteria.andStuIdEqualTo(stuid);

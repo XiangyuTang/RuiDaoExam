@@ -9,6 +9,15 @@
     <result column="points" property="points" jdbcType="INTEGER" />
     <result column="face_data" property="faceData" jdbcType="VARCHAR" />
   </resultMap>
+   <resultMap id="BaseResultMap2" type="com.neuedu.ruidaoexam.entity.Paper" >
+    <id column="paper_id" property="paperId" jdbcType="INTEGER" />
+    <result column="paper_name" property="paperName" jdbcType="VARCHAR" />
+    <result column="paper_type" property="paperType" jdbcType="INTEGER" />
+    <result column="createdByTeacherId" property="createdbyteacherid" jdbcType="INTEGER" />
+    <result column="paper_time" property="paperTime" jdbcType="INTEGER" />
+    <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+    <result column="point_price" property="pointPrice" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -261,7 +270,8 @@
     from student
     where name = #{name,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
-  <select id="showNotAnswered" parameterType="Integer" resultType="Integer">
- select a.paper_id from ((select paper_id from invite_student where student_id=#{stuid}) union all (select paper_id from trade_record where buyer_type=2 and buyer_s_id=#{stuid})) a  where a.paper_id not in(select b.paper_id from answered_paper b where b.stu_id=#{stuid});  </select>
+  <select id="showNotAnswered" parameterType="Integer" resultMap="BaseResultMap2">
+  select * from paper where paper_id in (select a.paper_id from ((select paper_id from invite_student where student_id=#{stuid}) union all (select paper_id from trade_record where buyer_type=2 and buyer_s_id=#{stuid})) a  where a.paper_id not in(select b.paper_id from answered_paper b where b.stu_id=#{stuid})); 
+  </select>
   
 </mapper>

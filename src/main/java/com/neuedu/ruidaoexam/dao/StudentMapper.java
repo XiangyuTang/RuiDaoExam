@@ -1,4 +1,4 @@
-package com.neuedu.ruidaoexam.dao;
+ package com.neuedu.ruidaoexam.dao;
 
 import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Student;
@@ -49,5 +49,5 @@ public interface StudentMapper {
     
     Student selectByNamePassword(String name,String password);
     
-    List<Integer> showNotAnswered(Integer stuid);//19/06/24 by lb 获得未答试卷的id
+    List<Paper> showNotAnswered(Integer stuid);//19/06/24 by lb 获得未答试卷的列表
 }

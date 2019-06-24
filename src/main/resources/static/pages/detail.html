@@ -306,7 +306,6 @@
 
     <script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
     <script>
-
         layui.use(['laypage', 'form'], function () {
             var laypage = layui.laypage;
             var form = layui.form;
@@ -323,6 +322,7 @@
             });
             $.ajax({
                 url: "/getNumberOfAnswered",
+                async:false,
                 type: "POST",
                 dataType: "text",
                 success: function (data) {
@@ -355,6 +355,7 @@
             $.ajax({
                 url: "/getGradelist",
                 type: "POST",
+                async:false,
                 dataType: "json",
                 success: function (data) {
                     var str = []
