@@ -29,5 +29,6 @@ public interface TradeRecordMapper {
     int updateByPrimaryKeySelective(TradeRecord record);
 
     int updateByPrimaryKey(TradeRecord record);
-    
+    //通过教师id查询其购买记录
+    List<TradeRecord> getTradesbyTeacherId(Integer Teacherid);
 }

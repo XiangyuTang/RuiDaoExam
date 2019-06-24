@@ -70,6 +70,7 @@ public class PageJumpController {
 		for (QuestionBank questionBank : questionBanks) {
 			System.out.println(questionBank.getQuesBankName());
 		}
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWW");
 		model.addAttribute("questionbanks", questionBanks);
 //		model.addAttribute("test", "我被取用了");
 		return "shoudongzujuan";
@@ -170,10 +171,9 @@ public class PageJumpController {
 		public String toaddpaper() {
 			return "addpaper";
 		}
-		//跳转到我的卷子界面
-		@RequestMapping("/toMyPaper")
-		public String toMyPaper() {
-			return "invite";
+		//跳转到教师的我的考试界面
+		@RequestMapping("/toMyPapers")
+		public String toMyPapers() {
+			return "papers";
 		}
-		
 }

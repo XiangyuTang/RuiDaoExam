@@ -72,7 +72,7 @@ public class PaperController {
 		}
 		Paper paper = new Paper();
 		paper.setPaperName(papername);
-		paper.setCreatedbyteacherid(1);
+		paper.setCreatedbyteacherid(1);//此处teaceherid应当由session中取得
 		paper.setPaperTime(papertime);
 		paper.setTotalScore(total_score);
 		Integer paperid = paperService.addPaper(paper);
@@ -82,5 +82,11 @@ public class PaperController {
 		}
 		Mappers.clear();
 		return "true";
+	}
+	
+	@RequestMapping("/getPapers")
+	public String getPapers() {
+		paperService.getPaperByTeacherId(1);
+		return "invite";
 	}
 }
