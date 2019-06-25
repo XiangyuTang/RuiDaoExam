@@ -6,19 +6,19 @@
 	    <link rel="stylesheet" href="static/css/amazeui.min.css" th:href="@{/static/css/amazeui.min.css}" media="all">
 		<link rel="stylesheet" href="static/css/admin.css" th:href="@{/static/css/admin.css}" media="all">
 		<link rel="stylesheet" href="static/css/app.css" th:href="@{/static/css/app.css}" media="all">
+		<link rel="stylesheet" type="text/css" href="../layuiadmin/layui/css/layui.css" th:href="@{/static/layuiadmin/layui/css/layui.css}" media="all">
+		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
+		<script src="../layuiadmin/layui/layui.js" th:src="@{/static/layuiadmin/layui/layui.js}" charset="utf-8" type="text/javascript"></script>
 		<style>
 			.admin-main{
 				padding-top: 0px;
 			}
 		</style>
-		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
 		<script type="text/javascript">
-			$(function(){
+/* 			$(function(){
 				$("[class='am-btn am-btn-success']").click(function(){
 					var papername = $("[id='doc-vld-pwd-1']").val();
 					var papertime = $("[id='doc-vld-pwd-2']").val();
-					alert(papername);
-					alert(papertime);
 					$.ajax({
 						type:"get",
 						url:"addpaper",
@@ -27,21 +27,53 @@
 						data:{'papername':papername,'papertime':papertime},
 						success:function(e){
 							if(e == "true"){
-								alert("添加成功")
+								alert("添加成功,请前往我的考试界面查看")
 							}else if(e == "false1"){
 								alert("未选择题目，添加失败")
 							}else{
 								alert("服务异常")
 							}
-						parent.layer.closeAll();
+						parent.closeAll();
 //						parent.location.href="toMyPaper"
 
 						},
 						
 					});
-				/*alert("haha");*/
 			})
-			})
+			}) */
+			layui.use(['layer', 'form', 'element'], function () {
+				var layer = layui.layer, form = layui.form, element = layui.element
+				$ = layui.$
+				$("[class='am-btn am-btn-success']").click(function(){
+					var papername = $("[id='doc-vld-pwd-1']").val();
+					var papertime = $("[id='doc-vld-pwd-2']").val();
+					alert(papername);
+					$.ajax({
+						type:"get",
+						url:"addpaper",
+						async:false,
+						dataType:"text",
+						data:{'papername':papername,'papertime':papertime},
+						success:function(e){
+							alert(1);
+							if(e == "false1"){
+								alert("未选择题目，添加失败")
+								window.parent.layer.closeAll();
+							}else{
+								alert("添加成功，请前往我的考试界面查看！");
+								window.parent.layer.closeAll();
+							}
+
+						},
+ 						
+						error:function(e){
+							alert(2);
+						} 
+					});
+/* 					alert("添加成功，请前往我的考试界面查看！");
+					window.parent.layer.closeAll(); */
+			});				
+			});
 		</script>
 	</head>
 	<body class="addpaper">
@@ -77,9 +109,7 @@
 			</div>
 		</div>
 	</div>
-<!-- 	<script type="text/javascript"
-		src="assets/js/libs/jquery-1.10.2.min.js">
-	</script> -->
+	</script> 
 	<script type="text/javascript" src="static/myplugs/js/plugs.js" th:src="@{static/myplugs/js/plugs.js}">
 	</script>
 	</body>

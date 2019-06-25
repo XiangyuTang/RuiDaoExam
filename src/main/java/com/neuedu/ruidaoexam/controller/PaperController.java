@@ -3,10 +3,12 @@ package com.neuedu.ruidaoexam.controller;
 import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,15 +80,17 @@ public class PaperController {
 		Integer paperid = paperService.addPaper(paper);
 		for (Ques_Paper_Mapper mapper:Mappers) {
 			mapper.setPaperId(paperid);
-			int i = paperMapperService.addMapper(mapper);
+			paperMapperService.addMapper(mapper);
 		}
 		Mappers.clear();
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 		return "true";
 	}
 	
 	@RequestMapping("/getPapers")
-	public String getPapers() {
-		paperService.getPaperByTeacherId(1);
-		return "invite";
+	public String getPapers(Model model) {
+		HashMap<String, Object> papers = paperService.getPaperByTeacherId(1);
+		model.addAttribute(papers);
+		return "papers";
 	}
 }
