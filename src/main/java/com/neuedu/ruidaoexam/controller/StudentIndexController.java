@@ -64,6 +64,7 @@ public class StudentIndexController {
 		  vo1.setCreatedTeacher(teacherservice.getTeacherNameByPaper(paper.getCreatedbyteacherid()));
 		  vo1.setPaperTime(paper.getPaperTime());
 		  vo1.setPaperName(paper.getPaperName());
+		  vo1.setPaperID(paper.getPaperId());
 		  notAnsweredData.add(vo1);
 	}
 	  StudentDataVO vo2=new StudentDataVO();

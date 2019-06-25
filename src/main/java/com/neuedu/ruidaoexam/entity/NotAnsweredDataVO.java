@@ -4,6 +4,7 @@ public class NotAnsweredDataVO {
 	private String paperName;
 	private Integer paperTime;
 	private String createdTeacher;
+	private Integer paperID;
 	public String getPaperName() {
 		return paperName;
 	}
@@ -21,6 +22,12 @@ public class NotAnsweredDataVO {
 	}
 	public void setCreatedTeacher(String createdTeacher) {
 		this.createdTeacher = createdTeacher;
+	}
+	public Integer getPaperID() {
+		return paperID;
+	}
+	public void setPaperID(Integer paperID) {
+		this.paperID = paperID;
 	}
 	
 	
