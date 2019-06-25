@@ -72,7 +72,6 @@ public class StudentIndexController {
 	  vo2.setNumberOfNotAnswered(numberOfNotAnswered);
 	  vo2.setNotAnsweredPapers(notAnsweredData);
 	  return vo2;
-	  
 	}
 
 }
