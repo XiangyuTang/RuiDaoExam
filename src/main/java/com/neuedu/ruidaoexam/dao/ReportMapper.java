@@ -29,4 +29,6 @@ public interface ReportMapper {
     int updateByPrimaryKeySelective(Report record);
 
     int updateByPrimaryKey(Report record);
+    
+    int getPaper_id(Integer report_id);
 }

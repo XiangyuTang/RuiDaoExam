@@ -29,8 +29,16 @@ public class Trade_recordServiceimpl implements Trade_recordService {
 		List<TradeRecord> trade_records= tradeRecordMapper.selectByExample(tradeRecordExample);
 		List<QuestionBank> questionBanks = new ArrayList<QuestionBank>();
 		for(TradeRecord tradeRecord:trade_records) {
-			QuestionBank questionBank = questionBankMapper.selectByPrimaryKey(tradeRecord.getBankId());
-			questionBanks.add(questionBank);
+//			System.out.println(tradeRecord.getTradeId());
+//			System.out.println(tradeRecord.getTime());
+//			System.out.println(tradeRecord.getBankId());
+			if (tradeRecord.getBankId() != null) {
+				QuestionBank questionBank = questionBankMapper.selectByPrimaryKey(tradeRecord.getBankId());
+				questionBanks.add(questionBank);	
+			}
+//			QuestionBank questionBank = questionBankMapper.selectByPrimaryKey(tradeRecord.getBankId());
+////			System.out.println(questionBank.getQuesBankName());
+//			questionBanks.add(questionBank);
 		}
 		return questionBanks;
 	}

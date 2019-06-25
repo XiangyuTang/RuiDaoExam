@@ -63,7 +63,7 @@ public class PageJumpController {
 	public String toLogin() {
 		return "user/login";
 	}
-
+	//跳转到组卷界面
 	@RequestMapping("/toshoudong")
 	public String toshoudong(Model model) {
 		// 此处的teacher_id应该是session中的内容
@@ -75,6 +75,7 @@ public class PageJumpController {
 		for (QuestionBank questionBank : questionBanks) {
 			System.out.println(questionBank.getQuesBankName());
 		}
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWW");
 		model.addAttribute("questionbanks", questionBanks);
 //		model.addAttribute("test", "我被取用了");
 		return "shoudongzujuan";
@@ -94,7 +95,7 @@ public class PageJumpController {
 		HashMap<String,Object> questionByBankid = questionServiceimpl.getQuestionByBankid(Bank_id);
 		model.addAttribute("questions", questionByBankid);
 //		System.out.println("我被调了");
-		return "news";
+		return "chioceques";
 	}
 
 	// 主页
@@ -176,4 +177,14 @@ public class PageJumpController {
 		public String toStuForget() {
 			return "student/forget";
 		}
+		//跳转到添加填写试卷信息页面
+		@RequestMapping("/toaddpaper")
+		public String toaddpaper() {
+			return "addpaper";
+		}
+//		//跳转到教师的我的考试界面
+//		@RequestMapping("/toMyPapers")
+//		public String toMyPapers() {
+//			return "papers";
+//		}
 }

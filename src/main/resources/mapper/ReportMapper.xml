@@ -288,4 +288,7 @@
       is_allowed_to_see = #{isAllowedToSee,jdbcType=INTEGER}
     where report_id = #{reportId,jdbcType=INTEGER}
   </update>
+  <select id="getPaper_id" parameterType="Integer" resultType="java.lang.Integer">
+  
+  select paper_id from report where report_id=#{report_id} </select>
 </mapper>

@@ -40,7 +40,7 @@
            // $.each(data, function(i, value) {
             	console.log(data.role);
             	sessionStorage.setItem('role',data.role);
-            	sessionStorage.setItem('id',data.id);
+            	sessionStorage.setItem('uid',data.uid);
             	sessionStorage.setItem('name',data.name);
               console.log(sessionStorage.getItem('role'));
             //});
@@ -160,16 +160,16 @@
             if (data == 1) {
               layer.msg("登录成功，即将进入教师个人中心");
               setTimeout(function(){
-                window.location.href="toindexteacher?id="+
-                sessionStorage.getItem('id')+"&name="+
+                window.location.href="toindexteacher?uid="+
+                sessionStorage.getItem('uid')+"&name="+
                 sessionStorage.getItem('name');
               },2000)
               
             } else if(data == 2) {
               layer.msg("登录成功，即将进入学生个人中心");
 							setTimeout(function(){
-                window.location.href="toindex?id="+
-                sessionStorage.getItem('id')+"&name="+
+                window.location.href="toindex?uid="+
+                sessionStorage.getItem('uid')+"&name="+
                 sessionStorage.getItem('name');
               },2000)
             }else if(data == 3){

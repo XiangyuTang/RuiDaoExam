@@ -92,8 +92,43 @@ public class QuestionServiceimpl implements QuestionService {
 
 	@Override
 	public List<Object> getQuestionsByBankid(Integer Bank_id) {
-		// TODO Auto-generated method stub
-		return null;
+		Ques_Bank_MapperExample ques_Bank_MapperExample = new Ques_Bank_MapperExample();
+		Criteria createCriteria = ques_Bank_MapperExample.createCriteria();
+		createCriteria.andBankIdEqualTo(Bank_id);
+		List<Ques_Bank_Mapper> ques_Bank_Mappers = ques_Bank_MapperMapper.selectByExample(ques_Bank_MapperExample);
+		List<Integer> choice_id_list = new ArrayList<Integer>();
+		List<Integer> essay_id_list = new ArrayList<Integer>();
+		List<Integer> judge_id_list = new ArrayList<Integer>();
+		for (Ques_Bank_Mapper ques_Bank_Mapper:ques_Bank_Mappers) {
+			Integer quesType = ques_Bank_Mapper.getQuesType();
+			if (quesType == 1 || quesType == 2) {
+				System.out.println(ques_Bank_Mapper.getCqId());
+				choice_id_list.add(ques_Bank_Mapper.getCqId());
+			}else if (quesType == 4) {
+				System.out.println(ques_Bank_Mapper.getJqId());
+				judge_id_list.add(ques_Bank_Mapper.getJqId());
+			}else {
+				System.out.println(ques_Bank_Mapper.getEqId());
+				essay_id_list.add(ques_Bank_Mapper.getEqId());
+			}
+		}
+		List<Object> questions = new ArrayList<Object>();
+		if (!choice_id_list.isEmpty()) {
+			List<ChoiceQuestion> choiceQuestions = choiceQuestionMapper.selectByidInList(choice_id_list);
+			questions.addAll(choiceQuestions);
+		}else {
+		}
+		if (!judge_id_list.isEmpty()) {
+			List<JudgeQuestion> judgeQuestions = judgeQuestionMapper.selectByidInList(judge_id_list);
+			questions.addAll(judgeQuestions);
+		}else {
+		}
+		if (!essay_id_list.isEmpty()) {
+			List<EssayQuestion> essayQuestions = essayQuestionMapper.selectByidInList(essay_id_list);
+			questions.addAll(essayQuestions);
+		}else {
+		}
+		return questions;
 	}
 
 }
