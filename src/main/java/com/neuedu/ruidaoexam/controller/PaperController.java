@@ -78,9 +78,10 @@ public class PaperController {
 		Integer paperid = paperService.addPaper(paper);
 		for (Ques_Paper_Mapper mapper:Mappers) {
 			mapper.setPaperId(paperid);
-			int i = paperMapperService.addMapper(mapper);
+			paperMapperService.addMapper(mapper);
 		}
 		Mappers.clear();
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 		return "true";
 	}
 	
