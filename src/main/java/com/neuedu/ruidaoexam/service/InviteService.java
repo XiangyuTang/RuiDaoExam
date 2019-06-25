@@ -10,4 +10,6 @@ public interface InviteService {
 	int addInviteMsg(MsgOfInvite msg, String invitecode);
 
 	InviteStudent verifyPerson(String email, String invitecode);
+	
+	
 }

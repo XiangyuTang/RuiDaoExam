@@ -54,5 +54,7 @@ public class InviteServiceimpl implements InviteService{
 		if(inviteStudent!=null)
 			return inviteStudent;
 		return null;
-	}	
+	}
+	
+	
 }
