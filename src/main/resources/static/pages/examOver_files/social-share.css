@@ -1,0 +1,737 @@
+body {
+    font-smoothing: antialiased;
+    overflow-x: hidden;
+    padding-bottom: 70px !important;
+    background-color: #f8f8f8 !important;
+}
+
+body.weixin {
+    padding-bottom: 0 !important;
+}
+
+body.weixin .share-btns {
+    display: none;
+}
+
+body.weixin .exam-end-btn {
+    background: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    text-align: center;
+    padding: 8px;
+}
+
+@media (min-width: 980px) {
+    .share-page {
+        max-width: 760px;
+        margin: 30px auto 0 auto;
+    }
+}
+
+.share-page .share-btns {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 70px;
+    z-index: 10;
+    padding-top: 10px;
+}
+
+.share-page .share-btns .max-w {
+    max-width: 550px;
+    position: relative;
+}
+
+.share-page .share-btns .backdrop {
+    background-color: #000;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.share-page .social-share-list {
+    padding: 0;
+    z-index: 1;
+    position: relative;
+}
+
+.share-page .social-share-list.circle a[data-type] {
+    font-size: 26px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    width: 50px;
+    text-align: center;
+    height: 50px;
+    line-height: 46px;
+    display: inline-block;
+    background-color: #fff;
+}
+
+.share-page .social-share-list.circle a[data-type] i {
+    font-size: 1em;
+}
+
+.share-page .bg-dark {
+    background-color: #f8f8f8;
+}
+
+.share-page .max-w {
+    position: relative;
+}
+
+.share-page .send-btn {
+    cursor: pointer;
+}
+
+.share-page .max-w .popover {
+    display: block;
+    left: 72%;
+    top: 30px;
+    z-index: 1;
+    font-size: 12px;
+    margin-right: 3px;
+    color: #989898;
+    background: #fff;
+    border-color: #dcdcdc;
+}
+
+.share-page .max-w .popover .popover-content {
+    padding: 3px 7px;
+}
+
+.share-page .max-w .popover.bottom > .arrow {
+    border-bottom-color: #dcdcdc;
+    left: 85%;
+}
+
+.share-page .max-w .popover.bottom > .arrow:after {
+    border-bottom-color: #fff;
+}
+
+.share-page .max-w .wx-icon:hover .fa-qrcode {
+    color: #7ca8bd;
+}
+
+.share-page .max-w .fa-qrcode {
+    height: 35px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #000;
+}
+
+.share-page .max-w .wx-cover {
+    border-width: 17px;
+    border-style: solid;
+    border-color: transparent transparent #fff #fff;
+    position: absolute;
+    top: 3px;
+    right: 1px;
+}
+
+.share-page .weixin-share-hint {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.share-page .weixin-share-hint > div.backdrop {
+    opacity: 0.6;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #000;
+}
+
+.share-page .weixin-share-hint > img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60%;
+    max-width: 220px;
+}
+
+.share-page .share-title {
+    font-size: 26px;
+    color: #26292a;
+    margin: 20px 0;
+    position: relative;
+}
+
+.share-page .share-title > .mid-line {
+    position: absolute;
+    border-top: 1px solid #e5e5e5;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 50%;
+}
+
+.share-page .share-title > .title-content {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    background-color: #f8f8f8;
+    padding: 0 20px;
+}
+
+.share-page .share-sub-title {
+    margin: 10px 0;
+    font-size: 20px;
+    color: #26292a;
+}
+
+.share-page .role-explain {
+    padding: 20px 0;
+}
+
+.share-page .role-explain p {
+    margin: 10px 0;
+    color: #686868;
+}
+
+.share-page .share-label {
+    text-align: center;
+}
+
+.share-page .feature {
+    padding-bottom: 50px;
+}
+
+.share-page .feature img {
+    max-width: 120px;
+    margin-top: 20px;
+}
+
+.share-page .feature .share-label {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/** 考试后分享页面 */
+#module-container.exam .exam-card {
+    background: #fff;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 980px) {
+    #module-container.exam .exam-card {
+        border-radius: 4px;
+    }
+}
+
+#module-container.exam .btn-report {
+    min-width: 80px;
+    margin-left: 5px;
+}
+
+#module-container.exam .btn-success {
+    background-color: #3fd0ad !important;
+    border: 1px solid #3fd0ad !important;
+    min-width: 80px;
+}
+
+#module-container.exam .btn-success:hover {
+    background-color: #37bc9b !important;
+}
+
+#module-container.exam .btn-re {
+    background-color: #ff7674;
+    border: 1px solid #ff7674;
+}
+
+#module-container.exam .btn-re:hover {
+    background-color: #ed5464;
+    border: 1px solid #ed5464;
+}
+
+#module-container.exam .exam-header {
+    background-color: #009ee7;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    position: relative;
+    line-height: 16px;
+}
+
+@media (min-width: 980px) {
+    #module-container.exam .exam-header {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+}
+
+#module-container.exam .exam-header a {
+    font-weight: bold;
+    color: #fff;
+    opacity: 0.95;
+    padding: 0 2px;
+    text-decoration: underline !important;
+}
+
+#module-container.exam .exam-header a:hover {
+    opacity: 1;
+}
+
+#module-container.exam .exam-header > h4 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+#module-container .exam-body .paper-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#module-container.exam .exam-header .arrow {
+    border: 15px solid transparent;
+    border-top: 15px solid #009ee7;
+    display: block;
+    position: absolute;
+    left: 50%;
+    left: calc(50% - 15px);
+    bottom: -30px;
+    z-index: 1;
+}
+
+#module-container.exam .exam-body {
+    border: 1px solid transparent;
+}
+
+#module-container.exam .exam-body > div {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.share-page.be-shared #module-container.exam .exam-body > div {
+    margin-top: 0;
+}
+
+#module-container.exam .exam-body h4 {
+    font-size: 20px;
+}
+
+#module-container.exam .exam-body .port-img {
+    width: 75px;
+    height: 75px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#module-container.exam .exam-body .name {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+#module-container.exam .exam-body img.img-remark {
+    width: 90%;
+}
+
+#module-container.exam .exam-body .score {
+    font-size: 34px;
+    position: relative;
+}
+
+#module-container.exam .exam-body .score > span {
+    font-size: 14px;
+    color: #777;
+    bottom: 2px;
+}
+
+#module-container.exam .exam-body .summary {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+#module-container.exam .exam-body .title:not(:empty) {
+    color: #777;
+    font-size: 14px;
+    margin: 40px 25px 0;
+    padding-top: 20px;
+    border-top: 1px solid #f5f5f5;
+}
+
+#module-container.exam .exam-body .title:not(:empty) a {
+    padding: 0 2px;
+    text-decoration: underline !important;
+}
+
+#module-container.exam .exam-body .btn-report,
+#module-container.exam .exam-body .btn-test {
+    max-width: 200px;
+}
+
+/* #module-container.exam .exam-body .btn-test {
+	display: none;
+} */
+.be-shared #module-container.exam .exam-body .btn-test {
+    display: block;
+}
+
+#module-container.exam .link-query-code {
+    display: inline-block;
+    padding: 0 3px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+}
+
+.social-share-list {
+    padding: 15px;
+}
+
+.social-share-list li {
+    display: inline-block;
+    width: 19%;
+}
+
+.social-share-list li a {
+    text-align: center;
+    color: #aab2bd;
+}
+
+.social-share-list li a i {
+    font-size: 3em;
+    opacity: 0.8;
+    -webkit-transition: opacity 0.15s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.social-share-list li a:hover i {
+    opacity: 1;
+}
+
+.social-share-list a.s-weibo i {
+    color: #e91e34;
+}
+
+.social-share-list a.s-tweibo i {
+    color: #24a6dc;
+}
+
+.social-share-list a.s-qzone i {
+    color: #fdc03c;
+}
+
+.social-share-list a.s-weixin i {
+    color: #56c13d;
+}
+
+.social-share-list a.s-renren i {
+    color: #217dc6;
+}
+
+.social-share-list li span {
+    display: block;
+    font-size: 0.9em;
+}
+
+.social-share-list.justified {
+    width: 100%;
+    border-bottom: 0;
+}
+
+.social-share-list.justified li {
+    display: table-cell;
+    text-align: center;
+    width: 1%;
+}
+
+@media screen and (max-width: 404px) {
+    .social-share-list.justified li {
+        font-size: 0.8em;
+    }
+
+    .social-share-list {
+        padding: 15px 5px;
+    }
+
+    .social-share-container {
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .social-share-list.justified li {
+        font-size: 0.6em;
+    }
+
+    .social-share-list {
+        padding: 15px 5px;
+    }
+
+    .social-share-container {
+        padding: 5px;
+    }
+}
+
+.social-share-list.hide-text span {
+    display: none;
+}
+
+.social-share-qrcode .popover-title-cus {
+    font-weight: normal;
+    padding: 5px 5px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.social-share-qrcode .popover-content {
+    padding: 5px;
+}
+
+.wx-text {
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    z-index: 9;
+}
+
+.wx-text span {
+    color: #96989a;
+}
+
+#share-qrcode-modal .modal-body {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+.weixin-waiting-wrapper,
+.weixin-waiting-wrapper .modal-footer {
+    text-align: center;
+}
+
+.weixin-waiting-wrapper .modal-header {
+    padding-bottom: 0;
+}
+
+.weixin-waiting-wrapper .modal-body {
+    height:220px;
+}
+
+.weixin-waiting-wrapper .loading {
+    margin-top: 30%;
+    position: absolute;
+    width: 95%;
+}
+
+.weixin-waiting-wrapper .modal-footer {
+    padding-top: 0;
+}
+
+.weixin-waiting-wrapper .qrCode img {
+    width: 100%;
+}
+
+/*yezi*/
+@media (max-width: 767px) {
+    #module-container.exam .exam-body > div {
+        margin-top: 0px;
+        padding-top: 10px;
+    }
+
+    #module-container.exam .exam-header > h4 {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    #module-container .exam-body .paper-name {
+        font-size: 16px !important;
+    }
+
+    #module-container.exam .exam-header {
+        padding: 10px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    #module-container.exam .exam-body .summary {
+        font-size: 15px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    #module-container.exam .exam-body .title:not(:empty) {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+
+    .ax-container {
+        margin-top: 10px !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .share-page .role-explain {
+        margin-bottom: 45px;
+    }
+
+    .share-page .share-title {
+        padding-top: 40px;
+    }
+
+    .share-page .share-title > .mid-line {
+        top: 80%;
+    }
+}
+
+.ax-container {
+    margin-top: 30px;
+    height: 90px;
+    margin-bottom: 50px;
+}
+
+.ax-container img {
+    width: 100% !important;
+    max-height: 100% !important;
+}
+
+.ax-wrap {
+    height: 90px;
+    text-align: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-bottom: 50px;
+}
+
+.ax-wrap > a {
+    display: block;
+    height: 90px;
+}
+
+@media (min-width: 760px) {
+    .ax-wrap-large {
+        display: block;
+    }
+
+    .ax-wrap-small {
+        display: none;
+    }
+}
+
+@media (max-width: 759px) {
+    .ax-wrap {
+        background-size: 370px 90px;
+    }
+
+    .ax-wrap-large {
+        display: none;
+    }
+
+    .ax-wrap-small {
+        display: block;
+    }
+
+    #module-container.exam .exam-body img.img-remark {
+        width: 95%;
+    }
+}
+
+@media (min-width: 371px) and (max-width: 759px) {
+    .ax-wrap {
+        background-size: 370px 90px;
+    }
+}
+
+@media (max-width: 370px) {
+    .ax-wrap {
+        background-size: contain;
+    }
+}
+
+.exam-end-btn .btn {
+    width: 80px;
+}
+
+.exam-end-btn .btn:not(:first-child) {
+    margin-left: 10px;
+}
+
+@media (min-width: 980px) {
+    .exam-end-btn .btn {
+        width: 136px;
+    }
+}
+
+#carousel-ax .carousel-indicators {
+    bottom: 0;
+    margin-bottom: 0;
+}
+
+#carousel-ax .carousel-inner > .item {
+    height: 90px;
+}
+
+/*广告modal样式*/
+
+#baidu-ad-modal.pc .modal-dialog {
+    width: 500px;
+    margin: 150px auto;
+}
+#baidu-ad-modal .modal-dialog {
+    width: 100%;
+    margin: 80px 0;
+}
+#baidu-ad-modal .modal-body {
+    padding: 0;
+}
+
+#baidu-ad-modal .modal-body .close {
+    position: absolute;
+    height: 18px;
+    padding: 0 10px;
+    z-index: 1;
+    left: calc(50% - 10px);
+    bottom: -17px;
+    background-color: white;
+    opacity: 0.4;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#baidu-ad-modal .modal-content {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+#baidu-ad-modal .second{
+    display: none;
+}
+#baidu-ad-modal .close{
+    display: block;
+}
+#baidu-ad-modal.loading .second{
+    display: block;
+    position: absolute;
+    height: 20px;
+    font-size: 0.8em;
+    padding: 2px 5px;
+    color: #B6B6B6;
+    left: calc(50% - 40px);
+    bottom: -20px;
+    background-color: white;
+    opacity: 0.4;
+}
+#baidu-ad-modal.loading .close{
+    display: none;
+}

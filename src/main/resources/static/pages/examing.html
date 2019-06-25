@@ -22,6 +22,7 @@
 	background: #FF6633;
 	color:#fff;
 }
+.emptyAnswer{}
 </style>
 <script>  
 	/*屏幕切换监控*/
@@ -37,32 +38,10 @@
 	    else  
 	    	document.title=normal_title;  
     });  
-    
-    //下面代码实现全屏显示 
-	window.onload = function(){ 
-		var Request = new Array();//保存参数 
-		var s = location.search.substring(1); 
-		if (s && s!=""){ 
-		  	var list = s.split("&"); 
-			for (var i=0; i < list.length; i++){ 
-				var pair = list[i].split("="); 
-				if (pair[0] && pair[0] !=""){ 
-				Request[unescape(pair[0])] = unescape(pair[1]); 
-				} 
-			} 
-		  } 
-		
-		var fullscreen=Request["fullscreen"]; 
-		if(fullscreen!="yes"){ 
-			var file =self.location; 
-			var a = window.open("about:blank","","fullscreen=yes") 
-			self.opener=null 
-			self.close() 
-			a.location=file + "?fullscreen=yes"; 
-	  	} 
-	} 
-	window.onbeforeunload=function(){   window.event.returnValue='确认真的要刷新？'   }
-    
+         
+</script>
+<script>
+
 </script>
 <script>
 	/*添加标记题目同步答题卡事件*/
@@ -73,13 +52,13 @@
 			
 			if($(this).attr("class")=="fa fa-bookmark-o"){
 				$(this).attr("class","fa fa-bookmark");
-				var examId = $(this).prev().prev().closest('li').attr('id'); // 得到题目ID;
+				var examId = $(this).parent().prev().prev().closest('li').attr('id'); // 得到题目ID;
 				var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡;
 				// 设置已答题
 				cardLi.addClass('markQuestion');		
 			}
 			else{
-				var examId = $(this).prev().prev().closest('li').attr('id'); // 得到题目ID;
+				var examId = $(this).parent().prev().prev().closest('li').attr('id'); // 得到题目ID;
 				var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡;
 				$(this).attr("class","fa fa-bookmark-o");
 				cardLi.removeClass('markQuestion');
@@ -90,14 +69,91 @@
 	
 	/*做完某道题，定位答题卡标记蓝色表示已做的事件*/
 	$(function() {
+		//单选或者多选的点击事件
 		$('li.option').click(function() {
 			var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
 			var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
-			// 设置已答题
-			if(!cardLi.hasClass('hasBeenAnswer')){
+			if($(this).is(":has(input[type='checkbox'])"))
+			{
+				//选中的选项题型是多选
+				if($(this).find("input[type='checkbox']").is(':checked'))
+				{
+					//alert("选中了");
+					if(!cardLi.hasClass('hasBeenAnswer')){
+					cardLi.addClass('hasBeenAnswer');
+					cardLi.removeClass('emptyAnswer');
+					}
+				}
+				else
+				{
+					//alert("取消选中,判断其他兄弟有没有被选中");
+					if($(this).siblings().find("input[type='checkbox']").is(':checked'))
+					{
+						//alert("还有兄弟被选中了");
+						if(!cardLi.hasClass('hasBeenAnswer')){
+						cardLi.addClass('hasBeenAnswer');
+						cardLi.removeClass('emptyAnswer');
+						}
+					}
+					else
+					{
+						//alert("全没选中");
+						// 设置已答题
+						if(cardLi.hasClass('hasBeenAnswer')){
+							cardLi.removeClass('hasBeenAnswer');
+							cardLi.addClass('emptyAnswer');
+						}
+					}
+					
+				}
+			}
+			else {
+				//alert("不是多选");
+				//这里可能是单选和判断
+				// 设置已答题
+				if(!cardLi.hasClass('hasBeenAnswer')){
+					cardLi.addClass('hasBeenAnswer');
+					cardLi.removeClass('emptyAnswer');
+				}
+			}
+
+		});
+		
+		//填空题是否填写的监控事件
+		$("input[type='text']").blur(function(){
+			var text = $(this).val();
+			var textId = $(this).closest('li').attr('id');
+			var cardLi = $('a[href=#' + textId + ']'); // 根据题目ID找到对应答题卡
+			if(text=="")
+			{
+				cardLi.removeClass('hasBeenAnswer');
+				cardLi.addClass('emptyAnswer');
+			}
+			else
+			{
+				cardLi.removeClass('emptyAnswer');
 				cardLi.addClass('hasBeenAnswer');
 			}
-		});
+				
+		})
+		
+		//简答题是否填写的监控事件
+		$("textarea[type='text']").blur(function(){
+			var text = $(this).val();
+			var textId = $(this).closest('li').attr('id');
+			var cardLi = $('a[href=#' + textId + ']'); // 根据题目ID找到对应答题卡
+			if(text=="")
+			{
+				cardLi.removeClass('hasBeenAnswer');
+				cardLi.addClass('emptyAnswer');
+			}
+			else
+			{
+				cardLi.removeClass('emptyAnswer');
+				cardLi.addClass('hasBeenAnswer');
+			}
+		})
+		
 	});
 </script>
 <script>
@@ -107,22 +163,30 @@
 	    clickresult =window.confirm("提交试卷后内容不可更改,\n确定提交？");
 	    if(clickresult==true)
 	    {
-	    	$("form[id='paper']").submit();
-	    	//return clickresult;
+	    	if($("div[class='rt_nr1']").find("li a").hasClass('emptyAnswer'))
+	    	{
+	    		clickresult =window.confirm("您的试卷还有未完成的题目,\n还是确定提交？");
+	    		if(clickresult==true)
+	    			$("form[id='paper']").submit();
+	    	}
+	    	else
+		    	$("form[id='paper']").submit();
 	    }
 	    else
 	    	return clickresult;
 	}
 </script>
 
+
 </head>
-<body>
+<body ><!-- scroll="no"  onload="RunOnBeforeUnload()"-->
+	
 <div class="main">
 	<!--nr start-->
 	<div class="test_main">
 		<div class="nr_left">
 			<div class="test">
-				<form id="paper" action="" method="post">
+				<form id="paper" action="toExamOver" method="post">
 					<div class="test_title">
 						<p class="test_time">
 							<i class="fa fa-clock-o"></i><b id="alt-1" class="alt-1">00:01</b>
@@ -130,6 +194,7 @@
 						<font><input type="button" name="test_jiaojuan" onclick="return confirmSubmit()" value="交卷"></font>
 					</div>
 					
+					<!--下面是单选题-->
 						<div class="test_content">
 							<div class="test_content_title">
 								<h2>单选题</h2>
@@ -142,7 +207,7 @@
 							<ul>
 									<li id="qu_0_0">
 										<div class="test_content_nr_tt">
-											<i>1</i><span>(1分)</span><font>在生产管理信息系统中，下列操作步骤能正确将工单推进流程的是（  ）</font><b class="fa fa-bookmark-o"></b>
+											<i>1</i><span>(1分)</span><font>在生产管理信息系统中，下列操作步骤能正确将工单推进流程的是（  ）</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -193,7 +258,7 @@
 								
 									<li id="qu_0_1">
 										<div class="test_content_nr_tt">
-											<i>2</i><span>(1分)</span><font>在营销系统中查询客户有无欠费、余额及抄表数据接待客户时应做到哪些最基本的礼仪？</font><b class="fa fa-bookmark-o"></b>
+											<i>2</i><span>(1分)</span><font>在营销系统中查询客户有无欠费、余额及抄表数据接待客户时应做到哪些最基本的礼仪？</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -244,7 +309,7 @@
 								
 									<li id="qu_0_2">
 										<div class="test_content_nr_tt">
-											<i>3</i><span>(1分)</span><font>请在下列选项中选择正确进入电力营销系统网址</font><b class="fa fa-bookmark-o"></b>
+											<i>3</i><span>(1分)</span><font>请在下列选项中选择正确进入电力营销系统网址</font><a href="#" title="标记此题" ></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -285,7 +350,7 @@
 								
 									<li id="qu_0_3">
 										<div class="test_content_nr_tt">
-											<i>4</i><span>(1分)</span><font>如何在电力营销系统查询出客户的是否有余额</font><b class="fa fa-bookmark-o"></b>
+											<i>4</i><span>(1分)</span><font>如何在电力营销系统查询出客户的是否有余额</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -336,7 +401,7 @@
 								
 									<li id="qu_0_4">
 										<div class="test_content_nr_tt">
-											<i>5</i><span>(1分)</span><font>检查、使用万用表,用万用表测量一小型加工厂线电压为351V，请问其电压是否合格（  ）</font><b class="fa fa-bookmark-o"></b>
+											<i>5</i><span>(1分)</span><font>检查、使用万用表,用万用表测量一小型加工厂线电压为351V，请问其电压是否合格（  ）</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -367,7 +432,8 @@
 
 							</ul>
 						</div>
-					
+						
+						<!--下面是多选题-->
 						<div class="test_content">
 							<div class="test_content_title">
 								<h2>多选题</h2>
@@ -381,7 +447,7 @@
 								
 									<li id="qu_1_0">
 										<div class="test_content_nr_tt">
-											<i>1</i><span>(1分)</span><font>以下属于南方电网员工职业操守中明文规定的有()</font><b class="fa fa-bookmark-o"></b>
+											<i>1</i><span>(1分)</span><font>以下属于南方电网员工职业操守中明文规定的有()</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -437,7 +503,7 @@
 								
 									<li id="qu_1_1">
 										<div class="test_content_nr_tt">
-											<i>2</i><span>(1分)</span><font>以下属于南方电网员工职业禁区的有()</font><b class="fa fa-bookmark-o"></b>
+											<i>2</i><span>(1分)</span><font>以下属于南方电网员工职业禁区的有()</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -488,7 +554,7 @@
 								
 									<li id="qu_1_2">
 										<div class="test_content_nr_tt">
-											<i>3</i><span>(1分)</span><font>对 “热爱祖国、热爱南网、热爱岗位”理解正确的是()</font><b class="fa fa-bookmark-o"></b>
+											<i>3</i><span>(1分)</span><font>对 “热爱祖国、热爱南网、热爱岗位”理解正确的是()</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -539,7 +605,7 @@
 								
 									<li id="qu_1_3">
 										<div class="test_content_nr_tt">
-											<i>4</i><span>(1分)</span><font>优质服务工作的主线是（）</font><b class="fa fa-bookmark-o"></b>
+											<i>4</i><span>(1分)</span><font>优质服务工作的主线是（）</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -592,7 +658,7 @@
 									<li id="qu_1_4">
 										<div class="test_content_nr_tt">
 											<i>5</i><span>(1分)</span><font>职业操守中明确注明需要增强的意识有哪些（）
-①道德意识 ②忧患意识 ③环保意识 ④自律意识 ⑤节约意识</font><b class="fa fa-bookmark-o"></b>
+①道德意识 ②忧患意识 ③环保意识 ④自律意识 ⑤节约意识</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
 										</div>
 
 										<div class="test_content_nr_main">
@@ -643,7 +709,128 @@
 	
 							</ul>
 						</div>
-					
+						<!--下面是判断题-->
+						<div class="test_content">
+							<div class="test_content_title">
+								<h2>判断题</h2>
+								<p>
+									<span>共</span><i class="content_lit">2</i><span>题，</span><span>合计</span><i class="content_fs">2</i><span>分</span>
+								</p>
+							</div>
+						</div>
+						<div class="test_content_nr">
+							<ul>
+								<li id="qu_2_0">
+										<div class="test_content_nr_tt">
+											<i>1</i><span>(1分)</span><font>蔡旭鲲是一个拥有跳舞时长三年半的练习生。</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
+										</div>
+
+										<div class="test_content_nr_main">
+											<ul>
+													<li class="option">
+															<input type="radio" class="radioOrCheck" name="answer1"
+																id="2_answer_0_option_1"
+															/>
+														<label for="2_answer_0_option_1">
+															A.
+															<p class="ue" style="display: inline;">正确</p>
+														</label>
+													</li>
+												
+													<li class="option">
+															<input type="radio" class="radioOrCheck" name="answer1"
+																id="2_answer_0_option_2"
+															/>
+														<label for="2_answer_0_option_2">
+															B.
+															<p class="ue" style="display: inline;">错误</p>
+														</label>
+													</li>
+											</ul>
+										</div>
+								</li>
+								<li id="qu_2_1">
+										<div class="test_content_nr_tt">
+											<i>2</i><span>(1分)</span><font>蔡旭鲲拥有唱跳，rap，和打篮球的技能。</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
+										</div>
+
+										<div class="test_content_nr_main">
+											<ul>
+													<li class="option">
+															<input type="radio" class="radioOrCheck" name="answer2"
+																id="2_answer_1_option_1"
+															/>
+														<label for="2_answer_1_option_1">
+															A.
+															<p class="ue" style="display: inline;">正确</p>
+														</label>
+													</li>
+												
+													<li class="option">
+															<input type="radio" class="radioOrCheck" name="answer2"
+																id="2_answer_1_option_2"
+															/>
+														<label for="2_answer_1_option_2">
+															B.
+															<p class="ue" style="display: inline;">错误</p>
+														</label>
+													</li>
+											</ul>
+										</div>
+								</li>
+									
+							</ul>
+						</div>
+						
+						<!--下面是填空题-->
+						<div class="test_content">
+							<div class="test_content_title">
+								<h2>填空题</h2>
+								<p>
+									<span>共</span><i class="content_lit">1</i><span>题，</span><span>合计</span><i class="content_fs">5</i><span>分</span>
+								</p>
+							</div>
+						</div>
+						<div class="test_content_nr">
+							<ul>
+								<li id="qu_3_0">
+										<div class="test_content_nr_tt">
+											<i>1</i><span>(5分)</span><font>某练习市场两年半的著名练习生的姓名是_______。</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
+										</div>
+
+										<div class="test_content_nr_main">
+											<ul>
+												<input style="width:400px;height:20px" type="text" class="radioOrCheck" placeholder="若有多个填空项，答案之间请用逗号隔开" name="answer1"/>
+											</ul>
+										</div>
+								</li>
+							</ul>
+						</div>
+						
+						<!--下面是简答题-->
+						<div class="test_content">
+							<div class="test_content_title">
+								<h2>简答题</h2>
+								<p>
+									<span>共</span><i class="content_lit">1</i><span>题，</span><span>合计</span><i class="content_fs">10</i><span>分</span>
+								</p>
+							</div>
+						</div>
+						<div class="test_content_nr">
+							<ul>
+								<li id="qu_4_0">
+										<div class="test_content_nr_tt">
+											<i>1</i><span>(10分)</span><font>蔡徐坤这么火原因是什么？你的看法是？</font></font><a href="#" title="标记此题" ><b class="fa fa-bookmark-o"></b></a>
+										</div>
+
+										<div class="test_content_nr_main">
+											<ul>
+												<textarea style="width:800px; height:100px" type="text" class="radioOrCheck" placeholder="请在这填写你的答案" name="answer1"></textarea>
+											</ul>
+										</div>
+								</li>
+							</ul>
+						</div>
 				</form>
 			</div>
 
@@ -669,15 +856,15 @@
 							</div>
 							<div class="rt_content_nr answerSheet">
 								<ul>
-										<li><a href="#qu_0_0">1</a></li>
+										<li><a class="emptyAnswer" href="#qu_0_0">1</a></li>
 									
-										<li><a href="#qu_0_1">2</a></li>
+										<li><a class="emptyAnswer" href="#qu_0_1">2</a></li>
 									
-										<li><a href="#qu_0_2">3</a></li>
+										<li><a class="emptyAnswer" href="#qu_0_2">3</a></li>
 									
-										<li><a href="#qu_0_3">4</a></li>
+										<li><a class="emptyAnswer" href="#qu_0_3">4</a></li>
 									
-										<li><a href="#qu_0_4">5</a></li>
+										<li><a class="emptyAnswer" href="#qu_0_4">5</a></li>
 								</ul>
 							</div>
 						</div>
@@ -686,20 +873,64 @@
 							<div class="rt_content_tt">
 								<h2>多选题</h2>
 								<p>
-									<span>共</span><i class="content_lit">10</i><span>题</span>
+									<span>共</span><i class="content_lit">5</i><span>题</span>
 								</p>
 							</div>
 							<div class="rt_content_nr answerSheet">
 								<ul>
-										<li><a href="#qu_1_0">1</a></li>
+										<li><a class="emptyAnswer" href="#qu_1_0">1</a></li>
 									
-										<li><a href="#qu_1_1">2</a></li>
+										<li><a class="emptyAnswer" href="#qu_1_1">2</a></li>
 									
-										<li><a href="#qu_1_2">3</a></li>
+										<li><a class="emptyAnswer" href="#qu_1_2">3</a></li>
 									
-										<li><a href="#qu_1_3">4</a></li>
+										<li><a class="emptyAnswer" href="#qu_1_3">4</a></li>
 									
-										<li><a href="#qu_1_4">5</a></li>
+										<li><a class="emptyAnswer" href="#qu_1_4">5</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="rt_content">
+							<div class="rt_content_tt">
+								<h2>判断题</h2>
+								<p>
+									<span>共</span><i class="content_lit">2</i><span>题</span>
+								</p>
+							</div>
+							<div class="rt_content_nr answerSheet">
+								<ul>
+										<li><a class="emptyAnswer" href="#qu_2_0">1</a></li>
+									
+										<li><a class="emptyAnswer" href="#qu_2_1">2</a></li>
+
+								</ul>
+							</div>
+						</div>
+						
+						<div class="rt_content">
+							<div class="rt_content_tt">
+								<h2>填空题</h2>
+								<p>
+									<span>共</span><i class="content_lit">1</i><span>题</span>
+								</p>
+							</div>
+							<div class="rt_content_nr answerSheet">
+								<ul>
+										<li><a class="emptyAnswer" href="#qu_3_0">1</a></li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class="rt_content">
+							<div class="rt_content_tt">
+								<h2>简答题</h2>
+								<p>
+									<span>共</span><i class="content_lit">1</i><span>题</span>
+								</p>
+							</div>
+							<div class="rt_content_nr answerSheet">
+								<ul>
+										<li><a class="emptyAnswer" href="#qu_4_0">1</a></li>
 								</ul>
 							</div>
 						</div>
@@ -710,13 +941,14 @@
 		</div>
 	</div>
 	<!--nr end-->
-	<div class="foot"></div>
+	<div class="foot"><span id="fullScreen">听说你想全屏？</span></div>
 </div>
 
 <script type="text/javascript">
 	//倒计时监控事件
    	window.onload=function(){
         daojishi();
+        //$("#fullScreen").trigger("click");
     }
 
  	var counttime=100*60;//总秒钟,60秒
@@ -772,16 +1004,21 @@ document.onkeydown = function(){
 	//屏蔽Alt+方向键→
 	event.returnValue=false;
 	}
-	if((event.keyCode==8)||(event.keyCode==116)||(event.ctrlKey && event.keyCode==82)){
-	//屏蔽退格删除键
+	if((event.keyCode==116)||(event.ctrlKey && event.keyCode==82)){
+	//屏蔽退格删除键(event.keyCode==8)||
 	//屏蔽F5刷新键
 	//Ctrl+R
 	event.keyCode=0;
 	event.returnValue=false;
 	}
 	if(event.keyCode==122){
-		event.keyCode=0;event.returnValue=false;
+		event.keyCode=0;//0
+		event.returnValue=false;//false
 	} //屏蔽F11
+	/*if(event.keyCode==123){
+		event.keyCode=0;//0
+		event.returnValue=false;//false
+	} //屏蔽F12*/
 	if(event.ctrlKey && event.keyCode==78)
 		event.returnValue=false; //屏蔽Ctrl+n
 	if(event.shiftKey && event.keyCode==121)
@@ -794,7 +1031,61 @@ document.onkeydown = function(){
 	}
 }
 </script> 
+<script>
+	$(function(){
+	    //全屏
+	    $("#fullScreen").on("click",function(){
+	        fullScreen();
+	    })
+	    //退出全屏
+	    $("#exitFullScreen").on("click",function(){
+	        exitFullscreen();
+	    })
+	})
+	
+	//fullScreen()和exitScreen()有多种实现方式，此处只使用了其中一种
+	//全屏
+	function fullScreen() {
+	    var element = document.documentElement;
+	    if (element.requestFullscreen) {
+	        element.requestFullscreen();
+	    } else if (element.msRequestFullscreen) {
+	        element.msRequestFullscreen();
+	    } else if (element.mozRequestFullScreen) {
+	        element.mozRequestFullScreen();
+	    } else if (element.webkitRequestFullscreen) {
+	        element.webkitRequestFullscreen();
+	    }
+	}
+	
+	//退出全屏 
+	function exitFullscreen() {
+	    if (document.exitFullscreen) {
+	        document.exitFullscreen();
+	    } else if (document.msExitFullscreen) {
+	        document.msExitFullscreen();
+	    } else if (document.mozCancelFullScreen) {
+	        document.mozCancelFullScreen();
+	    } else if (document.webkitExitFullscreen) {
+	        document.webkitExitFullscreen();
+	    }
+	}
+	
+	//监听window是否全屏，并进行相应的操作,支持esc键退出
+	window.onresize = function() {
+	    var isFull=!!(document.webkitIsFullScreen || document.mozFullScreen || 
+	        document.msFullscreenElement || document.fullscreenElement
+	    );//!document.webkitIsFullScreen都为true。因此用!!
+	    if (isFull==false) {
+	        $("#exitFullScreen").css("display","none");
+	        $("#fullScreen").css("display","");
+	    }else{
+	        $("#exitFullScreen").css("display","");
+	        $("#fullScreen").css("display","none");
+	    }
+	}
 
+</script>
 
 </body>
 </html>

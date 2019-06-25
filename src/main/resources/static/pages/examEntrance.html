@@ -64,6 +64,9 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+</body>
+
+
 <script type="text/javascript">
 window.onload = function(){ 
 	//alert("text1");
@@ -85,7 +88,7 @@ $(function(){
 			data:datas,//将json对象转换成字符串,再向后台传递
 			success:function(e){
 				if(e=="1")
-					window.location.href = 'toexam';
+					parent.location.href = 'toexam';
 				else
 				{
 					layui.use(['layer', 'form'], function(){
@@ -112,6 +115,4 @@ $(function(){
 	
 });
 </script>
-
-</body>
 </html>

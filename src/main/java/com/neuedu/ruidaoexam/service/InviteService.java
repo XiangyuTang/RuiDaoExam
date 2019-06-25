@@ -1,5 +1,6 @@
 package com.neuedu.ruidaoexam.service;
 
+import com.neuedu.ruidaoexam.entity.InviteStudent;
 import com.neuedu.ruidaoexam.entity.MsgOfInvite;
 import com.neuedu.ruidaoexam.entity.Student;
 
@@ -8,5 +9,5 @@ public interface InviteService {
 
 	int addInviteMsg(MsgOfInvite msg, String invitecode);
 
-	int verifyPerson(String email, String invitecode);
+	InviteStudent verifyPerson(String email, String invitecode);
 }
