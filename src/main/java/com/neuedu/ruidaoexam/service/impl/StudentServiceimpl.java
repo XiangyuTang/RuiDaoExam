@@ -9,10 +9,12 @@ import com.neuedu.ruidaoexam.dao.AnsweredPaperMapper;
 import com.neuedu.ruidaoexam.dao.ReportMapper;
 import com.neuedu.ruidaoexam.dao.StudentMapper;
 import com.neuedu.ruidaoexam.entity.AnsweredPaperExample;
+import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportExample;
 import com.neuedu.ruidaoexam.entity.ReportExample.Criteria;
 import com.neuedu.ruidaoexam.entity.Student;
+import com.neuedu.ruidaoexam.entity.StudentDataVO;
 import com.neuedu.ruidaoexam.service.StudentService;
 
 @Service
@@ -36,13 +38,24 @@ public class StudentServiceimpl implements StudentService{
 		return reports;
 		
 	}
+
 	@Override
-	public int getNumberOfAnsweredPaper(Integer stuid) {
+	public Integer getNumberofAnswered(Integer stuid) {
 		AnsweredPaperExample answeredPaperExample=new AnsweredPaperExample();
 		com.neuedu.ruidaoexam.entity.AnsweredPaperExample.Criteria criteria=answeredPaperExample.createCriteria();
 		criteria.andStuIdEqualTo(stuid);
-		int count=answeredpapermapper.countByExample(answeredPaperExample);
-		
-		return count;
+		int numberOfansweredPaper=answeredpapermapper.countByExample(answeredPaperExample);
+		return numberOfansweredPaper;
+	}
+	@Override
+	public Integer getNumberofNotAnswered(Integer stuid) {
+		List<Paper> notAnsweredPapers=stumapper.showNotAnswered(stuid);
+		int numberofNotAnsweredPaper=notAnsweredPapers.size();
+		return numberofNotAnsweredPaper;
+	}
+	@Override
+	public List<Paper> getNotAnsweredList(Integer stuid) {
+		// TODO Auto-generated method stub
+		return stumapper.showNotAnswered(stuid);
 	}
 }

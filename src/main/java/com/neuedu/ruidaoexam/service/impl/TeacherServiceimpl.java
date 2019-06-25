@@ -15,6 +15,10 @@ public class TeacherServiceimpl implements TeacherService{
 		int i = mapper.insertSelective(teacher);
 		return i;
 	}
+	@Override
+	public String getTeacherNameByPaper(Integer created_id) {
+			return mapper.selectByPrimaryKey(created_id).getName();
+	}
 
 	
 	
