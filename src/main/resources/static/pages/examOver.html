@@ -1,10 +1,232 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>rerere</title>
+<html lang="zh-CN"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+
+
+<script src="examOver_files/hm.js" th:src="@{static/pages/examOver_files/hm.js}"></script>
+<link charset="utf-8" rel="stylesheet" href="examOver_files/social-share.css" th:href="@{static/pages/examOver_files/social-share.css}">
+<link charset="utf-8" rel="stylesheet" href="examOver_files/moon.css" th:href="@{static/pages/examOver_files/moon.css}">
+<link charset="utf-8" rel="stylesheet" href="examOver_files/msg.css" th:href="@{static/pages/examOver_files/msg.css}">
+<link charset="utf-8" rel="stylesheet" href="examOver_files/font-awesome.css" th:href="@{static/pages/examOver_files/font-awesome.css}">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+
+
+<link rel="stylesheet" href="examOver_files/base.css" th:href="@{static/pages/examOver_files/base.css}">
+<link rel="stylesheet" href="examOver_files/sets.css" th:href="@{static/pages/examOver_files/sets.css}">
+<link rel="stylesheet" href="examOver_files/style.css" th:href="@{static/pages/examOver_files/style.css}">
+<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}" />
+
+<script type="text/javascript" src="examOver_files/jquery.js" th:src="@{static/pages/examOver_files/jquery.js}"></script>
+<script type="text/javascript" src="examOver_files/sea.js" id="seajsnode" th:src="@{static/pages/examOver_files/sea.js}"></script>
+<script type="text/javascript" src="examOver_files/seajs-preload.js" th:src="@{static/pages/examOver_files/seajs-preload.js}"></script>
+<script type="text/javascript" src="examOver_files/seajs-css.js" th:src="@{static/pages/examOver_files/seajs-css.js}"></script>
+<script type="text/javascript" src="examOver_files/seajs-text.js" th:src="@{static/pages/examOver_files/seajs-text.js}"></script>
+<script type="text/javascript" src="examOver_files/config-temp.js" th:src="@{static/pages/examOver_files/config-temp.js}"></script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?e16bac3df70cc77a3932bd0f15bfbed6";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+    $(function ready() {
+        // 多模态窗口按层次展示：http://stackoverflow.com/a/24914782
+        $(document).on('show.bs.modal', '.modal', function () {
+            var len = $('.modal:visible').length,
+                    zIndex = 1040 + (10 * len);
+            // 多个模态时
+            $(this).css('z-index', zIndex);
+            setTimeout(function () {
+                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+            // 多层模态切换时滚动条失效的bug: http://stackoverflow.com/a/27379904
+        }).on('hidden.bs.modal', '.modal', function () {
+            // 这里能用.fade.in来判断modal隐藏后是否还有在显示的modal,因为bootstrap会自动给已经有.fade的modal加上.in的样式,
+            // 并且此modal隐藏的时候不会删除.fade.in
+            // 所以使用visible来判断!
+            if ($('.modal:visible').length > 0) {
+                $('body').addClass('modal-open');
+            }
+        });
+    });
+</script>
+
+    
+    <script type="text/javascript">
+        (function () {
+            seajs.use([seajs._route.appPath('app/share/social-share')], function (app) {
+                $(function () {
+                    app.initModule($('#social-share'), {
+                        shareData: JSON.parse($('#shareData').val()),
+                        shareType: "EXAM",
+                        isCompanyDomain: "" === "true",
+                        shareUniqueId: "vGUJope6YmHpTR434B2sTsMqbGu6IiET",
+                        shared: "",
+                        baseUrl: "https://www.101test.com/"
+                    });
+                });
+            });
+        })();
+    </script>
+    <script src="../js/ban.js" th:src="@{static/js/ban.js}"></script>
+		<style>
+		    body {
+		      height: 100%;
+		      overflow: hidden;
+		    }
+		
+		    canvas {
+		      z-index: 0;
+		      position: absolute;
+		    }
+		 </style>
 </head>
-<body>
-考试已经结束！
-</body>
-</html>
+<body class="retina">
+<canvas></canvas>
+<div class="share-page">
+    <title>考试结束页面</title>
+<form style="display:none;">
+    <input type="hidden" id="shareData" name="shareData" value="{&quot;candidateId&quot;:12217252,&quot;queryCode&quot;:&quot;L1P8QT&quot;,&quot;paperName&quot;:&quot;小学一年级数学十以内加减法训练&quot;,&quot;supportWx&quot;:true,&quot;logoEnabled&quot;:true,&quot;adEnabled&quot;:true,&quot;shareEnabled&quot;:true,&quot;testId&quot;:44968666,&quot;title&quot;:&quot;点&lt;a href='/'&gt;首页&lt;/a&gt;注册可查成绩报告；或用 L1P8QT 在&lt;a href='/e#!/query'&gt;查询页面&lt;/a&gt;查询；或将成绩发到 &lt;a class='send-btn'&gt;微信&lt;/a&gt;&quot;,&quot;remark&quot;:&quot;别哭，下次继续努力，加油！&quot;,&quot;picPc&quot;:&quot;https://101test-public.oss-cn-beijing.aliyuncs.com/paper/paperPic/pc_advert4.png&quot;,&quot;picMobile&quot;:&quot;https://101test-public.oss-cn-beijing.aliyuncs.com/paper/paperPic/mobile#_advert4.png&quot;,&quot;urlPc&quot;:&quot;/home&quot;,&quot;urlMobile&quot;:&quot;/home&quot;,&quot;shareTitle&quot;:&quot;《小学一年级数学十以内加减法训练》，我得了30分，小伙伴们快来看！&quot;,&quot;shareDesc&quot;:&quot;省时省力又省心，电脑手机都能答，互联网+在线考试，招聘教学培训都可使用&quot;,&quot;shareIcon&quot;:&quot;https://101test-public.oss-cn-beijing.aliyuncs.com/company/logo/64.png&quot;,&quot;scoreEnabled&quot;:true,&quot;name&quot;:&quot;emmm&quot;,&quot;portrait&quot;:&quot;https://101test-public.oss-cn-beijing.aliyuncs.com/common/employer/defaultPortrait/2.png&quot;,&quot;score&quot;:30.0,&quot;points&quot;:100.0,&quot;testUrl&quot;:&quot;https://www.101test.com/cand/index?paperId=6Q7B2Y&quot;,&quot;reportUrl&quot;:&quot;https://www.101test.com/share/irrevocable?employerId=678542&amp;url=%2FreportDetail%2F44968666%3Fsync%3Dtrue%26paperId%3D450608%26candidateId%3D12217252%26reportThreshold%3D14&amp;sign=zvRrmfvtaCysaAvbXw9HnA&amp;expiredAt=1592888971222&quot;,&quot;retest&quot;:true,&quot;hideScore&quot;:false,&quot;shareLinkType&quot;:2,&quot;configShow&quot;:false,&quot;shared&quot;:false,&quot;freeUser&quot;:true}">
+</form>
+<div class="fade modal" id="examFeedBackModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">在线反馈</h4>
+            </div>
+            <div class="modal-body">
+                <p>对于本次答题，你有什么想说的可以在这里告诉我们（答卷组织者）</p>
+                <textarea class="form-control" rows="4"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success btn-commit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fade modal weixin-waiting-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm mt100">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">使用微信扫一扫</h4>
+            </div>
+            <div class="modal-body pb20">
+                <h4 class="loading text-medium-gray" style="display:none">
+                    获取二维码<i class="fa fa-spinner fa-spin ml5"></i>
+                </h4>
+                <div class="qrCode center-block">
+                    <img alt="Scan me!" src="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="module-container" class="exam">
+    <div class="exam-card">
+        <div class="exam-header">
+            <h4>
+                <i class="fa fa-check"></i>
+                答题已结束，感谢您的参加
+            </h4>
+        </div>
+        <div class="exam-body">
+            <div class="max-w">
+                <div class="img-circle img-responsive center-block port-img mt5 mb10" style="background-image: url('https://101test-public.oss-cn-beijing.aliyuncs.com/common/employer/defaultPortrait/2.png');"></div>
+                <p class="name">emmm</p>
+                                    <p class="score text-bittersweet mb10">
+                        30 分<span> (100 分)</span>
+                    </p>
+                    <p class="summary">别哭，下次继续努力，加油！</p>
+                                                <div class="exam-end-btn">
+                                            <a class="btn btn-re" href="http://localhost:8080/tohomePage">回到首页</a>
+                                                                                             <a onlyforsharer="" share-action="check-report" class="btn btn-warning btn-report" href="https://www.101test.com/share/irrevocable?employerId=678542&amp;url=%2FreportDetail%2F44968666%3Fsync%3Dtrue%26paperId%3D450608%26candidateId%3D12217252%26reportThreshold%3D14&amp;sign=zvRrmfvtaCysaAvbXw9HnA&amp;expiredAt=1592888971222">查看对错</a>
+                                                                <a class="btn feedback-trigger btn-success">在线反馈</a>
+                </div>
+                <div class="title">点<a href="http://localhost:8080/tohome">首页</a>注册可查成绩报告；或用 L1P8QT 在<a href="https://www.101test.com/e#!/query">查询页面</a>查询；或将成绩发到 <a class="send-btn">微信</a></div>
+            </div>
+        </div>
+    </div>
+        <div class="ax-container">
+        <div id="carousel-ax" class="carousel slide" data-ride="carousel" data-interval="4000">
+                                                            <div class="carousel-inner" role="listbox">
+                                                                        
+                                                            <div class="item active">
+                                                                                <a href="http://localhost:8080/tohome" target="_blank">
+                                <img class="block" src="examOver_files/pc_advert4.png" alt="">
+                            </a>
+                                            </div>
+                            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="share-btns">
+        <div class="backdrop"></div>
+        <div class="max-w center-block">
+            <div id="social-share">
+        		<ul class="social-share-list justified circle hide-text" data-link="class{merge:style toggle=style} class{merge:!showText toggle='hide-text'}">
+	            	<li><a data-type="weibo" class="s-weibo" title="分享到Github"><i class="fa fa-github"></i><span>Github</span></a></li>
+	            	<li><a data-type="tweibo" class="s-tweibo" title="分享到腾讯微博"><i class="fa fa-tencent-weibo"></i><span>腾讯微博</span></a></li>
+	            	<li><a data-type="qzone" class="s-qzone" title="分享到Youtube"><i class="fa fa-youtube"></i><span>QQ空间</span></a></li>
+	            	<li><a data-type="weixin" class="s-weixin" title="分享到微信"><i class="fa fa-wechat"></i><span>微信</span></a></li>
+	            	<li><a data-type="renren" class="s-renren" title="分享到人人网"><i class="fa fa-renren"></i><span>人人网</span></a></li>
+            	</ul>
+            </div>
+        </div>
+    </div>
+    <div class="weixin-share-hint" style="display:none;">
+        <div class="backdrop"></div>
+        <img src="examOver_files/share2wx-timeline.png">
+    </div>
+<style>
+    .btn-re {
+        background-color: #ff7674;
+        border: 1px solid #ff7674;
+        width: 20%;
+    }
+
+    .btn-re:hover {
+        background-color: #ed5464;
+        border: 1px solid #ed5464
+    }
+</style>
+</div>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?e16bac3df70cc77a3932bd0f15bfbed6";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<div class="fade modal loading pc" id="baidu-ad-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>
+
+
+</body></html>

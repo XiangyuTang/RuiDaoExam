@@ -224,7 +224,6 @@
     
 	</body>
 	<script type="text/html" id="template1">
-	<h1>{{title}}</h1>
 	{{each informedList as student}}	
 		<li class="list-group-item reciever-info">
 	        <span class="name">{{student.name}}</span>
@@ -315,7 +314,7 @@
 				var endtime = $('#endtime').val();
 				var cheattimes = $('#cheattimes').val();
 				var teacher_id = 1;//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
-				var paper_id = 1;//先写死
+				var paper_id = 2;//先写死
 				var pararms ={"name":sname,
 							  "email":semail,
 							  "begintime":begintime,

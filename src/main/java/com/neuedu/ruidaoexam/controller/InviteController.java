@@ -31,12 +31,7 @@ public class InviteController {
 	//@RequestMapping("/sendEmail")
 	@PostMapping("/sendEmail")
 	@ResponseBody
-	public String sendemail(@RequestBody MsgOfInvite msg,HttpSession session
-			/*@RequestParam(value="name",required=false) String name,
-			@RequestParam(value="email",required=false) String email,
-			@RequestParam(value="begintime",required=false) String begin_time,
-			@RequestParam(value="endtime",required=false) String end_time,
-			@RequestParam(value="cheattimes",required=false,defaultValue="0") Integer cheat_times*/){		
+	public String sendemail(@RequestBody MsgOfInvite msg,HttpSession session){		
 		//HashMap<String,Object> map = new HashMap<String,Object>();
 		System.out.println(msg.getName()+"---"+msg.getEmail());
 		System.out.println(msg.getBegintime()+"---"+msg.getEndtime()+"---"+msg.getCheattimes());

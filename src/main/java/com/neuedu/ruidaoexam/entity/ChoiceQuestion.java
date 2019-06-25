@@ -23,7 +23,25 @@ public class ChoiceQuestion {
 
     private Integer abilityTypeId;
 
-    public Integer getChoiceQuesId() {
+    private String score;
+    
+    public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return "ChoiceQuestion [choiceQuesId=" + choiceQuesId + ", quesTypeId=" + quesTypeId + ", content=" + content
+				+ ", choice1=" + choice1 + ", choice2=" + choice2 + ", choice3=" + choice3 + ", choice4=" + choice4
+				+ ", answer=" + answer + ", difficulty=" + difficulty + ", analysis=" + analysis + ", abilityTypeId="
+				+ abilityTypeId + "]";
+	}
+
+	public Integer getChoiceQuesId() {
         return choiceQuesId;
     }
 

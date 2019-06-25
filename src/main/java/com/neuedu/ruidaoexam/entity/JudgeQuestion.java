@@ -13,7 +13,23 @@ public class JudgeQuestion {
 
     private Integer abilityTypeId;
 
-    public Integer getJudgeId() {
+    private String score;
+    
+    public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return "JudgeQuestion [judgeId=" + judgeId + ", quesTypeId=" + quesTypeId + ", content=" + content + ", answer="
+				+ answer + ", difficulty=" + difficulty + ", abilityTypeId=" + abilityTypeId + "]";
+	}
+
+	public Integer getJudgeId() {
         return judgeId;
     }
 

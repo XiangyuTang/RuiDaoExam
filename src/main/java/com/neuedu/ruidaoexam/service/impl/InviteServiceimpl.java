@@ -48,11 +48,13 @@ public class InviteServiceimpl implements InviteService{
 	}
 
 	@Override
-	public int verifyPerson(String email, String invitecode) {
+	public InviteStudent verifyPerson(String email, String invitecode) {
 		// TODO Auto-generated method stub
 		InviteStudent inviteStudent  = inviteStudentMapper.selectByEmailAndInvitecode(email, invitecode);
 		if(inviteStudent!=null)
-			return 1;
-		return 0;
-	}	
+			return inviteStudent;
+		return null;
+	}
+	
+	
 }

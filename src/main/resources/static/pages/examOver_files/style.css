@@ -1,0 +1,50 @@
+body {
+	font-family: "微软雅黑", "Open Sans", Arial, "Hiragino Sans GB",
+	"Microsoft YaHei", "STHeiti", "WenQuanYi Micro Hei", SimSun,
+	sans-serif;
+	background: none repeat scroll 0 0 #f0f0f0;
+}
+@font-face {
+	font-family: 'simple-icomoon';
+	src:url('../fonts/simple-icomoon.eot?lr3emo');
+	src:url('../fonts/simple-icomoon.eot?lr3emo#iefix') format('embedded-opentype'),
+		url('../fonts/simple-icomoon.ttf?lr3emo') format('truetype'),
+		url('../fonts/simple-icomoon.woff?lr3emo') format('woff'),
+		url('../fonts/simple-icomoon.svg?lr3emo#simple-icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="simpleicon-"], [class*=" simpleicon-"] {
+	font-family: 'simple-icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.simpleicon-check-circle:before {
+	content: "\e900";
+}
+.simpleicon-qzone:before {
+	content: "\e901";
+}
+.simpleicon-renren:before {
+	content: "\e902";
+}
+.simpleicon-tencent-weibo:before {
+	content: "\e903";
+}
+.simpleicon-weibo:before {
+	content: "\e904";
+}
+.simpleicon-weixin:before {
+	content: "\e905";
+}
+

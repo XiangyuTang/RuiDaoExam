@@ -41,12 +41,17 @@ public class PageJumpController {
 	public String toindex() {
 		return "index";
 	}
-
+	//考生录入界面
 	@RequestMapping("/toinvite")
 	public String toinvite() {
 		return "invite";
 	}
 
+	//考试结束页面
+	@RequestMapping("/toExamOver")
+	public String toExamOver() {
+		return "examOver";
+	}
 	// 注册页
 	@RequestMapping("/toRegister")
 	public String toRegister() {
@@ -98,7 +103,13 @@ public class PageJumpController {
 	public String tohomepage() {
 		return "user/homePage";
 	}
-
+	
+	//游客主页
+	@RequestMapping("/tohome")
+	public String tohome() {
+		return "home";
+	}
+	
 	// 教师个人中心
 	@RequestMapping("/toindexteacher")
 	public String toindexteacher(HttpServletRequest request) {

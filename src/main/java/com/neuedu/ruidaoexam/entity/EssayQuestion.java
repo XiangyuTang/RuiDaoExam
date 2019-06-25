@@ -13,7 +13,23 @@ public class EssayQuestion {
 
     private Integer abilityTypeId;
 
-    public Integer getQuesAnsId() {
+    private String score;
+    
+    public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return "EssayQuestion [quesAnsId=" + quesAnsId + ", quesTypeId=" + quesTypeId + ", content=" + content
+				+ ", answer=" + answer + ", difficulty=" + difficulty + ", abilityTypeId=" + abilityTypeId + "]";
+	}
+
+	public Integer getQuesAnsId() {
         return quesAnsId;
     }
 
