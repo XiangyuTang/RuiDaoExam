@@ -162,9 +162,9 @@ public class PageJumpController {
 		
 		
 		//学生忘记密码
-		@RequestMapping("toStuForget")
+		@RequestMapping("toStuModifyPassword")
 		public String toStuForget() {
-			return "student/forget";
+			return "password";
 		}
 		//跳转到添加填写试卷信息页面
 		@RequestMapping("/toaddpaper")
