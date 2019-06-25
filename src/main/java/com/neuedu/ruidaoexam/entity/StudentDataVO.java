@@ -6,7 +6,7 @@ public class StudentDataVO {
 
 	private int numberOfAnswered;
 	private int numberOfNotAnswered;
-	private List<Paper> notAnsweredPapers;
+	private List<NotAnsweredDataVO> notAnsweredPapers;
 	public int getNumberOfAnswered() {
 		return numberOfAnswered;
 	}
@@ -19,10 +19,10 @@ public class StudentDataVO {
 	public void setNumberOfNotAnswered(int numberOfNotAnswered) {
 		this.numberOfNotAnswered = numberOfNotAnswered;
 	}
-	public List<Paper> getNotAnsweredPapers() {
+	public List<NotAnsweredDataVO> getNotAnsweredPapers() {
 		return notAnsweredPapers;
 	}
-	public void setNotAnsweredPapers(List<Paper> notAnsweredPapers) {
+	public void setNotAnsweredPapers(List<NotAnsweredDataVO> notAnsweredPapers) {
 		this.notAnsweredPapers = notAnsweredPapers;
 	}
 	

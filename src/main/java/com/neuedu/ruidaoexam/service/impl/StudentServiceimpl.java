@@ -38,20 +38,24 @@ public class StudentServiceimpl implements StudentService{
 		return reports;
 		
 	}
+
 	@Override
-	public StudentDataVO getStudentIndexData(Integer stuid) {
+	public Integer getNumberofAnswered(Integer stuid) {
 		AnsweredPaperExample answeredPaperExample=new AnsweredPaperExample();
 		com.neuedu.ruidaoexam.entity.AnsweredPaperExample.Criteria criteria=answeredPaperExample.createCriteria();
 		criteria.andStuIdEqualTo(stuid);
 		int numberOfansweredPaper=answeredpapermapper.countByExample(answeredPaperExample);
+		return numberOfansweredPaper;
+	}
+	@Override
+	public Integer getNumberofNotAnswered(Integer stuid) {
 		List<Paper> notAnsweredPapers=stumapper.showNotAnswered(stuid);
 		int numberofNotAnsweredPaper=notAnsweredPapers.size();
-		StudentDataVO vo = new StudentDataVO();
-		vo.setNotAnsweredPapers(notAnsweredPapers);
-		vo.setNumberOfAnswered(numberOfansweredPaper);
-		vo.setNumberOfNotAnswered(numberofNotAnsweredPaper);
-		return vo;
-		
-		
+		return numberofNotAnsweredPaper;
+	}
+	@Override
+	public List<Paper> getNotAnsweredList(Integer stuid) {
+		// TODO Auto-generated method stub
+		return stumapper.showNotAnswered(stuid);
 	}
 }
