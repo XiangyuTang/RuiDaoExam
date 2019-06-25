@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neuedu.ruidaoexam.entity.GradeListVO;
 import com.neuedu.ruidaoexam.entity.Report;
+import com.neuedu.ruidaoexam.entity.StudentDataVO;
 import com.neuedu.ruidaoexam.service.PaperService;
 import com.neuedu.ruidaoexam.service.ReportService;
 import com.neuedu.ruidaoexam.service.StudentService;
@@ -45,11 +46,11 @@ public class StudentIndexController {
 		
 	}
 	
-	@PostMapping("/getNumberOfAnswered")
+	@PostMapping("/getStudentIndexData")
 	@ResponseBody
-	public int getNumberOfAnswered(HttpServletRequest request) {
+	public StudentDataVO getStudentIndexData(HttpServletRequest request) {
 		HttpSession session=request.getSession();
-		return studentservice.getNumberOfAnsweredPaper((Integer)session.getAttribute("uid"));
+		return studentservice.getStudentIndexData((Integer)session.getAttribute("uid"));
 	}
 
 }

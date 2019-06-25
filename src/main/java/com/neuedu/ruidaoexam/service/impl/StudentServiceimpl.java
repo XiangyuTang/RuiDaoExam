@@ -14,6 +14,7 @@ import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportExample;
 import com.neuedu.ruidaoexam.entity.ReportExample.Criteria;
 import com.neuedu.ruidaoexam.entity.Student;
+import com.neuedu.ruidaoexam.entity.StudentDataVO;
 import com.neuedu.ruidaoexam.service.StudentService;
 
 @Service
@@ -38,16 +39,19 @@ public class StudentServiceimpl implements StudentService{
 		
 	}
 	@Override
-	public int getNumberOfAnsweredPaper(Integer stuid) {
-		List<Paper> papers=stumapper.showNotAnswered(stuid);
-		for(Paper paper:papers ) {
-			System.out.println(paper.getPaperName());
-		}
+	public StudentDataVO getStudentIndexData(Integer stuid) {
 		AnsweredPaperExample answeredPaperExample=new AnsweredPaperExample();
 		com.neuedu.ruidaoexam.entity.AnsweredPaperExample.Criteria criteria=answeredPaperExample.createCriteria();
 		criteria.andStuIdEqualTo(stuid);
-		int count=answeredpapermapper.countByExample(answeredPaperExample);
+		int numberOfansweredPaper=answeredpapermapper.countByExample(answeredPaperExample);
+		List<Paper> notAnsweredPapers=stumapper.showNotAnswered(stuid);
+		int numberofNotAnsweredPaper=notAnsweredPapers.size();
+		StudentDataVO vo = new StudentDataVO();
+		vo.setNotAnsweredPapers(notAnsweredPapers);
+		vo.setNumberOfAnswered(numberOfansweredPaper);
+		vo.setNumberOfNotAnswered(numberofNotAnsweredPaper);
+		return vo;
 		
-		return count;
+		
 	}
 }
