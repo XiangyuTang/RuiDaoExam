@@ -1,7 +1,5 @@
-
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>个人中心- 学生</title>
@@ -127,7 +125,7 @@
               </li>
                  
             <li data-name="home" class="layui-nav-item layui-nav-itemed">
-              <a href="javascript:;" lay-tips="购买记录" lay-direction="2">
+              <a lay-href="toStuOrder" lay-tips="购买记录" lay-direction="2">
                 <i class="layui-icon layui-icon-cart"></i>
                 <cite>购买记录</cite>
               </a>
@@ -179,10 +177,6 @@
   </div>
 
 <script src="../layuiadmin/layui/layui.js"  th:src="@{static/layuiadmin/layui/layui.js}"></script>
-  <script>
-
-
-  </script>
   <script>
   layui.config({
     base: '/static/layuiadmin/' //静态资源所在路径

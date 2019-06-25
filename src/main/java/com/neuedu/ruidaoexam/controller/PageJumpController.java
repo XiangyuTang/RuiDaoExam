@@ -187,4 +187,9 @@ public class PageJumpController {
 //		public String toMyPapers() {
 //			return "papers";
 //		}
+		//跳转到学生购买记录界面
+		@RequestMapping("/toStuOrder")
+		public String toStuOrder() {
+			return "student/order";
+		}
 }
