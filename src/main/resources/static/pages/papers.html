@@ -11,15 +11,25 @@
 		<link rel="stylesheet" href="../layuiadmin/style/admin.css"  th:href="@{static/layuiadmin/style/admin.css}" media="all">
 		<link rel="stylesheet" href="../layuiadmin/style/template.css" th:href="@{static/layuiadmin/style/template.css}" media="all">
 		<link rel="stylesheet" type="text/css" href="../layuiadmin/style/goodslist.css" th:href="@{static/layuiadmin/style/goodslist.css}"/>
+		<style>
+			.paper-item{
+				height: 130px;
+			}
+			.paper-item-bottom{
+				width: auto;
+				height: 30px;
+				background-color:#C7CCD3;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="layui-fluid layadmin-cmdlist-fluid">
-					<div>
-						<span class="layui-breadcrumb" lay-separator=">">
+				<div>
+						<!--<span class="layui-breadcrumb" lay-separator=">">
  							<a href="">全部分类</a>
 							<a href="">软件开发</a>
 							<a><cite>共5个题库</cite></a>
-						</span>
+						</span>-->
 					<div class="goodslist-nav">
 
 						<table class="layui-table" lay-skin="line" style="margin-bottom: 0px;">
@@ -30,15 +40,15 @@
 								</colgroup>
 								<tbody>
 									<tr>
-										<td style="color: gray;">排序方式</td>
+										<td style="color: gray;">我创建的</td>
 										<td>
-											<a href="">最新</a>
+											<a href=""></a>
 										</td>
 										<td>
-											<a href="">最热</a>
+											<a href=""></a>
 										</td>
 										<td>
-											<a href="">相关度</a>
+											<a href=""></a>
 										</td>
 									</tr>
 								</tbody>
@@ -46,31 +56,27 @@
 							</table>
 					</div>
 					<div class="layui-row layui-col-space30" style="margin-top: 10px;">
+						<div th:remove="(${papers.createpapers} == null)? all:none">
 						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
+							<div class="cmdlist-container paper-item">
 								<a href="javascript:;">
 									<div class="cmdlist-text">
 										<p class="info">《五年编程三年脱发》精选题库</p>
 										<div class="price">
 											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
 											<span class="flow">
-						                      <i class="layui-icon layui-icon-rate"></i>
 						                      433
 						                    </span>
 										</div>
 									</div>
 								</a>
+								<div class="paper-item-bottom">
+<!-- 									<strong th:text="${papers.createpapers}"></strong> -->
+								</div>
 							</div>
 						</div>
+						</div>
+						
 						<div class="layui-col-md2 layui-col-sm2">
 							<div class="cmdlist-container">
 								<a href="javascript:;">
@@ -83,9 +89,9 @@
 												<del>130</del>
 											</p>
 											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
+                      						<i class="layui-icon layui-icon-rate"></i>
+                    						  433
+                    						</span>
 										</div>
 									</div>
 								</a>
@@ -141,18 +147,18 @@
 								</colgroup>
 								<tbody>
 									<tr>
-										<td style="color: gray;">相关标签</td>
+										<td style="color: gray;">我购买的</td>
 										<td>
-											<a href="">IT技术<span>8</span></a>
+											<a href=""><span></span></a>
 										</td>
 										<td>
-											<a href="">前端开发<span>3</span></a>
+											<a href=""><span></span></a>
 										</td>
 										<td>
-											<a href="">后端开发<span>5</span></a>
+											<a href=""><span></span></a>
 										</td>
 										<td>
-											<a href="">软件开发<span>8</span></a>
+											<a href=""><span></span></a>
 										</td>
 									</tr>
 								</tbody>
