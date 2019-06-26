@@ -12,17 +12,44 @@
 		<link rel="stylesheet" href="../layuiadmin/style/template.css" th:href="@{static/layuiadmin/style/template.css}" media="all">
 		<link rel="stylesheet" type="text/css" href="../layuiadmin/style/goodslist.css" th:href="@{static/layuiadmin/style/goodslist.css}"/>
 		<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}" />
+		<script src="../js/jquery-3.1.0.min.js" th:src="@{/static/js/jquery-3.1.0.min.js}"></script>
 		<style>
 			.paper-item{
-				height: 140px;
+				height: 150px;
+				/*padding-top: 2px;
+				padding-top: color:#00BB00;*/
+				border-color: black;
+/*				border:2px;*/
 /* 				background-color:#00FF00;  */
 			}
 			.paper-item-bottom{
  				width: auto; 
 				height: 40px;
 				background-color:#B8BFC8;
-				font: color;
 			}
+/*			.cmdlist-text{}*/
+			/*.item-center{
+				width: auto; 
+				height: 40px;
+				margin: 5px;
+			}*/
+			.toreport{
+				position: absolute;
+				margin-top: 10px;
+				margin-left: 10px;
+/*				text-align: left;*/
+			}
+			.toinvite{
+				position: absolute;
+				margin-top: 10px;
+/*				margin-left: 200px;*/
+				margin-left: 71%;
+/*				background-color: #DDDDDD;*/
+			}
+			a:link {color:#000000;}    /* unvisited link */
+			a:visited {color:#000000;} /* visited link */
+			a:hover {color:#0000CC;}   /* mouse over link */
+			a:active {color:#00FF00;}
 			/*.p{
 				margin-left: auto;
 				margin-right: auto;
@@ -70,9 +97,9 @@
 							</table>
 					</div>
 					<div class="layui-row layui-col-space30" style="margin-top: 10px;" th:remove="(${papers.createpapers} == null)? all:none">
-						<div class="layui-col-md2 layui-col-sm2" th:each="createpaper:${papers.createpapers}">
+						<div class="layui-col-md3 layui-col-sm3" th:each="createpaper:${papers.createpapers}">
 							<div class="cmdlist-container paper-item">
-								<a href="javascript:;">
+<!--								<a href="javascript:;">-->
 									<div class="cmdlist-text">
 <!--										<i class="fa fa-book"></i>-->
 										<b><p class="info" th:text="${createpaper.paperName}" align="center" style="font-size: 17px;">卷名</p></b>
@@ -89,10 +116,16 @@
 						                    </span>
 						                </div>
 									</div>
-								</a>
+<!--								</a>-->
 								<div class="paper-item-bottom">
-									<span class="toreport" style="font-size: 18px; color: #000000;"><i class="fa fa-file-text-o"></i>查看报告</span>
-									<span class="toinvite" style="font-size: 18px; color: #000000;"><i class="fa fa-user-o"></i>考生录入</span>
+									<div class="item-center">
+										<a class="toreport" style="font-size: 14px;" href="">
+											<i class="fa fa-file-text-o"></i>查看报告
+										</a>
+										<a class="toinvite" style="font-size: 14px;" th:href="@{/toinvite(paper_id=${createpaper.paperId})}">
+											<i class="fa fa-user-o"></i>考生录入
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -126,9 +159,9 @@
 					</div>
 <!--					</div>-->
 					<div class="layui-row layui-col-space30" style="margin-top: 10px;" th:remove="(${papers.buypapers} == null)? all:none">
-						<div class="layui-col-md2 layui-col-sm2" th:each="buypaper:${papers.buypapers}">
+						<div class="layui-col-md3 layui-col-sm3" th:each="buypaper:${papers.buypapers}">
 							<div class="cmdlist-container paper-item">
-								<a href="javascript:;">
+<!--								<a href="javascript:;" style="color: #000000;">-->
 									<div class="cmdlist-text">
 <!--										<i class="fa fa-book"></i>-->
 										<b><p class="info" th:text="${buypaper.paperName}" align="center" style="font-size: 17px;">卷名</p></b>
@@ -145,9 +178,16 @@
 						                    </span>
 						                </div>
 									</div>
-								</a>
+<!--								</a>-->
 								<div class="paper-item-bottom">
-<!-- 									<strong th:text="${papers.buypapers}"></strong> -->
+									<div class="item-center">
+										<a class="toreport" style="font-size: 14px;" href="">
+											<i class="fa fa-file-text-o"></i>查看报告
+										</a>
+										<a class="toinvite" style="font-size: 14px;" th:href="@{/toinvite(paper_id=${buypaper.paperId})}">
+											<i class="fa fa-user-o"></i>考生录入
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -155,3 +195,9 @@
 			</div>
 	</body>
 </html>
+<script src="../js/jquery-3.1.0.min.js" th:src="@{/static/js/jquery-3.1.0.min.js}"></script>
+<script>
+	$(function(){
+		
+	})
+</script>

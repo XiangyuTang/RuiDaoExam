@@ -41,11 +41,11 @@ public class PageJumpController {
 	public String toindex() {
 		return "index";
 	}
-	//考生录入界面
-	@RequestMapping("/toinvite")
-	public String toinvite() {
-		return "invite";
-	}
+//	//考生录入界面
+//	@RequestMapping("/toinvite")
+//	public String toinvite() {
+//		return "invite";
+//	}
 
 	//考试结束页面
 	@RequestMapping("/toExamOver")
@@ -218,4 +218,18 @@ public class PageJumpController {
 		return "redirect:tologin";
 				
 				}
+		//跳转到添加题目界面
+		@RequestMapping("/toaddquestion")
+		public String toaddquestion(Integer bank_id, String bank_name,Model model) {
+			model.addAttribute("bank_id", bank_id);
+			model.addAttribute("bank_name", bank_name);
+//			return "addQuestion";
+			return "invite";
+		}
+		//到教师主页，测试用，后期删掉
+		@RequestMapping("/tozhuye")
+		public String tozhuye() {
+			return "indexteacher";
+		}
+		
 }

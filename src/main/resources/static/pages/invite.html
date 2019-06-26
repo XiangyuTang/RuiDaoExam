@@ -216,7 +216,7 @@
                 </div>
             </div>
         </div>
-
+        <input type="hidden" class="paper_id" id="paper_id" th:value="${paper_id}">
 	</body>
 	<script type="text/html" id="template1">
 	{{each informedList as student}}	
@@ -249,7 +249,7 @@
 				var endtime = $('#endtime').val();
 				var cheattimes = $('#cheattimes').val();
 				var teacher_id = 1;//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
-				var paper_id = 1;//先写死
+				var paper_id = $("[type='hidden'][class='paper_id']").val();//先写死
 				//判断是否需要通过邮件进行批量通知
 				var informflag;
 				if($("#sendemail").prev().is(":checked")){
