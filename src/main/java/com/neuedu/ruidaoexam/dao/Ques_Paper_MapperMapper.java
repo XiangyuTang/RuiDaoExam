@@ -29,4 +29,10 @@ public interface Ques_Paper_MapperMapper {
     int updateByPrimaryKeySelective(Ques_Paper_Mapper record);
 
     int updateByPrimaryKey(Ques_Paper_Mapper record);
+    
+    int countQuestionNum(Integer paperId);	//取试卷中试题总数
+    
+    int countKeGuanQuestionNum(Integer paperId);	//取试卷中客观题总数
+    
+    int countZhuGuanQuestionNum(Integer paperId);	//取试卷中主观题总数
 }

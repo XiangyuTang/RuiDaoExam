@@ -31,4 +31,39 @@ public interface AnsweredQuestionMapper {
     int updateByPrimaryKey(AnsweredQuestion record);
     
     List<AnsweredQuestion> selectAllByAnsPaperId(int ans_paper_id);
+    
+    AnsweredQuestion selectByPaperResultId(Integer paperResultId);	//根据paper_result_id取*
+    
+    Integer sumKeGuanTiScore(Integer paperResultId);	//根据paper_result_id和ques_type(1,2,4)取客观题实际得分
+    Integer sumKeGuanTiTotalScore(Integer paperResultId);	//根据paper_result_id和ques_type(1,2,4)取客观题总得分
+    
+    Integer sumZhuGuanTiScore(Integer paperResultId);	//根据paper_result_id和ques_type(3,5)取主观题实际得分
+    Integer sumZhuGuanTiTotalScore(Integer paperResultId);	//根据paper_result_id和ques_type(3,5)取主观题总得分
+    
+    Integer countKeGuanTiNum(Integer paperResultId);	//根据paper_result_id和ques_type(1,2,4)取客观题数目
+    Integer countZhuGuanTiNum(Integer paperResultId);	//根据paper_result_id和ques_type(3,5)取主观题数目
+    
+    Integer sumXuanZeTiScore(Integer paperResultId);	//根据paper_result_id和ques_type(1,2)取选择题实际得分
+    Integer countXuanZeTiNum(Integer paperResultId);	//根据paper_result_id和ques_type(1,2)取选择题数目
+    Integer countXuanZeTiWrongNum(Integer paperResultId);	//根据paper_result_id和ques_type(1,2)取选择题错题数目
+    
+    Integer sumPanDuanTiScore(Integer paperResultId);	//根据paper_result_id和ques_type(4)取判断题实际得分
+    Integer countPanDuanTiNum(Integer paperResultId);	//根据paper_result_id和ques_type(4)取判断题数目
+    Integer countPanDuanTiWrongNum(Integer paperResultId);	//根据paper_result_id和ques_type(4)取选判断错题数目
+    
+    Integer sumTianKongTiScore(Integer paperResultId);	//根据paper_result_id和ques_type(5)取填空题实际得分
+    Integer countTianKongTiNum(Integer paperResultId);	//根据paper_result_id和ques_type(5)取填空题数目
+    Integer countTianKongTiWrongNum(Integer paperResultId);	//根据paper_result_id和ques_type(5)取填空题错题数目
+    
+    Integer sumWenDaTiScore(Integer paperResultId);	//根据paper_result_id和ques_type(3)取问答题实际得分
+    Integer countWenDaTiNum(Integer paperResultId);	//根据paper_result_id和ques_type(3取问答题数目
+    Integer countWenDaTiWrongNum(Integer paperResultId);	//根据paper_result_id和ques_type(3)取问答题错题数目
+    
+    List<AnsweredQuestion> getAnsweredQuestionsByPaperResultId(Integer paperresultid);
+    
+    List<AnsweredQuestion> getJudgeQuestionsByPaperResultId(Integer paperresultid);
+    
+    List<AnsweredQuestion> getTianKongQuestionsByPaperResultId(Integer paperresultid);
+    
+    List<AnsweredQuestion> getWenDaQuestionsByPaperResultId(Integer paperresultid);
 }

@@ -33,4 +33,6 @@ public interface ChoiceQuestionMapper {
     List<ChoiceQuestion> selectByidInList(List<Integer> choice_id_list);
     
     int insertAndGetId(ChoiceQuestion record);
+    
+    List<ChoiceQuestion> getChoiceQuestionsInList(List<Integer> choice_id_list);
 }

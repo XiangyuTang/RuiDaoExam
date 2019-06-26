@@ -34,4 +34,8 @@ public interface EssayQuestionMapper {
     List<EssayQuestion> selectByidInList(List<Integer> essay_id_list);
     
     int insertAndGetId(EssayQuestion record);
+    
+    List<EssayQuestion> getTianKongQuestionsInList(List<Integer> essay_id_list);
+    
+    List<EssayQuestion> getWenDaQuestionsInList(List<Integer> essay_id_list);
 }

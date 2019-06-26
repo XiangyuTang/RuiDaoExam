@@ -31,4 +31,6 @@ public interface AnsweredPaperMapper {
     int updateByPrimaryKey(AnsweredPaper record);
     
     List<AnsweredPaper> selectByPaperId(int paper_id);
+    
+    AnsweredPaper selectAnsPaperId(Integer paperId, Integer stuId);	//根据paper_id和stu_id取*
 }

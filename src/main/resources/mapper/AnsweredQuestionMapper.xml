@@ -310,4 +310,115 @@
       isCorrect = #{iscorrect,jdbcType=INTEGER}
     where answer_id = #{answerId,jdbcType=INTEGER}
   </update>
+  <select id="selectByPaperResultId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  	select *
+    from answered_question
+    where paper_result_id = #{paperResultId}
+  </select>
+  <select id="sumKeGuanTiScore" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select sum(score)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 1 or ques_type = 2 or ques_type = 4)
+  </select>
+  <select id="sumKeGuanTiTotalScore" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select sum(total_score)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 1 or ques_type = 2 or ques_type = 4)
+  </select>
+  <select id="sumZhuGuanTiScore" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select sum(score)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 3 or ques_type = 5)
+  </select>
+	<select id="sumZhuGuanTiTotalScore" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select sum(total_score)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 3 or ques_type = 5)
+  </select>
+  <select id="countKeGuanTiNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 1 or ques_type = 2 or ques_type = 4)
+  </select>
+  <select id="countZhuGuanTiNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 3 or ques_type = 5)
+  </select>
+  <select id="sumXuanZeTiScore" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select sum(score)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 1 or ques_type = 2)
+  </select>
+  <select id="countXuanZeTiNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 1 or ques_type = 2)
+  </select>
+  <select id="countXuanZeTiWrongNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 1 or ques_type = 2) and isCorrect = 0
+  </select>
+  <select id="sumPanDuanTiScore" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select sum(score)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 4)
+  </select>
+  <select id="countPanDuanTiNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 4)
+  </select>
+  <select id="countPanDuanTiWrongNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 4) and isCorrect = 0
+  </select>
+  <select id="sumTianKongTiScore" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select sum(score)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 5)
+  </select>
+  <select id="countTianKongTiNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 5)
+  </select>
+  <select id="countTianKongTiWrongNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 5) and isCorrect = 0
+  </select>
+  <select id="sumWenDaTiScore" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select sum(score)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 3)
+  </select>
+  <select id="countWenDaTiNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 3)
+  </select>
+  <select id="countWenDaTiWrongNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where paper_result_id = #{paperResultId} and (ques_type = 3) and isCorrect = 0
+  </select>
+    <select id="getAnsweredQuestionsByPaperResultId" resultMap="BaseResultMap">
+ 	 select * from answered_question
+ 	 where paper_result_id = #{paperresultid} and (ques_type = 1 or ques_type = 2)
+  </select>
+  <select id="getJudgeQuestionsByPaperResultId" resultMap="BaseResultMap">
+ 	 select * from answered_question
+ 	 where paper_result_id = #{paperresultid} and (ques_type = 4)
+  </select>
+  <select id="getTianKongQuestionsByPaperResultId" resultMap="BaseResultMap">
+ 	 select * from answered_question
+ 	 where paper_result_id = #{paperresultid} and (ques_type = 5)
+  </select>
+  <select id="getWenDaQuestionsByPaperResultId" resultMap="BaseResultMap">
+ 	 select * from answered_question
+ 	 where paper_result_id = #{paperresultid} and (ques_type = 3)
+  </select>
 </mapper>
