@@ -1,4 +1,234 @@
+
 #item
 {
 	margin-top: 10px;
+	margin-left: 10px;
+}
+.top-line
+{
+	background-color: lightblue;
+	width: 100%;
+	height: 3px;
+}
+/*.cmdlist-container*/
+.cmdlist-container
+{
+	height: 150px;
+	position: relative;
+}
+.cmdlist-container:hover .top-line {
+  background-color: orange;
+}
+.cmdlist-container:hover .gcs-checkbox-label
+{
+	display: inline-block;
+}
+.control-all
+{
+	width: 100%;
+	height: 30px;
+	background-color: white;
+	padding: 10px 20px;
+}
+/*全选的复选框*/
+.checkall-checkbox {
+	float: left;
+	display: none;
+}
+.checkall-checkbox:checked+.checkall-checkbox-label
+{
+	display: inline-block;
+}
+.checkall-checkbox-label
+{
+	float: left;
+}
+
+.checkall-checkbox+.checkall-checkbox-label {
+  background-color: white;
+  border-radius: 0px;
+  border: 1px solid #d3d3d3;
+  width: 25px;
+  height: 25px;
+  /*display: inline-block;*/
+  text-align: center;
+  vertical-align: bottom;
+  line-height: 20px;
+}
+.checkall-checkbox+.checkall-checkbox-label:hover {
+  cursor: pointer;
+  border: 1px solid #2783FB;
+}
+
+.checkall-checkbox:checked+.checkall-checkbox-label {
+  background-color: #eee;
+  background: #2783FB;
+}
+
+.checkall-checkbox:checked+.checkall-checkbox-label:after {
+  content: "\2714";
+  color: white;
+}
+.checkall-checkbox:checked+.checkall-checkbox-label
+{
+	border: 1px solid #2783FB;
+}
+/*item的单个复选框*/
+.gcs-checkbox {
+	float: left;
+    display: none;
+}
+.gcs-checkbox:checked+.top-line
+{
+	background-color: blue;
+}
+.gcs-checkbox:checked+.gcs-checkbox-label
+{
+	display: inline-block;
+}
+.gcs-checkbox-label
+{
+	float: left;
+	display: none;
+}
+
+.gcs-checkbox+.gcs-checkbox-label {
+  background-color: white;
+  border-radius: 0px;
+  border: 1px solid #d3d3d3;
+  width: 20px;
+  height: 20px;
+  /*display: inline-block;*/
+  text-align: center;
+  vertical-align: bottom;
+  line-height: 20px;
+}
+.gcs-checkbox+.gcs-checkbox-label:hover {
+  cursor: pointer;
+  border: 1px solid #2783FB;
+}
+
+.gcs-checkbox:checked+.gcs-checkbox-label {
+  background-color: #eee;
+  background: #2783FB;
+}
+
+.gcs-checkbox:checked+.gcs-checkbox-label:after {
+  content: "\2714";
+  color: white;
+}
+.gcs-checkbox:checked+.gcs-checkbox-label+.top-line
+{
+	background-color: #2783FB;
+}
+.gcs-checkbox:checked+.gcs-checkbox-label
+{
+	border: 1px solid #2783FB;
+}
+.cmdlist-text
+{
+	margin-top: 20px;
+	margin-right: 0px;
+	padding: 0px 10px;
+}
+.item-menu
+{
+	width: 30px;
+  	height: 30px;
+	float: right;
+	margin-top: 20px;
+	margin-right: 5px;
+	
+}
+.item-menu:after
+{
+	content: "\25BC";
+	color: gray;
+}
+/*.item-menu i
+{
+	content: "/9660";
+}*/
+.item-menu:hover:after
+{
+	color: gold;
+}
+.item-menu-active:after
+{
+	content: "\25B2";
+	color: black;
+}
+.item-title
+{
+	height: 70px;
+	margin-top: 20px;
+	margin-right: 40px;
+}
+.item-name
+{
+	display: block;
+	margin-left: 10px;
+}
+.item-name p
+{
+	font-size: small;
+	color: darkgray;
+	display: block;
+	margin-left: 20px;
+}
+.item-intro
+{
+	width: 99%;
+	margin-bottom: 10px;
+	padding-bottom: 0px;
+}
+.item-intro p
+{
+	
+	color: darkgray;
+	display: block;
+	margin-left: 10px;
+	margin-bottom: 0px;
+	float: left;
+}
+.item-intro button
+{
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 0px;
+}
+.item-intro span
+{
+	font-size: x-large;
+	color: orangered;
+	
+}
+.item-menu-list
+{
+	width: 87px;
+	height: 105px;
+	right: -65px;
+	top: 33px;
+	position: absolute;
+	background-color: #fff8ee;
+	box-sizing: border-box;
+	border: 1px solid lightgrey;
+	z-index: 999;
+	display: none;
+	
+}
+.item-menu-list a
+{
+	width: 85px;
+	height: 20px;
+	display: block;
+	text-align: center;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border-bottom: 0px solid lightgray;
+	color: gray;
+}
+.item-menu-list a:hover
+{
+	background-color: #ecebff;
 }

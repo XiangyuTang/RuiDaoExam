@@ -1,6 +1,7 @@
 package com.neuedu.ruidaoexam.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.neuedu.ruidaoexam.entity.Paper;
 
@@ -10,4 +11,8 @@ public interface PaperService {
 	String getPaper_name(Integer paper_id);
 	//根据教师的id选择其创建和购买的卷子
 	HashMap<String, Object> getPaperByTeacherId(Integer TeacherId);
+	//获取教师所有的卷子
+	public List<Paper> getPapersByTeacherid(Integer TeacherId);
+	//删除卷子
+	int deletePaperByPaperId(Integer PaperId);
 }

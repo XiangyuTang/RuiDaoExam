@@ -131,9 +131,9 @@ public class PageJumpController {
 	}
 
 	// 教师-我的题库
-	@RequestMapping("/tomyLibraryTch")
+	@RequestMapping("/tomyBanksTch")
 	public String tomylibrary() {
-		return "teacher/myLibraryTch";
+		return "teacher/myBanksTch";
 	}
 
 	// 教师-我的试卷
@@ -141,7 +141,16 @@ public class PageJumpController {
 	public String tomyPaperTch() {
 		return "teacher/myPaperTch";
 	}
-
+	//教师-题库商户
+	@RequestMapping("/tomyBanksaleTch")
+	public String tomyBanksaleTch() {
+		return "teacher/myBanksaleTch";
+	}
+	//教师-卷子商户
+	@RequestMapping("/tomyPapersaleTch")
+	public String tomyPapersaleTch() {
+		return "teacher/myPapersaleTch";
+	}
 	// 考试页
 	@RequestMapping("/toexam")
 	public String toexam() {

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的题库</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/template.css" th:href="@{static/layuiadmin/style/template.css}" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/teacher/myLibraryTch.css" th:href="@{static/layuiadmin/style/teacher/myLibraryTch.css}" media="all">
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<!--变量定义-->
+		<script type="text/javascript">
+			var banks = new Array();
+			var filed = ["IT技术", "IQ&EQ", "招聘真题", "资格证书", "学历教育", "培训学习"];
+			var SlideValue = 0;
+			var SelectBanks = new Array();
+			var LastSelect = new Array();
+		</script>
+		<!--方法-->
+		<script type="text/javascript">
+			//初始化题库的数据，以html文本的形式存在books里
+			function initBooks() {
+				$.ajax({
+					url: "/getBanks",
+					type: "POST",
+					dataType: "json",
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					success: function(data) {
+						console.log(data);
+						$.each(data, function(i, value) {
+
+							banks.push(value);
+
+						});
+
+					},
+					error: function(e) {
+						layer.msg("系统异常");
+					}
+				});
+			}
+			//初始化元素的事件
+			function initJqueryFunc() {
+				//item（单个题库）右侧子菜单伸缩事件
+				$(".item-menu").on('click', function(e) {
+					//清空复选框选中
+					e.stopPropagation();
+					$('input[class="gcs-checkbox"]:checked').parent().find(".item-menu").not(this).parent().find(".gcs-checkbox-label").click();
+					$('[class="item-menu item-menu-active"]').not(this).parent().parent().find(".item-menu-list").slideUp(250);
+					$('[class="item-menu item-menu-active"]').not(this).removeClass().addClass("item-menu");
+
+					//$(this).parent().find(".gcs-checkbox-label").click();
+					$(this).toggleClass("item-menu-active");
+					if($(this).parent().parent().find(".item-menu-list").is(':hidden')) {
+						$(this).parent().parent().find(".item-menu-list").slideDown(250);
+						if(!$(this).parent().find(".gcs-checkbox").is(":checked")) {
+							$(this).parent().find(".gcs-checkbox-label").click();
+						}
+						SlideValue = 1;
+					} else {
+						$(this).parent().parent().find(".item-menu-list").slideUp(250);
+						if($(this).parent().find(".gcs-checkbox").is(":checked")) {
+							$(this).parent().find(".gcs-checkbox-label").click();
+						}
+						SlideValue = 0;
+					}
+					//$(this).parent().parent().find(".item-menu-list").slideToggle(250);
+
+					console.log(SlideValue);
+				});
+				//区域外点击事件
+				$(document).on('click', function(e) {
+					if(SlideValue == 1) {
+						$('input[class="gcs-checkbox"]:checked').parent().find(".gcs-checkbox-label").click();
+						$('.item-menu-list').parent().find('.item-top').find('.item-menu').removeClass().addClass("item-menu");
+						$('.item-menu-list').slideUp(250);
+						SlideValue = 0;
+					}
+
+				});
+				//复选框（label型）点击事件
+				$(".gcs-checkbox-label").click(function(e) {
+					e.stopPropagation();
+					var box = $(this).parent().find(".gcs-checkbox");
+					var currentselect = box.parent().attr('id').split("-")[1];
+					if(box.is(':checked')) {
+						//取消选中
+						box.click();
+						removeSelect(currentselect);
+					} else {
+						//选中
+						box.click();
+						SelectBanks.push(currentselect);
+
+					}
+					//					$('input[class="gcs-checkbox"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数    
+					//		            	console.log($(this).attr('id'));//将选中的值添加到数组chk_value中    
+					//		            });
+					console.log("此时所有选中的：");
+					console.log(SelectBanks);
+					console.log("此时LastSelect:");
+					console.log(LastSelect);
+
+				});
+				//删除题库,编辑，出售事件
+				$(".item-menu-list-item").click(function(e) {
+					e.stopPropagation();
+
+					if($(this).attr('id') == 'item-delete') {
+						layer.confirm('确认要删除吗？', {
+							btn: ['确定', '取消'] //按钮
+						}, function(index) {
+							LastSelect = [];
+							LastSelect = LastSelect.concat(SelectBanks);
+							console.log(LastSelect);
+							layer.close(index);
+							deleteBanks();
+							//此处请求后台程序，下方是成功后的前台处理……
+						});
+					}
+				});
+			}
+			//从勾选的题库数组中删除指定元素
+			function removeSelect(val) {
+				for(var i = 0; i < SelectBanks.length; i++) {
+					if(SelectBanks[i] == val) {
+						SelectBanks.splice(i, 1);
+						break;
+					}
+				}
+			}
+			//删除banks中的题库
+			function removeBank(val) {
+				for(var i = 0; i < banks.length; i++) {
+					for(var j = 0; j < LastSelect.length; j++) {
+						if(banks[i].quesBankId == LastSelect[j]) {
+							banks.splice(i, 1);
+						}
+					}
+
+				}
+			};
+			//删除题库
+			function deleteBanks() {
+				$.ajax({
+					url: "/deleteBanks",
+					type: "POST",
+					dataType: "text",
+					data: JSON.stringify(LastSelect),
+					contentType: 'application/json',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					success: function(data) {
+						if(data == 0) {
+							layer.msg("删除失败，操作非法！");
+						} else {
+							deleteBanksHtml();
+							removeBank();
+							SelectBanks = [];
+							layer.msg("删除成功！");
+
+						}
+
+					},
+					error: function(e) {
+						layer.msg("系统异常");
+					}
+				});
+			};
+			//同步删除html页面内容
+			function deleteBanksHtml() {
+				console.log("此时LastSelect:");
+				console.log(LastSelect);
+				for(var i = 0; i < LastSelect.length; i++) {
+					var box = $('#itemID-' + LastSelect[i]);
+					console.log("删除id:");
+					console.log($('#itemID-' + LastSelect[i]).attr('id').split("-")[1]);
+					box.parent().parent().remove();
+				}
+			};
+			
+		</script>
+		<!--初始化数据及绑定交互事件-->
+		<script type="text/javascript">
+			$(function() {
+				initBooks();
+				//多选删除
+			$("#delete-all").click(function() {
+				console.log("delete");
+				if(SelectBanks.length > 0) {
+					layer.confirm('确认要删除吗？', {
+						btn: ['确定', '取消'] //按钮
+					}, function(index) {
+						LastSelect = [];
+						LastSelect = LastSelect.concat(SelectBanks);
+						console.log(LastSelect);
+						layer.close(index);
+						deleteBanks();
+						//此处请求后台程序，下方是成功后的前台处理……
+					});
+				} else {
+					layer.msg("请先勾选题库！");
+				}
+			});
+			//全选事件
+			//复选框（label型）点击事件
+			$(".checkall-checkbox-label").click(function(e) {
+				console.log("点了checkall");
+				e.stopPropagation();
+				var box = $(".checkall-checkbox");
+				if(box.is(':checked')) {
+					//取消选中
+					console.log("取消全部选中");
+					$('input[class="gcs-checkbox"]:checked').parent().find(".gcs-checkbox-label").click();
+					$('.item-menu-list').parent().find('.item-top').find('.item-menu').removeClass().addClass("item-menu");
+					$('.item-menu-list').slideUp(250);
+				} else {
+					console.log("选中全部");
+					$('input[class="gcs-checkbox"]:not(:checked)').parent().find(".gcs-checkbox-label").click();
+					$('.item-menu-list').parent().find('.item-top').find('.item-menu').removeClass().addClass("item-menu");
+					$('.item-menu-list').slideUp(250);
+
+				}
+				
+				//					$('input[class="gcs-checkbox"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数    
+				//		            	console.log($(this).attr('id'));//将选中的值添加到数组chk_value中    
+				//		            });
+
+			});
+			})
+		</script>
+
+	</head>
+
+	<body>
+		<div class="control-all">
+			<div class="layui-row layui-col-space30" style="width: 100%; height: 40px;">
+				<div class="layui-col-md1 layui-col-sm1">
+					<input type="checkbox" id="item-check-2" class="checkall-checkbox">
+					<label class="checkall-checkbox-label" for="item-check-2"></label>
+				</div>
+				<div class="layui-col-md11 layui-col-sm11">
+					<button type="button" id="add-bank" class="layui-btn layui-btn-sm layui-btn-normal">
+						<i class="layui-icon layui-icon-add-1"></i>
+							添加
+					</button>
+					<button type="button" id="delete-all" class="layui-btn layui-btn-sm layui-btn-normal">
+						<i class="layui-icon layui-icon-delete"></i>
+							删除
+					</button>
+					
+				</div>
+			</div>
+		</div>
+		<div id="item" class="layui-row layui-col-space30">
+
+			<div class="layui-col-md4 layui-col-sm4">
+
+				<div class="cmdlist-container">
+
+					<!--
+									<a href="javascript:;">
+										<img src="../layuiadmin/style/res/template/portrait.png">
+									</a>
+									-->
+					<div class="item-top">
+						<div class="item-menu"></div>
+						<input type="checkbox" id="item-check-1" class="gcs-checkbox">
+						<label class="gcs-checkbox-label" for="item-check-1"></label>
+						<div class="top-line"></div>
+					</div>
+					<div class="item-title">
+						<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选题库">
+							《五年编程三年脱发》精选题库
+							<p>
+								更新于<span>2019-06-22 17:41</span>
+							</p>
+						</a>
+					</div>
+
+					<div class="cmdlist-text">
+
+						<div class="item-intro">
+							<p><span>6</span>道题</p>
+							<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">
+										<i class="layui-icon layui-icon-add-1"></i>
+							        	添加题目
+									</button>
+
+						</div>
+					</div>
+
+					<div class="item-menu-list">
+						<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑题库</a>
+						<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售题库</a>
+						<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除题库</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<div class="layui-row layui-col-space30">
+			<div class="layui-col-md12 layui-col-sm12">
+				<div id="demo0"></div>
+			</div>
+		</div>
+		<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
+		<script>
+			layui.config({
+				base: '/static/layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index']);
+			layui.use(['laypage', 'layer', 'form'], function() {
+				var laypage = layui.laypage,
+					layer = layui.layer,
+					form = layui.form;
+				form.render();
+				//调用分页
+				laypage.render({
+					elem: 'demo0',
+					count: banks.length,
+					limit: 6,
+					jump: function(obj) {
+						//此处是必要的，当banks内容变更（增删题库）时，需要重新给count赋值以免页数不对
+						obj.count = banks.length;
+						//模拟渲染
+						document.getElementById('item').innerHTML = function() {
+							console.log("obj:");
+							console.log(obj);
+							console.log(banks);
+							var arr = [],
+								thisData = banks.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+							layui.each(thisData, function(index, item) {
+								var str =
+									'<div id="item-list" class="layui-col-md4 layui-col-sm4">' +
+									'<div class="cmdlist-container">' +
+									'<div id="itemID-' + item.quesBankId + '" class="item-top">' +
+									'<div class="item-menu"></div>' +
+									'<input type="checkbox" id="item-check-1" class="gcs-checkbox">' +
+									'<label class="gcs-checkbox-label"></label>' + // for="item-check-1"
+									'<div class="top-line"></div>' +
+									'</div>' +
+									'<div class="item-title">' +
+									'<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选题库">' +
+									item.quesBankName +
+									'<p>' +
+									'类型：<span>' + filed[--item.quesBankFiled] + '</span>' +
+									'</p>' +
+									'</a>' +
+									'</div>' +
+									'<div class="cmdlist-text">' +
+									'<div class="item-intro">' +
+									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
+									'<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">' +
+									'<i class="layui-icon layui-icon-add-1"></i>' +
+									'添加题目' +
+									'</button>' +
+									'</div>' +
+									'</div>' +
+									'<div class="item-menu-list">' +
+									'<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑题库</a>' +
+									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售题库</a>' +
+									'<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除题库</a>' +
+									'</div>' +
+									'</div>' +
+									'</div>';
+								arr.push(str);
+							});
+
+							return arr.join('');
+						}();
+						//初始化事件
+						initJqueryFunc();
+					}
+				});
+			});
+		</script>
+
+	</body>
+
+</html>
