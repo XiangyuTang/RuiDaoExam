@@ -32,4 +32,6 @@ public interface JudgeQuestionMapper {
     int updateByPrimaryKey(JudgeQuestion record);
   //根据在list中的id值选取问题
     List<JudgeQuestion> selectByidInList(List<Integer> judge_id_list);
+    
+    int insertAndGetId(JudgeQuestion record);
 }

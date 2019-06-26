@@ -28,7 +28,7 @@ public class PageJumpController {
 	@RequestMapping("/to11")
 	public String to111() {
 		// System.out.println("f-----------------");
-		return "11";
+		return "addQuestion";
 	}
 
 	@RequestMapping("/test")

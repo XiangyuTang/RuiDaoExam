@@ -32,4 +32,6 @@ public interface EssayQuestionMapper {
     int updateByPrimaryKey(EssayQuestion record);
   //根据在list中的id值选取问题
     List<EssayQuestion> selectByidInList(List<Integer> essay_id_list);
+    
+    int insertAndGetId(EssayQuestion record);
 }

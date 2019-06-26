@@ -31,4 +31,6 @@ public interface ChoiceQuestionMapper {
     int updateByPrimaryKey(ChoiceQuestion record);
     //根据在list中的id值选取问题
     List<ChoiceQuestion> selectByidInList(List<Integer> choice_id_list);
+    
+    int insertAndGetId(ChoiceQuestion record);
 }

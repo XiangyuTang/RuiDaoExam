@@ -96,6 +96,13 @@
     from answered_question
     where answer_id = #{answerId,jdbcType=INTEGER}
   </select>
+  
+  
+  <select id="selectAllByAnsPaperId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	select * from answered_question where paper_result_id = #{ans_paper_id}
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from answered_question
     where answer_id = #{answerId,jdbcType=INTEGER}

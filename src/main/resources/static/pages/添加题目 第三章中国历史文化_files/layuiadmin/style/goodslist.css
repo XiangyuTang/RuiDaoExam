@@ -1,0 +1,52 @@
+.goodslist-nav span
+{
+	margin-left: 5px;
+}
+.goodslist-nav a:hover
+{
+	color: deepskyblue;
+}
+.goodslist-left
+{
+	margin-top: 20px;
+	height: 420px;
+	background-color: white;
+	border: 1px solid lightgray;
+}
+.goodslist-left-item
+{
+	width: 99%;
+	height: 58px;
+	background-color: white;
+	
+	border: 1px solid lightgray;
+}
+.goodslist-left-item:hover
+{
+	
+	box-shadow: 2px 0px 1px 1px gray;
+	
+}
+
+.goodslist-left-item a
+{
+	display: block;
+	float: left;
+	margin-top: 20px;
+	margin-left: 10px;
+}
+.goodslist-left-item p
+{
+	display: block;
+	float: right;
+	margin-top: 20px;
+	margin-right: 10px;
+}
+.goodslist-left-item p:after
+{
+    content: ">";
+}
+.goodslist-left a:hover
+{
+	color: deepskyblue;
+}

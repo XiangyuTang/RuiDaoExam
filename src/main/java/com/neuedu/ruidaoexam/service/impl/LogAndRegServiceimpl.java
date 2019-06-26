@@ -14,7 +14,7 @@ import com.neuedu.ruidaoexam.test.MyBatisSessionFactory;
 @Service
 public class LogAndRegServiceimpl implements LogAndRegService {
 
-	SqlSession session = MyBatisSessionFactory.getSession();
+//	SqlSession session = MyBatisSessionFactory.getSession();
 	
 	@Autowired StudentMapper studentmapper;
 	@Autowired TeacherMapper teachermapper;

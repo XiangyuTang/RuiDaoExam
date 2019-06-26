@@ -29,4 +29,6 @@ public interface AnsweredQuestionMapper {
     int updateByPrimaryKeySelective(AnsweredQuestion record);
 
     int updateByPrimaryKey(AnsweredQuestion record);
+    
+    List<AnsweredQuestion> selectAllByAnsPaperId(int ans_paper_id);
 }
