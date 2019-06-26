@@ -192,4 +192,21 @@ public class PageJumpController {
 		public String toStuOrder() {
 			return "student/order";
 		}
+		
+		//跳转到商城界面
+		@RequestMapping("toShop")
+	    public String toShop() {
+			return "user/goodslist";
+		}
+				
+				//登出
+		@RequestMapping("logout")
+		public String logout(Model m,HttpServletRequest req) {
+			req.getSession().removeAttribute("uid");
+			req.getSession().removeAttribute("name");
+			req.getSession().removeAttribute("role");
+					
+		return "redirect:tologin";
+				
+				}
 }
