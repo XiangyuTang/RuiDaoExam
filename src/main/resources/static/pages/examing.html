@@ -27,13 +27,15 @@
 <script>  
 	/*屏幕切换监控*/
 	var cheattimes = 0;
-    document.addEventListener('visibilitychange',function(){  
+    document.addEventListener('visibilitychange',function(){
+    	var acts = $("#allowedCheat").val();
 	    if(document.visibilityState=='hidden') {  
 	    	normal_title=document.title;
 	    	cheattimes++;
 	    	document.title='切换屏幕'+cheattimes+'次';
-	    	//document.title='(づ￣ 3￣)づ';
-	    	//alert("想不到吧，被抓到切屏了！！")
+	    	alert("*警告：您已切换屏幕"+cheattimes+"次，本次考试累计切换屏幕"+acts+"次，系统将自动交卷。")
+	    	if(cheattimes>=acts)
+	    		$("form[id='paper']").submit();
 	    }  
 	    else  
 	    	document.title=normal_title;  
@@ -80,8 +82,15 @@
 				{
 					//alert("选中了");
 					if(!cardLi.hasClass('hasBeenAnswer')){
-					cardLi.addClass('hasBeenAnswer');
-					cardLi.removeClass('emptyAnswer');
+						cardLi.addClass('hasBeenAnswer');
+						cardLi.removeClass('emptyAnswer');
+					}
+					var a=$(this).find('[type=checkbox]').length;
+					alert("长度是"+a);
+					for(var i=0;i<a;i++){
+						if($('[type=checkbox]').eq(i).is(':checked')) {
+						    alert(i+1);
+						}
 					}
 				}
 				else
@@ -91,8 +100,8 @@
 					{
 						//alert("还有兄弟被选中了");
 						if(!cardLi.hasClass('hasBeenAnswer')){
-						cardLi.addClass('hasBeenAnswer');
-						cardLi.removeClass('emptyAnswer');
+							cardLi.addClass('hasBeenAnswer');
+							cardLi.removeClass('emptyAnswer');
 						}
 					}
 					else
@@ -313,12 +322,9 @@
 													</li>
 												
 													<li class="option">
-														
-														
 															<input type="checkbox" class="radioOrCheck" th:name="|answer${multipleChoice.indexOf(multiple_choice)+1}|"
 																th:id="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_4|"
 															/>
-														
 														<label th:for="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_4|">
 															<!--D.-->
 															<p class="ue" style="display: inline;" th:text="${multiple_choice.getChoice4()}"></p>
@@ -541,6 +547,8 @@
 		</div>
 	</div>
 	<!--nr end-->
+	<input type="hidden" id="interval" th:value='${interval}'>
+	<input type="hidden" id="allowedCheat" th:value='${allowedCheat}'>
 	<div class="foot"><span id="fullScreen">听说你想全屏？</span></div>
 </div>
 
@@ -551,7 +559,7 @@
         //$("#fullScreen").trigger("click");
     }
 
- 	var counttime=100*60;//总秒钟,60秒
+ 	var counttime= $("#interval").val(); //100*60;//总秒钟,60秒
      
     function daojishi(){
     	if(counttime>=0){

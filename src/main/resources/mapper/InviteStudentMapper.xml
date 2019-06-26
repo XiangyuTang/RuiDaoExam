@@ -10,6 +10,7 @@
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="invite_code" property="inviteCode" jdbcType="VARCHAR" />
     <result column="isReaded" property="isreaded" jdbcType="INTEGER" />
+    <result column="allowedCheatTimes" property="allowedCheatTimes" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -255,7 +256,7 @@
       isReaded = #{isreaded,jdbcType=INTEGER}
     where invite_id = #{inviteId,jdbcType=INTEGER}
   </update>
- 
+
 	<select id="selectByEmailAndInvitecode" resultMap="BaseResultMap" parameterType="java.lang.String" >
 	   select i.*
 	   from invite_student i,student s

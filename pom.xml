@@ -126,6 +126,14 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 		</dependency>
+		
+        <!--短信接口-->
+		<!-- <dependency>
+			<groupId>com.github.qcloudsms</groupId>
+			<artifactId>qcloudsms</artifactId>
+			<version>1.0.6</version>
+		</dependency> -->
+		
 	</dependencies>
 
 	<build>

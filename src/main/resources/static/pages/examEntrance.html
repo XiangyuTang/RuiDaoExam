@@ -89,12 +89,20 @@ $(function(){
 			success:function(e){
 				if(e=="1")
 					parent.location.href = 'importpaper';
-				else
+				else if(e=="-1")
 				{
 					layui.use(['layer', 'form'], function(){
 				  		var layer = layui.layer
 				  			,form = layui.form;
 				  			layer.msg('身份验证失败，请重新检查邀请码或邮箱！');
+					});
+				}
+				else if(e=="0")
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('当前时间不在考试时间范围内！');
 					});
 				}
 			},
@@ -103,7 +111,7 @@ $(function(){
 				layui.use(['layer', 'form'], function(){
 			  		var layer = layui.layer
 			  			,form = layui.form;
-			  			layer.msg('身份验证失败，请重新检查邀请码或邮箱！');
+			  			layer.msg('出错了');
 				});
 			}
         });

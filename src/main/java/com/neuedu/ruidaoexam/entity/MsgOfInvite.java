@@ -25,12 +25,12 @@ public class MsgOfInvite {
 		this.teacherid = teacherid;
 		this.paperid = paperid;
 	}
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone="GMT+8")
 	private Date begintime;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone="GMT+8")
 	private Date endtime;
 	private Integer cheattimes;
 	private Integer teacherid;

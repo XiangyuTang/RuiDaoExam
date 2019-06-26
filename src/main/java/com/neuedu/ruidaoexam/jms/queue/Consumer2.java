@@ -64,7 +64,7 @@ public class Consumer2 {
 		Teacher t = teacherMapper.selectByPrimaryKey(msg.getTeacherid());
 		Paper p = paperMapper.selectByPrimaryKey(msg.getPaperid());
 		InviteStudent inviteStudent = new InviteStudent(null,
-				p.getPaperId(),t.getTeacherId(),s.getStudentId(),msg.getBegintime(),msg.getEndtime(),invitecode,0);
+				p.getPaperId(),t.getTeacherId(),s.getStudentId(),msg.getBegintime(),msg.getEndtime(),invitecode,0,msg.getCheattimes());
 		inviteStudentMapper.insert(inviteStudent);
 		
 	}

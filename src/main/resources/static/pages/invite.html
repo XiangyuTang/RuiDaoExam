@@ -189,12 +189,7 @@
 						    	<li id='listGroup1' class='list-group-item' data-link=''>
 						    		<span class='badge badge-success'>😏</span>已录入通知列表 
 						    	</li>
-						        
-						        <!--<li class="list-group-item reciever-info">
-						            <span class="name">123123</span>
-						            <span class="email">123@qq.com</span>
-						        </li>
-						        -->
+
 							    </ul>
 								
 								
@@ -221,7 +216,7 @@
                 </div>
             </div>
         </div>
-    
+
 	</body>
 	<script type="text/html" id="template1">
 	{{each informedList as student}}	
@@ -314,7 +309,7 @@
 				var endtime = $('#endtime').val();
 				var cheattimes = $('#cheattimes').val();
 				var teacher_id = 1;//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
-				var paper_id = 2;//先写死
+				var paper_id = 1;//先写死
 				var pararms ={"name":sname,
 							  "email":semail,
 							  "begintime":begintime,

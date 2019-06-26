@@ -41,7 +41,6 @@ public class ExcelController {
 	@RequestMapping("/importexcel")
     @ResponseBody
     public Object test2(Model m,@RequestParam("file") MultipartFile file,HttpServletRequest request) {
-        
 		List<Object> list = ExcelUtil.readExcel(file, new PersonDTO(),1);
 		for (Object o : list) {
 			System.out.println(o.toString());

@@ -20,8 +20,19 @@ public class InviteStudent {
 
     private Integer isreaded;
     
-    public InviteStudent(Integer inviteId, Integer paperId, Integer teacherId, Integer studentId, Timestamp beginTime,
-			Timestamp endTime, String inviteCode, Integer isreaded) {
+    private Integer allowedCheatTimes;
+    
+    
+    public Integer getAllowedCheatTimes() {
+		return allowedCheatTimes;
+	}
+
+	public void setAllowedCheatTimes(Integer allowedCheatTimes) {
+		this.allowedCheatTimes = allowedCheatTimes;
+	}
+
+	public InviteStudent(Integer inviteId, Integer paperId, Integer teacherId, Integer studentId, Timestamp beginTime,
+			Timestamp endTime, String inviteCode, Integer isreaded,Integer allowedCheatTimes) {
     	super();
 		this.inviteId = inviteId;
 		this.paperId = paperId;
@@ -31,10 +42,11 @@ public class InviteStudent {
 		this.endTime = endTime;
 		this.inviteCode = inviteCode;
 		this.isreaded = isreaded;
+		this.allowedCheatTimes = allowedCheatTimes;
     }
 
     public InviteStudent(Integer inviteId, Integer paperId, Integer teacherId, Integer studentId, Date beginTime,
-			Date endTime, String inviteCode, Integer isreaded) {
+			Date endTime, String inviteCode, Integer isreaded,Integer allowedCheatTimes) {
 		super();
 		this.inviteId = inviteId;
 		this.paperId = paperId;
@@ -44,6 +56,7 @@ public class InviteStudent {
 		this.endTime = endTime;
 		this.inviteCode = inviteCode;
 		this.isreaded = isreaded;
+		this.allowedCheatTimes = allowedCheatTimes;
 	}
 
     public Integer getInviteId() {

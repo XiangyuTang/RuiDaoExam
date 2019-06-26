@@ -21,6 +21,9 @@ import com.neuedu.ruidaoexam.entity.JudgeQuestion;
 import com.neuedu.ruidaoexam.service.InviteService;
 import com.neuedu.ruidaoexam.service.QuestionPaperService;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 @Controller
 public class ExamController {
 	
@@ -30,21 +33,31 @@ public class ExamController {
 	@Autowired
 	QuestionPaperService questionPaperService;
 	
+	
+	
 	@RequestMapping(value="/verifyintoexam",method = RequestMethod.POST)
     @ResponseBody
     public String verifyIntoExam(String email,String invitecode,HttpServletResponse response,HttpSession session) {
 
 		String str="";
+		//SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		Date now = new Date();// new Date()为获取当前系统时间
 		
 		InviteStudent inviteStudent = inviteService.verifyPerson(email,invitecode);
-		if(inviteStudent!=null)
+		if(inviteStudent==null)
+			return "-1";
+		int compareTobegin = now.compareTo(inviteStudent.getBeginTime());//当前时间大于开始时间返回1
+		int compareToEnd = now.compareTo(inviteStudent.getEndTime());//当前时间小于结束时间返回-1
+		if(compareTobegin==1&&compareToEnd==-1)
 		{
-			str="1";
-			session.setAttribute("inviteStudent", inviteStudent);
-			
+			if(inviteStudent!=null)
+			{
+				str="1";//代表可以参加考试
+				session.setAttribute("inviteStudent", inviteStudent);
+			}
 		}	
 		else
-			str="0";
+			str="0";//代表当前时间不在考试范围内
 		return str;
 	}
 	
@@ -54,6 +67,12 @@ public class ExamController {
 		//List<ChoiceQuestion> singleChoice =  questionPaperService.selectSingleChoice(1);//和上面的paper_id对接
 		InviteStudent inviteStudent = (InviteStudent) session.getAttribute("inviteStudent");
 		int paper_id = inviteStudent.getPaperId();
+		Date begin = new Date();//获取当前考生进入考试的时间
+		Date end = inviteStudent.getEndTime();//获取考试的结束时间
+		long interval = (end.getTime() - begin.getTime())/1000;//总秒数
+		System.out.println(interval);
+		m.addAttribute("interval", interval);
+		m.addAttribute("allowedCheat", inviteStudent.getAllowedCheatTimes());
 		List<ChoiceQuestion> singleChoice =  questionPaperService.selectSingleChoice(paper_id);
 		List<ChoiceQuestion> multipleChoice =  questionPaperService.selectMultipleChoice(paper_id);
 		List<JudgeQuestion> judgeQuestion = questionPaperService.selectJudge(paper_id);
@@ -106,28 +125,3 @@ public class ExamController {
 	}
 }
 
-/*System.out.println("单选题：");		
-for(ChoiceQuestion cq:singleChoice)
-{
-	System.out.println(cq.toString());
-}
-System.out.println("多选题：");
-for(ChoiceQuestion cq:multipleChoice)
-{
-	System.out.println(cq.toString());
-}
-System.out.println("判断题：");
-for(JudgeQuestion jq:judgeQuestion)
-{
-	System.out.println(jq.toString());
-}
-System.out.println("填空题：");
-for(EssayQuestion eq:fillBlankQuestion)
-{
-	System.out.println(eq.toString());
-}
-System.out.println("简答题：");
-for(EssayQuestion eq:shortAnswerQuestion)
-{
-	System.out.println(eq.toString());
-}*/
