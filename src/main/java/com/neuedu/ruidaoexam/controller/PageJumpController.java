@@ -224,7 +224,7 @@ public class PageJumpController {
 			model.addAttribute("bank_id", bank_id);
 			model.addAttribute("bank_name", bank_name);
 //			return "addQuestion";
-			return "invite";
+			return "addQuestion";
 		}
 		//到教师主页，测试用，后期删掉
 		@RequestMapping("/tozhuye")
