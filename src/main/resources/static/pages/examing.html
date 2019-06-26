@@ -204,7 +204,7 @@
 					</div>
 					
 					<!--下面是单选题-->
-					<div id="single_choice" th:display="(${singleChoice}==null)?none:block">
+					<div id="single_choice" th:style="'display:'+@{((${singleChoice}==null)?'none':'block')}">
 						<div class="test_content">
 							<div class="test_content_title">
 								<h2>单选题</h2>
@@ -271,7 +271,7 @@
 						</div>
 					</div>
 						<!--下面是多选题-->
-					<div id="multiple_choice" th:display="(${multipleChoice}==null)?none:block">
+					<div id="multiple_choice" th:style="'display:'+@{((${multipleChoice.size()}==0)?'none':'block')}">
 						<div class="test_content">
 							<div class="test_content_title">
 								<h2>多选题</h2>
