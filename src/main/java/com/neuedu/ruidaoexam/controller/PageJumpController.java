@@ -173,9 +173,9 @@ public class PageJumpController {
 		
 		
 		//学生忘记密码
-		@RequestMapping("toStuForget")
+		@RequestMapping("toStuModifyPassword")
 		public String toStuForget() {
-			return "student/forget";
+			return "password";
 		}
 		//跳转到添加填写试卷信息页面
 		@RequestMapping("/toaddpaper")
@@ -187,4 +187,9 @@ public class PageJumpController {
 //		public String toMyPapers() {
 //			return "papers";
 //		}
+		//跳转到学生购买记录界面
+		@RequestMapping("/toStuOrder")
+		public String toStuOrder() {
+			return "student/order";
+		}
 }
