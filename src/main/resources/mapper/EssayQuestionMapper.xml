@@ -239,4 +239,16 @@
   		#{id}
   	</foreach>
   </select>
+    <select id="getTianKongQuestionsInList" resultMap="BaseResultMap">
+  	select * from essay_question where ques_ans_id in
+  	<foreach collection="list" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </select>
+  <select id="getWenDaQuestionsInList" resultMap="BaseResultMap">
+  	select * from essay_question where ques_ans_id in
+  	<foreach collection="list" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </select>
 </mapper>

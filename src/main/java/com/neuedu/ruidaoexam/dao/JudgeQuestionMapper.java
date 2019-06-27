@@ -34,4 +34,6 @@ public interface JudgeQuestionMapper {
     List<JudgeQuestion> selectByidInList(List<Integer> judge_id_list);
     
     int insertAndGetId(JudgeQuestion record);
+    
+    List<JudgeQuestion> getJudgeQuestionsInList(List<Integer> judge_id_list);
 }
