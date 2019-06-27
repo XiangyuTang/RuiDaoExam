@@ -229,7 +229,7 @@ public class PageJumpController {
 		//到教师主页，测试用，后期删掉
 		@RequestMapping("/tozhuye")
 		public String tozhuye() {
-			return "indexteacher";
+			return "reportlist";
 		}
 		
 }

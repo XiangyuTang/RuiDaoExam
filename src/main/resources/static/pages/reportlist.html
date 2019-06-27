@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="bookmark" href="http://www.101test.com/assets/img/favicon.ico">
+		<link rel="shortcut icon" href="http://www.101test.com/assets/img/favicon.ico">		
+		<link rel="stylesheet" href="./reportdir/sets.min.css" th:href="@{/static/pages/reportdir/sets.min.css}" media="all">
+		<link rel="stylesheet" href="./reportdir/base.min.css" th:href="@{/static/pages/reportdir/base.min.css}" media="all">
+		<link rel="stylesheet" href="./reportdir/app.css" th:href="@{/static/pages/reportdir/sets.min.css}" media="all">
+		<link rel="stylesheet" href="./reportdir/font-awesome.min.css" th:href="@{/static/pages/reportdir/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" href="./reportdir/moon.css" th:href="@{/static/pages/reportdir/moon.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/report.css" th:href="@{/static/pages/reportdir/report.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/msg.css" th:href="@{/static/pages/reportdir/msg.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/form.css" th:href="@{/static/pages/reportdir/form.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/view-report-feedback.css" th:href="@{/static/pages/reportdir/view-report-feedback.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/bootstrap-datetimepicker.css" th:href="@{/static/pages/reportdir/bootstrap-datetimepicker.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/moon(1).css" th:href="@{/static/pages/reportdir/moon(1).css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/social-share.css" th:href="@{/static/pages/reportdir/social-share.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/select.css" th:href="@{/static/pages/reportdir/select.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/login.css" th:href="@{/static/pages/reportdir/login.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/frontsearch.css" th:href="@{/static/pages/reportdir/frontsearch.css}" media="all">
+		<link charset="utf-8" rel="stylesheet" href="./reportdir/share.css" th:href="@{/static/pages/reportdir/share.css}" media="all">
+		<link rel="stylesheet" href="./reportdir/index.css" th:href="@{/static/pages/reportdir/index.css}" media="all">
+		<style>
+			/*.main{
+				margin-left: auto;
+				margin-right: auto;
+				width: 80%;
+			}*/
+			.main{
+				margin-top: 50px;
+			}
+			.main-left{
+/*				display: inline;*/
+/*        		height: 2000px;*/
+				float: left;
+				margin-left: 4%;
+				width: 60%;
+				margin-right: 10px;
+			}
+			.main-right{
+/*				display: inline;*/
+				position: fixed;
+				float: left;
+				margin-left: 67%;
+				width: 30%;
+/*				height: 200px;*/
+/*				background-color: #0B6FA2;*/
+			}
+			.head1{
+/*				background-color:#E2E2E2;*/
+				background-color: #EDEDED;
+			}
+			/*.item{
+				border: 1px;
+				border-color: #000000;
+			}*/
+		</style>
+	</head>
+	<body>
+		<div class="main">
+		<div class="main-left">
+		<div id="report-list-panel">
+		    <div>
+		    	
+			    <div class="btn-group report-actions m10">
+			        <button data-action="tag" data-toggle="dropdown" type="button" class="btn btn-default" title="打标记" data-link="disabled{:actionDisabled || updatingTags}" disabled="disabled">
+			            <i class="fa fa-tags"></i>
+			        </button>
+			        <ul class="dropdown-menu tags-selecter" role="menu" data-jsv-df=""><form data-jsv="#30_" class="report-tag-wrapper">
+				还没有任何标记
+				<hr>
+					<span class="pr" data-link="class{merge:tagErr toggle=&#39;has-error&#39;}">
+						<input type="text" placeholder="添加一个标记" class="form-control input-sm inline-block input-add-tag" data-link="{:newTag trigger=true:trim} disabled{:savingTag}">
+					</span>
+					<span class="text-knewone" data-link="visible{:savingTag}" style="display: none;"><i class="fa fa-spinner fa-spin"></i> 保存中...</span>
+					<span class="text-error f12"></span>
+				<a class="btn btn-success btn-sm pull-right btn-confirm">确定</a>
+				<a class="btn btn-link btn-sm pull-right mr5 btn-cancel">取消</a>
+				</form></ul>
+			        <button data-action="delete" type="button" class="btn btn-default" title="删除" data-link="disabled{:actionDisabled}" style="margin-left: -1px" disabled="disabled">
+			            <i class="fa fa-trash"></i>
+			        </button>
+			        <button data-action="archive" type="button" class="btn btn-default btn-group-last" title="归档" data-link="disabled{:actionDisabled} class{merge:!isActivity toggle=&#39;btn-group-last&#39;}" disabled="disabled">
+			            <i class="fa fa-archive"></i>
+			        </button>
+			   </div>
+			   
+			    <a class="btn btn-link text-knewone btn-table-condensed" data-link="visible{:reports^length}" style="display: inline-block;">
+			    	<i data-link="class{:condensed?&#39;fa fa-list&#39;:&#39;fa fa-th-list&#39;}" class="fa fa-th-list"></i>
+			    </a>
+			    
+			    <div class="btn-group export-report">
+			        <button data-export="pdf-chosen" type="button" class="btn btn-default btn-export" title="下载选中PDF报告" data-link="disabled{:actionDisabled||pdfDownload||!showInfo}" disabled="disabled">
+			            <i class="fa fa-download"></i>
+			        </button>
+			        <button data-export="excel" type="button" title="" class="btn btn-default btn-export btn-export-excel-all" data-link="disabled{:excelDownload || !totalCount}" data-original-title="下载EXCEL汇总成绩">
+			            <i class="fa fa-file-excel-o"></i>
+			        </button>
+			        <button data-export="excel-stat" type="button" title="" class="btn btn-default btn-export btn-export-stat" data-link="disabled{:statDownload || !totalCount}" data-original-title="下载Excel答题详情">
+			            <i class="moon moon-report-stat"></i>
+			        </button>
+			        <button data-export="feedback" type="button" title="考试反馈" class="btn btn-default btn-export">
+			            <i class="fa fa-commenting" data-original-title="" title=""></i>
+			        </button>
+			        <button data-export="share-experience" type="button" title="分享经验" class="btn btn-default btn-export">
+			            <i class="fa fa-share-alt"></i>
+			        </button>
+			    </div>
+		    
+		    
+		       <!-- <div class="btn-group pull-right report-pagination">
+		            <button type="button" data-action="prev" class="btn btn-default" data-link="disabled{:currentPage==1 || loadingTotalCount || loadingList}" disabled="disabled">
+		                <i class="fa fa-chevron-left"></i>
+		            </button>
+		            <button type="button" data-action="next" class="btn btn-default" data-link="disabled{:~isLastPage(currentPage, totalCount) || loadingTotalCount || loadingList}" disabled="disabled">
+		                <i class="fa fa-chevron-right"></i>
+		            </button>
+		        </div>
+			<span class="result-hint pull-right">
+					<label class="label label-default label-average-score">
+						平均分：<span>30.0</span>
+					</label>
+					第 <span class="fb">1</span> 个，共 <span class="fb">1</span> 个
+			</span>-->			
+		    </div>
+		    
+		    
+		    <table class="table table-striped report-list" data-link="class{merge:condensed toggle=&#39;report-list-condensed&#39;}">
+		    	<thead class="head1">
+		    		<tr class="report-header">
+		    			<th>
+		                <label class="mt10 check-box inline-block" data-link="class{merge:_selectAll toggle=&#39;active&#39;}">
+						<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
+						<i class="fa fa-check-square fa-stack-1x check"></i></span>
+		                        <input class="btn-select-all" type="checkbox" data-link="_selectAll">
+		                </label>
+		               </th>
+		               <th></th>
+		               <th style="text-align:left;padding-left:20px;">姓名</th>
+		               <th class="report-sortable" data-sort="0">生成时间
+		                    <i data-link="class{:asc?&#39;fa fa-sort-asc text-mint&#39;:&#39;fa fa-sort-desc text-mint&#39;}" class="fa fa-sort-desc text-mint"></i>
+		               </th>
+		               <th class="report-sortable" data-sort="1">分数
+		                    <i class="fa fa-sort"></i>
+		               </th>
+		               <th>标记</th>
+		               <th>已判卷</th>
+		               <th data-jsv="#38^/38^#39^#26_/26_/39^">
+		                    <i class="fa fa-download"></i>
+		                </th>
+		    		</tr>
+		    	</thead>
+		                
+		        <tbody data-jsv-df="" class="item">
+		        	<tr data-jsv="#41^#28_#78_" class="report-item">
+		        	<td style="width:30px;">
+		            <label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
+					<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
+					<i class="fa fa-check-square fa-stack-1x check"></i></span>
+		                <input type="checkbox" data-link="_selected">
+		            </label>
+			        </td>
+			        
+			        <td style="width: 30px;">
+			            <img class="img-circle candidate-portrait" data-link="src{:(portrait||~getPortrait(testId))}" src="./reportdir/portrait_default_9.png" width="40px" height="40px">
+			        </td>
+			        
+			        <td style="width:10%;text-align:left;">
+			            <a class="btn btn-link candidate-name fb" target="_blank" title="">哈哈哈</a>
+			        </td>
+			        
+			        <td style="min-width:135px">2019-06-14 16:18</td>
+			        <td  style="width: 60px;"> 30</td>
+			        
+			        <td style="width:30%;">
+			        </td>
+			        
+			        <td>是
+			        </td>
+			        
+			        <td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">
+			            <a data-action="pdf" class="btn btn-default btn-dowload-pdf-single" title="下载PDF报告">
+			                <i class="fa fa-download"></i>
+			                <i class="text-bittersweet fa fa-file-pdf-o"></i>
+			            </a>
+			        </td>
+		        </tr>
+		        </tbody>
+		        <tbody data-jsv-df="" class="item">
+		        	<tr data-jsv="#41^#28_#78_" class="report-item">
+		        	<td style="width:30px;">
+		            <label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
+					<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
+					<i class="fa fa-check-square fa-stack-1x check"></i></span>
+		                <input type="checkbox" data-link="_selected">
+		            </label>
+			        </td>
+			        
+			        <td style="width: 30px;">
+			            <img class="img-circle candidate-portrait" data-link="src{:(portrait||~getPortrait(testId))}" src="./reportdir/portrait_default_9.png" width="40px" height="40px">
+			        </td>
+			        
+			        <td style="width:10%;text-align:left;">
+			            <a class="btn btn-link candidate-name fb" target="_blank" data-link="href{:&#39;reportDetail/&#39; + testId + &#39;?paperId=&#39; + ~data.paperId + &#39;&amp;groupId=&#39; + ~data.groupId+ &#39;&amp;candidateId=&#39; + candidateId}" href="http://www.101test.com/reportDetail/43589879?paperId=454435&amp;groupId=&amp;candidateId=12000753" data-original-title="" title="">哈哈哈</a>
+			        </td>
+			        
+			        <td style="min-width:135px">2019-06-14 16:18</td><td data-jsv="#246^#79_" style="width: 60px;"> 30
+			        </td>
+			        
+			        <td style="width:30%;">
+			        </td>
+			        
+			        <td>是
+			        </td>
+			        
+			        <td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">
+			            <a data-action="pdf" data-link="href{:~data.showInfo?url:&#39;java:void(0)&#39;} disabled{:!~data.showInfo}" class="btn btn-default btn-dowload-pdf-single" title="下载PDF报告" href="https://www.101test.com/share/irrevocable/%E5%93%88%E5%93%88%E5%93%88%EF%BC%882516930455%40qq.com%EF%BC%89-43589879.pdf?employerId=712269&amp;url=%2Freport%2FexportReport%2F43589879%2F%E5%93%88%E5%93%88%E5%93%88%EF%BC%882516930455%40qq.com%EF%BC%89-43589879.pdf&amp;sign=mJCVviTtIIRFccevczBlVg&amp;expiredAt=1593094932185">
+			                <i class="fa fa-download"></i>
+			                <i class="text-bittersweet fa fa-file-pdf-o"></i>
+			            </a>
+			        </td>
+		        </tr>
+		        </tbody>
+		    </table>
+		    
+		    
+		    <div class="list-footer">		        	
+		    <div>		    	
+		        <div class="btn-group pull-right report-pagination">
+		            <button type="button" data-action="prev" class="btn btn-default" data-link="disabled{:currentPage==1 || loadingTotalCount || loadingList}" disabled="disabled">
+		                <i class="fa fa-chevron-left"></i>
+		            </button>
+		            <button type="button" data-action="next" class="btn btn-default" data-link="disabled{:~isLastPage(currentPage, totalCount) || loadingTotalCount || loadingList}" disabled="disabled">
+		                <i class="fa fa-chevron-right"></i>
+		            </button>
+		        </div>
+		        
+		        
+				<span class="result-hint pull-right">
+						<label class="label label-default label-average-score">
+							平均分：<span>30.0</span>
+						</label>
+						第 <span class="fb">1</span> 个，共 <span class="fb">1</span> 个
+				</span>
+			
+		    </div>
+		    </div> 
+		    
+		    
+		</div>
+		</div>
+		
+		<div class="main-right">
+			此处可以生成相关图表
+		</div>
+		
+		</div>
+	</body>
+</html>

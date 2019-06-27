@@ -1,0 +1,20 @@
+#report-feedback-list-modal .modal-body {
+  min-height: 500px;
+  padding-bottom: 10px;
+}
+#report-feedback-list-modal .table th,
+#report-feedback-list-modal .table td {
+  vertical-align: middle;
+  text-align: center;
+}
+#report-feedback-list-modal .table .remark {
+  width: 40%;
+  text-align: left;
+}
+#report-feedback-list-modal .pagination-label {
+  height: 35px;
+  width: 35px;
+}
+#report-feedback-list-modal .pagination {
+  vertical-align: middle;
+}

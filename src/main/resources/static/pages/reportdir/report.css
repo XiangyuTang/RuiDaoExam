@@ -1,0 +1,363 @@
+/* namespace */
+.report-matrix {
+	/* 	display: table-row;
+ */
+	min-width: 1000px;
+}
+/* namespace */
+.report-list-panel, .report-search-panel {
+	/* display: table-cell; */
+	position: relative;
+	border-radius: 4px;
+}
+
+/* namespace */
+.report-search-panel {
+	padding: 15px;
+	min-width: 320px;
+	background-color: #DAE7F1;
+	display: table-cell;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	position: relative;
+}
+
+/* namespace */
+.report-list-panel {
+	display: table-cell;
+	background-color: #FFF;
+	width: 100%;
+	overflow: hidden;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	padding-bottom: 56px;
+}
+
+.report-search-panel .search-label {
+	font-size: 1.1em;
+	display: inline-block;
+	position: relative;
+}
+
+/* .report-search-panel .search-label:before {
+	display: inline-block;
+	position: absolute;
+	border: 2px solid #8CADCA;
+	content: ' ';
+	top: 0;
+	left: -10px;
+	bottom: 0;
+} */
+	
+
+/** 基本信息 */
+.report-search-panel .extinfo-item {
+	display: table-row;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.report-search-panel .extinfo-item .btn-remove {
+	position: absolute;
+	right: -25px;
+	top: 0;
+	display: none;
+	padding: 7px 10px;
+	color: #AAB2BD;
+}
+
+.report-search-panel .extinfo-item .btn-remove:hover {
+	color: #E9573F;
+}
+
+.report-search-panel .extinfo-item.removable .btn-remove {
+	display: block;
+}
+
+.report-search-panel .extinfo-item .extinfo-label, .report-search-panel .extinfo-item .extinfo-kit
+	{
+	display: table-cell;
+	position: relative;
+}
+
+.report-search-panel .extinfo-item .extinfo-kit {
+	width: 100%;
+	padding-bottom: 10px;
+}
+
+.report-search-panel .extinfo-item .extinfo-label {
+	width: 1%;
+	text-align: right;
+	font-size: 13px;
+}
+
+.report-search-panel .extinfo-item .extinfo-label .ext-label-hint {
+	color: #37BC9B;
+	font-size: 0.8em;
+}
+
+.report-search-panel .extinfo-item .extinfo-label p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-right: 10px;
+}
+
+.report-search-panel .extinfo-item .range-string .form-control {
+	width: 80px;
+}
+
+.ext-info-pool-label {
+	font-weight: normal;
+	color: #37BC9B;
+	display: inline-block;
+}
+
+.report-search-panel .ext-info-pool-item {
+	display: inline-block;
+	padding: 2px 6px;
+	margin-bottom: 2px;
+}
+/** end 基本信息 */
+.report-search-panel .has-feedback label ~.form-control-feedback {
+	top: 0;
+}
+
+.report-search-panel .btn-tags-setting {
+	color: #8CADCA;
+}
+
+.report-search-panel .btn-tags-setting:hover {
+	color: #009EE7;
+}
+
+
+.report-search-panel .tag-item {
+	color: #656D78;
+	background-color: #fff;
+	border-radius: 3px;
+	cursor: pointer;
+	margin: 0 4px 6px 0;
+	display: inline-block;
+	font-weight: normal;
+	padding: 2px 6px;
+	-webkit-transition: all 0.1s linear 0s;
+	-moz-transition: all 0.1s linear 0s;
+	-ms-transition: all 0.1s linear 0s;
+	-o-transition: all 0.1s linear 0s;
+	transition: all 0.1s linear 0s;
+}
+
+.report-search-panel .tag-item.active {
+	color: #fff;
+	background-color: #37BC9B;
+}
+
+.report-search-panel .tag-item a {
+	color: #AAB2BD;
+}
+
+.report-search-panel .tag-item a:hover {
+	color: #E9573F;
+}
+
+.report-search-panel .tag-item.active a {
+	color: #48CFAD;
+	background-color: #37BC9B;
+}
+
+.report-search-panel .tag-item.active a:hover {
+	color: #FFF;
+}
+
+.report-search-panel .tag-item input {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+	pointer-events: none;
+}
+
+.report-list-panel .input-add-tag {
+	display: inline-block;
+	width: 100px;
+	outline: none;
+	border: 1px solid transparent;
+	padding: 2px 6px;
+	border-radius: 4px;
+}
+
+.report-list-panel .input-add-tag:focus {
+	color: #37BC9B;
+}
+
+.report-list-panel .input-add-tag[disabled] {
+	background-color: #F5F7FA;
+	color: #48CFAD;
+	opacity: 0.65;
+	filter: alpha(opacity = 65);
+}
+
+.report-list-panel .has-error>.input-add-tag {
+	background-color: #FBD8DB;
+	color: #DA4453;
+}
+
+.report-list-panel #report-list-panel {
+	/* 	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0; */
+	
+}
+
+.report-list-panel .label-average-score {
+	background: #E6E9ED;
+	border-color: transparent;
+	vertical-align: middle;
+	margin-right: 10px;
+	font-weight: normal;
+	padding: 2px 6px;
+}
+
+.report-list-panel .label-average-score span {
+	color: #E9573F;
+	font-weight: bold;
+}
+
+.report-list-panel .list-footer {
+	overflow: hidden;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.report-list-panel .tags-selecter {
+	width: 300px;
+}
+
+.report-list-panel .report-list-header {
+	background-color: #F5F7FA;
+	height: 50px;
+}
+
+.report-list-panel .report-list {
+	color: #656D78;
+	margin: 0;
+}
+
+.report-list-panel .report-list.report-list-condensed th,
+	.report-list-panel .report-list.report-list-condensed td {
+	padding: 0;
+}
+
+.report-list-panel .report-list th {
+	border-bottom: 2px solid #DAE7F1;
+}
+
+.report-list-panel .report-list th, .report-list-panel .report-list td {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.report-list-panel .report-list td {
+	border-bottom: 1px solid #ddd;
+}
+
+.report-list-panel .report-list .report-header {
+	background-color: #F5F7FA;
+}
+
+.report-list-panel .report-list .report-header th.report-sortable {
+	cursor: default;
+	min-width: 60px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.report-list-panel .result-hint {
+	margin: 10px;
+	height: 34px;
+	line-height: 34px;
+}
+
+.report-list-panel .export-report, .report-list-panel .report-pagination
+	{
+	margin: 10px;
+}
+
+.report-list-panel .btn-export {
+	
+}
+
+.report-list-panel .btn-export.btn-export-excel-all {
+	color: #37BC9B;
+}
+
+.report-list-panel .btn-export.btn-export-pdf-all {
+	color: #E9573F;
+}
+
+.report-list-panel .btn-dowload-pdf-single .fa {
+	width: 15px;
+	text-align: center;
+}
+
+.report-list-panel .btn-dowload-pdf-single .fa-file-pdf-o {
+	display: none;
+}
+
+.report-list-panel .btn-dowload-pdf-single:hover .fa-file-pdf-o {
+	display: inline-block;
+}
+
+.report-list-panel .btn-dowload-pdf-single:hover .fa-download {
+	display: none;
+}
+
+.report-list-panel .candidate-portrait {
+	width: 40px;
+	height: 40px;
+}
+
+.report-list-panel .report-list-condensed .candidate-portrait {
+	width: 30px;
+	height: 30px;
+}
+
+.report-list-panel .tag-item {
+	margin-right: 4px;
+	font-weight: normal;
+	display: inline-block;
+	font-size: 0.95em;
+	color: #8CADCA;
+}
+
+.report-list-panel .tag-item:before {
+	font-family: 'FontAwesome';
+	font-weight: normal;
+	font-style: normal;
+	display: inline-block;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: "\f02b";
+	margin-right: 2px;
+}
+
+.tooltip-candidate-name {
+	border-bottom: 1px solid #37BC9B;
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+}
+
+.report-list-panel .other-reports-dropdown a.other-reports{
+    color:#fff
+}
+.report-list-panel .other-reports-dropdown a.other-reports:hover{
+    color:#009ee7
+}

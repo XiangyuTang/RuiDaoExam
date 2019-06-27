@@ -1,0 +1,111 @@
+/** 搜索 */
+.search-comp label {
+	margin: 0;
+	font-weight: normal;
+	display: inline; /** for ie8 */
+}
+
+.search-comp .date-picker {
+	width: 130px;
+	background-color: #fff;
+	cursor: default;
+}
+
+.search-comp .date-cancel {
+	font-size: 18px;
+}
+
+.search-comp>.has-feedback>.form-control, .search-comp.has-feedback>.form-control
+	{
+	padding-right: 30px;
+}
+
+.search-comp.form-search>.search-icon {
+	left: 5px;
+	color: #AFC6DA;
+}
+
+.search-comp.form-search>.search-icon.text-danger {
+	color: #E9573F;
+}
+
+.search-comp.form-search>.search-query {
+	padding-left: 30px;
+	border-radius: 4px;
+	width: 100%;
+}
+
+/** big 版 */
+.search-comp-big.form-search>.search-query {
+	height: 50px;
+	padding-left: 35px;
+	font-size: 1.1em;
+}
+
+.search-comp-big.search-comp.form-search>.search-icon {
+	top: 10px;
+}
+
+.search-comp-big.search-comp .input-cancel {
+	top: 8px;
+}
+/** end big 版 */
+.sets-search-result-highlight {
+	color: #434A54;
+	background-color: #FCD631;
+	padding: 0 4px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
+}
+
+.search-result {
+	height: 0;
+	overflow: hidden;
+	-webkit-transition: all 0.15s ease-in-out 0s;
+	-moz-transition: all 0.15s ease-in-out 0s;
+	-ms-transition: all 0.15s ease-in-out 0s;
+	-o-transition: all 0.15s ease-in-out 0s;
+	transition: all 0.15s ease-in-out 0s;
+}
+
+.search-result.show-search-result {
+	height: 32px;
+	line-height: 32px;
+}
+
+.search-result.show-search-result-big {
+	height: 48px;
+	line-height: 48px;
+}
+
+.search-result .search-result-key {
+	margin-left: -124px;
+	border: 1px dotted #F8866F;
+	padding: 0 20px;
+	display: inline-block;
+	margin-right: 20px;
+	line-height: 30px;
+	-webkit-transition: all 0.15s ease-in-out 0s;
+	-moz-transition: all 0.15s ease-in-out 0s;
+	-ms-transition: all 0.15s ease-in-out 0s;
+	-o-transition: all 0.15s ease-in-out 0s;
+	transition: all 0.15s ease-in-out 0s;
+}
+
+.search-result .search-result-key.show-key {
+	margin-left: 0;
+}
+
+.search-result span.highlight, .search-result .search-result-key>a {
+	color: #F8866F;
+}
+
+
+.search-result span.highlight{
+	vertical-align: top;
+}
+
+.search-result .search-result-key>a:hover {
+	color: #E9573F;
+}
