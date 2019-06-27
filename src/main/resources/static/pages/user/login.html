@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -24,11 +22,18 @@
 		    dotColor: '#5cbdaa',
 		    lineColor: '#5cbdaa'
 		  });
+		  //验证码
 	  	$("#verifyImg").on("click",function(){
        // var a=document.getElementById("verifyImg");
     //a.setAttribute('src','/ValidateUtil?'+Math.random());
         $("#verifyImg").attr("src","/ValidateUtil?"+Math.random())
-      })
+     });
+	  	$(document).keypress(function(event){
+	  		if(event.keyCode=="13")
+	  			$("#login-submit").click();
+	  			
+	  	})
+	  	
 	  });
 	  function setCustomerSession(){
 	  	$.ajax({
@@ -50,15 +55,16 @@
   </script>
 </head>
 <body>
-
   <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-
+	
     <div class="layadmin-user-login-main">
+    	
       <div class="layadmin-user-login-box layadmin-user-login-header">
         <h2>RuiDao Exam</h2>
         <p>集考试，题库，练习于一身的在线考试系统</p>
       </div>
       <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+      	
         <div class="layui-form-item">
           <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
           <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名/邮箱" class="layui-input">
@@ -67,6 +73,7 @@
           <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
           <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="密码" class="layui-input">
         </div>
+        
         <div class="layui-form-item">
           <div class="layui-row">
             <div class="layui-col-xs7">
@@ -85,7 +92,7 @@
           <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
         </div>
         <div class="layui-form-item">
-          <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
+          <button id="login-submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
         </div>
         <div class="layui-trans layui-form-item layadmin-user-login-other">
           <label>社交账号登入</label>
@@ -156,6 +163,7 @@
             "check_code": field.vercode
           },
           success: function (data) {
+          	
           	setCustomerSession();
             if (data == 1) {
               layer.msg("登录成功，即将进入教师个人中心");

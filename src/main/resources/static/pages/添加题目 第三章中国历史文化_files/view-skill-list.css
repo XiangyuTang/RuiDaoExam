@@ -1,0 +1,43 @@
+ul.skill-list {
+  width: 150px;
+  height: 250px;
+  overflow-y: auto;
+  display: inline-block;
+}
+ul.skill-list.edit {
+  width: 200px;
+}
+ul.skill-list.divider {
+  border-left: 1px dashed #ccc;
+}
+ul.skill-list > .add-skill {
+  padding: 10px 5px 10px 10px;
+}
+ul.skill-list > .add-skill input {
+  border: 1px solid transparent;
+  background: #f7f7f7;
+}
+ul.skill-list > .add-skill .btn-add {
+  background: #87b1d1;
+}
+ul.skill-list > .add-skill .btn-add.disabled {
+  background: #b1cce1;
+}
+ul.skill-list li {
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  color: #434a54;
+  padding: 6px 8px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+ul.skill-list li:hover {
+  background: #e6e9ed;
+}
+ul.skill-list li.checked {
+  background: #009ee7;
+  color: #fff;
+}

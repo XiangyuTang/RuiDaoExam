@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0089)http://www.101test.com/reportDetail/43713549?paperId=455313&groupId=&candidateId=12000753 -->
-<html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title> 不服就来做它报告 </title>
@@ -11,14 +11,26 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<script charset="utf-8" src="../css/marking_files/v.js.下载"></script>
-<script src="../css/marking_files/hm.js.下载"></script>
-<script type="text/javascript" src="../css/marking_files/qrcode.js.下载"></script>
-<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script charset="utf-8" src="../css/marking_files/v.js.下载" th:src="@{static/css/marking_files/v.js.下载}"></script>
+<script src="../css/marking_files/hm.js.下载" th:src="@{static/css/marking_files/hm.js.下载}"></script>
+<script type="text/javascript" src="../css/marking_files/qrcode.js.下载" th:src="@{static/css/marking_files/qrcode.js.下载}"></script>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>
+<script type="text/javascript" src="../js/template.js" th:src="@{static/js/template.js}"></script>
+
+
+
+
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<script src="https://cdn.bootcss.com/jspdf/1.3.4/jspdf.debug.js"></script>
+
+
+
+
+
 <link rel="bookmark" href="http://www.101test.com/assets/img/favicon.ico">
 <link rel="shortcut icon" href="http://www.101test.com/assets/img/favicon.ico">
-<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
-<link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
+<link rel="stylesheet" href="../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--[if IE]>
@@ -65,10 +77,10 @@
     window["webpackManifest"] = {"0":"0.1c50b.js","1":"1.f9de7.js","3":"vendor.5d63d.js","4":"report-detail.abe64.js","5":"paper-print.82b2c.js","6":"company-store-home.84a5a.js","7":"store-single-question.fab20.js","8":"my-demo.7709d.js"}
 </script>
             
-<link rel="stylesheet" href="../css/marking_files/lib.cba36.css">
-<link rel="stylesheet" href="../css/marking_files/vendor.06453.css">
-<link rel="stylesheet" href="../css/marking_files/report-detail.33547.css">
- <script type="text/javascript" charset="utf-8" async="" src="../css/marking_files/1.b8b3c.js.下载"></script>
+<link rel="stylesheet" href="../css/marking_files/lib.cba36.css" th:href="@{static/css/marking_files/lib.cba36.css}">
+<link rel="stylesheet" href="../css/marking_files/vendor.06453.css" th:href="@{static/css/marking_files/vendor.06453.css}">
+<link rel="stylesheet" href="../css/marking_files/report-detail.33547.css" th:href="@{static/css/marking_files/report-detail.33547.css}">
+ <script type="text/javascript" charset="utf-8" async="" src="../css/marking_files/1.b8b3c.js.下载" th:src="@{static/css/marking_files/1.b8b3c.js.下载}"></script>
  <style type="text/css">.CodeMirror{font-family:monospace;height:300px;color:#000;direction:ltr}.CodeMirror-lines{padding:4px 0}.CodeMirror pre{padding:0 4px}.CodeMirror-gutter-filler,.CodeMirror-scrollbar-filler{background-color:#fff}.CodeMirror-gutters{border-right:1px solid #ddd;background-color:#f7f7f7;white-space:nowrap}.CodeMirror-linenumber{padding:0 3px 0 5px;min-width:20px;text-align:right;color:#999;white-space:nowrap}.CodeMirror-guttermarker{color:#000}.CodeMirror-guttermarker-subtle{color:#999}.CodeMirror-cursor{border-left:1px solid #000;border-right:none;width:0}.CodeMirror div.CodeMirror-secondarycursor{border-left:1px solid silver}.cm-fat-cursor .CodeMirror-cursor{width:auto;border:0!important;background:#7e7}.cm-fat-cursor div.CodeMirror-cursors{z-index:1}.cm-fat-cursor-mark{background-color:rgba(20,255,20,.5);-webkit-animation:blink 1.06s steps(1) infinite;animation:blink 1.06s steps(1) infinite}.cm-animate-fat-cursor{width:auto;border:0;-webkit-animation:blink 1.06s steps(1) infinite;animation:blink 1.06s steps(1) infinite;background-color:#7e7}@-webkit-keyframes blink{50%{background-color:transparent}}@keyframes blink{50%{background-color:transparent}}.cm-tab{display:inline-block;text-decoration:inherit}.CodeMirror-rulers{position:absolute;left:0;right:0;top:-50px;bottom:-20px;overflow:hidden}.CodeMirror-ruler{border-left:1px solid #ccc;top:0;bottom:0;position:absolute}.cm-s-default .cm-header{color:#00f}.cm-s-default .cm-quote{color:#090}.cm-negative{color:#d44}.cm-positive{color:#292}.cm-header,.cm-strong{font-weight:700}.cm-em{font-style:italic}.cm-link{text-decoration:underline}.cm-strikethrough{text-decoration:line-through}.cm-s-default .cm-keyword{color:#708}.cm-s-default .cm-atom{color:#219}.cm-s-default .cm-number{color:#164}.cm-s-default .cm-def{color:#00f}.cm-s-default .cm-variable-2{color:#05a}.cm-s-default .cm-type,.cm-s-default .cm-variable-3{color:#085}.cm-s-default .cm-comment{color:#a50}.cm-s-default .cm-string{color:#a11}.cm-s-default .cm-string-2{color:#f50}.cm-s-default .cm-meta,.cm-s-default .cm-qualifier{color:#555}.cm-s-default .cm-builtin{color:#30a}.cm-s-default .cm-bracket{color:#997}.cm-s-default .cm-tag{color:#170}.cm-s-default .cm-attribute{color:#00c}.cm-s-default .cm-hr{color:#999}.cm-s-default .cm-link{color:#00c}.cm-invalidchar,.cm-s-default .cm-error{color:red}.CodeMirror-composing{border-bottom:2px solid}div.CodeMirror span.CodeMirror-matchingbracket{color:#0b0}div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#a22}.CodeMirror-matchingtag{background:rgba(255,150,0,.3)}.CodeMirror-activeline-background{background:#e8f2ff}.CodeMirror{position:relative;overflow:hidden;background:#fff}.CodeMirror-scroll{overflow:scroll!important;margin-bottom:-30px;margin-right:-30px;padding-bottom:30px;height:100%;outline:0;position:relative}.CodeMirror-sizer{position:relative;border-right:30px solid transparent}.CodeMirror-gutter-filler,.CodeMirror-hscrollbar,.CodeMirror-scrollbar-filler,.CodeMirror-vscrollbar{position:absolute;z-index:6;display:none}.CodeMirror-vscrollbar{right:0;top:0;overflow-x:hidden;overflow-y:scroll}.CodeMirror-hscrollbar{bottom:0;left:0;overflow-y:hidden;overflow-x:scroll}.CodeMirror-scrollbar-filler{right:0;bottom:0}.CodeMirror-gutter-filler{left:0;bottom:0}.CodeMirror-gutters{position:absolute;left:0;top:0;min-height:100%;z-index:3}.CodeMirror-gutter{white-space:normal;height:100%;display:inline-block;vertical-align:top;margin-bottom:-30px}.CodeMirror-gutter-wrapper{position:absolute;z-index:4;background:0 0!important;border:none!important}.CodeMirror-gutter-background{position:absolute;top:0;bottom:0;z-index:4}.CodeMirror-gutter-elt{position:absolute;cursor:default;z-index:4}.CodeMirror-gutter-wrapper ::selection{background-color:transparent}.CodeMirror-gutter-wrapper ::-moz-selection{background-color:transparent}.CodeMirror-lines{cursor:text;min-height:1px}.CodeMirror pre{border-radius:0;border-width:0;background:0 0;font-family:inherit;font-size:inherit;margin:0;white-space:pre;word-wrap:normal;line-height:inherit;color:inherit;z-index:2;position:relative;overflow:visible;-webkit-tap-highlight-color:transparent;-webkit-font-variant-ligatures:contextual;-moz-font-variant-ligatures:contextual;font-variant-ligatures:contextual}.CodeMirror-wrap pre{word-wrap:break-word;white-space:pre-wrap;word-break:normal}.CodeMirror-linebackground{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0}.CodeMirror-linewidget{position:relative;z-index:2;padding:.1px}.CodeMirror-rtl pre{direction:rtl}.CodeMirror-code{outline:0}.CodeMirror-gutter,.CodeMirror-gutters,.CodeMirror-linenumber,.CodeMirror-scroll,.CodeMirror-sizer{box-sizing:content-box}.CodeMirror-measure{position:absolute;width:100%;height:0;overflow:hidden;visibility:hidden}.CodeMirror-cursor{position:absolute;pointer-events:none}.CodeMirror-measure pre{position:static}div.CodeMirror-cursors{visibility:hidden;position:relative;z-index:3}.CodeMirror-focused div.CodeMirror-cursors,div.CodeMirror-dragcursors{visibility:visible}.CodeMirror-selected{background:#d9d9d9}.CodeMirror-focused .CodeMirror-selected{background:#d7d4f0}.CodeMirror-crosshair{cursor:crosshair}.CodeMirror-line::selection,.CodeMirror-line>span::selection,.CodeMirror-line>span>span::selection{background:#d7d4f0}.CodeMirror-line::-moz-selection,.CodeMirror-line>span::-moz-selection,.CodeMirror-line>span>span::-moz-selection{background:#d7d4f0}.cm-searching{background-color:#ffa;background-color:rgba(255,255,0,.4)}.cm-force-border{padding-right:.1px}@media print{.CodeMirror div.CodeMirror-cursors{visibility:hidden}}.cm-tab-wrap-hack:after{content:''}span.CodeMirror-selectedtext{background:0 0}</style>
 </head>
 
@@ -79,7 +91,7 @@
       	<div class="admin-login-box">
 						<a class="logo" style="left: 0;" href="#">
 							<span style="width: 50px;height: 100px;">
-								<img src="../layuiadmin/style/res/logo.png" style="width: 200px; height: 50px;">
+								<img src="../layuiadmin/style/res/logo.png"  th:src="@{static/layuiadmin/style/res/logo.png}" style="width: 200px; height: 50px;">
 							</span>
 						</a>
 						<div class="admin-side-toggle">
@@ -159,24 +171,30 @@
         </ul>
       </div>
 	 </div>
+	 <!--<br /><br /><br /><br /><br /><br />-->
     <script>window.SETS.local = JSON.parse('{\u0022self\u0022:true}') || {};</script>
-    <div class="container report-detail-wrapper pure-pre pt20" style="margin-top: -10px;">
+    <div  class="container report-detail-wrapper pure-pre pt20" style="margin-top: -10px;">
     <div class="row">
     <div class=" col-md-10 ">
     <div class="panel panel-default mb0">
-    <div class="panel-body">
+    <div id="PDF" class="panel-body">
     <div class="report-basic" id="report-basic">
-    	
-    <h3 id="jibenxinxi" class="tc fn report-title">不服就来做它报告</h3>
+    <!--<hr id="jibenxinxi" style="height:1px;border:none;border-top:1px solid #555555;" />-->
+    <!--<span id="jibenxinxi">&nbsp;</span>-->
+    <h3 id="jibenxinxi" class="tc fn report-title" th:text="${paperTitle}"></h3>
     <div class="head-info">
-        <img class="avator" src="../css/marking_files/portrait_default.png">
+        <img class="avator" src="../css/marking_files/portrait_default.png" th:src="@{static/css/marking_files/portrait_default.png}">
         <div class="info-wrapper">
-            <div class="name-wrapper">哈哈哈</div>
-            <div>邮箱 <span>2516930455@qq.com</span></div>
+            <div class="name-wrapper" th:text="${sName}"></div>
+            <div>邮箱 <span th:text=${sEmail}></span></div>
         </div>
-        <div class="text-bittersweet score-wrapper" _v-b40dfc58=""> 
-        	<span class="report-marked no" _v-b40dfc58="">（未判卷）</span> 
-        	<span class="score" _v-b40dfc58="">20</span> 分 
+        <div class="text-bittersweet score-wrapper" style="color: green;" th:if="${isModified==1}"> 
+        	<span class="report-marked no">（已判卷）</span> 
+        	<span class="score" th:text=${sScore}></span> 分 
+        </div>
+         <div class="text-bittersweet score-wrapper" th:if="${isModified==0}"> 
+        	<span class="report-marked no">（未判卷）</span> 
+        	<span class="score" th:text=${sScore}></span> 分 
         </div>
     </div>
 
@@ -190,18 +208,21 @@
     	</div>  
     </div>-->
 
-    </div>                                                                                                                                                                                            <div class="report-summary" id="report-summary">
+    </div>   
+    <div class="report-summary" id="report-summary">
     	<div class="section-title"><a id="quanmiangaikuo">全面概括</a></div>
-    	<p class="pb5 f16">试卷共 5 道题，考生共答 5 道题</p>
+    	<p class="pb5 f16">试卷共 <span class="pb5 f16" th:text="${shiTiNum}"></span> 道题，考生共答 <span class="pb5 f16" th:text="${shiTiNum}"></span> 道题</p>
     	<a class="btn btn-link p0">
-        <i class="layui-icon layui-icon-log"></i>
-		        考试时间 2019-06-18 10:57 至
-		         2019-06-18 10:57    </a>
+    	<i class="layui-icon layui-icon-log">考试时间 </i>
+        <i th:text="${beginTime}"></i>
+		<i>至 </i>   
+		<i th:text="${endTime}"></i>     
+		</a>
         
     <div> 
     	<div class="s-table mt10"> 
     		<div class="s-row th"> 
-    			<div class="s-col text-ellipsis" style="width: 18%">单选题</div> 
+    			<div class="s-col text-ellipsis" style="width: 18%">客观题</div> 
     			<div class="s-col"> 
     				<div class="s-table"> 
     					<div class="s-row"> 
@@ -219,21 +240,30 @@
     		<div class="s-row"> 
     			<div class="s-col overview" style="width: 18%"> 
     				<ul> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet">3</span> 道</li> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet">30</span> 分</li> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet">20</span> 分</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet" th:text="${keGuanTiNum}"></span> 道</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet" th:text="${keGuanTiTotalScore}">30</span> 分</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet" th:text="${keGuanTiScore}">20</span> 分</li> 
     				</ul> 
     			</div> 
     			<div class="s-col skill-list"> 
     				<div class="s-table"> 
 	    				<div class="s-row skill-row"> 
 	    					<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
-	    					<i class="text-medium-gray fa fa-minus-square-o mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
+	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
+	    					</div> 
+	    					<div class="s-col" style="width: 20%"> <span>选择题</span></div> 
+	    					<div class="s-col" style="width: 15%" th:text="${xuanZeTiNum}"></div> 
+	    					<div class="s-col error-count" style="width: 15%" th:text="${xuanZeTiWrongNum}"></div> 
+	    					<div class="s-col skill-score" style="width: 20%" th:text="${xuanZeTiScore}"></div>
+	    				</div>  
+	    				<div class="s-row skill-row"> 
+	    					<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
+	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
 	    					</div> 
 	    					<div class="s-col" style="width: 20%"> <span>判断题</span></div> 
-	    					<div class="s-col" style="width: 15%">3</div> 
-	    					<div class="s-col error-count" style="width: 15%">1</div> 
-	    					<div class="s-col skill-score" style="width: 20%">20</div> 
+	    					<div class="s-col" style="width: 15%" th:text="${panDuanTiNum}">3</div> 
+	    					<div class="s-col error-count" style="width: 15%" th:text="${panDuanTiWrongNum}"></div> 
+	    					<div class="s-col skill-score" style="width: 20%" th:text="${panDuanTiScore}"></div>
 	    				</div>  
     				</div> 
     			</div> 
@@ -241,7 +271,7 @@
     	</div>
     	<div class="s-table mt10"> 
     		<div class="s-row th"> 
-    			<div class="s-col text-ellipsis" style="width: 18%">简答题</div> 
+    			<div class="s-col text-ellipsis" style="width: 18%">主观题</div> 
     			<div class="s-col"> 
     				<div class="s-table"> 
     					<div class="s-row"> 
@@ -259,22 +289,31 @@
     		<div class="s-row"> 
     			<div class="s-col overview" style="width: 18%"> 
     				<ul> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet">2</span> 道</li> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet">20</span> 分</li> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet">0</span> 分</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet" th:text="${zhuGuanTiNum}"></span> 道</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet" th:text="${zhuGuanTiTotalScore}"></span> 分</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet" th:text="${zhuGuanTiScore}"></span> 分</li> 
     				</ul> 
     			</div> 
     			<div class="s-col skill-list"> 
     				<div class="s-table"> 
     					<div class="s-row skill-row"> 
     						<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
-    							<i class="text-medium-gray fa fa-minus-square-o mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> PHP</span>  
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> PHP</span>  
+    						</div> 
+    						<div class="s-col" style="width: 20%"> <span>填空题</span>  </div> 
+    						<div class="s-col" style="width: 15%" th:text="${tianKongTiNum}"></div> 
+    						<div class="s-col error-count" style="width: 15%" th:text="${tianKongTiWrongNum}"></div> 
+    						<div class="s-col skill-score" style="width: 20%" th:text="${tianKongTiScore}"></div> 
+    					</div>  
+    					<div class="s-row skill-row"> 
+    						<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> PHP</span>  
     						</div> 
     						<div class="s-col" style="width: 20%"> <span>问答题</span>  </div> 
-    						<div class="s-col" style="width: 15%">2</div> 
-    						<div class="s-col error-count" style="width: 15%">2</div> 
-    						<div class="s-col skill-score" style="width: 20%">0</div> 
-    					</div>  
+    						<div class="s-col" style="width: 15%" th:text="${wenDaTiNum}"></div> 
+    						<div class="s-col error-count" style="width: 15%" th:text="${wenDaTiWrongNum}"></div> 
+    						<div class="s-col skill-score" style="width: 20%" th:text="${wenDaTiScore}"></div> 
+    					</div>
     				</div> 
     			</div> 
     		</div> 
@@ -284,12 +323,248 @@
 
 <div class="report-answer" id="report-answer">
     <div class="section-title"><a id="datiqingkuang">答题情况</a></div>
-        <div class="part-title">单选题（共3道题）</div>
+    <div id="xunhuan"></div>
+    <div th:if="${#objects.nullSafe(forChoiceQuestionInList,default)}">
+    <div class="part-title">
+    	选择题（共
+    	<span th:text="${xuanZeTiNum}"></span>
+    	道题）
+    </div>
+    	<div th:each="forChoiceQuestionInList:${forChoiceQuestionInList}">
+        	<div class="question ">
+				<div class="q-panel wrong" th:if="${forChoiceQuestionInList.iscorrect==0}"> 
+					<i style="font-style:normal" th:text="${forChoiceQuestionInListStat.count}"></i>.  <span class="q-type">[ 选择题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forChoiceQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forChoiceQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forChoiceQuestionInList.totalScore}"></i> </span> 
+						</div> 
+					</div> 
+				
+				</div>
+				<div class="q-panel right" th:if="${forChoiceQuestionInList.iscorrect==1}">
+					<i style="font-style:normal" th:text="${forChoiceQuestionInListStat.count}"></i>.  <span class="q-type">[ 选择题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forChoiceQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forChoiceQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forChoiceQuestionInList.totalScore}"></i> </span> 
+						</div> 
+					</div> 
+				</div>
+
+ 				<div class="q-subject unselectable" th:text="${forChoiceQuestionInList.content}">
+        			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
+ 				</div>
+ 				
+				<ul class="q-options unselectable">
+                    <li class="q-option">
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'A')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'A')}"></i>
+                        <!-- <i class="layui-icon layui-icon-circle text-medium-gray" th:remove="(${forChoiceQuestionInList.answer})?none:block"></i> -->
+                        <i style="font-style:normal" th:text="${forChoiceQuestionInList.choice1}"></i>
+                    </li>
+                    <li class="q-option">
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'B')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'B')}"></i>
+                        <i style="font-style:normal" th:text="${forChoiceQuestionInList.choice2}"></i>
+                    </li>
+                    <li class="q-option">
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'C')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'C')}"></i>
+                        <i style="font-style:normal" th:text="${forChoiceQuestionInList.choice3}"></i>
+                    </li>
+                    <li class="q-option">
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'D')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'D')}"></i>
+                        <i style="font-style:normal" th:text="${forChoiceQuestionInList.choice4}"></i>
+                    </li>
+                </ul>
+    
+                <div class="q-text cand">
+            		<p>考生答案：</p>
+            		<i style="font-style:normal" th:text="${forChoiceQuestionInList.answer}"></i>
+                </div>
+                
+                <div class="q-text">
+                	<p>正确答案：</p>
+                	<i style="font-style:normal" th:text="${forChoiceQuestionInList.rightAnswer}"></i>
+            	</div>
+        	</div>
+      </div>
+    </div>
+    
+    <div th:if="${#objects.nullSafe(forJudgeQuestionInList,default)}">
+      <div class="part-title">
+    	判断题（共
+    	<span th:text="${panDuanTiNum}"></span>
+    	道题）
+      </div>
+      <div th:each="forJudgeQuestionInList:${forJudgeQuestionInList}">
+      	<div class="question ">
+				<div class="q-panel wrong" th:if="${forJudgeQuestionInList.iscorrect==0}"> 
+					<i style="font-style:normal" th:text="${forJudgeQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forJudgeQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forJudgeQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forJudgeQuestionInList.totalScore}"></i> </span> 
+						</div> 
+					</div> 
+				
+				</div>
+				<div class="q-panel right" th:if="${forJudgeQuestionInList.iscorrect==1}">
+					<i style="font-style:normal" th:text="${forJudgeQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forJudgeQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forJudgeQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forJudgeQuestionInList.totalScore}"></i> </span> 
+						</div> 
+					</div> 
+				</div>
+
+ 				<div class="q-subject unselectable" th:text="${forJudgeQuestionInList.content}">
+        			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
+ 				</div>
+ 				
+				<ul class="q-options unselectable">
+                    <li class="q-option">
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forJudgeQuestionInList.answer,'A')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forJudgeQuestionInList.answer,'A')}"></i>
+                        <!-- <i class="layui-icon layui-icon-circle text-medium-gray" th:remove="(${forJudgeQuestionInList.answer})?none:block"></i> -->
+                        <i style="font-style:normal" th:text="${forJudgeQuestionInList.choice1}"></i>
+                    </li>
+                    <li class="q-option">
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forJudgeQuestionInList.answer,'B')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forJudgeQuestionInList.answer,'B')}"></i>
+                        <i style="font-style:normal" th:text="${forJudgeQuestionInList.choice2}"></i>
+                    </li>
+                </ul>
+    
+                <div class="q-text cand">
+            		<p>考生答案：</p>
+            		<i style="font-style:normal" th:text="${forJudgeQuestionInList.answer}"></i>
+                </div>
+                
+                <div class="q-text">
+                	<p>正确答案：</p>
+                	<i style="font-style:normal" th:text="${forJudgeQuestionInList.rightAnswer}"></i>
+            	</div>
+        	</div>
+      </div>
+    </div>
+    
+    <div th:if="${#objects.nullSafe(forTianKongQuestionInList,default)}">
+      <div class="part-title">
+    	填空题（共
+    	<span th:text="${tianKongTiNum}"></span>
+    	道题）
+      </div>
+      <div th:each="forTianKongQuestionInList:${forTianKongQuestionInList}">
+      	<div class="question ">
+				<div class="q-panel wrong" th:if="${forTianKongQuestionInList.iscorrect==0}"> 
+					<i style="font-style:normal" th:text="${forTianKongQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forTianKongQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forTianKongQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forTianKongQuestionInList.totalScore}"></i> </span> 
+						</div> 
+					</div> 
+				
+				</div>
+				<div class="q-panel right" th:if="${forTianKongQuestionInList.iscorrect==1}">
+					<i style="font-style:normal" th:text="${forTianKongQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forTianKongQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forTianKongQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forTianKongQuestionInList.totalScore}"></i> </span> 
+						</div> 
+					</div> 
+				</div>
+
+ 				<div class="q-subject unselectable" th:text="${forTianKongQuestionInList.content}">
+        			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
+ 				</div>
+				    
+                <div class="q-text cand">
+            		<p>考生答案：</p>
+            		<i style="font-style:normal" th:text="${forTianKongQuestionInList.answer}"></i>
+                </div>
+                
+                <div class="q-text">
+                	<p>正确答案：</p>
+                	<i style="font-style:normal" th:text="${forTianKongQuestionInList.rightAnswer}"></i>
+            	</div>
+        	</div>
+      </div>
+    </div>
+    
+    <div th:if="${#objects.nullSafe(forWenDaQuestionInList,default)}">
+      <div class="part-title">
+    	问答题（共
+    	<span th:text="${wenDaTiNum}"></span>
+    	道题）
+      </div>
+      <div th:each="forWenDaQuestionInList:${forWenDaQuestionInList}">
+      	<div class="question ">
+				<div class="q-panel wrong" th:if="${forWenDaQuestionInList.iscorrect==0}"> 
+					<i style="font-style:normal" th:text="${forWenDaQuestionInListStat.count}"></i>.  <span class="q-type">[ 问答题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forWenDaQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forWenDaQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forWenDaQuestionInList.totalScore}"></i> </span> 
+						</div> 
+					</div> 
+				
+				</div>
+				<div class="q-panel right" th:if="${forWenDaQuestionInList.iscorrect==1}">
+					<i style="font-style:normal" th:text="${forWenDaQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forWenDaQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forWenDaQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forWenDaQuestionInList.totalScore}"></i> </span> 
+						</div> 
+					</div> 
+				</div>
+
+ 				<div class="q-subject unselectable" th:text="${forWenDaQuestionInList.content}">
+        			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
+ 				</div>
+				    
+                <div class="q-text cand">
+            		<p>考生答案：</p>
+            		<i style="font-style:normal" th:text="${forWenDaQuestionInList.answer}"></i>
+                </div>
+                
+                <div class="q-text">
+                	<p>正确答案：</p>
+                	<i style="font-style:normal" th:text="${forWenDaQuestionInList.rightAnswer}"></i>
+            	</div>
+        	</div>
+      </div>
+    </div>
+<!--        <div class="part-title">单选题（共3道题）</div>
         	<div class="question ">
 				<div class="q-panel wrong"> 1、 <span class="q-type">[ 判断题 ]</span> 
 					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
 					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
 						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
+							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
+							<div class="q-remark" style="display: none;"> 
+							<form> 
+								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
+									<div class="tr"> 
+										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
+									</div> 
+							</form> 
+							</div> 
 						</div> 
 					</div> 
 				</div>
@@ -322,6 +597,16 @@
 					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
 					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
 						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
+							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
+							<div class="q-remark" style="display: none;"> 
+							<form> 
+								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
+									<div class="tr"> 
+										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
+									</div> 
+							</form> 
+							</div> 
 						</div> 
 					</div> 
 				</div>
@@ -354,6 +639,16 @@
 					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
 					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span> 
 						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
+							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
+							<div class="q-remark" style="display: none;"> 
+							<form> 
+								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
+									<div class="tr"> 
+										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
+									</div> 
+							</form> 
+							</div> 
 						</div> 
 					</div> 
 				</div>
@@ -387,6 +682,16 @@
 				<span class="label skill hint--top hint--rounded" data-hint="PHP" title="PHP">PHP</span>   
 				<div class="pull-right">  
 					<div class="score-wrapper"> <span class="score-none"> 未打分 </span>  <span class="point">满分: 10 </span>
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
+						<div class="q-remark" style="display: none;"> 
+						<form> 
+							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div>
+							<div class="tr"> 
+								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
+							</div> 
+						</form>
+						</div>
 					</div>
 				</div> 
 			</div>
@@ -411,6 +716,16 @@
 				<span class="label skill hint--top hint--rounded" data-hint="PHP" title="PHP">PHP</span>   
 				<div class="pull-right">  
 					<div class="score-wrapper"> <span class="score-none"> 未打分 </span>  <span class="point">满分: 10 </span>
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
+						<div class="q-remark" style="display: none;"> 
+						<form> 
+							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div>
+							<div class="tr"> 
+								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
+							</div> 
+						</form>
+						</div>
 					</div>
 				</div> 
 			</div>
@@ -428,30 +743,71 @@
 	            	<p>题目解析：</p>
 	                <pre>这么简单都不会！！</pre>        
 				</div>
-        </div>
+        </div>-->
+</div>
+<div>
+	<div class="section-title"><a id="baogaopingyu">报告评语</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<ul class="log-list" th:remove="(${comment}==null)? all:none">
+        <li id="comment" class="mb5" th:text="${comment}">
+        </li>
+   </ul>
+   <ul class="log-list" th:remove="(${comment}==null)? none:all">
+        <li id="comment" class="mb5">
+        	暂无评语
+        </li>
+   </ul>
+   <div style="display: none; background-color:white;" id="comment"><!--该div为即将加载的comment的div-->
+		<div id="writecomment">
+			<div style="height: 60px;">
+				<textarea id="wenbenkuang" name="" class="form-control11" required lay-verify="required" placeholder="请输入报告评语" style="height: 60px; width: 100% "></textarea>
+			</div>
+			<div>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="button" class="layui-btn layui-btn-primary" style="margin-top: 10px;">取消发布</button>
+				<button type="button" class="layui-btn layui-btn-normal" style="margin-top: 10px;">发布评语</button>
+				<!--<button class="layui-btn  layui-btn-sm" style="width:85px; height: 30px;">发布</button>-->
+			</div>
+		</div>
+	</div>
 </div>
 <div class="report-logs" id="report-logs">
-<div class="section-title" id="ceshirizhi">测试日志</div>
+<div class="section-title"><a id="ceshirizhi">测试日志</a></div>
     <ul class="log-list">
         <li class="mb5">浏览器   chrome</li>
         <li class="mb5">IP 地址   211.137.23.194</li>
-        <li class="mb5">操作系统   Win32</li>
+        <li class="mb5">操作系统   Win64</li>
+        <li class="mb5 ">
+                <span class="log-time" th:text="${beginTime}">2019-06-18 10:57</span>
+                <span class="ml30">开始测试</span>
+        </li>
         <li class="mb5 ">
                 <span class="log-time">2019-06-18 10:57</span>
-                <span class="ml30">开始测试</span>
-                            </li>
-                                <li class="mb5 ">
-                <span class="log-time">2019-06-18 10:57</span>
                 <span class="ml30">开始部分--&gt;单选题</span>
-                            </li>
-                                <li class="mb5 ">
+        </li>
+        <li class="mb5 ">
                 <span class="log-time">2019-06-18 10:57</span>
                 <span class="ml30">开始部分--&gt;简答题</span>
-                            </li>
-                                <li class="mb5 ">
-                <span class="log-time">2019-06-18 10:57</span>
+        </li>
+        <li class="mb5 ">
+                <span class="log-time" th:text="${endTime}">2019-06-18 10:57</span>
                 <span class="ml30">结束测试</span>
-                            </li>
+        </li>
     </ul>
 </div>
 </div>
@@ -473,10 +829,7 @@
         			<div class="input-group input-group-sm mt10 mb20" _v-719dab47=""> 
         				<input type="text" placeholder="添加一个标记" class="form-control" _v-719dab47="">
         				<span class="input-group-btn" _v-719dab47=""> 
-        					<a class="btn btn-info layui-icon layui-icon-add-1" _v-719dab47=""> 
-        						<!--<i class="layui-icon layui-icon-add-1"></i>-->
-        						<!--<i class="layui-icon layui-icon-add-circle" _v-719dab47=""></i>-->
-        					</a>
+        					<a class="btn btn-info layui-icon layui-icon-add-1" _v-719dab47=""></a>
         				</span>
         			</div>
         		</div> 
@@ -491,10 +844,11 @@
 	            </div>
 	            <div class="mt10">
 	                <ul class="links">
-	                    <li><a href="report.html#jibenxinxi">基本信息</a></li>
-	                    <li><a href="report.html#quanmiangaikuo">全面概括</a></li>
-	                    <li><a href="report.html#datiqingkuang">答题情况</a></li>
-	                    <li><a href="report.html#ceshirizhi">测试日志</a></li>
+	                    <li><a href="report#jibenxinxi">基本信息</a></li>
+	                    <li><a href="report#quanmiangaikuo">全面概括</a></li>
+	                    <li><a href="report#datiqingkuang">答题情况</a></li>
+	                    <li><a href="report#baogaopingyu">报告评语</a></li>
+	                    <li><a href="report#ceshirizhi">测试日志</a></li>
 	                 </ul>
 	            </div>
 	        </div>
@@ -506,27 +860,27 @@
 </div>
 </div>
 
-    <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?e16bac3df70cc77a3932bd0f15bfbed6";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?e16bac3df70cc77a3932bd0f15bfbed6";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
     
-    <script src="../css/marking_files/lib.10ef5.js.下载"></script>
-    <script src="../css/marking_files/vendor.18558.js.下载"></script>
-    <script src="../css/marking_files/report-detail.f47f4.js.下载"></script>
+<script src="../css/marking_files/lib.10ef5.js.下载" th:src="@{static/css/marking_files/lib.10ef5.js.下载}"></script>
+<script src="../css/marking_files/vendor.18558.js.下载" th:src="@{static/css/marking_files/vendor.18558.js.下载}"></script>
+<script src="../css/marking_files/report-detail.f47f4.js.下载" th:src="@{static/css/marking_files/report-detail.f47f4.js.下载}"></script>
     
     <div class="fade modal" id="ali-player-modal" tabindex="-1" role="dialog" aria-hidden="true">
     	<div class="modal-dialog">
     		<div class="modal-content">
     			<div class="modal-header">
     				<div class="audio-mark">
-    					<img class="dynamic" src="../css/marking_files/audio1.gif">
-    					<img class="static" src="../css/marking_files/audio.png">
+    					<img class="dynamic" src="../css/marking_files/audio1.gif" th:src="@{static/css/marking_files/audio1.gif}">
+    					<img class="static" src="../css/marking_files/audio.png" th:src="@{static/css/marking_files/audio.png}">
     				</div>
     				<div class="loading">加载中 <i class="fa fa-spinner fa-spin"></i></div>
     				<button type="button" class="close">
@@ -545,7 +899,308 @@
     </div>
 </div>
 
+<!--
+	作者：offline
+	时间：2019-06-20
+	描述：PDF下载
+-->
+<!--<script>
+	$(function(){
+		$('#xiazai').click(function(){
+			 var pdf = new jsPDF('p','pt','a4');
+			 pdf.internal.scaleFactor = 2;
+			 var options = {
+           			pagesplit: true, //设置是否自动分页
+          			"background": '#FFFFFF'   //如果导出的pdf为黑色背景，需要将导出的html模块内容背景 设置成白色。
+      		};
+      		var printHtml = $('#PDF').get(0);
+      		pdf.addHTML(printHtml,15, 15, options,function() {
+          		pdf.save('目标.pdf');
+     		});
+		})
+	})
+</script>-->
+
+<script>
+/*	$(function(){
+		$('[class="layui-icon layui-icon-edit"]').click(function(){
+			$(this).parent().next().css("display","block")
+	})
+	})	
+	$(function(){
+		$('[class="btn btn-default btn-sm mr10"]').click(function(){
+			$(this).parent().parent().parent().css("display","none")
+	})
+	})*/
+	
+	$(function(){
+		$('[class="layui-btn layui-btn-normal layui-btn-sm"]').click(function(){
+			$(this).parent().next().next().css("display","block")
+	})
+	})	
+	$(function(){
+		$('[class="layui-btn layui-btn-primary"]').click(function(){
+			$(this).parent().parent().parent().css("display","none")
+	})
+	})
+	$(function(){
+		$('[class="layui-btn layui-btn-normal"]').click(function(){
+	        var comment = $('#wenbenkuang').val();
+	        var pararms ={'val':comment};// 定义一个js对象
+	        $.ajax({
+		  		url:'addComment',
+		  		type:'POST',
+		  		traditional:true,//这使json格式的字符不会被转码
+		  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  		async : false,
+		  		dataType: "text",		  		
+		  		success:function(e){//e变量就是后台返回的Map对象
+		  		},
+		  		error:function(e){
+		  		}
+  			});
+  			$(this).parent().parent().parent().css("display","none")
+  			$(this).parent().parent().parent().prev().html(comment)
+		})
+	})
+	$(function(){
+	        var report_id = '1';
+	        var pararms ={'val':report_id};// 定义一个js对象
+	        $.ajax({
+		  		url:'getJiBenXinXi',
+		  		type:'POST',
+		  		traditional:true,//这使json格式的字符不会被转码
+		  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  		async : false,
+		  		dataType: "text",		  		
+		  		success:function(e){//e变量就是后台返回的Map对象
+		  		},
+		  		error:function(e){
+		  		}
+  			});
+  			/* $(this).parent().parent().parent().css("display","none")
+  			$(this).parent().parent().parent().prev().html(comment) */
+	})	
+	$(function(){
+	        var report_id = '1';
+	        var pararms ={'val':report_id};// 定义一个js对象
+	        $.ajax({
+		  		url:'getQuanMianGaiKuo',
+		  		type:'POST',
+		  		traditional:true,//这使json格式的字符不会被转码
+		  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  		async : false,
+		  		dataType: "text",		  		
+		  		success:function(e){//e变量就是后台返回的Map对象
+		  		},
+		  		error:function(e){
+		  		}
+  			});
+  			/* $(this).parent().parent().parent().css("display","none")
+  			$(this).parent().parent().parent().prev().html(comment) */
+	})	
+	$(function(){
+	        var report_id = '1';
+	        var pararms ={'val':report_id};// 定义一个js对象
+	        $.ajax({
+		  		url:'getDaTiQingKuang',
+		  		type:'POST',
+		  		traditional:true,//这使json格式的字符不会被转码
+		  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  		async : false,
+		  		dataType: "text",		  		
+		  		success:function(e){//e变量就是后台返回的Map对象
+		  			
+		  		},
+		  		error:function(e){
+		  		}
+  			});
+  			/* $(this).parent().parent().parent().css("display","none")
+  			$(this).parent().parent().parent().prev().html(comment) */
+	})	
+</script>
+
 <script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
+
+<script>
+  
+layui.use('layer', function(){ //独立版的layer无需执行这一句
+	var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+	
+	$('#shanchu').click(function(){
+	    layer.open({
+		    type: 1
+		    ,title: '报告删除'
+	        ,offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+	        ,area: ['300px', '157px']
+	        ,content: '<div style="padding: 20px 10px; text-align: center"><p> 确定删除本报告吗？ </p></div>'
+	        ,btn: ['删除', '取消']
+	        ,btnAlign: 'r' //按钮居中
+	        ,shade: 0.6 //不显示遮罩
+	        ,yes: function(){
+	        	var report_id = '2';
+	        	var pararms ={'val':report_id};// 定义一个js对象
+		        $.ajax({
+			  		url:'deleteReport',
+			  		type:'POST',
+			  		traditional:true,//这使json格式的字符不会被转码
+			  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+			  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+			  		async : false,
+			  		dataType: "text",		  		
+			  		success:function(e){//e变量就是后台返回的Map对象
+			  		},
+			  		error:function(e){
+			  		}
+  				});
+	        	layer.closeAll();
+	        	self.location='home';
+	        }
+	        ,btn2: function(index, layero){
+		    	layer.closeAll();
+		  	}
+		})
+	})
+	
+	$('#xiazai').click(function(){
+	    layer.open({
+		    type: 1
+		    ,title: '报告下载'
+	        ,offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+	        ,area: ['300px', '157px']
+	        ,content: '<div style="padding: 20px 10px; text-align: center"><p> 确定下载本报告吗？ </p></div>'
+	        ,btn: ['下载', '取消']
+	        ,btnAlign: 'r' //按钮居中
+	        ,shade: 0.6 //不显示遮罩
+	        ,yes: function(){
+	        	var pdf = new jsPDF('p','pt','a4');
+				 pdf.internal.scaleFactor = 2;
+				 var options = {
+	           		pagesplit: true, //设置是否自动分页
+	          		"background": '#FFFFFF'   //如果导出的pdf为黑色背景，需要将导出的html模块内容背景 设置成白色。
+	      		};
+	      		var printHtml = $('#PDF').get(0);
+	      		pdf.addHTML(printHtml,15, 15, options,function() {
+	          		pdf.save('目标.pdf');
+	     		});
+	     		layer.closeAll();
+		    }
+	        ,btn2: function(index, layero){
+		    	layer.closeAll();
+		  	}
+		})
+	})
+})
+	
+/*	$('#pingyu').click(function(){
+	    layer.open({
+		    type: 1
+		    ,title: '报告评语'
+	        ,offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+	        ,area: ['500px', '400px']
+	        ,id: 'pingyu' //防止重复弹出
+	        ,content: '<div style="padding: 20px 10px; text-align: center"> <textarea id="wenbenkuang" class="form-control11" type="text">  </textarea> </div>'
+	        ,btn: ['确认', '取消']
+	        ,btnAlign: 'r' //按钮居中
+	        ,shade: 0.6 //不显示遮罩
+	        ,yes: function(){
+	        alert($('#wenbenkuang'));
+	        var comment = $('#wenbenkuang').text();
+	        var pararms ={'val':comment};// 定义一个js对象
+	        alert(comment);
+	        	$.ajax({
+		  			url:'addComment',
+		  			type:'POST',
+		  			traditional:true,//这使json格式的字符不会被转码
+		  			contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  			data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  			dataType: "json",
+		  			success:function(e){//e变量就是后台返回的Map对象
+		  				alert(e);
+		  			},
+		  			error:function(e){
+	  				
+		  			}
+  				});*/
+  				
+	        	/*$.ajax({
+					url:"addComment",
+					type:"get",
+					async:false,
+					dataType:"text",
+					data:{report_id: "1"},
+					success:function(data){
+						if(data=="success"){
+							alert("发布问题成功！")
+						}
+						if(data=="failed"){
+							alert("服务异常！")
+						}
+				            window.parent.layer.closeAll();//关闭弹窗
+					}
+				})*/
+/*	        }
+	        ,btn2: function(index, layero){
+		    	layer.closeAll();
+		  	}
+		})
+	})*/
+	
+
+	 
+/*	$('#xiazai').click(function(){
+	    layer.open({
+		    type: 1
+		    ,title: '报告下载'
+	        ,offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+	        ,area: ['300px', '157px']
+	        ,id: 'pingyu' //防止重复弹出////注销过
+	        ,content: '<div style="padding: 20px 10px; text-align: center"><p> 确定下载本报告吗？ </p></div>'
+	        ,btn: ['下载', '取消']
+	        ,btnAlign: 'r' //按钮居中
+	        ,shade: 0.6 //不显示遮罩
+	        ,yes: function(){
+	        	return false
+	        }
+	        ,btn2: function(index, layero){
+		    	layer.closeAll();
+		  	}
+		})
+	})*/
+	
+</script>
+
+<style>
+	.form-control11 { 
+		display: block;
+		margin: auto;
+		width: 90%; 
+		height: 263px; 
+		padding: 5px 5px; 
+		font-size: 14px; 
+		line-height: 1.428571429; 
+		color: #555555; 
+		vertical-align: middle; 
+		background-color: #ffffff; 
+		border: 1px solid lightblue; 
+		border-radius: 4px; 
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); 
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); 
+		-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; 
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; 
+	} 
+	.form-control11:focus { 
+		border-color: #66afe9; 
+		outline: 0; 
+		background-color: whitesmoke;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6); 
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6); 
+	} 
+</style>
 
 </body>
 </html>

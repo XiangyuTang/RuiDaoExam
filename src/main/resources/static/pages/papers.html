@@ -11,20 +11,61 @@
 		<link rel="stylesheet" href="../layuiadmin/style/admin.css"  th:href="@{static/layuiadmin/style/admin.css}" media="all">
 		<link rel="stylesheet" href="../layuiadmin/style/template.css" th:href="@{static/layuiadmin/style/template.css}" media="all">
 		<link rel="stylesheet" type="text/css" href="../layuiadmin/style/goodslist.css" th:href="@{static/layuiadmin/style/goodslist.css}"/>
+		<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}" />
+		<script src="../js/jquery-3.1.0.min.js" th:src="@{/static/js/jquery-3.1.0.min.js}"></script>
 		<style>
 			.paper-item{
-				height: 130px;
+				height: 150px;
+				/*padding-top: 2px;
+				padding-top: color:#00BB00;*/
+				border-color: black;
+/*				border:2px;*/
+/* 				background-color:#00FF00;  */
 			}
 			.paper-item-bottom{
-				width: auto;
-				height: 30px;
-				background-color:#C7CCD3;
+ 				width: auto; 
+				height: 40px;
+				background-color:#B8BFC8;
 			}
+/*			.cmdlist-text{}*/
+			/*.item-center{
+				width: auto; 
+				height: 40px;
+				margin: 5px;
+			}*/
+			.toreport{
+				position: absolute;
+				margin-top: 10px;
+				margin-left: 10px;
+/*				text-align: left;*/
+			}
+			.toinvite{
+				position: absolute;
+				margin-top: 10px;
+/*				margin-left: 200px;*/
+				margin-left: 71%;
+/*				background-color: #DDDDDD;*/
+			}
+			a:link {color:#000000;}    /* unvisited link */
+			a:visited {color:#000000;} /* visited link */
+			a:hover {color:#858585}   /* mouse over link */
+			a:active {color:#204D74;}
+			/*.p{
+				margin-left: auto;
+				margin-right: auto;
+			}*/
+			/*body{
+				font-size: x-large;
+			}*/
+			/*.fa-clock-o{
+				width: px;
+				height: 20px;
+			}*/
 		</style>
 	</head>
 	<body>
 		<div class="layui-fluid layadmin-cmdlist-fluid">
-				<div>
+<!--				<div>-->
 						<!--<span class="layui-breadcrumb" lay-separator=">">
  							<a href="">全部分类</a>
 							<a href="">软件开发</a>
@@ -55,89 +96,41 @@
 
 							</table>
 					</div>
-					<div class="layui-row layui-col-space30" style="margin-top: 10px;">
-						<div th:remove="(${papers.createpapers} == null)? all:none">
-						<div class="layui-col-md2 layui-col-sm2">
+					<div class="layui-row layui-col-space30" style="margin-top: 10px;" th:remove="(${papers.createpapers} == null)? all:none">
+						<div class="layui-col-md3 layui-col-sm3" th:each="createpaper:${papers.createpapers}">
 							<div class="cmdlist-container paper-item">
-								<a href="javascript:;">
+<!--								<a href="javascript:;">-->
 									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<span class="flow">
-						                      433
-						                    </span>
+<!--										<i class="fa fa-book"></i>-->
+										<b><p class="info" th:text="${createpaper.paperName}" align="center" style="font-size: 17px;">卷名</p></b>
+										<div class="price" style="display: inline;">
+											<i class="fa fa-clock-o fa-lg" ></i>&nbsp;&nbsp;&nbsp;<i th:text="${createpaper.paperTime}" style="font-size: 17px; font-style:normal">79</i>
+											<!--<span class="flow" th:text="${createpaper.totalScore}" style="font-size: 17px;">
+						                      <i class="fa fa-hourglass-start "></i>&nbsp;&nbsp;&nbsp;433
+						                    </span>-->
 										</div>
+										<div class="price" style="display: inline;">
+<!--										<i class="fa fa-hourglass-start"></i>-->
+										<span class="flow" style="font-size: 17px;">
+						                      <i class="fa fa-hourglass-start">&nbsp;&nbsp;&nbsp;<i style=" font-style:normal;" th:text="${createpaper.totalScore}">433</i></i>
+						                    </span>
+						                </div>
 									</div>
-								</a>
+<!--								</a>-->
 								<div class="paper-item-bottom">
-<!-- 									<strong th:text="${papers.createpapers}"></strong> -->
+									<div class="item-center">
+										<a class="toreport" style="font-size: 14px;" href="">
+											<i class="fa fa-file-text-o"></i>查看报告
+										</a>
+										<a class="toinvite" style="font-size: 14px;" th:href="@{/toinvite(paper_id=${createpaper.paperId})}">
+											<i class="fa fa-user-o"></i>考生录入
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
-						</div>
-						
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      						<i class="layui-icon layui-icon-rate"></i>
-                    						  433
-                    						</span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-					<div class="goodslist-nav">
+					</div>
+					<div class="goodslist-nav" style="margin-top: 30px;">
 					<table class="layui-table" lay-skin="line" style="margin-top: 0px;">
 								<colgroup>
 									<col width="100">
@@ -164,377 +157,47 @@
 								</tbody>
 							</table>				
 					</div>
-					</div>
-
-					<!--
-			----------------------------此处为右侧商品列表----------------------------------------
-			-->
-
-					<div class="layui-row layui-col-space30" style="margin-top: 10px;">
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
+<!--					</div>-->
+					<div class="layui-row layui-col-space30" style="margin-top: 10px;" th:remove="(${papers.buypapers} == null)? all:none">
+						<div class="layui-col-md3 layui-col-sm3" th:each="buypaper:${papers.buypapers}">
+							<div class="cmdlist-container paper-item">
+<!--								<a href="javascript:;" style="color: #000000;">-->
 									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-						                      <i class="layui-icon layui-icon-rate"></i>
-						                      433
+<!--										<i class="fa fa-book"></i>-->
+										<b><p class="info" th:text="${buypaper.paperName}" align="center" style="font-size: 17px;">卷名</p></b>
+										<div class="price" style="display: inline;">
+											<i class="fa fa-clock-o fa-lg" ></i>&nbsp;&nbsp;&nbsp;<i th:text="${buypaper.paperTime}" style="font-size: 17px; font-style:normal">79</i>
+											<!--<span class="flow" th:text="${buypaper.totalScore}" style="font-size: 17px;">
+						                      <i class="fa fa-hourglass-start "></i>&nbsp;&nbsp;&nbsp;433
+						                    </span>-->
+										</div>
+										<div class="price" style="display: inline;">
+<!--										<i class="fa fa-hourglass-start"></i>-->
+										<span class="flow" style="font-size: 17px;">
+						                      <i class="fa fa-hourglass-start">&nbsp;&nbsp;&nbsp;<i style=" font-style:normal;" th:text="${buypaper.totalScore}">433</i></i>
 						                    </span>
-										</div>
+						                </div>
 									</div>
-								</a>
+<!--								</a>-->
+								<div class="paper-item-bottom">
+									<div class="item-center">
+										<a class="toreport" style="font-size: 14px;" href="">
+											<i class="fa fa-file-text-o"></i>查看报告
+										</a>
+										<a class="toinvite" style="font-size: 14px;" th:href="@{/toinvite(paper_id=${buypaper.paperId})}">
+											<i class="fa fa-user-o"></i>考生录入
+										</a>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md2 layui-col-sm2">
-							<div class="cmdlist-container">
-								<!--
-								<a href="javascript:;">
-									<img src="../layuiadmin/style/res/template/portrait.png">
-								</a>
-								-->
-								<a href="javascript:;">
-									<div class="cmdlist-text">
-										<p class="info">《五年编程三年脱发》精选题库</p>
-										<div class="price">
-											<b>￥79</b>
-											<p>
-												¥
-												<del>130</del>
-											</p>
-											<span class="flow">
-                      <i class="layui-icon layui-icon-rate"></i>
-                      433
-                    </span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="layui-col-md12 layui-col-sm12">
-							<div id="demo0"></div>
-						</div>
-					</div>
-				</div>
+					</div>						
+			</div>
 	</body>
 </html>
+<script src="../js/jquery-3.1.0.min.js" th:src="@{/static/js/jquery-3.1.0.min.js}"></script>
+<script>
+	$(function(){
+		
+	})
+</script>

@@ -1,0 +1,129 @@
+/** 消息msg */
+.sets-msg {
+	margin: 0;
+	position: fixed;
+	text-align: center;
+	width: 360px;
+	top: 0;
+	left: calc(50% - 180px);
+	color: #FFF;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	padding: 13px 20px;
+	z-index: 2000;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+	-webkit-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+.sets-msg.slow{
+	-webkit-animation-duration: 1.5s;
+	animation-duration: 1.5s;
+}
+
+.sets-msg.success{
+	background-color: #37BC9B;
+}
+.sets-msg.info{
+	background-color: #8CADCA;
+}
+.sets-msg.danger{
+	background-color: #E9573F;
+}
+.sets-msg.warning{
+	background-color: #FFA400;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+          animation-name: fadeInDown;
+}
+
+@-webkit-keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+}
+
+.fadeOutUp {
+  -webkit-animation-name: fadeOutUp;
+          animation-name: fadeOutUp;
+}
+
+@-webkit-keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0);
+  }
+}
+
+.fadeOutDown {
+  -webkit-animation-name: fadeOutDown;
+          animation-name: fadeOutDown;
+}
+

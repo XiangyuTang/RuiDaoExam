@@ -21,6 +21,8 @@ public interface ReportMapper {
     List<Report> selectByExample(ReportExample example);
 
     Report selectByPrimaryKey(Integer reportId);
+    
+    List<Report> selectByPaperId(Integer paper_id);
 
     int updateByExampleSelective(@Param("record") Report record, @Param("example") ReportExample example);
 

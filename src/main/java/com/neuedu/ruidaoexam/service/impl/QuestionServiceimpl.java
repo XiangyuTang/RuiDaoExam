@@ -131,4 +131,10 @@ public class QuestionServiceimpl implements QuestionService {
 		return questions;
 	}
 
+//	@Override
+//	public List<ChoiceQuestion> getChoiceQuestionsInList(List<Integer> idList) {
+//		List<ChoiceQuestion> choiceQuestionsInList = choiceQuestionMapper.getChoiceQuestionsInList(idList);
+//		return choiceQuestionsInList;
+//	}
+
 }

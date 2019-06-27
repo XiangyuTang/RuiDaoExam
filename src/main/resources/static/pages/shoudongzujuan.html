@@ -40,7 +40,7 @@
 			</div>
 
 	    	<div class="sidebar-wrapper ">
-	            <ul class="nav">
+	            <ul class="nav" th:remove="(${questionbanks} == null)? all:none">
  	                <li th:each="questionbank:${questionbanks}">
 	                    <a href="/toquestion" target="right" th:href="@{/toquestion(quesbankid=${questionbank.quesBankId})}">
 	                        <i class="material-icons" th:id="${questionbankStat.count}" ></i>

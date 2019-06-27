@@ -31,5 +31,10 @@ public class QuestionBankServiceimpl implements QuestionBankService {
 //		}
 		return questionBanks;
 	}
+	@Override
+	public int deleteBankByBankId(Integer Bank_id) {
+		int rs = questionBankMapper.deleteByPrimaryKey(Bank_id);
+		return rs;
+	}
 
 }

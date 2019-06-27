@@ -28,7 +28,7 @@ public class PageJumpController {
 	@RequestMapping("/to11")
 	public String to111() {
 		// System.out.println("f-----------------");
-		return "11";
+		return "addQuestion";
 	}
 
 	@RequestMapping("/test")
@@ -41,11 +41,11 @@ public class PageJumpController {
 	public String toindex() {
 		return "index";
 	}
-	//考生录入界面
-	@RequestMapping("/toinvite")
-	public String toinvite() {
-		return "invite";
-	}
+//	//考生录入界面
+//	@RequestMapping("/toinvite")
+//	public String toinvite() {
+//		return "invite";
+//	}
 
 	
 	// 注册页
@@ -127,9 +127,9 @@ public class PageJumpController {
 	}
 
 	// 教师-我的题库
-	@RequestMapping("/tomyLibraryTch")
+	@RequestMapping("/tomyBanksTch")
 	public String tomylibrary() {
-		return "teacher/myLibraryTch";
+		return "teacher/myBanksTch";
 	}
 
 	// 教师-我的试卷
@@ -137,7 +137,16 @@ public class PageJumpController {
 	public String tomyPaperTch() {
 		return "teacher/myPaperTch";
 	}
-
+	//教师-题库商户
+	@RequestMapping("/tomyBanksaleTch")
+	public String tomyBanksaleTch() {
+		return "teacher/myBanksaleTch";
+	}
+	//教师-卷子商户
+	@RequestMapping("/tomyPapersaleTch")
+	public String tomyPapersaleTch() {
+		return "teacher/myPapersaleTch";
+	}
 	// 考试页
 	@RequestMapping("/toexam")
 	public String toexam() {
@@ -188,4 +197,35 @@ public class PageJumpController {
 		public String toStuOrder() {
 			return "student/order";
 		}
+		
+		//跳转到商城界面
+		@RequestMapping("toShop")
+	    public String toShop() {
+			return "user/goodslist";
+		}
+				
+				//登出
+		@RequestMapping("logout")
+		public String logout(Model m,HttpServletRequest req) {
+			req.getSession().removeAttribute("uid");
+			req.getSession().removeAttribute("name");
+			req.getSession().removeAttribute("role");
+					
+		return "redirect:tologin";
+				
+				}
+		//跳转到添加题目界面
+		@RequestMapping("/toaddquestion")
+		public String toaddquestion(Integer bank_id, String bank_name,Model model) {
+			model.addAttribute("bank_id", bank_id);
+			model.addAttribute("bank_name", bank_name);
+//			return "addQuestion";
+			return "addQuestion";
+		}
+		//到教师主页，测试用，后期删掉
+		@RequestMapping("/tozhuye")
+		public String tozhuye() {
+			return "reportlist";
+		}
+		
 }

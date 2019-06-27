@@ -1,19 +1,21 @@
 package com.neuedu.ruidaoexam.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import org.apache.poi.ss.formula.IStabilityClassifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.neuedu.ruidaoexam.entity.AnsweredQuestion;
 import com.neuedu.ruidaoexam.entity.MsgOfUpdateQuestion;
 import com.neuedu.ruidaoexam.service.AnsweredQuestionService;
@@ -21,23 +23,16 @@ import com.neuedu.ruidaoexam.service.QuestionService;
 import com.neuedu.ruidaoexam.service.ReportService;
 import com.neuedu.ruidaoexam.service.impl.QuestionServiceimpl;
 import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
-
+import com.neuedu.ruidaoexam.entity.Student;
+import com.neuedu.ruidaoexam.excel.test;
 @RestController
 public class AjaxController {
-	@Autowired
-	QuestionServiceimpl questionServiceimpl;
-	@Autowired
-	AnsweredQuestionService answeredQuestionService;
-	//通过bank_id查询其所属的所有题目并返回前端
-	@RequestMapping("/toquestion1")
-	public Map<String, List<Object>> test(){
-		questionServiceimpl.getQuestionByBankid(2);
-		return null;
-	}
+	
 	
 	@Autowired
 	ReportService reportService;
-	
+	@Autowired
+	AnsweredQuestionService answeredQuestionService;
 	/**
 	 * 教师发布报告评语
 	 * @return
@@ -134,5 +129,38 @@ public class AjaxController {
 			System.out.println(i);
 		}
 		return "666";
+	}
+	/**
+	 * 呈现答题情况
+	 * @return
+	 */
+	@RequestMapping(value = "/getDaTiQingKuang", method = RequestMethod.POST)
+	@ResponseBody
+	public String getDaTiQingKuang(@RequestBody Map val, HttpServletRequest request) {
+		
+//		request.getSession().setAttribute("report_id", val.get("val").toString());
+//	    String reportId = request.getSession().getAttribute("report_id").toString();
+//	    int report_id = Integer.parseInt(reportId);
+//		reportServiceimpl.getDaTiQingKuang(report_id);
+		
+		List<test> list = new ArrayList<test>();
+		
+		test test = new test();
+		test.setEmail("erwerwetwetwt");
+		list.add(test);
+		HashMap map = new HashMap();
+		map.put("shitiList", list);
+		String str = JSON.toJSONString(map);
+		return str;
+		
+		//int id = 1;
+		//List<Object> shitiList = new ArrayList<Object>();
+		//shitiList.add(id);
+		//HashMap map = new HashMap();
+		//map.put("shitiList", shitiList);
+		//String str = JSON.toJSONString(map); // 利用fastjson转换字符串
+		//return str; //返回字符串
+		
+//		return val.get("val").toString();
 	}
 }

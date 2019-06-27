@@ -91,6 +91,21 @@
     from ques_paper_mapper
     where mapper_id = #{mapperId,jdbcType=INTEGER}
   </select>
+  <select id="countQuestionNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+  	from ques_paper_mapper
+  	where paper_id = #{papperId}
+  </select>
+  <select id="countKeGuanQuestionNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+  	from from ques_paper_mapper
+  	where paper_id = #{paperId} and (ques_type = 1 or ques_type = 2 or ques_type = 4)
+  </select>
+  <select id="countZhuGuanQuestionNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+  	from from ques_paper_mapper
+  	where paper_id = #{paperId} and (ques_type = 3 or ques_type = 5)
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from ques_paper_mapper
     where mapper_id = #{mapperId,jdbcType=INTEGER}

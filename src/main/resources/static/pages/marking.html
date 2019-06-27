@@ -15,7 +15,7 @@
 <script src="../css/marking_files/hm.js.下载" th:src="@{static/css/marking_files/hm.js.下载}"></script>
 <script type="text/javascript" src="../css/marking_files/qrcode.js.下载" th:src="@{static/css/marking_files/qrcode.js.下载}"></script>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>
-
+<script type="text/javascript" src="../js/template.js" th:src="@{static/js/template.js}"></script>
 
 
 
@@ -181,16 +181,16 @@
     <div class="report-basic" id="report-basic">
     <!--<hr id="jibenxinxi" style="height:1px;border:none;border-top:1px solid #555555;" />-->
     <!--<span id="jibenxinxi">&nbsp;</span>-->
-    <h3 id="jibenxinxi" class="tc fn report-title">不服就来做它报告</h3>
+    <h3 id="jibenxinxi" class="tc fn report-title" th:text="${session.paperTitle}"></h3>
     <div class="head-info">
         <img class="avator" src="../css/marking_files/portrait_default.png" th:src="@{static/css/marking_files/portrait_default.png}">
         <div class="info-wrapper">
-            <div class="name-wrapper">哈哈哈</div>
-            <div>邮箱 <span>2516930455@qq.com</span></div>
+            <div class="name-wrapper" th:text="${sName}"></div>
+            <div>邮箱 <span th:text=${session.sEmail}></span></div>
         </div>
         <div class="text-bittersweet score-wrapper" _v-b40dfc58=""> 
         	<span class="report-marked no" _v-b40dfc58="">（未判卷）</span> 
-        	<span class="score" _v-b40dfc58="">20</span> 分 
+        	<span class="score" _v-b40dfc58="" th:text=${session.sScore}></span> 分 
         </div>
     </div>
 
@@ -204,18 +204,21 @@
     	</div>  
     </div>-->
 
-    </div>                                                                                                                                                                                            <div class="report-summary" id="report-summary">
+    </div>   
+    <div class="report-summary" id="report-summary">
     	<div class="section-title"><a id="quanmiangaikuo">全面概括</a></div>
-    	<p class="pb5 f16">试卷共 5 道题，考生共答 5 道题</p>
+    	<p class="pb5 f16">试卷共 <span class="pb5 f16" th:text="${session.shiTiNum}"></span> 道题，考生共答 <span class="pb5 f16" th:text="${session.shiTiNum}"></span> 道题</p>
     	<a class="btn btn-link p0">
-        <i class="layui-icon layui-icon-log"></i>
-		        考试时间 2019-06-18 10:57 至
-		         2019-06-18 10:57    </a>
+    	<i class="layui-icon layui-icon-log">考试时间 </i>
+        <i th:text="${session.beginTime}"></i>
+		<i>至 </i>   
+		<i th:text="${session.endTime}"></i>     
+		</a>
         
     <div> 
     	<div class="s-table mt10"> 
     		<div class="s-row th"> 
-    			<div class="s-col text-ellipsis" style="width: 18%">单选题</div> 
+    			<div class="s-col text-ellipsis" style="width: 18%">客观题</div> 
     			<div class="s-col"> 
     				<div class="s-table"> 
     					<div class="s-row"> 
@@ -233,7 +236,7 @@
     		<div class="s-row"> 
     			<div class="s-col overview" style="width: 18%"> 
     				<ul> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet">3</span> 道</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet" th:text="${session.keGuanTiNum}"></span> 道</li> 
     					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet">30</span> 分</li> 
     					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet">20</span> 分</li> 
     				</ul> 
@@ -244,10 +247,19 @@
 	    					<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
 	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
 	    					</div> 
+	    					<div class="s-col" style="width: 20%"> <span>选择题</span></div> 
+	    					<div class="s-col" style="width: 15%">3</div> 
+	    					<div class="s-col error-count" style="width: 15%">1</div> 
+	    					<div class="s-col skill-score" style="width: 20%">20</div>
+	    				</div>  
+	    				<div class="s-row skill-row"> 
+	    					<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
+	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
+	    					</div> 
 	    					<div class="s-col" style="width: 20%"> <span>判断题</span></div> 
 	    					<div class="s-col" style="width: 15%">3</div> 
 	    					<div class="s-col error-count" style="width: 15%">1</div> 
-	    					<div class="s-col skill-score" style="width: 20%">20</div> 
+	    					<div class="s-col skill-score" style="width: 20%">20</div>
 	    				</div>  
     				</div> 
     			</div> 
@@ -255,7 +267,7 @@
     	</div>
     	<div class="s-table mt10"> 
     		<div class="s-row th"> 
-    			<div class="s-col text-ellipsis" style="width: 18%">简答题</div> 
+    			<div class="s-col text-ellipsis" style="width: 18%">主观题</div> 
     			<div class="s-col"> 
     				<div class="s-table"> 
     					<div class="s-row"> 
@@ -284,11 +296,20 @@
     						<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
     							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> PHP</span>  
     						</div> 
-    						<div class="s-col" style="width: 20%"> <span>问答题</span>  </div> 
+    						<div class="s-col" style="width: 20%"> <span>填空题</span>  </div> 
     						<div class="s-col" style="width: 15%">2</div> 
     						<div class="s-col error-count" style="width: 15%">2</div> 
     						<div class="s-col skill-score" style="width: 20%">0</div> 
     					</div>  
+    					<div class="s-row skill-row"> 
+    						<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> PHP</span>  
+    						</div> 
+    						<div class="s-col" style="width: 20%"> <span>问答题</span>  </div> 
+    						<div class="s-col" style="width: 15%">2</div> 
+    						<div class="s-col error-count" style="width: 15%">2</div> 
+    						<div class="s-col skill-score" style="width: 20%">0</div> 
+    					</div>
     				</div> 
     			</div> 
     		</div> 
@@ -298,7 +319,8 @@
 
 <div class="report-answer" id="report-answer">
     <div class="section-title"><a id="datiqingkuang">答题情况</a></div>
-        <div class="part-title">单选题（共3道题）</div>
+    <div id="xunhuan"></div>
+<!--        <div class="part-title">单选题（共3道题）</div>
         	<div class="question ">
 				<div class="q-panel wrong"> 1、 <span class="q-type">[ 判断题 ]</span> 
 					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
@@ -308,7 +330,6 @@
 							<div class="q-remark" style="display: none;"> 
 							<form> 
 								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<!--<div class="form-group form-group-sm"> <textarea class="form-control remark-input" placeholder="输入评语"></textarea> </div>--> 
 									<div class="tr"> 
 										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
 										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
@@ -351,7 +372,6 @@
 							<div class="q-remark" style="display: none;"> 
 							<form> 
 								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<!--<div class="form-group form-group-sm"> <textarea class="form-control remark-input" placeholder="输入评语"></textarea> </div>--> 
 									<div class="tr"> 
 										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
 										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
@@ -394,7 +414,6 @@
 							<div class="q-remark" style="display: none;"> 
 							<form> 
 								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<!--<div class="form-group form-group-sm"> <textarea class="form-control remark-input" placeholder="输入评语"></textarea> </div>--> 
 									<div class="tr"> 
 										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
 										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
@@ -438,7 +457,6 @@
 						<div class="q-remark" style="display: none;"> 
 						<form> 
 							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div>
-							<!--<div class="form-group form-group-sm"> <textarea class="form-control remark-input" placeholder="输入评语"></textarea> </div>--> 
 							<div class="tr"> 
 								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
 								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
@@ -473,7 +491,6 @@
 						<div class="q-remark" style="display: none;"> 
 						<form> 
 							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div>
-							<!--<div class="form-group form-group-sm"> <textarea class="form-control remark-input" placeholder="输入评语"></textarea> </div>--> 
 							<div class="tr"> 
 								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
 								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
@@ -497,7 +514,7 @@
 	            	<p>题目解析：</p>
 	                <pre>这么简单都不会！！</pre>        
 				</div>
-        </div>
+        </div>-->
 </div>
 <div>
 	<div class="section-title"><a id="baogaopingyu">报告评语</a>
@@ -595,10 +612,7 @@
         			<div class="input-group input-group-sm mt10 mb20" _v-719dab47=""> 
         				<input type="text" placeholder="添加一个标记" class="form-control" _v-719dab47="">
         				<span class="input-group-btn" _v-719dab47=""> 
-        					<a class="btn btn-info layui-icon layui-icon-add-1" _v-719dab47=""> 
-        						<!--<i class="layui-icon layui-icon-add-1"></i>-->
-        						<!--<i class="layui-icon layui-icon-add-circle" _v-719dab47=""></i>-->
-        					</a>
+        					<a class="btn btn-info layui-icon layui-icon-add-1" _v-719dab47=""></a>
         				</span>
         			</div>
         		</div> 
@@ -613,11 +627,11 @@
 	            </div>
 	            <div class="mt10">
 	                <ul class="links">
-	                    <li><a href="/static/pages/marking.html#jibenxinxi">基本信息</a></li>
-	                    <li><a href="/static/pages/marking.html#quanmiangaikuo">全面概括</a></li>
-	                    <li><a href="/static/pages/marking.html#datiqingkuang">答题情况</a></li>
-	                    <li><a href="/static/pages/marking.html#baogaopingyu">报告评语</a></li>
-	                    <li><a href="/static/pages/marking.html#ceshirizhi">测试日志</a></li>
+	                    <li><a href="marking#jibenxinxi">基本信息</a></li>
+	                    <li><a href="marking#quanmiangaikuo">全面概括</a></li>
+	                    <li><a href="marking#datiqingkuang">答题情况</a></li>
+	                    <li><a href="marking#baogaopingyu">报告评语</a></li>
+	                    <li><a href="marking#ceshirizhi">测试日志</a></li>
 	                 </ul>
 	            </div>
 	        </div>
@@ -629,19 +643,19 @@
 </div>
 </div>
 
-    <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?e16bac3df70cc77a3932bd0f15bfbed6";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?e16bac3df70cc77a3932bd0f15bfbed6";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
     
-    <script src="../css/marking_files/lib.10ef5.js.下载" th:src="@{static/css/marking_files/lib.10ef5.js.下载}"></script>
-    <script src="../css/marking_files/vendor.18558.js.下载" th:src="@{static/css/marking_files/vendor.18558.js.下载}"></script>
-    <script src="../css/marking_files/report-detail.f47f4.js.下载" th:src="@{static/css/marking_files/report-detail.f47f4.js.下载}"></script>
+<script src="../css/marking_files/lib.10ef5.js.下载" th:src="@{static/css/marking_files/lib.10ef5.js.下载}"></script>
+<script src="../css/marking_files/vendor.18558.js.下载" th:src="@{static/css/marking_files/vendor.18558.js.下载}"></script>
+<script src="../css/marking_files/report-detail.f47f4.js.下载" th:src="@{static/css/marking_files/report-detail.f47f4.js.下载}"></script>
     
     <div class="fade modal" id="ali-player-modal" tabindex="-1" role="dialog" aria-hidden="true">
     	<div class="modal-dialog">
@@ -691,7 +705,7 @@
 </script>-->
 
 <script>
-	$(function(){
+/*	$(function(){
 		$('[class="layui-icon layui-icon-edit"]').click(function(){
 			$(this).parent().next().css("display","block")
 	})
@@ -700,7 +714,7 @@
 		$('[class="btn btn-default btn-sm mr10"]').click(function(){
 			$(this).parent().parent().parent().css("display","none")
 	})
-	})
+	})*/
 	
 	$(function(){
 		$('[class="layui-btn layui-btn-normal layui-btn-sm"]').click(function(){
@@ -733,7 +747,64 @@
   			$(this).parent().parent().parent().prev().html(comment)
 		})
 	})
-		
+	$(function(){
+	        var report_id = '1';
+	        var pararms ={'val':report_id};// 定义一个js对象
+	        $.ajax({
+		  		url:'getJiBenXinXi',
+		  		type:'POST',
+		  		traditional:true,//这使json格式的字符不会被转码
+		  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  		async : false,
+		  		dataType: "text",		  		
+		  		success:function(e){//e变量就是后台返回的Map对象
+		  		},
+		  		error:function(e){
+		  		}
+  			});
+  			/* $(this).parent().parent().parent().css("display","none")
+  			$(this).parent().parent().parent().prev().html(comment) */
+	})	
+	$(function(){
+	        var report_id = '1';
+	        var pararms ={'val':report_id};// 定义一个js对象
+	        $.ajax({
+		  		url:'getQuanMianGaiKuo',
+		  		type:'POST',
+		  		traditional:true,//这使json格式的字符不会被转码
+		  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  		async : false,
+		  		dataType: "text",		  		
+		  		success:function(e){//e变量就是后台返回的Map对象
+		  		},
+		  		error:function(e){
+		  		}
+  			});
+  			/* $(this).parent().parent().parent().css("display","none")
+  			$(this).parent().parent().parent().prev().html(comment) */
+	})	
+	$(function(){
+	        var report_id = '1';
+	        var pararms ={'val':report_id};// 定义一个js对象
+	        $.ajax({
+		  		url:'getDaTiQingKuang',
+		  		type:'POST',
+		  		traditional:true,//这使json格式的字符不会被转码
+		  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  		async : false,
+		  		dataType: "text",		  		
+		  		success:function(e){//e变量就是后台返回的Map对象
+		  			
+		  		},
+		  		error:function(e){
+		  		}
+  			});
+  			/* $(this).parent().parent().parent().css("display","none")
+  			$(this).parent().parent().parent().prev().html(comment) */
+	})	
 </script>
 
 <script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
@@ -756,7 +827,6 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 	        ,yes: function(){
 	        	var report_id = '2';
 	        	var pararms ={'val':report_id};// 定义一个js对象
-	        	alert(report_id)
 		        $.ajax({
 			  		url:'deleteReport',
 			  		type:'POST',
@@ -887,6 +957,98 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 	
 </script>
 
+<script type="text/html" id="template_shiti">
+	{{each shitiList as shiti}}
+	<div class="question ">
+		<div class="q-panel right"> 1、 <span class="q-type">[ 判断题 ]</span> 
+			<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
+			<div class="pull-right"> 
+				<i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> 
+				<span class="divider"></span> 
+				<div class="score-wrapper"> 
+					<span class="score" > 得分: {{shiti.email}}</span> 
+					<span class="point">满分: 10 </span> 
+					<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+					</a> 
+					<div class="q-remark" style="display: none;"> 
+						<form> 
+							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
+							<!--<div class="form-group form-group-sm"> <textarea class="form-control remark-input" placeholder="输入评语"></textarea> </div>--> 
+							<div class="tr"> 
+								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
+							</div> 
+						</form> 
+					</div> 
+				</div> 
+			</div> 
+		</div>
+
+ 		<div class="q-subject unselectable">
+        	<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
+ 		</div>
+ 				
+		<ul class="q-options unselectable">
+            <li class="q-option">
+                <i class="layui-icon layui-icon-radio text-medium-gray"></i> <span class="q-index">A、</span>正确
+            </li>
+            <li class="q-option">
+                <i class="layui-icon layui-icon-circle text-medium-gray"></i> <span class="q-index">B、</span>错误
+            </li>
+        </ul>
+    
+        <div class="q-text cand">
+            <p>考生答案：</p>A
+        </div>
+                
+        <div class="q-text">
+            <p>正确答案：</p>
+            <pre>B</pre>
+        </div>
+    </div>
+    {{/each}}
+    <script>
+    	$(function(){
+		$('[class="layui-icon layui-icon-edit"]').click(function(){
+			$(this).parent().next().css("display","block")
+		})
+		})	
+		$(function(){
+			$('[class="btn btn-default btn-sm mr10"]').click(function(){
+				$(this).parent().parent().parent().css("display","none")
+		})
+		})
+    </script>
+</script>
+
+<script>
+	$(function(){
+		var report_id = '1';
+	    var pararms ={'val':report_id};// 定义一个js对象
+		$.ajax({
+			url:'/getDaTiQingKuang',
+			type:'post',
+			processData:false,
+			contentType:false,
+			data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+			traditional:true,//这使json格式的字符不会被转码
+		  	contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  	async : false,
+		  	dataType: "text",
+			success:function(e){
+				/* alert(e); */
+				var obj = JSON.parse(e);//将字符串转换成json对象
+				var new_html= template("template_shiti",obj);//将json对象绑定到artTemplate模板上
+				$('#xunhuan').append(new_html);
+				/*$('#defen').append(e);*/
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	})
+</script>
 <style>
 	.form-control11 { 
 		display: block;

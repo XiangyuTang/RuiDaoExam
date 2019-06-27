@@ -29,7 +29,7 @@
 				<div class="admin-login-box">
 					<a class="logo" style="left: 0;" href="#">
 						<span style="width: 50px;height: 100px;">
-								<img src="../../layuiadmin/style/res/logo.png" style="width: 200px; height: 50px;">
+								<img src="../../layuiadmin/style/res/logo.png" th:src="@{static/layuiadmin/style/res/logo.png}" style="width: 200px; height: 50px;">
 							</span>
 					</a>
 					<div class="admin-side-toggle">
@@ -47,7 +47,7 @@
 				<ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
 
 					<li class="layui-nav-item" lay-unselect>
-						<a href="homePage.html" layadmin-event="message" lay-text="首页">
+						<a href="tohome" layadmin-event="message" lay-text="首页">
 
 							<!--
               	作者：1173073908@qq.com
@@ -61,7 +61,7 @@
 						</a>
 					</li>
 					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-						<a style="color: #75dd6e;" lay-href="user/goodslist.html" href="javascript:;" layadmin-event="theme">
+						<a style="color: #75dd6e;" lay-href="user/goodslist.html" href="javascript:;" >
 							<!--
                 	作者：1173073908@qq.com
                 	时间：2019-06-13
@@ -71,7 +71,7 @@
 						</a>
 					</li>
 					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-						<a href="javascript:;" layadmin-event="note">
+						<a href="toindex">
 							<!--
               	作者：1173073908@qq.com
               	时间：2019-06-13
@@ -87,18 +87,18 @@
 					</li>
 					<li class="layui-nav-item" lay-unselect>
 						<a href="javascript:;">
-							<cite>hiki</cite>
+							<cite th:text="${session.name}"></cite>
 						</a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a lay-href="set/user/info.html">基本资料</a>
+								<a  href="toindex">基本资料</a>
 							</dd>
 							<dd>
-								<a lay-href="set/user/password.html">修改密码</a>
+								<a href="toindex">修改密码</a>
 							</dd>
 							<hr>
-							<dd layadmin-event="logout" style="text-align: center;">
-								<a>退出</a>
+							<dd style="text-align: center;">
+								<a href="logout">退出</a>
 							</dd>
 						</dl>
 					</li>

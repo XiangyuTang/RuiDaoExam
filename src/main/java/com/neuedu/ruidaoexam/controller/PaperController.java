@@ -90,7 +90,11 @@ public class PaperController {
 	@RequestMapping("/getPapers")
 	public String getPapers(Model model) {
 		HashMap<String, Object> papers = paperService.getPaperByTeacherId(1);
-		model.addAttribute(papers);
+		model.addAttribute("papers", papers);
+//		model.addAttribute("xiao", "hahaha");
+//		for (Paper paper:papers.g) {
+//			
+//		}
 		return "papers";
 	}
 }

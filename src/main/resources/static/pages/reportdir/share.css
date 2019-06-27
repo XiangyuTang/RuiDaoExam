@@ -1,0 +1,116 @@
+/*ul.personList,.company-wrap{
+	padding:20px;
+	background-color:#F4F8FB;
+	border-radius:3px;
+}*/
+/*.company-wrap .company-name{
+	background-color:#F7F7F7;
+}*/
+ul.set-right {
+	margin-top: 10px;
+}
+
+ul.set-right li {
+	margin-bottom: 10px;
+	border-bottom: 1px dotted #CCD1D9;
+}
+
+.personList input[readonly] {
+	background-color: #fff;
+}
+
+.share-list-panel {
+	background-color: #FFF;
+	padding: 20px;
+}
+
+.modal-share .company-label {
+	background-color: #E9EDF0;
+	padding: 6px 16px;
+	border-radius: 4px;
+	display: inline-block;
+	color: #656D78;
+	margin-top: 10px;
+}
+
+.modal-share .alert-info {
+	background-color: #F5F7FA;
+}
+
+.share-list-panel .share-list-header {
+	background-color: #F5F7FA;
+	height: 50px;
+}
+
+.share-list-panel .share-list {
+	color: #656D78;
+	margin: 0;
+}
+
+.share-list-panel .share-list.share-list-condensed th, .share-list-panel .share-list.share-list-condensed td
+	{
+	padding: 0;
+}
+
+.share-list-panel .share-list th {
+	border-bottom: 2px solid #DAE7F1;
+}
+
+.share-list-panel .share-list th, .share-list-panel .share-list td {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.share-list-panel .share-list .share-header {
+	background-color: #F5F7FA;
+	height: 45px;
+	line-height: 45px;
+}
+
+.share-list-panel .result-hint {
+	margin: 10px;
+	height: 34px;
+	line-height: 34px;
+}
+
+.share-list-panel .share-pagination {
+	margin: 10px;
+}
+
+.social-share-container{
+	margin: 20px 0;
+}
+
+/* 分享列表用户信息 */
+.user-info-wrap{
+	width: 200px;
+}
+.user-info {
+	text-align: left;
+	padding-left: 50px;
+}
+.user-info a{
+	color: #656D78;
+}
+.user-info .avator{
+	width: 35px;
+	height: 35px;
+}
+.user-info .nickname{
+	max-width: 80px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.share-rule {
+	padding-left: 32px;
+}
+
+.pt7 {
+	padding-top: 7px !important;
+}
+
+.danger {
+	color: red;
+}

@@ -1,0 +1,27 @@
+.skill-selector-wrapper {
+  font-size: 13px;
+}
+.skill-selector-wrapper .trigger {
+  min-width: 200px;
+}
+.skill-selector-wrapper .trigger > .skill-name {
+  text-align: left;
+  width: 170px;
+}
+.skill-selector-wrapper .dropdown {
+  z-index: 1050;
+  min-height: 200px;
+  position: absolute;
+  color: #434a54;
+  background: #fff;
+  border-radius: 0;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.skill-selector-wrapper .dropdown > .actions {
+  padding: 10px;
+}
+.skill-selector-wrapper .dropdown > .actions .btn + .btn {
+  margin-left: 10px;
+}

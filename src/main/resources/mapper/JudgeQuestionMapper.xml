@@ -151,6 +151,14 @@
       </if>
     </trim>
   </insert>
+  
+  
+  <insert id="insertAndGetId" useGeneratedKeys="true">
+	<selectKey order="AFTER" keyProperty="judgeId" resultType="int">select LAST_INSERT_ID()</selectKey>
+		insert into judge_question(ques_type_id,content,answer,difficulty,ability_type_id) values(#{quesTypeId},#{content},#{answer},#{difficulty},#{abilityTypeId})
+  </insert>
+  
+  
   <select id="countByExample" parameterType="com.neuedu.ruidaoexam.entity.JudgeQuestionExample" resultType="java.lang.Integer" >
     select count(*) from judge_question
     <if test="_parameter != null" >
@@ -225,7 +233,13 @@
       ability_type_id = #{abilityTypeId,jdbcType=INTEGER}
     where judge_id = #{judgeId,jdbcType=INTEGER}
   </update>
-    <select id="selectByidInList" resultMap="BaseResultMap">
+  <select id="selectByidInList" resultMap="BaseResultMap">
+  	select * from judge_question where judge_id in
+  	<foreach collection="list" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </select>
+  <select id="getJudgeQuestionsInList" resultMap="BaseResultMap">
   	select * from judge_question where judge_id in
   	<foreach collection="list" item="id" open="(" close=")" separator=",">
   		#{id}

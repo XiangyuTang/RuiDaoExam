@@ -11,6 +11,8 @@ import com.neuedu.ruidaoexam.dao.PaperMapper;
 import com.neuedu.ruidaoexam.dao.TradeRecordMapper;
 import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.PaperExample;
+import com.neuedu.ruidaoexam.entity.QuestionBank;
+import com.neuedu.ruidaoexam.entity.QuestionBankExample;
 import com.neuedu.ruidaoexam.entity.PaperExample.Criteria;
 import com.neuedu.ruidaoexam.entity.TradeRecord;
 import com.neuedu.ruidaoexam.service.PaperService;
@@ -65,4 +67,21 @@ public class PaperServiceimpl implements PaperService{
 //		}
 //		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 	}
+	//通过老师id查询其创建的题库
+		@Override
+		public List<Paper> getPapersByTeacherid(Integer TeacherId) {
+			PaperExample paperExample = new PaperExample();
+			Criteria createCriteria = paperExample.createCriteria();
+			createCriteria.andCreatedbyteacheridEqualTo(TeacherId);
+			List<Paper> papers = paperMapper.selectByExample(paperExample);
+//			for (QuestionBank questionBank:questionBanks) {
+//				System.out.println(questionBank.getQuesBankName());
+//			}
+			return papers;
+		}
+		@Override
+		public int deletePaperByPaperId(Integer PaperId) {
+			int rs = paperMapper.deleteByPrimaryKey(PaperId);
+			return rs;
+		}
 }

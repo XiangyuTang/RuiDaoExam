@@ -189,6 +189,12 @@
       </if>
     </trim>
   </insert>
+  
+  <insert id="insertAndGetId" useGeneratedKeys="true">
+	<selectKey order="AFTER" keyProperty="choiceQuesId" resultType="int">select LAST_INSERT_ID()</selectKey>
+		insert into choice_question(ques_type_id,content,choice1,choice2,choice3,choice4,answer,difficulty,analysis,ability_type_id) values(#{quesTypeId},#{content},#{choice1},#{choice2},#{choice3},#{choice4},#{answer},#{difficulty},#{analysis},#{abilityTypeId})
+	</insert>
+  
   <select id="countByExample" parameterType="com.neuedu.ruidaoexam.entity.ChoiceQuestionExample" resultType="java.lang.Integer" >
     select count(*) from choice_question
     <if test="_parameter != null" >
@@ -304,6 +310,12 @@
     where choice_ques_id = #{choiceQuesId,jdbcType=INTEGER}
   </update>
   <select id="selectByidInList" resultMap="BaseResultMap">
+  	select * from choice_question where choice_ques_id in
+  	<foreach collection="list" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </select>
+    <select id="getChoiceQuestionsInList" resultMap="BaseResultMap">
   	select * from choice_question where choice_ques_id in
   	<foreach collection="list" item="id" open="(" close=")" separator=",">
   		#{id}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jQuery Tabs滑动选项卡</title>
+
+<link type="text/css" href="../css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/common_206ed20.css">
+<link rel="stylesheet" href="../css/widget_0b71d5e.css">
+<link rel="stylesheet" href="../css/notice_1e296c5.css">
+</head>
+<body>
+
+<!--<div class="mt-tabpage" js-tab="2">
+	<div class="mt-tabpage-title">
+		<a href="javascript:;" class="mt-tabpage-item mt-tabpage-item-cur">公告</a>
+		<a href="javascript:;" class="mt-tabpage-item">决定</a>
+		<a href="javascript:;" class="mt-tabpage-item">会议</a>
+	</div>
+	<div class="mt-tabpage-count">
+		<ul class="mt-tabpage-cont__wrap">
+			<li class="mt-tabpage-item">Cont1</li>
+			<li class="mt-tabpage-item">Cont2</li>
+			<li class="mt-tabpage-item">Cont3</li>
+		</ul>
+	</div>
+</div>-->
+
+<div class="mt-tabpage" js-tab="3">
+	<div class="mt-tabpage-title">
+		<a href="javascript:;" class="mt-tabpage-item mt-tabpage-item-cur">公告</a>
+		<a href="javascript:;" class="mt-tabpage-item">决定</a>
+		<a href="javascript:;" class="mt-tabpage-item">会议</a>
+	</div>
+	<div class="mt-tabpage-count">
+		<ul class="mt-tabpage-cont__wrap">
+			<li class="mt-tabpage-item">
+				<div data-log-from="Notice" class="p-notice-cont w-feed-notice" style="">
+					<div class="w-feed">
+						<div class="w-feed-container">
+							<div class="new-message">
+								<a class="avatar"><img src="./news/wenda_logo_9a612b2.png"></a> 
+								<div class="cont">
+									<p><a href="https://www.wukong.com/answer/6702576044903235844/" target="_blank" data-log="Visit_Answer|From_AnswerLink">你收藏的问题新增1个新回答，快去看看吧~</a></p> 
+							 		<div class="datetime">
+							            2019/06/15 20:35
+							        </div>
+								</div>
+							</div>
+					        <div class="new-message">
+					        	<a class="avatar"><img src="news/wenda_logo_9a612b2.png" width="40" height="40" /></a>  
+					        	<div class="cont">
+					        		<p><a href="https://www.wukong.com/question/6565653745726652680/" target="_blank" data-log="Visit_Question|From_QuestionLink">你收藏的问题新增2个新回答，快去看看吧~</a></p>
+					        		<div class="datetime">
+					            		2019/05/24 20:00
+					       			</div>
+					        	</div>
+					        </div>
+						</div> 
+						<div class="w-feed-loadmore"><span class="w-feed-loadmore-w">没有更多通知</span>
+							
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="mt-tabpage-item">Cont2</li>
+			<li class="mt-tabpage-item">Cont3</li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="../js/mt-tabpage.js"></script>
+<script type="text/javascript">
+$(function () {
+
+//	$('[js-tab=2]').tab({
+//		mouse: 'over',   //切换方式：over，click
+//		autoPlay: true,  //播放方式：false，true
+//		curDisplay: 1,     //当前第一个打开
+//		changeMethod: 'horizontal'  //切换选项：默认default，horizontal，vertical，opacity这4种方式
+//	});
+
+	$('[js-tab=3]').tab({
+		curDisplay: 2,
+		changeMethod: 'horizontal'
+	});
+	
+});
+</script>
+</body>
+</html>

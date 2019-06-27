@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,4 +75,12 @@ public class InviteController {
 		return "invite";
 	}
 	
+	//考生录入界面
+	@RequestMapping("/toinvite")
+	public String toinvite(Integer paper_id, Model m) {
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+//		System.out.println(paper_id);
+		m.addAttribute("paper_id", paper_id);
+		return "invite";
+	}
 }

@@ -89,6 +89,9 @@
     from answered_paper
     where ans_paper_id = #{ansPaperId,jdbcType=INTEGER}
   </select>
+   <select id="selectByPaperId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	select * from answered_paper where paper_id = #{paper_id}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from answered_paper
     where ans_paper_id = #{ansPaperId,jdbcType=INTEGER}
@@ -214,6 +217,11 @@
       is_modified_by_teacher = #{isModifiedByTeacher,jdbcType=VARCHAR}
     where ans_paper_id = #{ansPaperId,jdbcType=INTEGER}
   </update>
+  <select id="selectAnsPaperId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  	select *
+    from answered_paper
+    where paper_id = #{paperId} and stu_id = #{stuId}
+  </select>
   <select id="selectPrimeKey" parameterType="java.lang.Integer" resultType="java.lang.Integer">
   	select a.ans_paper_id
   	from answered_paper a
