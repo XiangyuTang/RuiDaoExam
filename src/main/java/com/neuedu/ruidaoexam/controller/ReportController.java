@@ -1,19 +1,25 @@
 package com.neuedu.ruidaoexam.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.xmlbeans.impl.jam.mutable.MPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.neuedu.ruidaoexam.dao.AnsweredPaperMapper;
+import com.neuedu.ruidaoexam.entity.AnsweredPaper;
 import com.neuedu.ruidaoexam.entity.ForChoiceQuestion;
 import com.neuedu.ruidaoexam.entity.ForJudgeQuestion;
 import com.neuedu.ruidaoexam.entity.ForTianKongQuestion;
 import com.neuedu.ruidaoexam.entity.ForWenDaQuestion;
+import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.service.impl.PaperServiceimpl;
 import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
 
@@ -24,6 +30,8 @@ public class ReportController {
 	ReportServiceimpl reportServiceimpl;
 	@Autowired
 	PaperServiceimpl PaperServiceimpl;
+	@Autowired
+	AnsweredPaperMapper answeredPaperMapper;
 	
 	@RequestMapping("/report")
 	public String getJiBenXinXi(HttpServletRequest request,HttpServletResponse response, Model model) throws Exception{
@@ -146,5 +154,17 @@ public class ReportController {
 		
 		return "report";
 		
+	}
+	@RequestMapping("/getRepotsAndAnsweredpaper")
+	public String getRepotsAndAnsweredpaper(Integer paper_id,Model m) {
+		HashMap<String, Object> hashMap = reportServiceimpl.getReportsByPaperId(1);
+//		for (Report report:reports) {
+//			System.out.println(report.getReportId());
+//		}
+//		for (AnsweredPaper answeredPaper:answeredpapers) {
+//			System.out.println(answeredPaper.getAnsPaperId());
+//		}
+		m.addAttribute("map", hashMap);
+		return "reportlist";
 	}
 }
