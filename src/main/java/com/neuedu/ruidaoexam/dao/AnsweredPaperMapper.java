@@ -29,4 +29,6 @@ public interface AnsweredPaperMapper {
     int updateByPrimaryKeySelective(AnsweredPaper record);
 
     int updateByPrimaryKey(AnsweredPaper record);
+
+	int selectPrimeKey(int stuId,int paperId);
 }

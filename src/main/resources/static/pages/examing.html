@@ -76,7 +76,7 @@
 		$('li.option').click(function() {
 			var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
 			var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
-			var paperId = $("#paperId").val();
+			var paperId = $("#ansPaperId").val();
 			if($(this).is(":has(input[type='checkbox'])"))
 			{
 				//选中的选项题型是多选
@@ -243,7 +243,7 @@
 		
 		//填空题是否填写的监控事件
 		$("input[type='text']").blur(function(){
-			var paperId = $("#paperId").val();
+			var paperId = $("#ansPaperId").val();
 			var answer = $(this).val();
 			var textId = $(this).closest('li').attr('id');
 			var cardLi = $('a[href=#' + textId + ']'); // 根据题目ID找到对应答题卡
@@ -298,7 +298,7 @@
 		
 		//简答题是否填写的监控事件
 		$("textarea[type='text']").blur(function(){
-			var paperId = $("#paperId").val();
+			var paperId = $("#ansPaperId").val();
 			var answer = $(this).val();
 			var textId = $(this).closest('li').attr('id');
 			var cardLi = $('a[href=#' + textId + ']'); // 根据题目ID找到对应答题卡
@@ -365,10 +365,86 @@
 	    	{
 	    		clickresult =window.confirm("您的试卷还有未完成的题目,\n还是确定提交？");
 	    		if(clickresult==true)
-	    			$("form[id='paper']").submit();
+	    		{
+	    			var paper_id = $("#ansPaperId").val();
+	    			var s_id = $("#student_id").val();
+	    			//var t_id = $("#teacher_id").val();
+	    			//var acquired_score = 0;//从数据库查
+	    			var total_score = $("#totalScore").val();
+	    			var comment = "暂无";
+	    			var begin_exam_time = $("#beginTimeStamp").val();
+				   // var date = new Date(begin_exam_time);  
+				   // var date_value=date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' 
+				  //  + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+   
+	    			var switch_time = cheattimes;
+	    			var pararms ={
+						  "paper_id":paper_id,
+						  "stu_id":s_id,
+						  "totalScores":total_score,
+						  "comment":comment,
+						  "beginTimeStamp":begin_exam_time,
+						  "switch_time":switch_time
+					};
+	    			$.ajax({
+						url:'analysePaper',
+						type:'post',
+						contentType:'application/json;charset=UTF-8',
+						async:false,
+						data:JSON.stringify(pararms),
+						success:function(e){
+							window.location.href = 'toExamOver';
+						},
+						error:function(e){
+							console.log(e);
+							layui.use(['layer', 'form'], function(){
+						  		var layer = layui.layer
+						  			,form = layui.form;
+						  			layer.msg('修改数据库出错！');
+							});
+						}
+					});
+	    		}
+	    			/*$("form[id='paper']").submit();*/
 	    	}
-	    	else
-		    	$("form[id='paper']").submit();
+	    	else//所有题都做完了
+	    	{
+	    		var paper_id = $("#ansPaperId").val();
+    			var s_id = $("#student_id").val();
+    			//var t_id = $("#teacher_id").val();
+    			//var acquired_score = 0;//从数据库查
+    			var total_score = $("#totalScore").val();
+    			var comment = "暂无";
+    			var begin_exam_time = $("#beginTimeStamp").val();
+    			var switch_time = cheattimes;
+    			var pararms ={
+					  "paper_id":paper_id,
+					  "stu_id":s_id,
+					  "totalScores":total_score,
+					  "comment":comment,
+					  "beginTimeStamp":begin_exam_time,
+					  "switch_time":switch_time
+				};
+    			$.ajax({
+					url:'analysePaper',
+					type:'post',
+					contentType:'application/json;charset=UTF-8',
+					async:false,
+					data:JSON.stringify(pararms),
+					success:function(e){
+						window.location.href = 'toExamOver';
+					},
+					error:function(e){
+						console.log(e);
+						layui.use(['layer', 'form'], function(){
+					  		var layer = layui.layer
+					  			,form = layui.form;
+					  			layer.msg('修改数据库出错！');
+						});
+					}
+				});
+	    	}
+		    	
 	    }
 	    else
 	    	return clickresult;
@@ -399,7 +475,7 @@
 	<div class="test_main">
 		<div class="nr_left">
 			<div class="test">
-				<form id="paper" action="toExamOver" method="post">
+				<!--<form id="paper" action="toExamOver" method="post">-->
 					<div class="test_title">
 						<p class="test_time">
 							<i class="fa fa-clock-o"></i><b id="alt-1" class="alt-1">00:01</b>
@@ -709,7 +785,7 @@
 							</ul>
 						</div>
 					</div>
-				</form>
+				<!--</form>-->
 			</div>
 
 		</div>
@@ -811,8 +887,13 @@
 		</div>
 	</div>
 	<!--nr end-->
+	<input type="hidden" id="totalScore" th:value='${totalScore}'>
+	<input type="hidden" id="student_id" th:value='${student_id}'>
+	<input type="hidden" id="teacher_id" th:value='${teacher_id}'>
 	<input type="hidden" id="interval" th:value='${interval}'>
+	<input type="hidden" id="beginTimeStamp" th:value='${begin_tstamp}'>
 	<input type="hidden" id="paperId" th:value='${paper_id}'>
+	<input type="hidden" id="ansPaperId" th:value='${ans_paper_id}'>
 	<input type="hidden" id="allowedCheat" th:value='${allowedCheat}'>
 	<div class="foot"><span id="fullScreen">听说你想全屏？</span></div>
 </div>

@@ -23,7 +23,27 @@ public class Report {
 
     private Integer isAllowedToSee;
 
-    public Integer getReportId() {
+    public Report(Integer reportId, Integer paperId, Integer stuId, Integer acquiredScore, Integer totalScore,
+			String comment, Date beginTimestamp, Date endTimestamp, Integer switchTimes, Integer isAllowedToSee) {
+		super();
+		this.reportId = reportId;
+		this.paperId = paperId;
+		this.stuId = stuId;
+		this.acquiredScore = acquiredScore;
+		this.totalScore = totalScore;
+		this.comment = comment;
+		this.beginTimestamp = beginTimestamp;
+		this.endTimestamp = endTimestamp;
+		this.switchTimes = switchTimes;
+		this.isAllowedToSee = isAllowedToSee;
+	}
+
+	public Report() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getReportId() {
         return reportId;
     }
 

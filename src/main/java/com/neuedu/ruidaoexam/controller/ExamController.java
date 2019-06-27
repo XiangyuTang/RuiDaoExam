@@ -1,6 +1,7 @@
 package com.neuedu.ruidaoexam.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,14 +22,21 @@ import com.neuedu.ruidaoexam.entity.ChoiceQuestion;
 import com.neuedu.ruidaoexam.entity.EssayQuestion;
 import com.neuedu.ruidaoexam.entity.InviteStudent;
 import com.neuedu.ruidaoexam.entity.JudgeQuestion;
+import com.neuedu.ruidaoexam.entity.MsgOfExamEnd;
 import com.neuedu.ruidaoexam.entity.MsgOfInvite;
 import com.neuedu.ruidaoexam.entity.MsgOfUpdateQuestion;
+import com.neuedu.ruidaoexam.entity.Report;
+import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.service.AnsweredPaperService;
 import com.neuedu.ruidaoexam.service.AnsweredQuestionService;
 import com.neuedu.ruidaoexam.service.InviteService;
 import com.neuedu.ruidaoexam.service.QuestionPaperService;
+import com.neuedu.ruidaoexam.service.ReportService;
+import com.neuedu.ruidaoexam.service.StudentService;
 
 import java.util.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @Controller
@@ -45,6 +53,12 @@ public class ExamController {
 	
 	@Autowired
 	AnsweredQuestionService answeredQuestionService;
+	
+	@Autowired
+	ReportService reportService;
+	
+	@Autowired
+	StudentService studentService;
 	
 	@RequestMapping(value="/verifyintoexam",method = RequestMethod.POST)
     @ResponseBody
@@ -82,6 +96,9 @@ public class ExamController {
 		Date end = inviteStudent.getEndTime();//获取考试的结束时间
 		long interval = (end.getTime() - begin.getTime())/1000;//总秒数
 		System.out.println(interval);
+		m.addAttribute("student_id",inviteStudent.getStudentId());
+		m.addAttribute("teacher_id",inviteStudent.getTeacherId());
+		m.addAttribute("begin_tstamp", begin);
 		m.addAttribute("paper_id",paper_id);
 		m.addAttribute("interval", interval);
 		m.addAttribute("allowedCheat", inviteStudent.getAllowedCheatTimes());
@@ -127,6 +144,8 @@ public class ExamController {
 				
 				shortAnswerTotalScore += Integer.parseInt(eq.getScore());
 			}
+		int totalScore = singleChoiceTotalScore+multiChoiceTotalScore+judgeChoiceTotalScore+fillBlankTotalScore+shortAnswerTotalScore;
+		m.addAttribute("totalScore", totalScore);
 		m.addAttribute("singleChoiceTotalScore",singleChoiceTotalScore);
 		m.addAttribute("multiChoiceTotalScore",multiChoiceTotalScore);
 		m.addAttribute("judgeChoiceTotalScore",judgeChoiceTotalScore);
@@ -135,54 +154,83 @@ public class ExamController {
 		
 		//下面的逻辑用于添加一条answered_paper记录
 		AnsweredPaper answerpaper = new AnsweredPaper(null,paper_id,inviteStudent.getStudentId(),inviteStudent.getTeacherId(),"0");
-		answeredPaperService.insert(answerpaper);
+		//answeredPaperService.insert(answerpaper);
+		int i = 0;
+		Integer pk = null; 
+		int flag = 0;
+		try {
+			pk = answeredPaperService.selectPrimeKey(answerpaper);
+		}catch (org.apache.ibatis.binding.BindingException e) {
+			// TODO: handle exception
+			i = answeredPaperService.insert(answerpaper);
+			
+			System.out.println(answerpaper.getAnsPaperId());
+			//pk = answeredPaperService.selectPrimeKey(answerpaper);
+			//answerpaper.setAnsPaperId(pk);
+			m.addAttribute("ans_paper_id",answerpaper.getAnsPaperId());
+			flag = 1;
+		}
+		if(flag == 0)
+		{
+			answerpaper.setAnsPaperId(pk);
+			i = answeredPaperService.insert(answerpaper);
+			m.addAttribute("ans_paper_id",pk);			
+			System.out.println(i);
+		}
 		return "examing";
 	}
 	
 	//考试结束页面
-	@RequestMapping(value="/toExamOver",method = RequestMethod.POST)
+	@RequestMapping("/toExamOver")
 	public String toExamOver(HttpServletRequest request) {
 		
 		return "examOver";
 	}
 	
-	@RequestMapping(value="/updateQuestion",method = RequestMethod.POST)
+	@RequestMapping(value="/analysePaper",method = RequestMethod.POST)
 	@ResponseBody
-	public String updateQuestion(@RequestBody MsgOfUpdateQuestion msg,HttpSession session) {
-		AnsweredQuestion aq = null;
-		Integer pk = null;
-		int flag = 0;
-		if(msg.getQuestype()==1||msg.getQuestype()==2)//单选或者多选
-		{
-			aq = new AnsweredQuestion(null,msg.getPaperResultId(),msg.getQuestype(),msg.getQuesid(),null,null,
-					msg.getAnswer(),msg.getRightanswer(),msg.getScore(),msg.getTotalScore(),msg.getIscorrect());
-			
-		}
-		else if(msg.getQuestype()==4)//判断
-		{
-			aq = new AnsweredQuestion(null,msg.getPaperResultId(),msg.getQuestype(),null,null,msg.getQuesid(),
-					msg.getAnswer(),msg.getRightanswer(),msg.getScore(),msg.getTotalScore(),msg.getIscorrect());
-		}
-		else
-		{
-			aq = new AnsweredQuestion(null,msg.getPaperResultId(),msg.getQuestype(),null,msg.getQuesid(),null,
-					msg.getAnswer(),msg.getRightanswer(),msg.getScore(),msg.getTotalScore(),msg.getIscorrect());
-		}
-		int i = 0;
+	public String analysePaper(@RequestBody MsgOfExamEnd msg,HttpSession session) {
+		//System.out.println(msg.getBeginTimeStamp());
+		//String s = "Thu Jun 27 15:47:14 CST 2019";
+		SimpleDateFormat sdf1= new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+		SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Timestamp begin_time = null;
+		Date date1 = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String es = sdf.format(date1);//时间存储为字符串
+		Timestamp end_time = null;
+		end_time = Timestamp.valueOf(es);
 		try {
-			pk = answeredQuestionService.selectPrimeKey(aq);
-		}catch (org.apache.ibatis.binding.BindingException e) {
-			// TODO: handle exception
-			i = answeredQuestionService.update(aq);
+			String ts = sdf2.format(sdf1.parse(msg.getBeginTimeStamp()));
+			begin_time = Timestamp.valueOf(ts);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int acquired_score = answeredQuestionService.selectScores(msg.getPaper_id());
+		Report r = new Report(null,msg.getPaper_id(),msg.getStu_id(),acquired_score,msg.getTotalScores(),msg.getComment(),begin_time,end_time,msg.getSwitch_time(),1);
+		int flag = 0;
+		int pk = 0;
+		try {
+			pk = reportService.getReport(msg.getPaper_id(), msg.getStu_id());
+		}catch(org.apache.ibatis.binding.BindingException e){
+			reportService.addReport(r);
 			flag = 1;
 		}
 		if(flag == 0)
 		{
-			aq.setAnswerId(pk);
-			i = answeredQuestionService.update(aq);
-			System.out.println(i);
+			r.setReportId(pk);
+			reportService.addReport(r);
 		}
+		Student s = studentService.getStudent(msg.getStu_id());
+		String name = s.getName();
+		session.setAttribute("stu_score", acquired_score);
+		session.setAttribute("stu_name", name);
+		session.setAttribute("paper_total_score", msg.getTotalScores());
+		//System.out.println(msg.toString());
 		return "666";
 	}
+	
 }
+
 

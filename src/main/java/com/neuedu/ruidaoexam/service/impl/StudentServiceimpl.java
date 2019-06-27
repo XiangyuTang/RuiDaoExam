@@ -58,4 +58,10 @@ public class StudentServiceimpl implements StudentService{
 		// TODO Auto-generated method stub
 		return stumapper.showNotAnswered(stuid);
 	}
+	@Override
+	public Student getStudent(Integer stuid) {
+		// TODO Auto-generated method stub
+		Student student = stumapper.selectByPrimaryKey(stuid);
+		return student;
+	}
 }

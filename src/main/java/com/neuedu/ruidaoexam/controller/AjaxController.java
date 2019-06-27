@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neuedu.ruidaoexam.entity.AnsweredQuestion;
+import com.neuedu.ruidaoexam.entity.MsgOfUpdateQuestion;
+import com.neuedu.ruidaoexam.service.AnsweredQuestionService;
+import com.neuedu.ruidaoexam.service.QuestionService;
+import com.neuedu.ruidaoexam.service.ReportService;
 import com.neuedu.ruidaoexam.service.impl.QuestionServiceimpl;
 import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
 
@@ -20,7 +26,8 @@ import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
 public class AjaxController {
 	@Autowired
 	QuestionServiceimpl questionServiceimpl;
-	
+	@Autowired
+	AnsweredQuestionService answeredQuestionService;
 	//通过bank_id查询其所属的所有题目并返回前端
 	@RequestMapping("/toquestion1")
 	public Map<String, List<Object>> test(){
@@ -29,7 +36,7 @@ public class AjaxController {
 	}
 	
 	@Autowired
-	ReportServiceimpl reportServiceimpl;
+	ReportService reportService;
 	
 	/**
 	 * 教师发布报告评语
@@ -65,7 +72,7 @@ public class AjaxController {
 		reportArray.add(switchTimes);
 		reportArray.add(isAllowedToSee);
 		
-		reportServiceimpl.addComment(reportArray);
+		reportService.addComment(reportArray);
 		
 		return val.get("val").toString();
 	}
@@ -84,8 +91,48 @@ public class AjaxController {
 	    
 	    int report_id = Integer.parseInt(reportId);
 	    
-		reportServiceimpl.deleteReport(report_id);
+		reportService.deleteReport(report_id);
 		
 		return val.get("val").toString();
+	}
+	
+	//每做一个题，更新问题
+	@RequestMapping(value="/updateQuestion",method = RequestMethod.POST)
+	@ResponseBody
+	public String updateQuestion(@RequestBody MsgOfUpdateQuestion msg,HttpSession session) {
+		AnsweredQuestion aq = null;
+		Integer pk = null;
+		int flag = 0;
+		if(msg.getQuestype()==1||msg.getQuestype()==2)//单选或者多选
+		{
+			aq = new AnsweredQuestion(null,msg.getPaperResultId(),msg.getQuestype(),msg.getQuesid(),null,null,
+					msg.getAnswer(),msg.getRightanswer(),msg.getScore(),msg.getTotalScore(),msg.getIscorrect());
+			
+		}
+		else if(msg.getQuestype()==4)//判断
+		{
+			aq = new AnsweredQuestion(null,msg.getPaperResultId(),msg.getQuestype(),null,null,msg.getQuesid(),
+					msg.getAnswer(),msg.getRightanswer(),msg.getScore(),msg.getTotalScore(),msg.getIscorrect());
+		}
+		else
+		{
+			aq = new AnsweredQuestion(null,msg.getPaperResultId(),msg.getQuestype(),null,msg.getQuesid(),null,
+					msg.getAnswer(),msg.getRightanswer(),msg.getScore(),msg.getTotalScore(),msg.getIscorrect());
+		}
+		int i = 0;
+		try {
+			pk = answeredQuestionService.selectPrimeKey(aq);
+		}catch (org.apache.ibatis.binding.BindingException e) {
+			// TODO: handle exception
+			i = answeredQuestionService.update(aq);
+			flag = 1;
+		}
+		if(flag == 0)
+		{
+			aq.setAnswerId(pk);
+			i = answeredQuestionService.update(aq);
+			System.out.println(i);
+		}
+		return "666";
 	}
 }

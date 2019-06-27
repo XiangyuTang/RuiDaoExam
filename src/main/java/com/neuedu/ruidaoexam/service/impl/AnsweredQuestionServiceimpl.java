@@ -37,5 +37,12 @@ public class AnsweredQuestionServiceimpl implements AnsweredQuestionService {
 		}
 		return i;
 	}
+
+	@Override
+	public int selectScores(int paper_result_id) {
+		// TODO Auto-generated method stub
+		int i = answeredQuestionMapper.selectAcquiredScore(paper_result_id);
+		return i;
+	}
 	
 }

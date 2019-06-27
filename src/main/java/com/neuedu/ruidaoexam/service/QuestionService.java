@@ -3,7 +3,9 @@ package com.neuedu.ruidaoexam.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public interface QuestionService {
 //	List<ChoiceQuestion> getChoiceQuestionByBankid(Integer Bank_id);
 //	List<JudgeQuestion> getJudgeQuestionByBankid(Integer Bank_id);

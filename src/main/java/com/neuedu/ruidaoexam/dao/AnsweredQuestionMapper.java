@@ -33,4 +33,6 @@ public interface AnsweredQuestionMapper {
 	int updateAndInsert(AnsweredQuestion aq);
 
 	int selectPrimeKey(Integer paperResultId, Integer quesType, Integer quesId);
+	
+	int selectAcquiredScore(Integer paperResultId);
 }

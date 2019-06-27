@@ -68,5 +68,19 @@ public class ReportServiceimpl implements ReportService{
 		return i;
 	}
 
+	@Override
+	public int addReport(Report r) {
+		// TODO Auto-generated method stub
+		int i = reportMapper.updateAndInsert(r);
+		return i;
+	}
+
+	@Override
+	public int getReport(int paper_id, int stu_id) {
+		// TODO Auto-generated method stub
+		int i = reportMapper.selectPrimeKey(paper_id, stu_id);
+		return i;
+	}
+
 
 }

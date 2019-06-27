@@ -114,6 +114,7 @@
       #{acquiredScore,jdbcType=INTEGER}, #{totalScore,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
       #{beginTimestamp,jdbcType=TIMESTAMP}, #{endTimestamp,jdbcType=TIMESTAMP}, #{switchTimes,jdbcType=INTEGER}, 
       #{isAllowedToSee,jdbcType=INTEGER})
+      
   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.Report" >
     insert into report
@@ -290,5 +291,30 @@
   </update>
   <select id="getPaper_id" parameterType="Integer" resultType="java.lang.Integer">
   
-  select paper_id from report where report_id=#{report_id} </select>
+  select paper_id from report where report_id=#{report_id} 
+  </select>
+  
+  <insert id="updateAndInsert" parameterType="com.neuedu.ruidaoexam.entity.Report">
+  	 insert into report (report_id, paper_id, stu_id, 
+      acquired_score, total_score, comment, 
+      begin_timestamp, end_timestamp, switch_times, 
+      is_allowed_to_see)
+    values (#{reportId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, 
+      #{acquiredScore,jdbcType=INTEGER}, #{totalScore,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
+      #{beginTimestamp,jdbcType=TIMESTAMP}, #{endTimestamp,jdbcType=TIMESTAMP}, #{switchTimes,jdbcType=INTEGER}, 
+      #{isAllowedToSee,jdbcType=INTEGER})
+	on DUPLICATE key update 
+	acquired_score=#{acquiredScore,jdbcType=INTEGER},
+	begin_timestamp=#{beginTimestamp,jdbcType=TIMESTAMP},
+	end_timestamp=#{endTimestamp,jdbcType=TIMESTAMP},
+	switch_times=#{switchTimes,jdbcType=INTEGER}		
+  </insert>
+  
+  <select id="selectPrimeKey" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select report_id
+  	from report 
+  	where paper_id = #{paperId,jdbcType=INTEGER}
+  	and stu_id = #{stuId,jdbcType=INTEGER}
+ </select>
+  
 </mapper>

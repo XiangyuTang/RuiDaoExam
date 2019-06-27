@@ -316,13 +316,30 @@
   		
   </insert>
   <select id="selectPrimeKey" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-  	select a.answer_id
+  	(select a.answer_id
   	from answered_question a
   	where paper_result_id=#{paperResultId,jdbcType=INTEGER}
   	and ques_type=#{quesType,jdbcType=INTEGER}
-  	and cq_id=#{quesId,jdbcType=INTEGER}
-  	 or jq_id=#{quesId,jdbcType=INTEGER}
-  	 or eq_id=#{quesId,jdbcType=INTEGER}
+  	and cq_id=#{quesId,jdbcType=INTEGER})
+  	union
+  	(select a.answer_id
+  	from answered_question a
+  	where paper_result_id=#{paperResultId,jdbcType=INTEGER}
+  	and ques_type=#{quesType,jdbcType=INTEGER}
+  	and jq_id=#{quesId,jdbcType=INTEGER})
+  	union
+  	(select a.answer_id
+  	from answered_question a
+  	where paper_result_id=#{paperResultId,jdbcType=INTEGER}
+  	and ques_type=#{quesType,jdbcType=INTEGER}
+  	and eq_id=#{quesId,jdbcType=INTEGER})
+
+ </select>
+  <select id="selectAcquiredScore" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select SUM(score)as sum
+  	from answered_question
+  	where paper_result_id = #{paperResultId,jdbcType=INTEGER}
+
   </select>
   
 </mapper>

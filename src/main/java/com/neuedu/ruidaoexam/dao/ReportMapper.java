@@ -31,4 +31,8 @@ public interface ReportMapper {
     int updateByPrimaryKey(Report record);
     
     int getPaper_id(Integer report_id);
+    
+    int updateAndInsert(Report record);
+    
+    int selectPrimeKey(int paperId,int stuId);
 }

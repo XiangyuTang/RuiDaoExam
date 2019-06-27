@@ -147,17 +147,18 @@
         <div class="exam-body">
             <div class="max-w">
                 <div class="img-circle img-responsive center-block port-img mt5 mb10" style="background-image: url('https://101test-public.oss-cn-beijing.aliyuncs.com/common/employer/defaultPortrait/2.png');"></div>
-                <p class="name">emmm</p>
-                                    <p class="score text-bittersweet mb10">
-                        30 分<span> (100 分)</span>
-                    </p>
-                    <p class="summary">别哭，下次继续努力，加油！</p>
+                <p class="name" th:text="${session.stu_name}"></p>
+                                    <p class="score text-bittersweet mb10" th:text=" ${session.stu_score} + '分'">
+                          					<span th:text="'('+${session.paper_total_score}+')分'"> </span>
+                    				</p>
+                    <p class="summary">*以上仅显示单选题，多选题与判断题的得分*</p>
                                                 <div class="exam-end-btn">
-                                            <a class="btn btn-re" href="http://localhost:8080/tohomePage">回到首页</a>
-                                                                                             <a onlyforsharer="" share-action="check-report" class="btn btn-warning btn-report" href="https://www.101test.com/share/irrevocable?employerId=678542&amp;url=%2FreportDetail%2F44968666%3Fsync%3Dtrue%26paperId%3D450608%26candidateId%3D12217252%26reportThreshold%3D14&amp;sign=zvRrmfvtaCysaAvbXw9HnA&amp;expiredAt=1592888971222">查看对错</a>
-                                                                <a class="btn feedback-trigger btn-success">在线反馈</a>
+                                            <a class="btn btn-re" href="http://localhost:8080/tohome">回到首页</a>
+                                             <a onlyforsharer="" share-action="check-report" class="btn btn-warning btn-report" href="https://www.101test.com/share/irrevocable?employerId=678542&amp;url=%2FreportDetail%2F44968666%3Fsync%3Dtrue%26paperId%3D450608%26candidateId%3D12217252%26reportThreshold%3D14&amp;sign=zvRrmfvtaCysaAvbXw9HnA&amp;expiredAt=1592888971222">查看对错</a>
+                                           <!-- <a class="btn feedback-trigger btn-success">在线反馈</a>-->
                 </div>
-                <div class="title">点<a href="http://localhost:8080/tohome">首页</a>注册可查成绩报告；或用 L1P8QT 在<a href="https://www.101test.com/e#!/query">查询页面</a>查询；或将成绩发到 <a class="send-btn">微信</a></div>
+                <div class="title">点<a href="http://localhost:8080/tohome">首页</a>注册可查成绩报告；或去<a href="http://118.24.55.226:8080/RuiDaoQA/index.jsp">睿道问答社区</a>提问；或将成绩分享到 
+                	<a class="send-btn" onclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+encodeURIComponent(document.location.href));return false;" >QQ空间</a></div>
             </div>
         </div>
     </div>
@@ -180,12 +181,18 @@
         <div class="max-w center-block">
             <div id="social-share">
         		<ul class="social-share-list justified circle hide-text" data-link="class{merge:style toggle=style} class{merge:!showText toggle='hide-text'}">
-	            	<li><a data-type="weibo" class="s-weibo" title="分享到Github"><i class="fa fa-github"></i><span>Github</span></a></li>
-	            	<li><a data-type="tweibo" class="s-tweibo" title="分享到腾讯微博"><i class="fa fa-tencent-weibo"></i><span>腾讯微博</span></a></li>
-	            	<li><a data-type="qzone" class="s-qzone" title="分享到Youtube"><i class="fa fa-youtube"></i><span>QQ空间</span></a></li>
-	            	<li><a data-type="weixin" class="s-weixin" title="分享到微信"><i class="fa fa-wechat"></i><span>微信</span></a></li>
-	            	<li><a data-type="renren" class="s-renren" title="分享到人人网"><i class="fa fa-renren"></i><span>人人网</span></a></li>
+	            	<li><a data-type="weibo" class="s-weibo" title="查看Github项目源码" onclick="window.open('https://github.com/XiangyuTang/RuiDaoExam')">
+	            		<i class="fa fa-github"></i><span>Github</span></a></li>
+	            	<li><a data-type="tweibo" class="s-tweibo" title="分享到新浪微博" href="javascript:window.open('http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent(document.title.substring(0,76))+'&amp;url='+encodeURIComponent(location.href)+'&amp;rcontent=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); void 0">
+	            		<i class="fa fa-weibo"></i><span>新浪微博</span></a></li>
+	            	<li><a data-type="qzone" class="s-qzone" title="分享到QQ空间" onclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+encodeURIComponent(document.location.href));return false;">
+	            		<i class="fa fa-quora"></i><span>QQ空间</span></a></li>
+	            	<li><a data-type="weixin" class="s-weixin" title="分享到QQ好友" data-cmd="weixin" onclick="window.open('http://connect.qq.com/widget/shareqq/index.html?url='+encodeURIComponent(document.location.href));return false;">
+	            		<i class="fa fa-qq"></i><span>QQ好友</span></a></li>
+	            	<li><a data-type="renren" class="s-renren" title="到睿道QA发布问题" onclick="window.open('http://118.24.55.226:8080/RuiDaoQA/index.jsp')">
+	            		<i class="fa fa-share-alt" ></i><span>到睿道QA发布问题</span></a></li>
             	</ul>
+
             </div>
         </div>
     </div>

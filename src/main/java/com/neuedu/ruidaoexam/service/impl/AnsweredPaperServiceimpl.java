@@ -14,9 +14,17 @@ public class AnsweredPaperServiceimpl implements AnsweredPaperService {
 	AnsweredPaperMapper answeredPaperMapper;
 	
 	@Override
-	public void insert(AnsweredPaper ap) {
+	public int insert(AnsweredPaper ap) {
 		// TODO Auto-generated method stub
-		answeredPaperMapper.insert(ap);
+		 int i = answeredPaperMapper.insert(ap);
+		 return i;
+	}
+
+	@Override
+	public Integer selectPrimeKey(AnsweredPaper answerpaper) {
+		// TODO Auto-generated method stub
+		int i = answeredPaperMapper.selectPrimeKey(answerpaper.getStuId(),answerpaper.getPaperId());
+		return i;
 	}
 	
 }

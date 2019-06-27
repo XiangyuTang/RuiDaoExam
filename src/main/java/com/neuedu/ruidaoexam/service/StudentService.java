@@ -14,4 +14,5 @@ public interface StudentService {
 	Integer getNumberofAnswered(Integer stuid);
 	Integer getNumberofNotAnswered(Integer stuid);
 	List<Paper> getNotAnsweredList(Integer stuid);
+	Student getStudent(Integer stuid);
 }

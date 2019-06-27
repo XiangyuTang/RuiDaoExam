@@ -100,13 +100,17 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.AnsweredPaper" >
+  	<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="ansPaperId">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
     insert into answered_paper (ans_paper_id, paper_id, stu_id, 
       checkedByTeacherId, is_modified_by_teacher
       )
     values (#{ansPaperId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, 
       #{checkedbyteacherid,jdbcType=INTEGER}, #{isModifiedByTeacher,jdbcType=VARCHAR}
       )
-  </insert>
+    on DUPLICATE key update paper_id=#{paperId,jdbcType=INTEGER},stu_id=#{stuId,jdbcType=INTEGER}
+   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.AnsweredPaper" >
     insert into answered_paper
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -210,4 +214,10 @@
       is_modified_by_teacher = #{isModifiedByTeacher,jdbcType=VARCHAR}
     where ans_paper_id = #{ansPaperId,jdbcType=INTEGER}
   </update>
+  <select id="selectPrimeKey" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select a.ans_paper_id
+  	from answered_paper a
+  	where stu_id=#{stuId,jdbcType=INTEGER}
+  	and paper_id=#{paperId,jdbcType=INTEGER}
+  </select>
 </mapper>
