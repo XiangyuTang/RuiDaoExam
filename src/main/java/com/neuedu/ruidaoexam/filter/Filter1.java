@@ -43,6 +43,7 @@ public class Filter1 implements Filter {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		chain.doFilter(request, response);
+		return;
 	}
 
 

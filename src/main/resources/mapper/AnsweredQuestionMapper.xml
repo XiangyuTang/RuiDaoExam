@@ -303,4 +303,26 @@
       isCorrect = #{iscorrect,jdbcType=INTEGER}
     where answer_id = #{answerId,jdbcType=INTEGER}
   </update>
+  <insert id="updateAndInsert" parameterType="com.neuedu.ruidaoexam.entity.AnsweredQuestion">
+  	insert into answered_question (answer_id, paper_result_id, ques_type, 
+      cq_id, eq_id, jq_id, answer, 
+      right_answer, score, total_score, 
+      isCorrect)
+    values (#{answerId,jdbcType=INTEGER}, #{paperResultId,jdbcType=INTEGER}, #{quesType,jdbcType=INTEGER}, 
+      #{cqId,jdbcType=INTEGER}, #{eqId,jdbcType=INTEGER}, #{jqId,jdbcType=INTEGER}, #{answer,jdbcType=VARCHAR}, 
+      #{rightAnswer,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{totalScore,jdbcType=INTEGER}, 
+      #{iscorrect,jdbcType=INTEGER})
+	on DUPLICATE key update answer=#{answer,jdbcType=VARCHAR},score=#{score,jdbcType=INTEGER},isCorrect=#{iscorrect,jdbcType=INTEGER}
+  		
+  </insert>
+  <select id="selectPrimeKey" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select a.answer_id
+  	from answered_question a
+  	where paper_result_id=#{paperResultId,jdbcType=INTEGER}
+  	and ques_type=#{quesType,jdbcType=INTEGER}
+  	and cq_id=#{quesId,jdbcType=INTEGER}
+  	 or jq_id=#{quesId,jdbcType=INTEGER}
+  	 or eq_id=#{quesId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

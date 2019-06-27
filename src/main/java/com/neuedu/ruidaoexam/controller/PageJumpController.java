@@ -47,11 +47,7 @@ public class PageJumpController {
 		return "invite";
 	}
 
-	//考试结束页面
-	@RequestMapping("/toExamOver")
-	public String toExamOver() {
-		return "examOver";
-	}
+	
 	// 注册页
 	@RequestMapping("/toRegister")
 	public String toRegister() {

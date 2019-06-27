@@ -11,7 +11,23 @@ public class AnsweredPaper {
 
     private String isModifiedByTeacher;
 
-    public Integer getAnsPaperId() {
+    
+    public AnsweredPaper() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public AnsweredPaper(Integer ansPaperId, Integer paperId, Integer stuId, Integer checkedbyteacherid,
+			String isModifiedByTeacher) {
+		super();
+		this.ansPaperId = ansPaperId;
+		this.paperId = paperId;
+		this.stuId = stuId;
+		this.checkedbyteacherid = checkedbyteacherid;
+		this.isModifiedByTeacher = isModifiedByTeacher;
+	}
+
+	public Integer getAnsPaperId() {
         return ansPaperId;
     }
 

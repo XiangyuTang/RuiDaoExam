@@ -13,6 +13,8 @@
 <!--时间js-->
 <script src="../js/jquery.countdown.js" th:src="@{static/js/jquery.countdown.js}"></script>
 <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}" />
+<link rel="stylesheet" href="../css/res/layui/css/layui.css" th:href="@{static/css/res/layui/css/layui.css}" media="all">
+<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 <style>
 .hasBeenAnswer {
 	background: #5d9cec;
@@ -65,16 +67,16 @@
 				$(this).attr("class","fa fa-bookmark-o");
 				cardLi.removeClass('markQuestion');
 			}
-			
 		})
 	})
 	
 	/*做完某道题，定位答题卡标记蓝色表示已做的事件*/
 	$(function() {
-		//单选或者多选的点击事件
+		//单选或者多选与判断的点击事件
 		$('li.option').click(function() {
 			var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
 			var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
+			var paperId = $("#paperId").val();
 			if($(this).is(":has(input[type='checkbox'])"))
 			{
 				//选中的选项题型是多选
@@ -85,13 +87,13 @@
 						cardLi.addClass('hasBeenAnswer');
 						cardLi.removeClass('emptyAnswer');
 					}
-					var a=$(this).find('[type=checkbox]').length;
+					/*var a=$('[type=checkbox]').length;
 					alert("长度是"+a);
 					for(var i=0;i<a;i++){
 						if($('[type=checkbox]').eq(i).is(':checked')) {
 						    alert(i+1);
 						}
-					}
+					}*/
 				}
 				else
 				{
@@ -125,15 +127,127 @@
 					cardLi.removeClass('emptyAnswer');
 				}
 			}
+			//以上步骤是在答题卡添加或者减少蓝色标记
+			//接下来是通过ajax添加答题记录进入数据库
+			var questype = $(this).find("input[type]").attr("que_type");
+			var quesid = $(this).find("input[type]").attr("que_id");
+			var totalScore = $(this).find("input[type]").attr("totalScore");
+			var answer;//自己选择的答案
+			var rightanswer;//标准答案
+			var iscorrect;//是否正确
+			var score;
+			
+			if(questype==1||questype==2)//单选或者多选题
+			{
+				if(questype==1)
+				{
+					//$(this).closest("ul")
+					var choose = $(this).find("input[type]").val();
+					
+					if(choose==1)
+						answer = "1 0 0 0";
+					else if(choose==2)
+						answer = "0 1 0 0";
+					else if(choose==3)
+						answer = "0 0 1 0";
+					else
+						answer = "0 0 0 1";
+				}
+				else
+				{
+					answer="";
+					if($($(this).closest("ul").find("input[type='checkbox']").get(0)).is(':checked'))
+						answer += "1 "; 
+					else
+						answer += "0 ";
+					if($($(this).closest("ul").find("input[type='checkbox']").get(1)).is(':checked'))
+						answer += "1 "; 
+					else
+						answer += "0 ";	
+					if($($(this).closest("ul").find("input[type='checkbox']").get(2)).is(':checked'))
+						answer += "1 "; 
+					else
+						answer += "0 ";	
+					if($($(this).closest("ul").find("input[type='checkbox']").get(3)).is(':checked'))
+						answer += "1"; 
+					else
+						answer += "0";
+				}
+				var rightanswer = $(this).find("input[type]").attr("rightanswer");
+				
+				if(answer==rightanswer)
+				{
+					iscorrect = 1;
+					score = totalScore;
+				}
+				else
+				{
+					iscorrect = 0;
+					score = 0;
+				}
+				
+			}
+			else if(questype==4)//判断题
+			{
+				var rightanswer = $(this).find("input[type]").attr("rightanswer");
+				answer = $(this).find("input[type]").val();
+				if(answer==rightanswer)
+				{
+					iscorrect = 1;
+					score = totalScore;
+				}
+				else
+				{
+					iscorrect = 0;
+					score = 0;
+				}
+			}
+			else//填空或者简答题
+			{
+				var rightanswer = $(this).find("input[type]").attr("rightanswer");
+				answer = $(this).find("input[type]").val();
+				score = 0;//需要老师评判
+				iscorrect = 0;//需要老师评判
+			}
+			var pararms ={
+					  "paperResultId":paperId,
+					  "questype":questype,
+					  "quesid":quesid,
+					  "score":score,
+					  "totalScore":totalScore,
+					  "answer":answer,
+					  "rightanswer":rightanswer,
+					  "iscorrect":iscorrect
+				};// 定义一个js对象
+				$.ajax({
+					url:'updateQuestion',
+					type:'post',
+					contentType:'application/json;charset=UTF-8',
+					async:false,
+					data:JSON.stringify(pararms),
+					success:function(e){
+						
+					},
+					error:function(e){
+						console.log(e);
+						layui.use(['layer', 'form'], function(){
+					  		var layer = layui.layer
+					  			,form = layui.form;
+					  			layer.msg('修改数据库出错！');
+						});
+					}
+				});
+			
 
 		});
 		
 		//填空题是否填写的监控事件
 		$("input[type='text']").blur(function(){
-			var text = $(this).val();
+			var paperId = $("#paperId").val();
+			var answer = $(this).val();
 			var textId = $(this).closest('li').attr('id');
 			var cardLi = $('a[href=#' + textId + ']'); // 根据题目ID找到对应答题卡
-			if(text=="")
+			if(answer=="")
 			{
 				cardLi.removeClass('hasBeenAnswer');
 				cardLi.addClass('emptyAnswer');
@@ -143,15 +257,52 @@
 				cardLi.removeClass('emptyAnswer');
 				cardLi.addClass('hasBeenAnswer');
 			}
-				
+			
+			var questype = $(this).attr("que_type");
+			var quesid = $(this).attr("que_id");
+			var totalScore = $(this).attr("totalScore");
+			var rightanswer = $(this).attr("rightanswer");;//标准答案
+			var iscorrect = 0;//需要老师评判
+			var score = 0;
+			
+			var pararms ={
+					  "paperResultId":paperId,
+					  "questype":questype,
+					  "quesid":quesid,
+					  "score":score,
+					  "totalScore":totalScore,
+					  "answer":answer,
+					  "rightanswer":rightanswer,
+					  "iscorrect":iscorrect
+				};// 定义一个js对象
+				$.ajax({
+					url:'updateQuestion',
+					type:'post',
+					contentType:'application/json;charset=UTF-8',
+					async:false,
+					data:JSON.stringify(pararms),
+					success:function(e){
+						
+					},
+					error:function(e){
+						console.log(e);
+						layui.use(['layer', 'form'], function(){
+					  		var layer = layui.layer
+					  			,form = layui.form;
+					  			layer.msg('修改数据库出错！');
+						});
+					}
+				});
+			
 		})
 		
 		//简答题是否填写的监控事件
 		$("textarea[type='text']").blur(function(){
-			var text = $(this).val();
+			var paperId = $("#paperId").val();
+			var answer = $(this).val();
 			var textId = $(this).closest('li').attr('id');
 			var cardLi = $('a[href=#' + textId + ']'); // 根据题目ID找到对应答题卡
-			if(text=="")
+			if(answer=="")
 			{
 				cardLi.removeClass('hasBeenAnswer');
 				cardLi.addClass('emptyAnswer');
@@ -161,6 +312,44 @@
 				cardLi.removeClass('emptyAnswer');
 				cardLi.addClass('hasBeenAnswer');
 			}
+			
+			var questype = $(this).attr("que_type");
+			var quesid = $(this).attr("que_id");
+			var totalScore = $(this).attr("totalScore");
+			var rightanswer = $(this).attr("rightanswer");;//标准答案
+			var iscorrect = 0;//需要老师评判
+			var score = 0;
+			
+			var pararms ={
+					  "paperResultId":paperId,
+					  "questype":questype,
+					  "quesid":quesid,
+					  "score":score,
+					  "totalScore":totalScore,
+					  "answer":answer,
+					  "rightanswer":rightanswer,
+					  "iscorrect":iscorrect
+				};// 定义一个js对象
+				$.ajax({
+					url:'updateQuestion',
+					type:'post',
+					contentType:'application/json;charset=UTF-8',
+					async:false,
+					data:JSON.stringify(pararms),
+					success:function(e){
+						
+					},
+					error:function(e){
+						console.log(e);
+						layui.use(['layer', 'form'], function(){
+					  		var layer = layui.layer
+					  			,form = layui.form;
+					  			layer.msg('修改数据库出错！');
+						});
+					}
+				});
+			
+			
 		})
 		
 	});
@@ -185,11 +374,26 @@
 	    	return clickresult;
 	}
 </script>
-
+<script>
+	/*$(function(){
+		$('.test_content').toggle(function(){//点击一下，缓慢出现
+			$(this).next().show('slow');	
+			//find("div[class='test_content_nr']").
+			//$(this).find('span').addClass("jian");
+			//$(this).children('span').addClass('jian');
+		},
+		function(){
+			$(this).next().hide('slow');
+			//$(this).next().hide('slow');
+			//$(this).find('span').removeClass("jian");
+			//$(this).removeClass('bgreen');
+		})
+	})*/
+</script>
 
 </head>
-<body ><!-- scroll="no"  onload="RunOnBeforeUnload()"-->
-	
+<body >
+
 <div class="main">
 	<!--nr start-->
 	<div class="test_main">
@@ -204,7 +408,7 @@
 					</div>
 					
 					<!--下面是单选题-->
-					<div id="single_choice" th:style="'display:'+@{((${singleChoice}==null)?'none':'block')}">
+					<div id="single_choice" th:style="'display:'+@{((${singleChoice.size()}==0)?'none':'block')}">
 						<div class="test_content">
 							<div class="test_content_title">
 								<h2>单选题</h2>
@@ -227,6 +431,12 @@
 													<li class="option">
 															<input type="radio" class="radioOrCheck" th:name="|answer${singleChoice.indexOf(single_choice)+1}|"
 																th:id="|0_answer_${singleChoice.indexOf(single_choice)+1}_option_1|"
+																th:que_type="${single_choice.getQuesTypeId()}"
+																th:que_id="${single_choice.getChoiceQuesId()}"
+																th:rightanswer="${single_choice.getAnswer()}"
+																value="1"
+																th:totalScore="${single_choice.getScore()}"
+																
 															/>
 														<label th:for="|0_answer_${singleChoice.indexOf(single_choice)+1}_option_1|">
 															<!--A.-->
@@ -237,6 +447,11 @@
 													<li class="option">
 															<input type="radio" class="radioOrCheck" th:name="|answer${singleChoice.indexOf(single_choice)+1}|"
 																th:id="|0_answer_${singleChoice.indexOf(single_choice)+1}_option_2|"
+																th:que_type="${single_choice.getQuesTypeId()}"
+																th:que_id="${single_choice.getChoiceQuesId()}"
+																th:rightanswer="${single_choice.getAnswer()}"
+																value="2"
+																th:totalScore="${single_choice.getScore()}"
 															/>
 														<label th:for="|0_answer_${singleChoice.indexOf(single_choice)+1}_option_2|">
 															<!--B.-->
@@ -247,6 +462,11 @@
 													<li class="option">
 															<input type="radio" class="radioOrCheck" th:name="|answer${singleChoice.indexOf(single_choice)+1}|"
 																th:id="|0_answer_${singleChoice.indexOf(single_choice)+1}_option_3|"
+																th:que_type="${single_choice.getQuesTypeId()}"
+																th:que_id="${single_choice.getChoiceQuesId()}"
+																th:rightanswer="${single_choice.getAnswer()}"
+																value="3"
+																th:totalScore="${single_choice.getScore()}"
 															/>
 														<label th:for="|0_answer_${singleChoice.indexOf(single_choice)+1}_option_3|">
 															<!--C.-->
@@ -257,6 +477,11 @@
 													<li class="option">
 															<input type="radio" class="radioOrCheck" th:name="|answer${singleChoice.indexOf(single_choice)+1}|"
 																th:id="|0_answer_${singleChoice.indexOf(single_choice)+1}_option_4|"
+																th:que_type="${single_choice.getQuesTypeId()}"
+																th:que_id="${single_choice.getChoiceQuesId()}"
+																th:rightanswer="${single_choice.getAnswer()}"
+																value="4"
+																th:totalScore="${single_choice.getScore()}"
 															/>
 														<label th:for="|0_answer_${singleChoice.indexOf(single_choice)+1}_option_4|">
 															<!--D.-->
@@ -294,6 +519,10 @@
 													<li class="option">
 															<input type="checkbox" class="radioOrCheck" th:name="|answer${multipleChoice.indexOf(multiple_choice)+1}|"
 																th:id="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_1|"
+																th:que_type="${multiple_choice.getQuesTypeId()}"
+																th:que_id="${multiple_choice.getChoiceQuesId()}"
+																th:rightanswer="${multiple_choice.getAnswer()}"
+																th:totalScore="${multiple_choice.getScore()}"
 															/>
 														<label th:for="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_1|">
 															<!--A.-->
@@ -304,6 +533,10 @@
 													<li class="option">
 															<input type="checkbox" class="radioOrCheck" th:name="|answer${multipleChoice.indexOf(multiple_choice)+1}|"
 																th:id="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_2|"
+																th:que_type="${multiple_choice.getQuesTypeId()}"
+																th:que_id="${multiple_choice.getChoiceQuesId()}"
+																th:rightanswer="${multiple_choice.getAnswer()}"
+																th:totalScore="${multiple_choice.getScore()}"
 															/>
 														<label th:for="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_2|">
 															<!--B.-->
@@ -314,6 +547,11 @@
 													<li class="option">
 															<input type="checkbox" class="radioOrCheck" th:name="|answer${multipleChoice.indexOf(multiple_choice)+1}|"
 																th:id="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_3|"
+																th:que_type="${multiple_choice.getQuesTypeId()}"
+																th:que_id="${multiple_choice.getChoiceQuesId()}"
+																th:rightanswer="${multiple_choice.getAnswer()}"
+																th:totalScore="${multiple_choice.getScore()}"
+																
 															/>
 														<label th:for="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_3|">
 															<!--C.-->
@@ -324,6 +562,10 @@
 													<li class="option">
 															<input type="checkbox" class="radioOrCheck" th:name="|answer${multipleChoice.indexOf(multiple_choice)+1}|"
 																th:id="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_4|"
+																th:que_type="${multiple_choice.getQuesTypeId()}"
+																th:que_id="${multiple_choice.getChoiceQuesId()}"
+																th:rightanswer="${multiple_choice.getAnswer()}"
+																th:totalScore="${multiple_choice.getScore()}"
 															/>
 														<label th:for="|1_answer_${multipleChoice.indexOf(multiple_choice)+1}_option_4|">
 															<!--D.-->
@@ -339,7 +581,7 @@
 						</div>
 					</div>
 						<!--下面是判断题-->
-					<div id="judge_question" th:display="(${judgeQuestion}==null)?none:block">
+					<div id="judge_question" th:style="'display:'+@{((${judgeQuestion.size()}==0)?'none':'block')}">
 						<div  class="test_content">
 							<div class="test_content_title">
 								<h2>判断题</h2>
@@ -350,7 +592,7 @@
 						</div>
 						<div class="test_content_nr">
 							<ul>
-								<div th:each="judge_question:${judgeQuestion}">
+								<div th:each="judge_question:${judgeQuestion}" style="line-height:23px">
 									
 									<li th:id="|qu_2_${judgeQuestion.indexOf(judge_question)}|">
 											<div class="test_content_nr_tt">
@@ -363,6 +605,11 @@
 														<li class="option">
 																<input type="radio" class="radioOrCheck" th:name="|answer${judgeQuestion.indexOf(judge_question)+1}|"
 																	th:id="|2_answer_${judgeQuestion.indexOf(judge_question)+1}_option_1|"
+																	th:que_type="${judge_question.getQuesTypeId()}"
+																	th:que_id="${judge_question.getJudgeId()}"
+																	th:rightanswer="${judge_question.getAnswer()}"
+																	th:totalScore="${judge_question.getScore()}"
+																	value="1"
 																/>
 															<label th:for="|2_answer_${judgeQuestion.indexOf(judge_question)+1}_option_1|">
 																A.
@@ -373,6 +620,11 @@
 														<li class="option">
 																<input type="radio" class="radioOrCheck" th:name="|answer${judgeQuestion.indexOf(judge_question)+1}|"
 																	th:id="|2_answer_${judgeQuestion.indexOf(judge_question)+1}_option_2|"
+																	th:que_type="${judge_question.getQuesTypeId()}"
+																	th:que_id="${judge_question.getJudgeId()}"
+																	th:rightanswer="${judge_question.getAnswer()}"
+																	th:totalScore="${judge_question.getScore()}"
+																	value="0"
 																/>
 															<label th:for="|2_answer_${judgeQuestion.indexOf(judge_question)+1}_option_2|">
 																B.
@@ -388,7 +640,7 @@
 						</div>
 					</div>
 						<!--下面是填空题-->
-					<div id="fillblank_question" th:display="(${fillBlankQuestion}==null)?none:block">
+					<div id="fillblank_question" th:style="'display:'+@{((${fillBlankQuestion.size()}==0)?'none':'block')}">
 						<div class="test_content">
 							<div class="test_content_title">
 								<h2>填空题</h2>
@@ -408,7 +660,13 @@
 	
 											<div class="test_content_nr_main">
 												<ul>
-													<input style="width:400px;height:20px" type="text" class="radioOrCheck" placeholder="若有多个填空项，答案之间请用逗号隔开" th:name="|answer${fillBlankQuestion.indexOf(fillblank_question)+1}|"/>
+													<input style="width:400px;height:20px" type="text" class="radioOrCheck" placeholder="若有多个填空项，答案之间请用逗号隔开" 
+														th:name="|answer${fillBlankQuestion.indexOf(fillblank_question)+1}|"
+														th:que_type="${fillblank_question.getQuesTypeId()}"
+														th:que_id="${fillblank_question.getQuesAnsId()}"
+														th:totalScore="${fillblank_question.getScore()}"
+														th:rightanswer="${fillblank_question.getAnswer()}"
+														/>
 												</ul>
 											</div>
 									</li>
@@ -417,7 +675,7 @@
 						</div>
 					</div>
 						<!--下面是简答题-->
-					<div id="shortanswer_question" th:display="(${shortAnswerQuestion}==null)?none:block">
+					<div id="shortanswer_question" th:style="'display:'+@{((${shortAnswerQuestion.size()}==0)?'none':'block')}">
 						<div class="test_content">
 							<div class="test_content_title">
 								<h2>简答题</h2>
@@ -437,7 +695,13 @@
 	
 											<div class="test_content_nr_main">
 												<ul>
-													<textarea style="width:800px; height:100px" type="text" class="radioOrCheck" placeholder="请在这填写你的答案" th:name="|answer${shortAnswerQuestion.indexOf(shortanswer_question)+1}|"></textarea>
+													<textarea style="width:800px; height:100px" type="text" class="radioOrCheck" placeholder="请在这填写你的答案" 
+														th:name="|answer${shortAnswerQuestion.indexOf(shortanswer_question)+1}|"
+														th:que_type="${shortanswer_question.getQuesTypeId()}"
+														th:que_id="${shortanswer_question.getQuesAnsId()}"
+														th:totalScore="${shortanswer_question.getScore()}"
+														th:rightanswer="${shortanswer_question.getAnswer()}"
+														></textarea>
 												</ul>
 											</div>
 									</li>
@@ -461,7 +725,7 @@
 						</p>
 					</div>
 					
-						<div class="rt_content" th:display="(${singleChoice}==null)?none:block">
+						<div class="rt_content" th:style="'display:'+@{((${singleChoice.size()}==0)?'none':'block')}">
 							<div class="rt_content_tt">
 								<h2>单选题</h2>
 								<p>
@@ -477,7 +741,7 @@
 							</div>
 						</div>
 					
-						<div class="rt_content">
+						<div class="rt_content" th:style="'display:'+@{((${multipleChoice.size()}==0)?'none':'block')}">
 							<div class="rt_content_tt">
 								<h2>多选题</h2>
 								<p>
@@ -493,7 +757,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="rt_content">
+						<div class="rt_content" th:style="'display:'+@{((${judgeQuestion.size()}==0)?'none':'block')}">
 							<div class="rt_content_tt">
 								<h2>判断题</h2>
 								<p>
@@ -509,7 +773,7 @@
 							</div>
 						</div>
 						
-						<div class="rt_content">
+						<div class="rt_content" th:style="'display:'+@{((${fillBlankQuestion.size()}==0)?'none':'block')}">
 							<div class="rt_content_tt">
 								<h2>填空题</h2>
 								<p>
@@ -525,7 +789,7 @@
 							</div>
 						</div>
 						
-						<div class="rt_content">
+						<div class="rt_content" th:style="'display:'+@{((${shortAnswerQuestion.size()}==0)?'none':'block')}">
 							<div class="rt_content_tt">
 								<h2>简答题</h2>
 								<p>
@@ -548,6 +812,7 @@
 	</div>
 	<!--nr end-->
 	<input type="hidden" id="interval" th:value='${interval}'>
+	<input type="hidden" id="paperId" th:value='${paper_id}'>
 	<input type="hidden" id="allowedCheat" th:value='${allowedCheat}'>
 	<div class="foot"><span id="fullScreen">听说你想全屏？</span></div>
 </div>

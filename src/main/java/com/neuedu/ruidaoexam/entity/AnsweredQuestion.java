@@ -23,7 +23,28 @@ public class AnsweredQuestion {
 
     private Integer iscorrect;
 
-    public Integer getAnswerId() {
+    public AnsweredQuestion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public AnsweredQuestion(Integer answerId, Integer paperResultId, Integer quesType, Integer cqId, Integer eqId,
+			Integer jqId, String answer, String rightAnswer, Integer score, Integer totalScore, Integer iscorrect) {
+		super();
+		this.answerId = answerId;
+		this.paperResultId = paperResultId;
+		this.quesType = quesType;
+		this.cqId = cqId;
+		this.eqId = eqId;
+		this.jqId = jqId;
+		this.answer = answer;
+		this.rightAnswer = rightAnswer;
+		this.score = score;
+		this.totalScore = totalScore;
+		this.iscorrect = iscorrect;
+	}
+
+	public Integer getAnswerId() {
         return answerId;
     }
 
