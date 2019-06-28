@@ -11,6 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.neuedu.ruidaoexam.entity.ForChoiceQuestion;
+import com.neuedu.ruidaoexam.entity.ForJudgeQuestion;
+import com.neuedu.ruidaoexam.entity.ForTianKongQuestion;
+import com.neuedu.ruidaoexam.entity.ForWenDaQuestion;
 import com.neuedu.ruidaoexam.service.impl.PaperServiceimpl;
 import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
 
@@ -35,6 +39,13 @@ public class MarkingController {
 		String paperTitle = studentInof.get(3);
 		String beginTime = studentInof.get(4);
 		String endTime = studentInof.get(5);
+		String comment = studentInof.get(6);
+		String sIsModified = studentInof.get(7);
+		int isModified = Integer.parseInt(sIsModified);
+		String ansPaperIdTag = studentInof.get(8);
+		String stuIdTag = studentInof.get(9);
+		int ansPaperId = Integer.parseInt(ansPaperIdTag);
+		int stuId = Integer.parseInt(stuIdTag);
 //		request.getSession().setAttribute("sName", sName);
 //		request.getSession().setAttribute("sEmail", sEmail);
 //		request.getSession().setAttribute("sScore", sScore);
@@ -48,6 +59,11 @@ public class MarkingController {
 		model.addAttribute("paperTitle", paperTitle);
 		model.addAttribute("beginTime", beginTime);
 		model.addAttribute("endTime", endTime);
+		model.addAttribute("comment", comment);
+		model.addAttribute("isModified", isModified);
+		model.addAttribute("reportId", report_id);
+		model.addAttribute("ansPaperId", ansPaperId);
+		model.addAttribute("stuId", stuId);
 		
 		//获取判卷页全面概括数据
 		ArrayList<String> quanMianGaiKuo = reportServiceimpl.getQuanMianGaiKuo(report_id);
@@ -115,6 +131,26 @@ public class MarkingController {
 		model.addAttribute("wenDaTiWrongNum", wenDaTiWrongNum);
 		model.addAttribute("wenDaTiScore", wenDaTiScore);
 		model.addAttribute("shiTiNum", shiTiNum);
+		
+		//获取报告页选择题答题情况数据
+		ArrayList<ForChoiceQuestion> forChoiceQuestionInList = reportServiceimpl.getXuanZeDaTiQingKuang(report_id);
+				
+		model.addAttribute("forChoiceQuestionInList", forChoiceQuestionInList);
+		
+		//获取报告页判断题答题情况数据
+		ArrayList<ForJudgeQuestion> forJudgeQuestionInList = reportServiceimpl.getPanDuanDaTiQingKuang(report_id);
+				
+		model.addAttribute("forJudgeQuestionInList", forJudgeQuestionInList);
+				
+		//获取报告页填空题答题情况数据
+		ArrayList<ForTianKongQuestion> forTianKongQuestionInList = reportServiceimpl.getTianKongDaTiQingKuang(report_id);
+				
+		model.addAttribute("forTianKongQuestionInList", forTianKongQuestionInList);
+				
+		//获取报告页问答题答题情况数据
+		ArrayList<ForWenDaQuestion> forWenDaQuestionInList = reportServiceimpl.getWenDaDaTiQingKuang(report_id);
+						
+		model.addAttribute("forWenDaQuestionInList", forWenDaQuestionInList);
 		
 		return "marking";
 		

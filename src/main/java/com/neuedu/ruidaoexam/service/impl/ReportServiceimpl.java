@@ -111,6 +111,8 @@ public class ReportServiceimpl implements ReportService{
 		
 		int stuId = report.getStuId();
 		int ansPaperId = report.getPaperId();
+		String stuIdTag = report.getStuId().toString();
+		String ansPaperIdTag = report.getPaperId().toString();
 //		Date beginTime = report.getBeginTimestamp();
 //		Date endTime = report.getEndTimestamp();
 		
@@ -132,6 +134,8 @@ public class ReportServiceimpl implements ReportService{
 		String comment = report.getComment();
 		studentInfoArrayList.add(comment);
 		studentInfoArrayList.add(answeredPaper.getIsModifiedByTeacher().toString());
+		studentInfoArrayList.add(ansPaperIdTag);
+		studentInfoArrayList.add(stuIdTag);
 		
 		return studentInfoArrayList;
 	}
