@@ -92,11 +92,11 @@ public class PageJumpController {
 			session.setAttribute("name", name);
 			session.setAttribute("role", role);
 			if(role.equals("teacher"))
-				return "indexteacher";
+				return "redirect:toindexteacher";
 			else if(role.equals("student"))
-				return "index";
+				return "redirect:toindex";
 			else
-				return "toRegister";
+				return "redirect:toRegister";
 		}
 	}
 	//跳转到组卷界面

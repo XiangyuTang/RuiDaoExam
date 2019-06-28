@@ -109,5 +109,17 @@ public class PaperServiceimpl implements PaperService{
 			return selledPapers;
 		}
 
-	
+		@Override
+		public List<Paper> keywordSearchPaper(String keyword,Integer teacherid){
+			PaperExample paperExample = new PaperExample();
+			Criteria createCriteria = paperExample.createCriteria();
+			createCriteria.andPaperNameLike("%"+keyword+"%");
+			createCriteria.andPointPriceGreaterThan(0);
+			createCriteria.andCreatedbyteacheridNotEqualTo(teacherid);
+			if(tradeRecordMapper.getBoughtBankIDs(teacherid).size()>0) {
+				createCriteria.andPaperIdNotIn(tradeRecordMapper.getBoughtBankIDs(teacherid));
+				}
+			List<Paper> papers = paperMapper.selectByExample(paperExample);
+			return papers;
+		}
 }

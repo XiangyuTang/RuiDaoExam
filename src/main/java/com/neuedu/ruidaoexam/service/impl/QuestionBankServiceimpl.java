@@ -79,4 +79,18 @@ public class QuestionBankServiceimpl implements QuestionBankService {
 		
 		return questionBankMapper.addBank(bank);
 	}
+	
+	@Override
+	public List<QuestionBank> keywordSearchBank(String keyword,Integer teacherid){
+		QuestionBankExample questionBankExample = new QuestionBankExample();
+		Criteria createCriteria = questionBankExample.createCriteria();
+		createCriteria.andQuesBankNameLike("%"+keyword+"%");
+		createCriteria.andPointPriceGreaterThan(0);
+		createCriteria.andCreatedbyteacheridNotEqualTo(teacherid);
+		if(tradeRecordMapper.getBoughtBankIDs(teacherid).size()>0) {
+			createCriteria.andQuesBankIdNotIn(tradeRecordMapper.getBoughtBankIDs(teacherid));
+			}
+		List<QuestionBank> questionBanks = questionBankMapper.selectByExample(questionBankExample);
+		return questionBanks;
+	}
 }

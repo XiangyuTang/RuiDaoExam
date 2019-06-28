@@ -135,6 +135,34 @@ public class ShopController {
 		
 	}
 	/*
+	 * 方法：关键字搜索
+	 * 详细：根据keyword参数，搜索name包含关键字的卷子
+	 * 返回：卷子的List
+	 */
+	@RequestMapping("/keywordSearchPaper")
+	@ResponseBody
+	public List<Paper> keywordSearchPaper(String keyword, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Integer uid_new = Integer.parseInt(String.valueOf(session.getAttribute("uid")).trim());
+		List<Paper> papers = paperservice.keywordSearchPaper(keyword,uid_new);
+		return papers;
+	}
+	
+	/*
+	 * 方法：关键字搜索
+	 * 详细：根据keyword参数，搜索name包含关键字的题库
+	 * 返回：题库的List
+	 */
+	@RequestMapping("/keywordSearchBank")
+	@ResponseBody
+	public List<QuestionBank> keywordSearchBank(String keyword, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Integer uid_new = Integer.parseInt(String.valueOf(session.getAttribute("uid")).trim());
+		List<QuestionBank> questionbank = questionbankservice.keywordSearchBank(keyword,uid_new);
+		return questionbank;
+	}
+	
+	/*
 	 * 方法：获取全部出售题库
 	 * 详细：根据参数-uid（教师id），获取该uid下所有出售题库
 	 * 返回：题库的List

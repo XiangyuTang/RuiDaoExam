@@ -12,6 +12,26 @@
   <script>
  // /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');a
   $(document).ready(function(){
+  		//Enter键提交搜索关键字事件
+    	$(document).keypress(function(event){
+	  		if(event.keyCode=="13"){
+	  			$("#item-search").click();
+	  		}
+	  		
+	  	});
+    	//搜索按钮点击事件
+    	$("#item-search").click(function(){
+    		console.log("进入search");
+    		var keyword = $('input[class="layui-input layui-input-search"]').val();
+    		if(keyword == ""){
+    			layer.msg("搜索不能为空！");
+    			return false;
+    		}
+    		sessionStorage.setItem('keyword',keyword);
+    		console.log(keyword);
+    		window.location.href="toShop?haskey=1";
+    	});
+    	
   })
   </script>
 </head>
@@ -37,8 +57,14 @@
               <i class="layui-icon layui-icon-refresh-3"></i>
             </a>
           </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords="> 
+          <li class="layui-nav-item layui-hide-xs" style="margin-right: 5px;" lay-unselect>
+            <input type="text" placeholder="搜索..." class="layui-input layui-input-search">
+          </li>
+          <li class="layui-nav-item" style="margin-left: 0px;" lay-unselect>
+          	<button type="button" id="item-search" class="layui-btn layui-btn-sm layui-btn-normal">
+							<i class="layui-icon layui-icon-search"></i>
+							搜索
+						</button>
           </li>
         </ul>
         <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">

@@ -24,40 +24,71 @@
 		<script type="text/javascript">
 			//初始化题库的数据，存在papers里
 			function initPapers() {
-				$.ajax({
-					url: "/getShopPapers",
-					type: "POST",
-					dataType: "json",
-					data: {
-							itemtype:getQueryVariable("itemtype")
-					},
-					xhrFields: {
-						withCredentials: true
-					},
-					crossDomain: true,
-					success: function(data) {
-						console.log(data);
-						$.each(data, function(i, value) {
-
-							papers.push(value);
-
-						});
-
-					},
-					error: function(e) {
-						layer.msg("系统异常");
+				if(getQueryVariable("haskey") != false){
+					var keyword = sessionStorage.getItem('keyword');
+					$('#itemtype-bread').html(keyword);
+					$.ajax({
+			          url: "/keywordSearchPaper",
+			          type: "POST",
+			          dataType: "json",
+			          xhrFields: {
+			          	withCredentials: true
+			          },
+			          crossDomain: true,
+			          data: {
+			            "keyword": keyword
+			          },
+			          success: function (data) {
+//			          	console.log(data);
+							$.each(data, function(i, value) {
+	
+								papers.push(value);
+								
+							});
+							console.log(papers);
+			          },
+			          error: function (e) {
+			            layer.msg("系统异常");
+			          }
+			        });
+				}else{
+					var itemtype = getQueryVariable("itemtype");
+					if(itemtype != false){
+						//面包屑显示
+						//$('.layui-breadcrumb').find('a').eq(1).val(filed[itemtype-1]);
+						$('#itemtype-bread').html(filed[itemtype-1]);
+					}else{
+						$('#itemtype-bread').html("全部");
 					}
-				});
+					$.ajax({
+						url: "/getShopPapers",
+						type: "POST",
+						dataType: "json",
+						data: {
+								itemtype:getQueryVariable("itemtype")
+						},
+						xhrFields: {
+							withCredentials: true
+						},
+						crossDomain: true,
+						success: function(data) {
+							console.log(data);
+							$.each(data, function(i, value) {
+	
+								papers.push(value);
+	
+							});
+	
+						},
+						error: function(e) {
+							layer.msg("系统异常");
+						}
+					});
+				}
 			}
 			//初始化元素的事件
 			function initJqueryFunc() {
-				var itemtype = getQueryVariable("itemtype");
-				if(itemtype != false){
-					//面包屑显示
-					$('#itemtype-bread').html(filed[itemtype-1]);
-				}else{
-					$('#itemtype-bread').html("全部");
-				}
+				
 				$('button[class="layui-btn layui-btn-sm layui-btn-normal"]').click(function(){
 					var ids = $(this).attr('id').split("-");
 					if(ids[0] == "itemButtonID"){
@@ -134,6 +165,25 @@
 		<script type="text/javascript">
 			$(function(){
 				initPapers();
+				//Enter键提交搜索关键字事件
+		    	$(document).keypress(function(event){
+			  		if(event.keyCode=="13"){
+			  			$("#item-search").click();
+			  		}
+			  		
+			  	});
+		    	//搜索按钮点击事件
+		    	$("#item-search").click(function(){
+		    		console.log("进入search");
+		    		var keyword = $('input[class="layui-input layui-input-search"]').val();
+		    		if(keyword == ""){
+		    			layer.msg("搜索不能为空！");
+		    			return false;
+		    		}
+		    		sessionStorage.setItem('keyword',keyword);
+		    		console.log(keyword);
+		    		window.location.href="toShop?haskey=1";
+		    	});
 				$(".goodslist-left-item").click(function(){
 					location.href = $(this).find('a').attr('href');
 				});
@@ -158,9 +208,15 @@
 				<!-- 头部区域 -->
 				<ul class="layui-nav layui-layout-left">
 
-					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-						<input style="background-color: #f2f2f2; width: 250px;" type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords=">
-					</li>
+				<li class="layui-nav-item layui-hide-xs" style="margin-right: 5px;" lay-unselect>
+		            <input type="text" placeholder="搜索..." class="layui-input layui-input-search">
+		          </li>
+		          <li class="layui-nav-item" style="margin-left: 0px;" lay-unselect>
+		          	<button type="button" id="item-search" class="layui-btn layui-btn-sm layui-btn-normal">
+									<i class="layui-icon layui-icon-search"></i>
+									搜索
+								</button>
+		          </li>
 				</ul>
 				<ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
 
@@ -265,7 +321,7 @@
 				<div class="layui-fluid layadmin-cmdlist-fluid">
 					<div>
 						<span class="layui-breadcrumb" lay-separator=">">
- 							<a href="toShop">全部分类</a>
+ 							<a href="toShop">全部考卷</a>
  							<a id="itemtype-bread" href="">IT技术</a>
 							<!--<a><cite>IT技术</cite></a>-->
 						</span>
