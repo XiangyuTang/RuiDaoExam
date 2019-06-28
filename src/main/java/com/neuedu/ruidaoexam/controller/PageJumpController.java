@@ -105,17 +105,19 @@ public class PageJumpController {
 	}
 	//跳转到组卷界面
 	@RequestMapping("/toshoudong")
-	public String toshoudong(Model model) {
+	public String toshoudong(Model model,HttpServletRequest request) {
 		// 此处的teacher_id应该是session中的内容
-		List<QuestionBank> questionBanks = questionBankService.getQusetionBankByTeacherid(1);
-		List<QuestionBank> questionBanks2 = trade_recordService.getQusetionBankByTeacherid(1);
+		HttpSession session = request.getSession();
+		Integer uid_new = Integer.parseInt(String.valueOf(session.getAttribute("uid")).trim());
+		List<QuestionBank> questionBanks = questionBankService.getQusetionBankByTeacherid(uid_new);
+		List<QuestionBank> questionBanks2 = trade_recordService.getQusetionBankByTeacherid(uid_new);
 		for (QuestionBank questionbank : questionBanks2) {
 			questionBanks.add(questionbank);
 		}
 		for (QuestionBank questionBank : questionBanks) {
 			System.out.println(questionBank.getQuesBankName());
 		}
-		System.out.println("WWWWWWWWWWWWWWWWWWWWWWW");
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWW");
 		model.addAttribute("questionbanks", questionBanks);
 //		model.addAttribute("test", "我被取用了");
 		return "shoudongzujuan";
