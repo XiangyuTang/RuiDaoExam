@@ -159,7 +159,7 @@ public class ReportController {
 	}
 	@RequestMapping("/getRepotsAndAnsweredpaper")
 	public String getRepotsAndAnsweredpaper(Integer paper_id,Model m) {
-		HashMap<String, Object> hashMap = reportServiceimpl.getReportsByPaperId(1);
+		HashMap<String, Object> hashMap = reportServiceimpl.getReportsByPaperId(paper_id);
 //		for (int i = 0; i <10; i++) {
 //			System.out.println(1);
 //		}

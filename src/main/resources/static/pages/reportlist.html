@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -23,7 +23,7 @@
 		<link charset="utf-8" rel="stylesheet" href="./reportdir/share.css" th:href="@{/static/pages/reportdir/share.css}" media="all">
 		<link rel="stylesheet" href="./reportdir/index.css" th:href="@{/static/pages/reportdir/index.css}" media="all">
 		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
-		  <script type="text/javascript" src="../js/echarts.js" th:src="@{static/js/echarts.js}"></script>
+		<script type="text/javascript" src="../js/echarts.js" th:src="@{static/js/echarts.js}"></script>
 		<style>
 			/*.main{
 				margin-left: auto;
@@ -39,7 +39,7 @@
 			}*/
 			.main{
 				margin-top: 20px;
-				
+/*				border:3px solid #AFB9C3;*/
 			}
 			.main-left{
 /*				display: inline;*/
@@ -48,6 +48,7 @@
 				margin-left: 4%;
 				width: 60%;
 				margin-right: 10px;
+				border:3px solid #C3BFBF;
 			}
 			.main-right{
 /*				display: inline;*/
@@ -142,25 +143,20 @@
 		    	<thead class="head1">
 		    		<tr class="report-header">
 		    			<th>
-		                <label class="mt10 check-box inline-block" data-link="class{merge:_selectAll toggle=&#39;active&#39;}">
-						<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
-						<i class="fa fa-check-square fa-stack-1x check"></i></span>
-		                        <input class="btn-select-all" type="checkbox" data-link="_selectAll">
-		                </label>
+		                    <input class="btn-select-all" type="checkbox" data-link="_selectAll">
 		               </th>
 		               <th></th>
-		               <th style="text-align:left;padding-left:20px;">姓名</th>
-		               <th class="report-sortable" data-sort="0">生成时间
-		                    <i data-link="class{:asc?&#39;fa fa-sort-asc text-mint&#39;:&#39;fa fa-sort-desc text-mint&#39;}" class="fa fa-sort-desc text-mint"></i>
+		               <th style="text-align:left;padding-left:20px;">&nbsp;&nbsp;姓名</th>
+		               <th class="report-sortable" data-sort="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;生成时间
+		                    <!--<i data-link="class{:asc?&#39;fa fa-sort-asc text-mint&#39;:&#39;fa fa-sort-desc text-mint&#39;}" class="fa fa-sort-desc text-mint"></i>-->
 		               </th>
 		               <th class="report-sortable" data-sort="1">分数
-		                    <i class="fa fa-sort"></i>
 		               </th>
 		               <th>总分</th>
 		               <th>已判卷</th>
-		               <th data-jsv="#38^/38^#39^#26_/26_/39^">
+		               <!--<th data-jsv="#38^/38^#39^#26_/26_/39^">
 		                    <i class="fa fa-download"></i>
-		                </th>
+		                </th>-->
 		    		</tr>
 		    	</thead>
  		        <div th:remove="(${hashMap.answeredpapers} == null)? all:none">
@@ -171,11 +167,11 @@
 				        <tbody data-jsv-df="" class="item">
 				        	<tr data-jsv="#41^#28_#78_" class="report-item">
 				        	<td style="width:30px;">
-				            <label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
+				            <!--<label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
 							<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
-							<i class="fa fa-check-square fa-stack-1x check"></i></span>
+							<i class="fa fa-check-square fa-stack-1x check"></i></span>-->
 				                <input type="checkbox" data-link="_selected">
-				            </label>
+<!--				            </label>-->
 					        </td>
 					        
 					        <td style="width: 30px;">
@@ -183,24 +179,23 @@
 					        </td>
 					        
 					        <td style="width:10%;text-align:left;">
-					            <a class="btn btn-link candidate-name fb" target="_blank" title="" th:text="${student.name}">哈哈哈</a>
+					            <a class="btn btn-link candidate-name fb" target="_blank" title="" th:text="${student.name}" th:href="@{/marking(report_id=${report.reportId})}">哈哈哈</a>
 					        </td>
-					        
 					        <td style="min-width:135px" th:text="${report.endTimestamp}">2019-06-14 16:18</td>
-					        <td  style="width: 60px;" th:text="${report.acquiredScore}"> 30</td>
+					        <td  style="width: 60px;" th:text="${report.acquiredScore}">&nbsp;30</td>
 					        
-					        <td style="width:30%;" th:text="${report.totalScore}">30
+					        <td style="width:30%;" th:text="${report.totalScore}">&nbsp;30
 					        </td>
 					        
-					        <td th:text="(${answeredpaper.isModifiedByTeacher} == '1')? '是':'否'">是
+					        <td th:text="(${answeredpaper.isModifiedByTeacher} == '1')? '是':'否'">&nbsp;&nbsp;&nbsp;&nbsp;是
 					        </td>
 					        
-					        <td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">
+					        <!--<td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">
 					            <a data-action="pdf" class="btn btn-default btn-dowload-pdf-single" title="下载PDF报告">
 					                <i class="fa fa-download"></i>
 					                <i class="text-bittersweet fa fa-file-pdf-o"></i>
 					            </a>
-					        </td>
+					        </td>-->
 				        </tr>
 				        </tbody>
 		        		</div>
@@ -245,7 +240,7 @@
 		    </table>-->
 		    
 		    
-		    <div class="list-footer">		        	
+		    <!--<div class="list-footer">		        	
 		    <div>		    	
 		        <div class="btn-group pull-right report-pagination">
 		            <button type="button" data-action="prev" class="btn btn-default" data-link="disabled{:currentPage==1 || loadingTotalCount || loadingList}" disabled="disabled">
@@ -265,7 +260,7 @@
 				</span>
 			
 		    </div>
-		    </div> 
+		    </div> -->
 		    
 		    
 		</div>

@@ -25,7 +25,7 @@
 			.paper-item-bottom{
 /*				margin-left: 60%;*/
  				width: auto; 
-				height: 40px;
+				height: 50px;
 				background-color:#B8BFC8;
 			}
 			/*.item-center{
@@ -41,15 +41,18 @@
 			}
 			.toinvite{
 				position: absolute;
-				margin-top: 10px;
+				margin-top: 14px;
 /*				margin-left: 200px;*/
-				margin-left: 51%;
+				margin-left: 52%;
 /*				background-color: #DDDDDD;*/
 			}
 			a:link {color:#000000;}    /* unvisited link */
 			a:visited {color:#000000;} /* visited link */
 			a:hover {color:#858585}   /* mouse over link */
 			a:active {color:#204D74;}
+			/*.item-center{
+/*				margin-top: 40px;*/
+			}*/
 		</style>
 	</head>
 	<body>
@@ -100,7 +103,7 @@
 										<!--<a class="toreport" style="font-size: 14px; color: #000000;" href="">
 											<i class="fa fa-file-text-o"></i>查看报告
 										</a>-->
-										<a class="toinvite" style="font-size: 16px;" th:href="@{/toaddquestion(bank_id=${bank.quesBankId},bank_name=${bank.quesBankName})}">
+										<a class="toinvite" style="font-size: 17px;" th:href="@{/toaddquestion(bank_id=${bank.quesBankId},bank_name=${bank.quesBankName})}">
 											<i class="fa fa-user-o"></i>添加题目
 										</a>
 									</div>
