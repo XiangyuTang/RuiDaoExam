@@ -274,6 +274,16 @@
   <select id="showNotAnswered" parameterType="Integer" resultMap="BaseResultMap2">
   select * from paper where paper_id in (select a.paper_id from ((select paper_id from invite_student where student_id=#{stuid}) union all (select paper_id from trade_record where buyer_type=2 and buyer_s_id=#{stuid})) a  where a.paper_id not in(select b.paper_id from answered_paper b where b.stu_id=#{stuid})); 
   </select>
+  <update id="degradePoint">
+update student set points=points-#{degradeNum} WHERE student_id=#{stuid}
+
+  </update>
+   <update id="addPoint">
+update student set points=points+#{addnum} WHERE student_id=#{stuid}
+
+  </update>
+  <select id="boughtPapers" parameterType="Integer" resultType="java.util.HashMap">
+SELECT trade_id,paper_name,time, paper_type,seller_id,points,paper_id FROM paper NATURAL JOIN trade_record WHERE paper_id in (select paper_id from trade_record where buyer_type=2 and buyer_s_id=#{stuid}) AND  buyer_s_id=#{stuid}  </select>
   <select id="getStudentsinList" resultMap="BaseResultMap">
   	select * from student where student_id in
   	<foreach collection="list" item="student_id" open="(" close=")" separator=",">

@@ -208,4 +208,18 @@
       point_price = #{pointPrice,jdbcType=INTEGER}
     where ques_bank_id = #{quesBankId,jdbcType=INTEGER}
   </update>
+  <update id="cancelSellBank">
+  UPDATE question_bank SET point_price=0 WHERE createdByTeacherId=#{teacherid} and ques_bank_id=#{bankid};
+  </update>
+  <update id="sellBank">
+    UPDATE question_bank SET point_price=#{price} WHERE createdByTeacherId=#{teacherid} and ques_bank_id=#{bankid};
+  
+  </update>
+  <insert id="addBank" parameterType="com.neuedu.ruidaoexam.entity.QuestionBank">
+  <selectKey order="AFTER" keyProperty="quesBankId" resultType="int">
+   			select LAST_INSERT_ID()
+   		</selectKey>
+   		insert into question_bank (ques_bank_name, ques_bank_filed, createdByTeacherId, point_price) values(#{quesBankName},#{quesBankFiled},#{createdbyteacherid},#{pointPrice})
+  
+  </insert>
 </mapper>

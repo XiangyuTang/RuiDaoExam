@@ -29,4 +29,10 @@ public interface QuestionBankMapper {
     int updateByPrimaryKeySelective(QuestionBank record);
 
     int updateByPrimaryKey(QuestionBank record);
+    
+    int cancelSellBank(Integer bankid,Integer teacherid);
+    
+    int sellBank(Integer bankid,Integer price,Integer teacherid);//贩卖卷子
+    
+    int addBank(QuestionBank bank);// lb 获取bank新增后的返回值
 }

@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="../../css/mail.css" th:href="@{static/css/mail.css}">
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="../../js/Particleground.js" th:src="@{static/js/Particleground.js}"></script>
+  <script type="text/javascript">
+  	var currentemail = "";
+  </script>
   <style>
     body {
       height: 100%;
@@ -232,7 +235,12 @@
           layer.msg("邮箱格式不正确")
           return
         } else {
+        	if(!checkEmail()){
+        	
+        		return 
+        	}
           var nums = 60;
+          currentemail = mailinput;
           showtTime(nums);
           $.ajax({
             url: "/getverifyemail",
@@ -298,6 +306,10 @@
         var repass = field.repass
         var nickname = field.nickname
         var character = field.character
+        if(currentemail != $("#LAY-user-login-cellphone").val()){
+        	layui.msg("请勿更改邮箱！");
+        	return false;
+        }
         console.log(vercode);
         $.ajax({
           url: "/checkRegister",

@@ -43,4 +43,10 @@ public class Trade_recordServiceimpl implements Trade_recordService {
 		return questionBanks;
 	}
 
+	@Override
+	public int addRecord(TradeRecord record) {
+		// TODO Auto-generated method stub
+		return tradeRecordMapper.insertSelective(record);
+	}
+
 }

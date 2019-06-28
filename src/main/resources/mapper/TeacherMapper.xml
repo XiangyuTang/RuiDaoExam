@@ -237,5 +237,13 @@
     from teacher
     where name = #{name,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
+    <update id="degradePoint">
+update teacher set points=points-#{degradeNum} WHERE teacher_id=#{teacherid}
+
+  </update>
+   <update id="addPoint">
+update teacher set points=points+#{addnum} WHERE teacher_id=#{teacherid}
+
+  </update>
   
 </mapper>

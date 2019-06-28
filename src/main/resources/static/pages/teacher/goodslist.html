@@ -4,7 +4,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>初始页</title>
+		<title>题库商城</title>
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -19,9 +19,6 @@
 		<script type="text/javascript">
 			var banks = new Array();
 			var filed = ["IT技术", "IQ&EQ", "招聘真题", "资格证书", "学历教育", "培训学习"];
-			var SlideValue = 0;
-			var SelectBanks = new Array();
-			var LastSelect = new Array();
 		</script>
 		<!--方法-->
 		<script type="text/javascript">
@@ -54,8 +51,14 @@
 			}
 			//初始化元素的事件
 			function initJqueryFunc() {
-				//item（单个题库）右侧子菜单伸缩事件
-				
+				var itemtype = getQueryVariable("itemtype");
+				if(itemtype != false){
+					//面包屑显示
+					//$('.layui-breadcrumb').find('a').eq(1).val(filed[itemtype-1]);
+					$('#itemtype-bread').html(filed[itemtype-1]);
+				}else{
+					$('#itemtype-bread').html("全部");
+				}
 				$('button[class="layui-btn layui-btn-sm layui-btn-normal"]').click(function(){
 					var ids = $(this).attr('id').split("-");
 					if(ids[0] == "itemButtonID"){
@@ -132,9 +135,9 @@
 		<script type="text/javascript">
 			$(function(){
 				initBanks();
-				$(".goodslist-left-item").hover(function(){
-					//$(this).slideToggle();
-				})
+				$(".goodslist-left-item").click(function(){
+					location.href = $(this).find('a').attr('href');
+				});
 			});
 		</script>
 	</head>
@@ -187,7 +190,7 @@
 						</a>
 					</li>
 					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-						<a href="toindex">
+						<a href="toindexteacher">
 							<!--
               	作者：1173073908@qq.com
               	时间：2019-06-13
@@ -196,21 +199,17 @@
 							个人中心
 						</a>
 					</li>
-					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-						<a href="javascript:;" layadmin-event="fullscreen">
-							<i class="layui-icon layui-icon-screen-full"></i>
-						</a>
-					</li>
+					
 					<li class="layui-nav-item" lay-unselect>
 						<a href="javascript:;">
 							<cite th:text="${session.name}"></cite>
 						</a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a  href="toindex">基本资料</a>
+								<a  href="toindexteacher">基本资料</a>
 							</dd>
 							<dd>
-								<a href="toindex">修改密码</a>
+								<a href="toindexteacher">修改密码</a>
 							</dd>
 							<hr>
 							<dd style="text-align: center;">
@@ -220,10 +219,9 @@
 					</li>
 
 					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-						<a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
-					</li>
-					<li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
-						<a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
+						<a href="javascript:;" layadmin-event="fullscreen">
+							<i class="layui-icon layui-icon-screen-full"></i>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -238,27 +236,27 @@
 				<!--左侧选择标签的导航栏-->
 				<div class="goodslist-left" style="height: 360px;">
 					<div class="goodslist-left-item">
-						<a href="">IT技术</a>
+						<a href="toShop?itemtype=1">IT技术</a>
 						<p></p>
 					</div>
 					<div class="goodslist-left-item">
-						<a href="">IQ&EQ</a>
+						<a href="toShop?itemtype=2">IQ&EQ</a>
 						<p></p>
 					</div>
 					<div class="goodslist-left-item">
-						<a href="">招聘真题</a>
+						<a href="toShop?itemtype=3">招聘真题</a>
 						<p></p>
 					</div>
 					<div class="goodslist-left-item">
-						<a href="">资格证书</a>
+						<a href="toShop?itemtype=4">资格证书</a>
 						<p></p>
 					</div>
 					<div class="goodslist-left-item">
-						<a href="">学历教育</a>
+						<a href="toShop?itemtype=5">学历教育</a>
 						<p></p>
 					</div>
 					<div class="goodslist-left-item">
-						<a href="">培训学习</a>
+						<a href="toShop?itemtype=6">培训学习</a>
 						<p></p>
 					</div>
 				</div>
@@ -268,8 +266,8 @@
 				<div class="layui-fluid layadmin-cmdlist-fluid">
 					<div>
 						<span class="layui-breadcrumb" lay-separator=">">
- 							<a href="">全部分类</a>
- 							<a href="">IT技术</a>
+ 							<a href="toShop">全部分类</a>
+ 							<a id="itemtype-bread" href="">IT技术</a>
 							<!--<a><cite>IT技术</cite></a>-->
 						</span>
 					<div class="goodslist-nav">

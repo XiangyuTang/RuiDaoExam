@@ -84,4 +84,30 @@ public class PaperServiceimpl implements PaperService{
 			int rs = paperMapper.deleteByPrimaryKey(PaperId);
 			return rs;
 		}
+		@Override
+		public List<Paper> getAllSelledPapers(Integer stuid) {
+			PaperExample paperExample = new PaperExample();
+			Criteria paperCriteria = paperExample.createCriteria();
+			paperCriteria.andPointPriceGreaterThan(0);
+			if(tradeRecordMapper.getBoughtPaperIDs(stuid).size()>0) {
+			paperCriteria.andPaperIdNotIn(tradeRecordMapper.getBoughtPaperIDs(stuid));
+			}
+			List<Paper> selledPapers=paperMapper.selectByExample(paperExample);
+			return selledPapers;
+		}
+
+		@Override
+		public List<Paper> getCertainTypeSelledPapers(Integer type,Integer stuid) {
+			PaperExample paperExample = new PaperExample();
+			Criteria paperCriteria = paperExample.createCriteria();
+			paperCriteria.andPointPriceGreaterThan(0);
+			paperCriteria.andPaperTypeEqualTo(type);
+			if(tradeRecordMapper.getBoughtPaperIDs(stuid).size()>0) {
+				paperCriteria.andPaperIdNotIn(tradeRecordMapper.getBoughtPaperIDs(stuid));
+			}
+			List<Paper> selledPapers=paperMapper.selectByExample(paperExample);
+			return selledPapers;
+		}
+
+	
 }

@@ -48,15 +48,15 @@
         <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
 
           <li class="layui-nav-item" lay-unselect>
-            <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
-              <i class="layui-icon layui-icon-notice"></i>
+            <a href="toShop" target="_blank" layadmin-event="" lay-text="商城" title="商城">
+              <i class="layui-icon layui-icon-cart"></i>
 
               <!-- 如果有新消息，则显示小圆点 -->
-              <span class="layui-badge-dot"></span>
+              <!--<span class="layui-badge-dot"></span>-->
             </a>
           </li>
           <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="theme">
+            <a href="javascript:;" layadmin-event="theme" title="主题">
               <i class="layui-icon layui-icon-theme"></i>
             </a>
           </li>
@@ -65,26 +65,26 @@
               <i class="layui-icon layui-icon-note"></i>
             </a>
           </li>-->
-          <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="fullscreen">
-              <i class="layui-icon layui-icon-screen-full"></i>
-            </a>
-          </li>-->
+          
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;">
-              <cite>贤心</cite>
+              <cite th:text="${session.name}">贤心</cite>
             </a>
             <dl class="layui-nav-child">
               <dd><a lay-href="set/user/info.html">基本资料</a></dd>
               <dd><a lay-href="set/user/password.html">修改密码</a></dd>
               <hr>
-              <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+              <dd><a href="logout">退出</a></dd>
             </dl>
           </li>
-
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="note"><i class="layui-icon layui-icon-more-vertical"></i></a>
+					<li class="layui-nav-item layui-hide-xs" lay-unselect>
+            <a href="javascript:;" layadmin-event="fullscreen">
+              <i class="layui-icon layui-icon-screen-full"></i>
+            </a>
           </li>
+          <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
+            <a href="javascript:;" layadmin-event="note"><i class="layui-icon layui-icon-more-vertical"></i></a>
+          </li>-->
           <!--<li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
             <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
           </li>-->
@@ -109,7 +109,7 @@
               <dl class="layui-nav-child">
               	
               	
-              	<dd data-name="console">
+              	<!--<dd data-name="console">
                   <li data-name="home" class="layui-nav-item ">
               			<a href="javascript:;" lay-tips="考试" lay-direction="2">
                 		<i></i>
@@ -126,15 +126,15 @@
                   		<a lay-href="toinvite" lay-text="录入考生" >录入考生（后期删掉）</a>
                 		</dd>
             			</li>
-                </dd>
+                </dd>-->
                 
                 
                 
                 <dd data-name="console">
-                  <a lay-href="/getPapers">我的考试</a>
+                  <a lay-href="/tomyPaperTch">我的考试</a>
                 </dd>
                 <dd data-name="console">
-                  <a lay-href="baseinfo.html">正在进行</a>
+                  <a lay-href="tomyPapersaleTch">我的商户</a>
                 </dd>
               </dl>
             </li>
@@ -147,13 +147,10 @@
 
                 <dd data-name="console">
 
-                  <a lay-href="toMyBank">我的题库</a>
+                  <a lay-href="tomyBanksTch">我的题库</a>
                 </dd>
                 <dd data-name="console">
-                  <a lay-href="set/user/password.html">我的分享</a>
-                </dd>
-                <dd data-name="console">
-                  <a lay-href="set/user/info.html">我的商户</a>
+                  <a lay-href="tomyBanksaleTch">我的商户</a>
                 </dd>
               </dl>
             </li>
@@ -166,10 +163,10 @@
 								<dl class="layui-nav-child">
 
 									<dd data-name="console">
-										<a lay-href="baseinfo.html">基本信息</a>
+										<a lay-href="toUserbaseinfo">基本信息</a>
 									</dd>
 									<dd data-name="console">
-										<a lay-href="password.html">修改密码</a>
+										<a lay-href="toUserchangepwd">修改密码</a>
 									</dd>
 								</dl>
 							</li>

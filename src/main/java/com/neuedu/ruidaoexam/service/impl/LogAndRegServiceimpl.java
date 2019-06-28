@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.neuedu.ruidaoexam.configUtils.MD5Util;
 import com.neuedu.ruidaoexam.dao.StudentMapper;
 import com.neuedu.ruidaoexam.dao.TeacherMapper;
 import com.neuedu.ruidaoexam.entity.Student;
@@ -141,6 +142,52 @@ public class LogAndRegServiceimpl implements LogAndRegService {
 			return teachermapper.selectByNamePassword(username, password) != null?
 					teachermapper.selectByNamePassword(username, password):
 					studentmapper.selectByNamePassword(username, password);
+		}
+	}
+	
+	@Override
+	public String getUserType(String username) {
+		Student student=studentmapper.selectByName(username);
+		Teacher teacher=teachermapper.selectByName(username);
+		if(isEmail(username)) {
+			student = studentmapper.selectByEmail(username);
+			teacher = teachermapper.selectByEmail(username);
+		}
+		if(student==null&&teacher==null) {
+			return null;
+		}else if(student==null) {
+			return "teacher";
+		}else {
+			return "student";
+		}
+		
+	}
+
+	@Override
+	public Boolean changePassword(String role,String name, String newPassword) {
+		if(role.equals("teacher")) {
+			Teacher teacher;
+			if(isEmail(name)) {
+				teacher=teachermapper.selectByEmail(name);
+			}else {
+				teacher=teachermapper.selectByName(name);
+			}
+			teacher.setPassword(MD5Util.md5Encode(newPassword));
+			teachermapper.updateByPrimaryKeySelective(teacher);
+			return true;
+		}else if(role.equals("student")){
+			Student student;
+			if(isEmail(name)) {
+				student=studentmapper.selectByEmail(name);
+			}else {
+				student=studentmapper.selectByName(name);
+			}
+			student.setPassword(MD5Util.md5Encode(newPassword));
+			studentmapper.updateByPrimaryKeySelective(student);
+			return true;
+			
+		}else {
+			return false;
 		}
 	}
 

@@ -247,4 +247,12 @@
    		</selectKey>
    		insert into paper (paper_name, createdByTeacherId, paper_time, total_score) values(#{paperName},#{createdbyteacherid},#{paperTime},#{totalScore})
   </insert>
+  <update id="cancelSellPaper">
+  
+  UPDATE paper SET point_price=0 WHERE createdByTeacherId=#{teacherid} and paper_id=#{paperid}
+  </update>
+  <update id="sellPaper">
+    UPDATE paper SET point_price=#{price} WHERE createdByTeacherId=#{teacherid} and paper_id=#{paperid}
+  
+  </update>
 </mapper>

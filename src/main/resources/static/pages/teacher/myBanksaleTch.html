@@ -12,7 +12,6 @@
 		<link rel="stylesheet" href="../../layuiadmin/style/template.css" th:href="@{static/layuiadmin/style/template.css}" media="all">
 		<link rel="stylesheet" href="../../layuiadmin/style/teacher/myLibraryTch.css" th:href="@{static/layuiadmin/style/teacher/myLibraryTch.css}" media="all">
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-				<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<!--变量定义-->
 		<script type="text/javascript">
 			var banks = new Array();
@@ -23,10 +22,10 @@
 		</script>
 		<!--方法-->
 		<script type="text/javascript">
-			//初始化题库的数据，存在books里
+			//初始化题库的数据，存在banks里
 			function initBanks() {
 				$.ajax({
-					url: "/getBanks",
+					url: "/getSaledBanks",
 					type: "POST",
 					dataType: "json",
 					xhrFields: {
@@ -115,7 +114,6 @@
 					e.stopPropagation();
 					LastSelect = [];
 					LastSelect = LastSelect.concat(SelectBanks);
-					console.log(LastSelect);
 					if($(this).attr('id') == 'item-delete') {
 						layer.confirm('确认要删除吗？', {
 							btn: ['确定', '取消'] //按钮
@@ -127,37 +125,18 @@
 							//此处请求后台程序，下方是成功后的前台处理……
 						});
 					}else if($(this).attr('id') == 'item-sale') {
-						layer.prompt({
-						  formType: 0,
-						  value: '',
-						  title: '请输入价格：（积分）',
-						  maxlength: 10,
-						  area: ['800px', '350px'] //自定义文本域宽高
-						}, function(value, index, elem){
+						layer.confirm('确认要取消出售吗？', {
+							btn: ['确定', '取消'] //按钮
+						}, function(index) {
 							
-							console.log("Last:");
 							console.log(LastSelect);
-							if(checkRate(value)){
-								console.log(value);
-						 		layer.close(index);
-						 		saleBank(value);
-						 		
-							}else{
-								value = '';
-							}
+							layer.close(index);
+							cancelsaleBank();
+							
+							//此处请求后台程序，下方是成功后的前台处理……
 						});
-						
-						
-//						layer.confirm('确认要出售吗？', {
-//							btn: ['确定', '取消'] //按钮
-//						}, function(index) {
-//							
-//							layer.close(index);
-//							
-//							//此处请求后台程序，下方是成功后的前台处理……
-//						});
 					}else{
-						layer.msg("此处为编辑题库接口");
+						layer.msg("操作失误！");
 					}
 				});
 			}
@@ -171,7 +150,7 @@
 				}
 			}
 			//删除banks中的题库
-			function removeBank() {
+			function removeBank(val) {
 				for(var i = 0; i < banks.length; i++) {
 					for(var j = 0; j < LastSelect.length; j++) {
 						if(banks[i].quesBankId == LastSelect[j]) {
@@ -221,40 +200,26 @@
 					box.parent().parent().remove();
 				}
 			};
-			//判断是否正整数
-			function checkRate(value) {
-			　　var re = /^[1-9]+[0-9]*]*$/;// /^[0-9]+.?[0-9]*$/; //判断字符串是否为数字 //判断正整数 /^[1-9]+[0-9]*]*$/ 
-			　　var nubmer = value;
-			　　if (!re.test(nubmer)) {
-			　　　　alert("请输入正整数！");
-			　　　　return false;
-			　　}else{
-				return true;
-				}
-			}
-			//更新积分（出售题库）
-			function saleBank(value){
+			//更新积分（取消出售）
+			function cancelsaleBank(){
 				$.ajax({
-					url: "/saleBank",
+					url: "/cancelSaleBanks",
 					type: "POST",
-					dataType: "json",
-					data: {
-							score: value,
-							SelectBanks: JSON.stringify(LastSelect)
-					},
-					//contentType: 'application/json',
+					dataType: "text",
+					data: JSON.stringify(LastSelect),
+					contentType: 'application/json',
 					xhrFields: {
 						withCredentials: true
 					},
 					crossDomain: true,
 					success: function(data) {
 						if(data == 0) {
-							layer.msg("出售失败，操作非法！");
+							layer.msg("取消出售失败，操作非法！");
 						} else {
 							deleteBanksHtml();
 							removeBank();
 							SelectBanks = [];
-							layer.msg("出售成功！");
+							layer.msg("取消成功！");
 
 						}
 
@@ -267,9 +232,6 @@
 		</script>
 		<!--初始化数据及绑定交互事件-->
 		<script type="text/javascript">
-			layui.use('layer',function(){
-				var $=layui.$
-			
 			$(function() {
 				initBanks();
 				//多选删除
@@ -315,9 +277,6 @@
 				//		            });
 
 			});
-			
-
-			})
 			})
 		</script>
 
@@ -383,7 +342,7 @@
 
 					<div class="item-menu-list">
 						<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑题库</a>
-						<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售题库</a>
+						<a href="javascript:;" id="item-sale" class="item-menu-list-item">取消出售</a>
 						<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除题库</a>
 					</div>
 				</div>
@@ -396,7 +355,7 @@
 				<div id="demo0"></div>
 			</div>
 		</div>
-
+		<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<script>
 			layui.config({
 				base: '/static/layuiadmin/' //静态资源所在路径
@@ -443,7 +402,7 @@
 									'</div>' +
 									'<div class="cmdlist-text">' +
 									'<div class="item-intro">' +
-									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
+									'<p>价格：<span>' + item.pointPrice + '</span>积分</p>' +
 									'<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">' +
 									'<i class="layui-icon layui-icon-add-1"></i>' +
 									'添加题目' +
@@ -452,7 +411,7 @@
 									'</div>' +
 									'<div class="item-menu-list">' +
 									'<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑题库</a>' +
-									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售题库</a>' +
+									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">取消出售</a>' +
 									'<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除题库</a>' +
 									'</div>' +
 									'</div>' +

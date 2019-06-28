@@ -44,4 +44,8 @@ public interface TeacherMapper {
     Teacher selectByEmailPassword(String email,String password);
     
     Teacher selectByNamePassword(String name,String password);
+    
+    int addPoint(Integer teacherid,Integer addnum);// 06/26 by lb 增加积分（可能用到）
+    
+    int degradePoint(Integer teacherid,Integer degradeNum);// 06/26 by lb减少积分（购买时候用到）
 }

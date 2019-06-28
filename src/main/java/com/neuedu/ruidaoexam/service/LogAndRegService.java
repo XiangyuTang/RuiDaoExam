@@ -18,5 +18,9 @@ public interface LogAndRegService {
 	Boolean isEmail(String email);
 	//根据用户名/邮箱得到对象
 	Object getUser(String username, String password);
+	//获得用户类型
+	String getUserType(String username);
+	//根据用户名和密码来修改密码
+	Boolean changePassword(String role,String name, String password);
 	
 }

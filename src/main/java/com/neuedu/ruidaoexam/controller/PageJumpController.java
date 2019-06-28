@@ -3,7 +3,10 @@ package com.neuedu.ruidaoexam.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.neuedu.ruidaoexam.entity.QuestionBank;
+import com.neuedu.ruidaoexam.service.LogAndRegService;
 import com.neuedu.ruidaoexam.service.QuestionBankService;
 import com.neuedu.ruidaoexam.service.Trade_recordService;
 import com.neuedu.ruidaoexam.service.impl.QuestionServiceimpl;
@@ -23,6 +27,8 @@ public class PageJumpController {
 	Trade_recordService trade_recordService;
 	@Autowired
 	QuestionServiceimpl questionServiceimpl;
+	@Autowired
+	LogAndRegService logandregservice;
 
 	// 这个controller测试放行静态资源的
 	@RequestMapping("/to11")
@@ -38,16 +44,24 @@ public class PageJumpController {
 
 	// 学生个人中心
 	@RequestMapping("/toindex")
-	public String toindex() {
-		return "index";
+	public String toindex(HttpServletRequest request) {
+		if (request.getSession().getValue("role") == "student") {
+			return "index";
+		} else {
+			return "redirect:tologin";
+		}
 	}
-//	//考生录入界面
+	//考生录入界面
 //	@RequestMapping("/toinvite")
 //	public String toinvite() {
 //		return "invite";
 //	}
-
-	
+//
+//	//考试结束页面
+//	@RequestMapping("/toExamOver")
+//	public String toExamOver() {
+//		return "examOver";
+//	}
 	// 注册页
 	@RequestMapping("/toRegister")
 	public String toRegister() {
@@ -56,8 +70,38 @@ public class PageJumpController {
 
 	// 登录页
 	@RequestMapping("tologin")
-	public String toLogin() {
-		return "user/login";
+	public String toLogin(Model model,HttpServletRequest req,HttpServletResponse res) {
+		Cookie[] cookies = req.getCookies();
+		HttpSession session = req.getSession();
+		String uid=null,name=null,role=null;
+		for(Cookie ck:cookies) {
+			if(ck.getName().equals("uid")) {
+				System.out.println("堵到了cookie："+ck.getValue());
+				uid = ck.getValue();
+			}else if(ck.getName().equals("name")){
+				name = ck.getValue();
+				if(name != null)
+				role = logandregservice.getUserType(name);
+			}
+//			else if(ck.getName() == "role") {
+//				role = ck.getValue();
+//			}
+		}
+		if(uid == null || uid.equals("undefined") || uid.equals("null")) {
+			System.out.println("此时cookie name:"+name);
+			return "user/login";
+		}else {
+			System.out.println("在cookie登录中，uid,name,role为："+uid+","+name+","+role);
+			session.setAttribute("uid", uid);
+			session.setAttribute("name", name);
+			session.setAttribute("role", role);
+			if(role.equals("teacher"))
+				return "indexteacher";
+			else if(role.equals("student"))
+				return "index";
+			else
+				return "toRegister";
+		}
 	}
 	//跳转到组卷界面
 	@RequestMapping("/toshoudong")
@@ -112,7 +156,7 @@ public class PageJumpController {
 		if (request.getSession().getValue("role") == "teacher") {
 			return "indexteacher";
 		} else {
-			return "user/login";
+			return "redirect:tologin";
 		}
 	}
 
@@ -147,6 +191,21 @@ public class PageJumpController {
 	public String tomyPapersaleTch() {
 		return "teacher/myPapersaleTch";
 	}
+	//个人信息-基本资料
+	@RequestMapping("/toUserbaseinfo")
+	public String toUserbaseinfo() {
+		return "user/baseinfo";
+	}
+	//个人信息-修改密码
+	@RequestMapping("/toUserchangepwd")
+	public String toUserchangepwd() {
+		return "user/changepwd";
+	}
+	//忘记密码
+	@RequestMapping("/toforget")
+	public String toforget() {
+		return "user/forget";
+	}
 	// 考试页
 	@RequestMapping("/toexam")
 	public String toexam() {
@@ -170,17 +229,17 @@ public class PageJumpController {
 			
 		}
 		
-	    //学生 个人中心
-		@RequestMapping("toStuBaseInfo")
+	    // 个人中心
+		@RequestMapping("toBaseInfo")
 		public String toStuBaseInfo() {
-			return "student/baseinfo";
+			return "user/baseinfo";
 		}
 		
 		
-		//学生忘记密码
-		@RequestMapping("toStuModifyPassword")
+		//修改密码
+		@RequestMapping("toChangePassword")
 		public String toStuForget() {
-			return "password";
+			return "user/changepwd";
 		}
 		//跳转到添加填写试卷信息页面
 		@RequestMapping("/toaddpaper")
@@ -200,20 +259,42 @@ public class PageJumpController {
 		
 		//跳转到商城界面
 		@RequestMapping("toShop")
-	    public String toShop() {
-			return "user/goodslist";
+	    public String toShop(HttpServletRequest request) {
+			if (request.getSession().getValue("role") == "student") {
+				return "student/goodslist";
+			} else if(request.getSession().getValue("role") == "teacher") {
+				return "teacher/goodslist";
+			}else {
+				return "redirect:tologin";
+			}
 		}
-				
-				//登出
+		//跳转到测试商城
+		@RequestMapping("totext")
+	    public String totext(HttpServletRequest request) {
+			
+				return "user/goodslist";
+		}
+		//登出
 		@RequestMapping("logout")
-		public String logout(Model m,HttpServletRequest req) {
+		public String logout(Model m,
+				HttpServletRequest req,
+				HttpServletResponse res) {
 			req.getSession().removeAttribute("uid");
 			req.getSession().removeAttribute("name");
 			req.getSession().removeAttribute("role");
-					
-		return "redirect:tologin";
-				
+			Cookie[] cookies = req.getCookies();
+			HttpSession session = req.getSession();
+			String uid=null,name=null,role = null;
+			for(Cookie ck:cookies) {
+				if(ck.getName().equals("uid")||
+						ck.getName().equals("name")) {
+					ck.setValue(null);
+					ck.setMaxAge(0);
+					res.addCookie(ck);
 				}
+			}
+		return "redirect:tologin";
+	}
 		//跳转到添加题目界面
 		@RequestMapping("/toaddquestion")
 		public String toaddquestion(Integer bank_id, String bank_name,Model model) {
@@ -227,5 +308,7 @@ public class PageJumpController {
 		public String tozhuye() {
 			return "reportlist";
 		}
-		
 }
+
+
+

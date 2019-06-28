@@ -31,4 +31,8 @@ public interface TradeRecordMapper {
     int updateByPrimaryKey(TradeRecord record);
     //通过教师id查询其购买记录
     List<TradeRecord> getTradesbyTeacherId(Integer Teacherid);
+    
+    List<Integer> getBoughtPaperIDs(Integer stuid);//0628 lb 检索已经买的卷子id
+    
+    List<Integer> getBoughtBankIDs(Integer teacherid);//0628 lb 检索已买的题库id
 }

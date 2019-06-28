@@ -15,4 +15,8 @@ public interface PaperService {
 	public List<Paper> getPapersByTeacherid(Integer TeacherId);
 	//删除卷子
 	int deletePaperByPaperId(Integer PaperId);
+	
+	List<Paper> getAllSelledPapers(Integer stuid);//0626 lb 商城展示页 展示所有已卖出的卷子
+	
+	List<Paper> getCertainTypeSelledPapers(Integer type,Integer stuid); //0626 lb 商城展示页 展示特定类别要卖出的卷子
 }

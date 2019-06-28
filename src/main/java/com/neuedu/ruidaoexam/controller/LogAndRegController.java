@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -71,4 +72,26 @@ public class LogAndRegController {
 			String jsonstr = JSON.toJSONString(json);
 			return jsonstr;
 		}
+		/*
+		 * 修改密码 0-密码错误 1 修改成功 2修改失败
+		 */
+		/*
+		 * 方法：找回密码
+		 * 详细：根据传入密码，修改该邮箱的密码
+		 * 返回： 0-密码错误 1 修改成功 2修改失败
+		 */
+		@PostMapping("/setPassword")
+		@ResponseBody
+		public String setPassword(String username,String newPassword,HttpServletRequest request) {
+			String role=(String)request.getSession().getAttribute("role");
+			String name=(String)request.getSession().getAttribute("name");
+			System.out.println("setPassword此时："+username+","+newPassword+","+larservice.getUserType(username));
+				Boolean i=larservice.changePassword(larservice.getUserType(username), username, newPassword);
+				if(i) {
+					return "1";
+				}
+				return "2";
+		
+		}
+		
 }

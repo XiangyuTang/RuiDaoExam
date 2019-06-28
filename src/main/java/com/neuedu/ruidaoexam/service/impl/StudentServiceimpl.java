@@ -1,20 +1,27 @@
 package com.neuedu.ruidaoexam.service.impl;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.neuedu.ruidaoexam.dao.AnsweredPaperMapper;
+import com.neuedu.ruidaoexam.dao.PaperMapper;
 import com.neuedu.ruidaoexam.dao.ReportMapper;
 import com.neuedu.ruidaoexam.dao.StudentMapper;
+import com.neuedu.ruidaoexam.dao.TeacherMapper;
+import com.neuedu.ruidaoexam.dao.TradeRecordMapper;
 import com.neuedu.ruidaoexam.entity.AnsweredPaperExample;
 import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportExample;
 import com.neuedu.ruidaoexam.entity.ReportExample.Criteria;
 import com.neuedu.ruidaoexam.entity.Student;
+import com.neuedu.ruidaoexam.entity.StudentDataVO;
+import com.neuedu.ruidaoexam.entity.TradeRecord;
 import com.neuedu.ruidaoexam.service.StudentService;
 
 @Service
@@ -22,6 +29,10 @@ public class StudentServiceimpl implements StudentService{
     @Autowired StudentMapper stumapper;
     @Autowired ReportMapper reportmapper;
     @Autowired AnsweredPaperMapper answeredpapermapper;
+    @Autowired TeacherMapper teachermapper;
+    @Autowired TradeRecordMapper traderecordmapper;
+    @Autowired PaperMapper papermapper;
+
 	@Override
 	public int registStudent(Student stu) {
 		// TODO Auto-generated method stub
@@ -57,6 +68,46 @@ public class StudentServiceimpl implements StudentService{
 	public List<Paper> getNotAnsweredList(Integer stuid) {
 		// TODO Auto-generated method stub
 		return stumapper.showNotAnswered(stuid);
+	}
+	@Override
+	public int addPoint(Integer stuid,Integer addNum) {
+		int i=stumapper.addPoint(stuid, addNum);
+		System.out.println("牛逼嗷增加成功了");
+		return i;
+	}
+	@Override
+	public int degradePoint(Integer stuid, Integer degradeNum) {
+		int i=stumapper.addPoint(stuid, degradeNum);
+		System.out.println("牛逼嗷减少成功了");
+		return i;
+	}
+	@Override
+	public List<Map<String,Object>> getBoughtPapers(Integer stuid) {
+		List<Map<String,Object>> boughtPapers = stumapper.boughtPapers(stuid);
+		return boughtPapers;
+	}
+	@Override
+	public Boolean buyPaper(Integer stuid,Integer paper_id) {
+		Integer price=papermapper.selectByPrimaryKey(paper_id).getPointPrice();
+		Integer teacher_id=papermapper.selectByPrimaryKey(paper_id).getCreatedbyteacherid();
+		 if(stumapper.selectByPrimaryKey(stuid).getPoints()<price) {
+			 return false;
+		 }
+		int i =stumapper.degradePoint(stuid, price);
+		int j=teachermapper.addPoint(teacher_id, price);
+		TradeRecord record=new TradeRecord();
+		record.setSellerId(teacher_id);
+		record.setPoints(price);
+		record.setTime(new Date());
+		record.setProductType(2);
+		record.setPaperId(paper_id);
+		record.setBuyerType(2);
+		record.setBuyerSId(stuid);
+		int o=traderecordmapper.insertSelective(record);
+		if(i!=0&&j!=0&&o!=0) {
+			return true;
+		}
+		return false;
 	}
 	@Override
 	

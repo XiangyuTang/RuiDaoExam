@@ -4,7 +4,7 @@ import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.entity.StudentExample;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -50,6 +50,12 @@ public interface StudentMapper {
     Student selectByNamePassword(String name,String password);
     
     List<Paper> showNotAnswered(Integer stuid);//19/06/24 by lb 获得未答试卷的列表
-    //选取studentid在student_idlist中的对象
+    
+    int addPoint(Integer stuid,Integer addnum);// 06/24 by lb 增加积分（可能用到）
+    
+    int degradePoint(Integer stuid,Integer degradeNum);// 06/26 by lb减少积分（购买时候用到）
+    
+    List<Map<String,Object>> boughtPapers(Integer stuid);
+  //选取studentid在student_idlist中的对象
     List<Student> getStudentsinList(List<Integer> student_idList);
 }

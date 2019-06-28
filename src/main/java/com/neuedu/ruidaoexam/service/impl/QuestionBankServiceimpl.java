@@ -36,5 +36,47 @@ public class QuestionBankServiceimpl implements QuestionBankService {
 		int rs = questionBankMapper.deleteByPrimaryKey(Bank_id);
 		return rs;
 	}
+	@Override
+	public List<QuestionBank> getAllSelledBanks(Integer teacherid) {
+		QuestionBankExample questionBankExample = new QuestionBankExample();
+		Criteria createCriteria = questionBankExample.createCriteria();
+		createCriteria.andPointPriceGreaterThan(0);
+		createCriteria.andCreatedbyteacheridNotEqualTo(teacherid);
+		List<Integer> boughtBankIDs = tradeRecordMapper.getBoughtBankIDs(teacherid);
+		for (Integer integer : boughtBankIDs) {
+			System.out.println(integer);
+		}
+		if(tradeRecordMapper.getBoughtBankIDs(teacherid).size()>0) {
+			createCriteria.andQuesBankIdNotIn(tradeRecordMapper.getBoughtBankIDs(teacherid));
+		}
+		
+		List<QuestionBank> questionBanks = questionBankMapper.selectByExample(questionBankExample);
+		for (QuestionBank questionBank:questionBanks) {
+			System.out.println(questionBank.getQuesBankName());
+		}
+		return questionBanks;
+	}
 
+	@Override
+	public List<QuestionBank> getCertainTypeSelledBanks(Integer type,Integer teacherid) {
+		QuestionBankExample questionBankExample = new QuestionBankExample();
+		Criteria createCriteria = questionBankExample.createCriteria();
+		createCriteria.andPointPriceGreaterThan(0);
+		createCriteria.andQuesBankFiledEqualTo(type);
+		createCriteria.andCreatedbyteacheridNotEqualTo(teacherid);
+		if(tradeRecordMapper.getBoughtBankIDs(teacherid).size()>0) {
+		createCriteria.andQuesBankIdNotIn(tradeRecordMapper.getBoughtBankIDs(teacherid));
+		}
+		List<QuestionBank> questionBanks = questionBankMapper.selectByExample(questionBankExample);
+		for (QuestionBank questionBank:questionBanks) {
+			System.out.println(questionBank.getQuesBankName());
+		}
+		return questionBanks;
+	}
+
+	@Override
+	public Integer addQuestBank(QuestionBank bank) {
+		
+		return questionBankMapper.addBank(bank);
+	}
 }

@@ -82,7 +82,7 @@ public class VerifyCodeController {
 		student.setEmail(email);
 		student.setName(nickname);
 		student.setPassword(MD5Util.md5Encode(password));
-		student.setPoints(0);
+		student.setPoints(100);
 		int i=logandregservice.register(student);
 		System.out.println(character+"表记录+"+i);
 		
@@ -92,7 +92,7 @@ public class VerifyCodeController {
 			teacher.setEmail(email);
 			teacher.setName(nickname);
 			teacher.setPassword(MD5Util.md5Encode(password));
-			teacher.setPoints(0);
+			teacher.setPoints(100);
 			int i=logandregservice.register(teacher);
 			System.out.println(character+"表记录+"+i);
 		
@@ -138,4 +138,28 @@ public class VerifyCodeController {
 		}
 		
 	}
+	
+	
+	/*
+	 * 修改密码 0-密码错误 1 修改成功 2修改失败
+	 */
+	@PostMapping("/changePassword")
+	@ResponseBody
+	public String changePassword(String oldPassword,String newPassword,HttpServletRequest request) {
+		String role=(String)request.getSession().getAttribute("role");
+		String name=(String)request.getSession().getAttribute("name");
+		int test=logandregservice.checkUser(name, MD5Util.md5Encode(oldPassword));
+		if(test==0) {
+			return "0";
+		}else {
+			Boolean i=logandregservice.changePassword(role, name, newPassword);
+			if(i) {
+				return "1";
+			}
+			return "2";
+			
+		}
+	
+	}
+
 }

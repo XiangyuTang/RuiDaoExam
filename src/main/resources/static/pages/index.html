@@ -28,7 +28,7 @@
             </a>
           </li>
           <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="toShop"  title="前台">
+            <a href="tohome"  title="首页">
               <i class="layui-icon layui-icon-website"></i>
             </a>
           </li>
@@ -44,28 +44,19 @@
         <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
           
           <li class="layui-nav-item" lay-unselect>
-            <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
-              <i class="layui-icon layui-icon-notice"></i>  
+            <a href="toShop" target="_blank" layadmin-event="message" lay-text="商城" title="商城">
+              <i class="layui-icon layui-icon-cart"></i>  
               
               <!-- 如果有新消息，则显示小圆点 -->
-              <span class="layui-badge-dot"></span>
+              <!--<span class="layui-badge-dot"></span>-->
             </a>
           </li>
           <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="theme">
+            <a href="javascript:;" layadmin-event="theme" title="主题">
               <i class="layui-icon layui-icon-theme"></i>
             </a>
           </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="note">
-              <i class="layui-icon layui-icon-note"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="fullscreen">
-              <i class="layui-icon layui-icon-screen-full"></i>
-            </a>
-          </li>
+
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;">
               <cite th:text="${session.name}"></cite>
@@ -74,16 +65,18 @@
               <dd><a lay-href="toStuBaseInfo">基本资料</a></dd>
               <dd><a lay-href="toStuModifyPassword">修改密码</a></dd>
               <hr>
-              <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+              <dd  style="text-align: center;"><a href="logout">退出</a></dd>
             </dl>
           </li>
-          
           <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
+            <a href="javascript:;" layadmin-event="fullscreen">
+              <i class="layui-icon layui-icon-screen-full"></i>
+            </a>
           </li>
-          <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
-            <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
-          </li>
+          <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
+            <a href="javascript:;" layadmin-event=""><i class="layui-icon layui-icon-more-vertical"></i></a>
+          </li>-->
+
         </ul>
       </div>
       
@@ -116,10 +109,10 @@
                 <dl class="layui-nav-child">
                 
                   <dd data-name="console">
-                    <a lay-href="toStuBaseInfo">基本信息</a>
+                    <a lay-href="toBaseInfo">基本信息</a>
                   </dd>
                   <dd data-name="console">
-                    <a lay-href="toStuModifyPassword">修改密码</a>
+                    <a lay-href="toChangePassword">修改密码</a>
                   </dd>
                 </dl>
               </li>

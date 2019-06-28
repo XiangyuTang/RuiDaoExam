@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>我的题库</title>
+		<title>我的卷子</title>
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -12,21 +12,20 @@
 		<link rel="stylesheet" href="../../layuiadmin/style/template.css" th:href="@{static/layuiadmin/style/template.css}" media="all">
 		<link rel="stylesheet" href="../../layuiadmin/style/teacher/myLibraryTch.css" th:href="@{static/layuiadmin/style/teacher/myLibraryTch.css}" media="all">
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-				<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<!--变量定义-->
 		<script type="text/javascript">
-			var banks = new Array();
+			var papers = new Array();
 			var filed = ["IT技术", "IQ&EQ", "招聘真题", "资格证书", "学历教育", "培训学习"];
 			var SlideValue = 0;
-			var SelectBanks = new Array();
+			var SelectPapers = new Array();
 			var LastSelect = new Array();
 		</script>
 		<!--方法-->
 		<script type="text/javascript">
-			//初始化题库的数据，存在books里
-			function initBanks() {
+			//初始化卷子的数据，以html文本的形式存在books里
+			function initBooks() {
 				$.ajax({
-					url: "/getBanks",
+					url: "/getSaledPapers",
 					type: "POST",
 					dataType: "json",
 					xhrFields: {
@@ -37,7 +36,7 @@
 						console.log(data);
 						$.each(data, function(i, value) {
 
-							banks.push(value);
+							papers.push(value);
 
 						});
 
@@ -49,7 +48,7 @@
 			}
 			//初始化元素的事件
 			function initJqueryFunc() {
-				//item（单个题库）右侧子菜单伸缩事件
+				//item（单个卷子）右侧子菜单伸缩事件
 				$(".item-menu").on('click', function(e) {
 					//清空复选框选中
 					e.stopPropagation();
@@ -98,93 +97,73 @@
 					} else {
 						//选中
 						box.click();
-						SelectBanks.push(currentselect);
+						SelectPapers.push(currentselect);
 
 					}
 					//					$('input[class="gcs-checkbox"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数    
 					//		            	console.log($(this).attr('id'));//将选中的值添加到数组chk_value中    
 					//		            });
 					console.log("此时所有选中的：");
-					console.log(SelectBanks);
+					console.log(SelectPapers);
 					console.log("此时LastSelect:");
 					console.log(LastSelect);
 
 				});
-				//删除题库,编辑，出售事件
+				//删除卷子,编辑，出售事件
 				$(".item-menu-list-item").click(function(e) {
 					e.stopPropagation();
 					LastSelect = [];
-					LastSelect = LastSelect.concat(SelectBanks);
-					console.log(LastSelect);
+					LastSelect = LastSelect.concat(SelectPapers);
 					if($(this).attr('id') == 'item-delete') {
 						layer.confirm('确认要删除吗？', {
 							btn: ['确定', '取消'] //按钮
 						}, function(index) {
-
+							
 							console.log(LastSelect);
 							layer.close(index);
-							deleteBanks();
+							deletePapers();
 							//此处请求后台程序，下方是成功后的前台处理……
 						});
 					}else if($(this).attr('id') == 'item-sale') {
-						layer.prompt({
-						  formType: 0,
-						  value: '',
-						  title: '请输入价格：（积分）',
-						  maxlength: 10,
-						  area: ['800px', '350px'] //自定义文本域宽高
-						}, function(value, index, elem){
+						layer.confirm('确认要取消出售吗？', {
+							btn: ['确定', '取消'] //按钮
+						}, function(index) {
 							
-							console.log("Last:");
 							console.log(LastSelect);
-							if(checkRate(value)){
-								console.log(value);
-						 		layer.close(index);
-						 		saleBank(value);
-						 		
-							}else{
-								value = '';
-							}
+							layer.close(index);
+							cancelsalePaper();
+							
+							//此处请求后台程序，下方是成功后的前台处理……
 						});
-						
-						
-//						layer.confirm('确认要出售吗？', {
-//							btn: ['确定', '取消'] //按钮
-//						}, function(index) {
-//							
-//							layer.close(index);
-//							
-//							//此处请求后台程序，下方是成功后的前台处理……
-//						});
 					}else{
-						layer.msg("此处为编辑题库接口");
+						layer.msg("操作失误！");
 					}
 				});
 			}
-			//从勾选的题库数组中删除指定元素
+			//从勾选的卷子数组中删除指定元素
 			function removeSelect(val) {
-				for(var i = 0; i < SelectBanks.length; i++) {
-					if(SelectBanks[i] == val) {
-						SelectBanks.splice(i, 1);
+				for(var i = 0; i < SelectPapers.length; i++) {
+					if(SelectPapers[i] == val) {
+						SelectPapers.splice(i, 1);
 						break;
 					}
 				}
 			}
-			//删除banks中的题库
-			function removeBank() {
-				for(var i = 0; i < banks.length; i++) {
+			//删除papers中的卷子
+			function removePaper(val) {
+				for(var i = 0; i < papers.length; i++) {
 					for(var j = 0; j < LastSelect.length; j++) {
-						if(banks[i].quesBankId == LastSelect[j]) {
-							banks.splice(i, 1);
+						if(papers[i].paperId == LastSelect[j]) {
+							papers.splice(i, 1);
 						}
 					}
 
 				}
 			};
-			//删除题库
-			function deleteBanks() {
+			//删除卷子
+			function deletePapers() {
 				$.ajax({
-					url: "/deleteBanks",
+					url: "/deletePapersTch",
 					type: "POST",
 					dataType: "text",
 					data: JSON.stringify(LastSelect),
@@ -197,9 +176,9 @@
 						if(data == 0) {
 							layer.msg("删除失败，操作非法！");
 						} else {
-							deleteBanksHtml();
-							removeBank();
-							SelectBanks = [];
+							deletePapersHtml();
+							removePaper();
+							SelectPapers = [];
 							layer.msg("删除成功！");
 
 						}
@@ -211,7 +190,7 @@
 				});
 			};
 			//同步删除html页面内容
-			function deleteBanksHtml() {
+			function deletePapersHtml() {
 				console.log("此时LastSelect:");
 				console.log(LastSelect);
 				for(var i = 0; i < LastSelect.length; i++) {
@@ -221,40 +200,26 @@
 					box.parent().parent().remove();
 				}
 			};
-			//判断是否正整数
-			function checkRate(value) {
-			　　var re = /^[1-9]+[0-9]*]*$/;// /^[0-9]+.?[0-9]*$/; //判断字符串是否为数字 //判断正整数 /^[1-9]+[0-9]*]*$/ 
-			　　var nubmer = value;
-			　　if (!re.test(nubmer)) {
-			　　　　alert("请输入正整数！");
-			　　　　return false;
-			　　}else{
-				return true;
-				}
-			}
-			//更新积分（出售题库）
-			function saleBank(value){
+			//更新积分（取消出售）
+			function cancelsalePaper(){
 				$.ajax({
-					url: "/saleBank",
+					url: "/cancelSalePapers",
 					type: "POST",
-					dataType: "json",
-					data: {
-							score: value,
-							SelectBanks: JSON.stringify(LastSelect)
-					},
-					//contentType: 'application/json',
+					dataType: "text",
+					data: JSON.stringify(LastSelect),
+					contentType: 'application/json',
 					xhrFields: {
 						withCredentials: true
 					},
 					crossDomain: true,
 					success: function(data) {
 						if(data == 0) {
-							layer.msg("出售失败，操作非法！");
+							layer.msg("取消出售失败，操作非法！");
 						} else {
-							deleteBanksHtml();
-							removeBank();
-							SelectBanks = [];
-							layer.msg("出售成功！");
+							deletePapersHtml();
+							removePaper();
+							SelectPapers = [];
+							layer.msg("取消成功！");
 
 						}
 
@@ -267,27 +232,26 @@
 		</script>
 		<!--初始化数据及绑定交互事件-->
 		<script type="text/javascript">
-			layui.use('layer',function(){
-				var $=layui.$
-			
 			$(function() {
-				initBanks();
+				console.log(filed[3]);
+				console.log(filed);
+				initBooks();
 				//多选删除
 			$("#delete-all").click(function() {
 				console.log("delete");
-				if(SelectBanks.length > 0) {
+				if(SelectPapers.length > 0) {
 					layer.confirm('确认要删除吗？', {
 						btn: ['确定', '取消'] //按钮
 					}, function(index) {
 						LastSelect = [];
-						LastSelect = LastSelect.concat(SelectBanks);
+						LastSelect = LastSelect.concat(SelectPapers);
 						console.log(LastSelect);
 						layer.close(index);
-						deleteBanks();
+						deletePapers();
 						//此处请求后台程序，下方是成功后的前台处理……
 					});
 				} else {
-					layer.msg("请先勾选题库！");
+					layer.msg("请先勾选卷子！");
 				}
 			});
 			//全选事件
@@ -315,9 +279,6 @@
 				//		            });
 
 			});
-			
-
-			})
 			})
 		</script>
 
@@ -361,8 +322,8 @@
 						<div class="top-line"></div>
 					</div>
 					<div class="item-title">
-						<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选题库">
-							《五年编程三年脱发》精选题库
+						<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选卷子">
+							《五年编程三年脱发》精选卷子
 							<p>
 								更新于<span>2019-06-22 17:41</span>
 							</p>
@@ -375,16 +336,16 @@
 							<p><span>6</span>道题</p>
 							<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">
 										<i class="layui-icon layui-icon-add-1"></i>
-							        	添加题目
+							        	发布考试
 									</button>
 
 						</div>
 					</div>
 
 					<div class="item-menu-list">
-						<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑题库</a>
-						<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售题库</a>
-						<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除题库</a>
+						<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑卷子</a>
+						<a href="javascript:;" id="item-sale" class="item-menu-list-item">取消出售</a>
+						<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除卷子</a>
 					</div>
 				</div>
 
@@ -396,7 +357,7 @@
 				<div id="demo0"></div>
 			</div>
 		</div>
-
+		<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<script>
 			layui.config({
 				base: '/static/layuiadmin/' //静态资源所在路径
@@ -411,49 +372,49 @@
 				//调用分页
 				laypage.render({
 					elem: 'demo0',
-					count: banks.length,
+					count: papers.length,
 					limit: 6,
 					jump: function(obj) {
-						//此处是必要的，当banks内容变更（增删题库）时，需要重新给count赋值以免页数不对
-						obj.count = banks.length;
+						//此处是必要的，当papers内容变更（增删卷子）时，需要重新给count赋值以免页数不对
+						obj.count = papers.length;
 						//模拟渲染
 						document.getElementById('item').innerHTML = function() {
 							console.log("obj:");
 							console.log(obj);
-							console.log(banks);
+							console.log(papers);
 							var arr = [],
-								thisData = banks.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+								thisData = papers.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
 							layui.each(thisData, function(index, item) {
 								var str =
 									'<div id="item-list" class="layui-col-md4 layui-col-sm4">' +
 									'<div class="cmdlist-container">' +
-									'<div id="itemID-' + item.quesBankId + '" class="item-top">' +
+									'<div id="itemID-' + item.paperId + '" class="item-top">' +
 									'<div class="item-menu"></div>' +
 									'<input type="checkbox" id="item-check-1" class="gcs-checkbox">' +
 									'<label class="gcs-checkbox-label"></label>' + // for="item-check-1"
 									'<div class="top-line"></div>' +
 									'</div>' +
 									'<div class="item-title">' +
-									'<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选题库">' +
-									item.quesBankName +
+									'<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选卷子">' +
+									item.paperName +
 									'<p>' +
-									'类型：<span>' + filed[item.quesBankFiled-1] + '</span>' +
+									'类型：<span>' + filed[item.paperType-1] + '</span>' +
 									'</p>' +
 									'</a>' +
 									'</div>' +
 									'<div class="cmdlist-text">' +
 									'<div class="item-intro">' +
-									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
+									'<p>价格：<span>' + item.pointPrice + '</span>积分</p>' +
 									'<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">' +
 									'<i class="layui-icon layui-icon-add-1"></i>' +
-									'添加题目' +
+									'发布考试' +
 									'</button>' +
 									'</div>' +
 									'</div>' +
 									'<div class="item-menu-list">' +
-									'<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑题库</a>' +
-									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售题库</a>' +
-									'<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除题库</a>' +
+									'<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑卷子</a>' +
+									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">取消出售</a>' +
+									'<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除卷子</a>' +
 									'</div>' +
 									'</div>' +
 									'</div>';

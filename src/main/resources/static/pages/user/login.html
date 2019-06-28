@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <meta charset="utf-8">
   <title>登入 - RuiDaoExam</title>
   <meta name="renderer" content="webkit">
@@ -9,7 +10,9 @@
   <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/admin.css"  th:href="@{static/layuiadmin/style/admin.css}" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/login.css"  th:href="@{static/layuiadmin/style/login.css}" media="all">
-  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+  <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+ 
   <script src="../../js/Particleground.js" th:src="@{static/js/Particleground.js}"></script>
   <style>
 	body{height:100%;overflow:hidden;}
@@ -32,7 +35,8 @@
 	  		if(event.keyCode=="13")
 	  			$("#login-submit").click();
 	  			
-	  	})
+	  	});
+	  	//记住密码
 	  	
 	  });
 	  function setCustomerSession(){
@@ -88,8 +92,8 @@
           </div>
         </div>
         <div class="layui-form-item" style="margin-bottom: 20px;">
-          <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
-          <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
+          <input type="checkbox" id="remember-password" name="remember" lay-skin="primary" title="记住密码">
+          <a href="toforget" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
         </div>
         <div class="layui-form-item">
           <button id="login-submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
@@ -167,7 +171,12 @@
           	setCustomerSession();
             if (data == 1) {
               layer.msg("登录成功，即将进入教师个人中心");
+              if($('#remember-password').is(':checked')){
+									$.cookie('uid',sessionStorage.getItem('uid'),{ path: '/', expires: 7 });
+									$.cookie('name',sessionStorage.getItem('name'),{ path: '/', expires: 7 });
+								}
               setTimeout(function(){
+              	
                 window.location.href="toindexteacher?uid="+
                 sessionStorage.getItem('uid')+"&name="+
                 sessionStorage.getItem('name');
@@ -175,7 +184,13 @@
               
             } else if(data == 2) {
               layer.msg("登录成功，即将进入学生个人中心");
+              if($('#remember-password').is(':checked')){
+									console.log("cookie");
+									$.cookie('uid',sessionStorage.getItem('uid'),{ path: '/', expires: 7 });
+									$.cookie('name',sessionStorage.getItem('name'),{ path: '/', expires: 7 });
+								}
 							setTimeout(function(){
+								
                 window.location.href="toindex?uid="+
                 sessionStorage.getItem('uid')+"&name="+
                 sessionStorage.getItem('name');

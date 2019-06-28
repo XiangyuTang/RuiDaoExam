@@ -9,4 +9,9 @@ public interface QuestionBankService {
 	List<QuestionBank> getQusetionBankByTeacherid(Integer Teacher_id);
 	//删除题库
 	int deleteBankByBankId(Integer Bank_id);
+    List<QuestionBank> getAllSelledBanks(Integer teacherid);//0626 lb 商城展示页 展示所有已卖出的题库
+	
+	List<QuestionBank> getCertainTypeSelledBanks(Integer type,Integer teacherid); //0626 lb 商城展示页 展示特定类别要卖出的题库
+	
+	Integer addQuestBank(QuestionBank bank);//增加并返回ID
 }
