@@ -193,7 +193,7 @@ public class AjaxController {
 	public List<Double> querydata(HttpSession session) {
 		
 		Integer stu_id = Integer.parseInt(String.valueOf(session.getAttribute("uid")).trim());
-
+		System.out.println(stu_id);
 		//int stu_id = 6;
 		int rightsingle = queryAbilityService.getTotalRightQues(stu_id, 1);
 		int rightmultiple = queryAbilityService.getTotalRightQues(stu_id, 2);
