@@ -152,6 +152,16 @@ public class MarkingController {
 						
 		model.addAttribute("forWenDaQuestionInList", forWenDaQuestionInList);
 		
+		//提交判卷结果
+		String ansPaperIdString = "1";
+		String isModifiedByTeacher = "1";
+				 
+		ArrayList<String> modifiedArray = new ArrayList<String>();
+		modifiedArray.add(ansPaperIdString);
+		modifiedArray.add(isModifiedByTeacher);
+				
+		reportServiceimpl.modified(modifiedArray);
+				
 		return "marking";
 		
 	}

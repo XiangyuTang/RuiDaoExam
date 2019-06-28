@@ -483,5 +483,37 @@
     )
   </select>
   
+  <update id="updateChoiceQuestionIsCorrect" parameterType="java.lang.Integer">
+  	update answered_question
+  	set score = #{score},
+  		isCorrect = #{isCorrect}
+  	where paper_result_id = #{ansPaperId} and cq_id = #{questionId}
+  </update>
+  <update id="updateChoiceQuestionIsCorrectAnswer">
+  	update answered_question
+  	set right_answer = #{rightAnswer}
+  	where paper_result_id = #{ansPI} and cq_id = #{quesId}
+  </update>
   
+  
+  
+  <update id="updateJudgeQuestionIsCorrect" parameterType="java.lang.Integer">
+  	update answered_question
+  	set score = #{score},
+  		isCorrect = #{isCorrect}
+  	where paper_result_id = #{ansPaperId} and jq_id = #{questionId}
+  </update>
+  <update id="updateJudgeQuestionIsCorrectAnswer">
+  	update answered_question
+  	set right_answer = #{rightAnswer}
+  	where paper_result_id = #{ansPI} and cq_id = #{quesId}
+  </update>
+  
+  
+  <update id="updateEssayQuestionIsCorrect" parameterType="java.lang.Integer">
+  	update answered_question
+  	set score = #{score},
+  		isCorrect = #{isCorrect}
+  	where paper_result_id = #{ansPaperId} and eq_id = #{questionId}
+  </update>
 </mapper>

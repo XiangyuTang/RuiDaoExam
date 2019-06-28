@@ -308,6 +308,21 @@ public class PageJumpController {
 		public String tozhuye() {
 			return "reportlist";
 		}
+		
+		@RequestMapping("/toshangcheng")
+		public String toshangcheng() {
+			return "user/goodslist";
+		}
+		
+		@RequestMapping("/todenglu")
+		public String todenglu() {
+			return "user/login";
+		}
+		
+		@RequestMapping("/tozhuce")
+		public String tozhuce() {
+			return "user/reg";
+		}
 }
 
 

@@ -77,4 +77,14 @@ public interface AnsweredQuestionMapper {
 	
 	Integer getTotalQues(Integer stu_id,Integer ques_type);
 	
+	//单选、多选,rightAnswer为前端获取的学生的答案
+    int updateChoiceQuestionIsCorrect(int isCorrect,int score, int ansPaperId, int questionId);
+    int updateChoiceQuestionIsCorrectAnswer(@Param("rightAnswer")String rightAnswer, @Param("ansPI")int ansPaperId, @Param("quesId")int questionId);
+    
+    //判断
+    int updateJudgeQuestionIsCorrect(int isCorrect, int score,int ansPaperId, int questionId);
+    int updateJudgeQuestionIsCorrectAnswer(@Param("rightAnswer")int rightAnswer, @Param("ansPI")int ansPaperId, @Param("quesId")int questionId);
+    
+    //填空、简答
+    int updateEssayQuestionIsCorrect(int isCorrect, int score, int ansPaperId, int questionId);
 }

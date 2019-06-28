@@ -337,6 +337,7 @@
     	<div id="111" th:each="forChoiceQuestionInList:${forChoiceQuestionInList}">
     		<input id="choiceTypeId" style="display:none" th:value="${forChoiceQuestionInList.quesTypeId}"/>
         	<input id="choiceId" style="display:none" th:value="${forChoiceQuestionInList.choiceQuesId}"/>
+        	<input id="stuAnswer" style="display:none" th:value="${forChoiceQuestionInList.answer}"/>
         	<div class="question ">
 				<div class="q-panel wrong" th:if="${forChoiceQuestionInList.iscorrect==0}"> 
 					<i style="font-style:normal" th:text="${forChoiceQuestionInListStat.count}"></i>.  <span class="q-type">[ 选择题 ]</span> 
@@ -435,6 +436,7 @@
       <div id="222" th:each="forJudgeQuestionInList:${forJudgeQuestionInList}">
       	<input id="judgeTypeId" style="display:none" th:value="${forJudgeQuestionInList.quesTypeId}"/>
         <input id="judgeId" style="display:none" th:value="${forJudgeQuestionInList.judgeQuesId}"/>
+        <input id="stuAnswer" style="display:none" th:value="${forJudgeQuestionInList.answer}"/>
       	<div class="question ">
 				<div class="q-panel wrong" th:if="${forJudgeQuestionInList.iscorrect==0}"> 
 					<i style="font-style:normal" th:text="${forJudgeQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
@@ -786,7 +788,7 @@
 	     </div>
 	     
 	     <div class="panel panel-default">
-	     	<button type="button" class="layui-btn layui-btn-lg layui-btn-normal">大型按钮</button>
+	     	<button type="button" class="layui-btn layui-btn-fluid layui-btn-normal" >提交判卷结果</button>
 	     </div>
 		</div> 
 	</div> 
@@ -881,6 +883,7 @@
 							var getChoiceId = $(this).parents('#111').find('input:eq(1)').val();
 							var getScore = $('#score').val();
 							var zongScore = $(this).parents('.score-wrapper').find('i:eq(1)').html();
+							var getStuAnswer = $(this).parents('#111').find('input:eq(2)').val();
 							
 							var params = {'oldScore':oldScore,
 										  'newScore':newScore,
@@ -890,7 +893,8 @@
 										  'getChoiceTypeId':getChoiceTypeId,
 										  'getChoiceId':getChoiceId,
 										  'getScore':getScore,
-										  'zongScore':zongScore};
+										  'zongScore':zongScore,
+										  'getStuAnswer':getStuAnswer};
 							$(this).parents('.score-wrapper').find('i:eq(0)').html(newScore);
 							$(this).parent().parent().parent().css("display","none");
 							
@@ -919,6 +923,7 @@
 							var getJudgeId = $(this).parents('#222').find('input:eq(1)').val();
 							var getScore = $('#score').val();
 							var zongScore = $(this).parents('.score-wrapper').find('i:eq(1)').html();
+							var getStuAnswer = $(this).parents('#222').find('input:eq(2)').val();
 							
 							var params = {'oldScore':oldScore,
 										  'newScore':newScore,
@@ -928,7 +933,8 @@
 										  'getJudgeTypeId':getJudgeTypeId,
 										  'getJudgeId':getJudgeId,
 										  'getScore':getScore,
-										  'zongScore':zongScore};
+										  'zongScore':zongScore,
+										  'getStuAnswer':getStuAnswer};
 							$(this).parents('.score-wrapper').find('i:eq(0)').html(newScore);
 							$(this).parent().parent().parent().css("display","none");
 							
@@ -1069,7 +1075,7 @@
   			$(this).parent().parent().parent().prev().html(comment)
 		})
 	})
-	$(function(){
+/*	$(function(){
 	        var report_id = '1';
 	        var pararms ={'val':report_id};// 定义一个js对象
 	        $.ajax({
@@ -1080,16 +1086,16 @@
 		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
 		  		async : false,
 		  		dataType: "text",		  		
-		  		success:function(e){//e变量就是后台返回的Map对象
+		  		success:function(e){*///e变量就是后台返回的Map对象
 //		  			var b = $(input).val();
 //		  			$("#defen").val(b);
-		  		},
-		  		error:function(e){
-		  		}
-  			});
+//		  		},
+//		  		error:function(e){
+//		  		}
+//  			});
   			/* $(this).parent().parent().parent().css("display","none")
   			$(this).parent().parent().parent().prev().html(comment) */
-	})	
+/*	})	
 	$(function(){
 	        var report_id = '1';
 	        var pararms ={'val':report_id};// 定义一个js对象
@@ -1105,10 +1111,10 @@
 		  		},
 		  		error:function(e){
 		  		}
-  			});
+  			});*/
   			/* $(this).parent().parent().parent().css("display","none")
   			$(this).parent().parent().parent().prev().html(comment) */
-	})	
+/*	})	
 	$(function(){
 	        var report_id = '1';
 	        var pararms ={'val':report_id};// 定义一个js对象
@@ -1125,10 +1131,31 @@
 		  		},
 		  		error:function(e){
 		  		}
-  			});
+  			});*/
   			/* $(this).parent().parent().parent().css("display","none")
   			$(this).parent().parent().parent().prev().html(comment) */
-	})	
+	//})	
+	
+/*	$(function(){
+	        var report_id = '1';
+	        var pararms ={'val':report_id};// 定义一个js对象
+	        $.ajax({
+		  		url:'getDaTiQingKuang',
+		  		type:'POST',
+		  		traditional:true,//这使json格式的字符不会被转码
+		  		contentType:'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+		  		data:JSON.stringify(pararms),//将json对象转换成字符串,再向后台传递
+		  		async : false,
+		  		dataType: "text",		  		
+		  		success:function(e){//e变量就是后台返回的Map对象
+		  			
+		  		},
+		  		error:function(e){
+		  		}
+  			});*/
+  			/* $(this).parent().parent().parent().css("display","none")
+  			$(this).parent().parent().parent().prev().html(comment) */
+//	})	
 </script>
 
 <script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
@@ -1201,6 +1228,9 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 		    	layer.closeAll();
 		  	}
 		})
+	})
+	$('[class="layui-btn layui-btn-fluid layui-btn-normal"]').click(function(){
+		window.location.href="/marking";
 	})
 })
 	
