@@ -57,7 +57,8 @@
 		 <table tableName="invite_student" domainObjectName="InviteStudent"/> -->
          <!-- <table tableName="teacher" domainObjectName="Teacher"/> -->
          <!-- <table tableName="invite_student" domainObjectName="InviteStudent"/> -->
-         <table tableName="answered_question" domainObjectName="AnsweredQuestion"/>
+         <!-- <table tableName="answered_question" domainObjectName="AnsweredQuestion"/> -->
+         <table tableName="news" domainObjectName="News"/>
 	</context>
 
 </generatorConfiguration>
