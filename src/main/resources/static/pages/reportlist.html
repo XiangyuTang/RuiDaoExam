@@ -179,7 +179,7 @@
 					        </td>
 					        
 					        <td style="width:10%;text-align:left;">
-					            <a class="btn btn-link candidate-name fb" target="_blank" title="" th:text="${student.name}" th:href="@{/marking(report_id=${report.reportId})}">哈哈哈</a>
+					            <a class="btn btn-link candidate-name fb" target="_blank" title="" th:text="${student.name}" th:href="@{/marking(report_id=${report.reportId},answeredpaper_id=${answeredpaper.ansPaperId})}">哈哈哈</a>
 					        </td>
 					        <td style="min-width:135px" th:text="${report.endTimestamp}">2019-06-14 16:18</td>
 					        <td  style="width: 60px;" th:text="${report.acquiredScore}">&nbsp;30</td>

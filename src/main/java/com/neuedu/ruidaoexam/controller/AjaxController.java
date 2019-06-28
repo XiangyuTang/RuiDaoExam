@@ -51,27 +51,27 @@ public class AjaxController {
 		request.getSession().setAttribute("pingyu", val.get("val").toString());
 		
 		String reportId = "1";
-		String paperId = "1";
-		String stuId = "1";
-		String acquiredScore = "10";
-		String totalScore = "20";
+//		String paperId = "1";
+//		String stuId = "1";
+//		String acquiredScore = "10";
+//		String totalScore = "20";
 	    String comment = request.getSession().getAttribute("pingyu").toString();
-	    String beginTimestamp = "2019-06-22 14:00:00";
-	    String endTimestamp = "2019-06-22 15:00:00";
-	    String switchTimes = "3";
-	    String  isAllowedToSee = "1";
+//	    String beginTimestamp = "2019-06-22 14:00:00";
+//	    String endTimestamp = "2019-06-22 15:00:00";
+//	    String switchTimes = "3";
+//	    String  isAllowedToSee = "1";
 	    
 		ArrayList<String> reportArray = new ArrayList<String>();
 		reportArray.add(reportId);
-		reportArray.add(paperId);
-		reportArray.add(stuId);
-		reportArray.add(acquiredScore);
-		reportArray.add(totalScore);
+//		reportArray.add(paperId);
+//		reportArray.add(stuId);
+//		reportArray.add(acquiredScore);
+//		reportArray.add(totalScore);
 		reportArray.add(comment);
-		reportArray.add(beginTimestamp);
-		reportArray.add(endTimestamp);
-		reportArray.add(switchTimes);
-		reportArray.add(isAllowedToSee);
+//		reportArray.add(beginTimestamp);
+//		reportArray.add(endTimestamp);
+//		reportArray.add(switchTimes);
+//		reportArray.add(isAllowedToSee);
 		
 		reportService.addComment(reportArray);
 		
