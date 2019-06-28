@@ -145,7 +145,7 @@ public class PageJumpController {
 	}
 	
 	//游客主页
-	@RequestMapping("/tohome")
+	@RequestMapping("/")
 	public String tohome() {
 		return "home";
 	}
@@ -308,6 +308,7 @@ public class PageJumpController {
 		public String tozhuye() {
 			return "reportlist";
 		}
+		
 }
 
 

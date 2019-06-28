@@ -11,12 +11,234 @@
   <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
   <link rel="stylesheet" href="../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
   <script type="text/javascript" src="../js/echarts.js" th:src="@{static/js/echarts.js}"></script>
+  <script type="text/javascript" src="js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>
+
   <script>
   ///^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+  function getPicView(){ 
+  	var pos = 0, ctx = null, saveCB,w = 320,h= 240, image = []; 
+  	var canvas = document.createElement("canvas");//创建画布指定宽度和高度
+  	canvas.setAttribute('width', 320); 
+  	canvas.setAttribute('height', 240); //如果画布成功创建
+  	if (canvas.toDataURL) { ctx = canvas.getContext("2d");//设置画布为2d，未来可能支持3d 
+  	image = ctx.getImageData(0, 0, 320, 240);//截图320*240，即整个画布作为有效区(cutx?) 
+  	saveCB = function(data) { 
+  		var col = data.split(";");//把data切割为数组
+  		var img = image; //绘制图像(这里不是很理解算法) //参数data  只是每行的数据  ，例如320*240 大小的照片，一张完整的照片下来需要240个data，每个data有320个rgb 
+  		for(var i = 0; i < w; i++) { //转换为十进制
+  			var tmp = parseInt(col[i]); 
+  			img.data[pos + 0] = (tmp >> 16) & 0xff; 
+  			img.data[pos + 1] = (tmp >> 8) & 0xff;
+  			img.data[pos + 2] = tmp & 0xff; 
+  			img.data[pos + 3] = 0xff; 
+  			pos+= 4; 
+  		} //当绘制320*240像素的图片时发给后端php 
+  		if (pos == 4 * w * h) { //把图像放到画布上,输出为png格式
+  			ctx.putImageData(img, 0, 0); 
+  			$.post("***.do?method=picView", 
+  			{
+  				val: "data",
+  				w:w,
+  				h:h,
+  				image: canvas.toDataURL("image/png")},
+  				function(){ 
+  					var imgStr = "";
+  					$("#picView").html(imgStr);//显示拍摄的照片
+  					$("#getPic").off('click');//禁用拍照功能
+  					$("#getPic").addClass('layui-btn-disabled'); 
+  				}); 
+  				pos = 0; 
+  		} 
+  	}; 
+  	} 
+  	else
+  	{ 
+  		saveCB = function(data) 
+  		{ 
+  			image.push(data);//把数据一点点的放入
+  			image[] pos+= 4 * w; 
+  			if (pos == 4 * w * h) { 
+  				$.ajax({
+  					type: 'POST',
+  					url: "***.do?method=picView",
+  					data: {
+  						val: "pixel",
+  						w:w,
+  						h:h,
+  						image:image.join('|')}, 
+  						success:function(){ 
+  							pos = 0, 
+  							ctx = null, 
+  							saveCB,
+  							w = 320,
+  							h= 240, 
+  							image = []; 
+  							var imgStr = ""; 
+  							$("#picView").html(imgStr);//显示拍摄的照片
+  							$("#getPic").off('click');//禁用拍照功能 
+  							$("#getPic").addClass('layui-btn-disabled');
+  						} 
+  				}); 
+  				pos = 0; 
+  			} 
+  		}; 
+  	} //拍照
+  	$("#webcam").webcam({ 
+  		width: 280, 
+  		height: 240,
+  		mode: "callback", 
+  		swffile: "***/webcam/jscam_canvas_only.swf",//自己的路径
+  		onSave: saveCB, 
+  		onCapture: function () 
+  		{ 
+  			$("#webcam").css("display", "block"); 
+  			$("#webcam").fadeOut("fast", function () { 
+  				$("#webcam").css("opacity", 1); 
+  			});
+  			webcam.save();
+  		}, 
+  		debug: function (type, string) {
+  			console.log(type + ": " + string); 
+  		} 
+  	}); 
+  }
+
   </script>
 </head>
+
 <body>
-	
+		
+<video src="" id="video"></video>
+
+
+		<button id="rec">开始录制</button>
+
+
+		<button id="camera">拍照</button>
+		<!--canvs绘制-->
+		<canvas width="640" height="480" id="outrec"></canvas>
+		<!--base64绘制-->
+		<img id="imgvideo" style="display:none;" width="640" height="480" src="" />
+
+
+		<script type="text/javascript">
+			var video = document.getElementById("video"); //视频dom元素
+
+
+			//001.开启摄像头
+			$('#rec').click(function() {
+				//视频获取
+				var Devicestate = navigator.mediaDevices.getUserMedia({
+					video: true
+				})
+
+
+				Devicestate.then(function(mediaStream) {
+
+
+					video.src = window.URL.createObjectURL(mediaStream);
+					console.log(mediaStream)
+					video.onloadedmetadata = function(e) {
+						video.play();
+					};
+
+
+				});
+
+
+				//用户拒绝使用,或者没有摄像头
+				Devicestate.catch(function(err) {
+					console.log(err.name);
+				});
+
+
+			});
+
+
+			//002.点击拍照按钮
+			$('#camera').click(function() {
+				//视频转换到canvs
+				var outrec = document.getElementById("outrec");
+				var outreccon = outrec.getContext("2d");
+				outreccon.drawImage(video, 0, 0, 640, 480);
+
+
+				var img = outrec.toDataURL("image/jpeg", 0.5)
+
+
+				$('#imgvideo').attr('src', img);
+
+
+				// 调用方式
+				// 参数一： 选择器，代表canvas
+				// 参数二： 图片名称，可选
+				downloadCanvasIamge('#outrec', 'imgvideo');
+				//关闭摄像窗口页面
+				setTimeout(function(){
+					custom_close();
+				},1100);
+				
+			});
+			// 下载Canvas元素的图片
+			function downloadCanvasIamge(selector, name) {
+			   // 通过选择器获取canvas元素
+			   var canvas = document.querySelector(selector)
+			   // 使用toDataURL方法将图像转换被base64编码的URL字符串
+			   var url = canvas.toDataURL('image/jpeg')
+			   // 生成一个a元素
+			   var a = document.createElement('a')
+			   // 创建一个单击事件
+			   var event = new MouseEvent('click')
+			   
+			   // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
+			   a.download = name || '下载图片名称'
+			   // 将生成的URL设置为a.href属性
+			   a.href = url
+			   
+			   // 触发a的单击事件
+			   a.dispatchEvent(event)
+			}
+			//关闭摄像窗口页面
+			function custom_close(){
+				if(confirm("摄像拍照成功，确认是否关闭本窗口")){
+					//delete_file();
+					window.opener=null;
+					window.open('','_self');
+					window.close();
+				}else{
+
+
+				}
+			}
+			//关闭窗口之后删除下载的图片文件，ActiveXObject对象只能在IE浏览器创建
+			/*function delete_file(){
+				alert("删除文件");
+				var fso = new ActiveXObject("Scripting.FileSystemObject");
+				var imgHandle = fso.GetFile("C:\\Users\\yuzhangwei\\Downloads\\imgvideo.jpg"); 
+				imgHandle.Delete();
+			}*/
+
+
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<div class="layui-layout layui-layout-admin">
       <div class="layui-header">
       	<div class="admin-login-box">
