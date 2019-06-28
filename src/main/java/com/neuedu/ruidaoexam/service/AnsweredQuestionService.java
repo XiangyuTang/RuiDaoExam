@@ -1,6 +1,7 @@
 package com.neuedu.ruidaoexam.service;
 
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.neuedu.ruidaoexam.entity.AnsweredQuestion;
 
@@ -15,5 +16,6 @@ public interface AnsweredQuestionService {
 	
 	int selectPrimeKey(AnsweredQuestion aq);
 	
+	@CacheEvict(value="acquired_score",beforeInvocation=true)
 	int selectScores(int paper_result_id);
 }

@@ -3,6 +3,7 @@ package com.neuedu.ruidaoexam.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.neuedu.ruidaoexam.dao.AnsweredPaperMapper;
@@ -14,7 +15,6 @@ import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportExample;
 import com.neuedu.ruidaoexam.entity.ReportExample.Criteria;
 import com.neuedu.ruidaoexam.entity.Student;
-import com.neuedu.ruidaoexam.entity.StudentDataVO;
 import com.neuedu.ruidaoexam.service.StudentService;
 
 @Service
@@ -59,6 +59,7 @@ public class StudentServiceimpl implements StudentService{
 		return stumapper.showNotAnswered(stuid);
 	}
 	@Override
+	
 	public Student getStudent(Integer stuid) {
 		// TODO Auto-generated method stub
 		Student student = stumapper.selectByPrimaryKey(stuid);
