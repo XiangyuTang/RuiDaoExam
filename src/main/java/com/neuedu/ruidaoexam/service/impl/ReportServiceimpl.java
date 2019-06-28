@@ -667,23 +667,78 @@ public class ReportServiceimpl implements ReportService{
 	@Override
 	public HashMap<String, Object> getReportsByPaperId(Integer paper_id) {
 		List<AnsweredPaper> answeredPapers = answeredPaperMapper.getAnsweredPaperByPaper_id(paper_id);
-		ArrayList<Integer> ans_paper_list = new ArrayList<Integer>();
+		List<Integer> ans_paper_list = new ArrayList<Integer>();
+		List<Integer> student_idList = new ArrayList<Integer>();
+		List<Report> reports = new ArrayList<Report>();
+		List<Student> students = new ArrayList<Student>();
+//		List<ReportandAnswered> reportandAnswereds = new ArrayList<ReportandAnswered>();
 		for (AnsweredPaper answeredPaper : answeredPapers) {
 //			System.out.println(answeredPaper.getAnsPaperId());
 			if (answeredPaper.getAnsPaperId() != null) {
 				ans_paper_list.add(answeredPaper.getAnsPaperId());
+//				System.out.println(answeredPaper.getAnsPaperId());
+			}
+			if (answeredPaper.getStuId() != null) {
+				student_idList.add(answeredPaper.getStuId());
+//				System.out.println(answeredPaper.getStuId());
 			}
 		}
-		List<Report> reports = reportMapper.getReportsInList(ans_paper_list);
 		if (!ans_paper_list.isEmpty()) {
 			reports = reportMapper.getReportsInList(ans_paper_list);
 		}
+		if (!student_idList.isEmpty()) {
+			students = studentMapper.getStudentsinList(student_idList);
+		}
+//		for (Student student:students) {
+//			System.out.println(student.getName());
+//		}
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+//		for (Report report:reports) {
+//			System.out.println(report.getAcquiredScore());
+//		}
+//		for (Student student:students) {
+//			System.out.println(student.getName());
+//		}
+//		for (AnsweredPaper answeredPaper:answeredPapers) {
+//			ReportandAnswered reportandAnswered = new ReportandAnswered();
+//			System.out.println(answeredPaper.getAnsPaperId());
+//			System.out.println(answeredPaper.getStuId());
+////			System.out.println(answeredPaper.getAnsPaperId());
+//			System.out.println(answeredPaper.getIsModifiedByTeacher());
+//			System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWW");
+//			reportandAnswered.setAnsweredpaper_id(answeredPaper.getAnsPaperId());
+//			reportandAnswered.setPaper_id(paper_id);
+//			reportandAnswered.setStudent_id(answeredPaper.getStuId());
+//			reportandAnswered.setModify(answeredPaper.getIsModifiedByTeacher());
+//			reportandAnswereds.add(reportandAnswered);
+//		}
+//		for (Report report:reports) {
+//			System.out.println(report.getAcquiredScore());
+//			int i = 0;
+//			ReportandAnswered reportandAnswered = reportandAnswereds.get(i);
+//			reportandAnswereds.get(i).setReport_id(report.getReportId());
+//			reportandAnswereds.get(i).setEndtime(report.getEndTimestamp());
+//			reportandAnswereds.get(i).setAcquiredScore(report.getAcquiredScore());
+//			reportandAnswereds.get(i).setTotalScore(report.getTotalScore());
+//			System.out.println(reportandAnswereds.get(i).getAcquiredScore());
+//			i++;
+//		}
+//		for (Student student:students) {
+//			int j = 0;
+//			reportandAnswereds.get(j).setStudentname(student.getName());
+//			System.out.println(student.getName());
+//			System.out.println(reportandAnswereds.get(j).getStudentname());
+//			System.out.println(reportandAnswereds.get(j).getAcquiredScore());
+//			j++;
+//		}
 //		for (Report report : reports) {
 //			System.out.println(report.getPaperId());
 //		}
+		
 		HashMap<String,Object> hashMap = new HashMap<String,Object>();
 		hashMap.put("answeredpapers", answeredPapers);
 		hashMap.put("reports", reports);
+		hashMap.put("students", students);
 		return hashMap;
 	}
 
