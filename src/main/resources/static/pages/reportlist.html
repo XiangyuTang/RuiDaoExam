@@ -145,50 +145,58 @@
 		               <th class="report-sortable" data-sort="1">分数
 		                    <i class="fa fa-sort"></i>
 		               </th>
-		               <th>标记</th>
+		               <th>总分</th>
 		               <th>已判卷</th>
 		               <th data-jsv="#38^/38^#39^#26_/26_/39^">
 		                    <i class="fa fa-download"></i>
 		                </th>
 		    		</tr>
 		    	</thead>
-		                
-		        <tbody data-jsv-df="" class="item">
-		        	<tr data-jsv="#41^#28_#78_" class="report-item">
-		        	<td style="width:30px;">
-		            <label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
-					<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
-					<i class="fa fa-check-square fa-stack-1x check"></i></span>
-		                <input type="checkbox" data-link="_selected">
-		            </label>
-			        </td>
-			        
-			        <td style="width: 30px;">
-			            <img class="img-circle candidate-portrait" data-link="src{:(portrait||~getPortrait(testId))}" src="./reportdir/portrait_default_9.png" width="40px" height="40px">
-			        </td>
-			        
-			        <td style="width:10%;text-align:left;">
-			            <a class="btn btn-link candidate-name fb" target="_blank" title="">哈哈哈</a>
-			        </td>
-			        
-			        <td style="min-width:135px">2019-06-14 16:18</td>
-			        <td  style="width: 60px;"> 30</td>
-			        
-			        <td style="width:30%;">
-			        </td>
-			        
-			        <td>是
-			        </td>
-			        
-			        <td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">
-			            <a data-action="pdf" class="btn btn-default btn-dowload-pdf-single" title="下载PDF报告">
-			                <i class="fa fa-download"></i>
-			                <i class="text-bittersweet fa fa-file-pdf-o"></i>
-			            </a>
-			        </td>
-		        </tr>
-		        </tbody>
-		        <tbody data-jsv-df="" class="item">
+ 		        <div th:remove="(${hashMap.answeredpapers} == null)? all:none">
+		        	<div th:each="answeredpaper:${hashMap.answeredpapers}" >
+		        	<div th:each="report:${hashMap.reports}"  th:remove="(${answeredpaperStat.count} == ${reportStat.count})? none:all">
+<!-- 		        	<input th:value="answered"> -->
+		        		<div th:each="student:${hashMap.students}"  th:remove="(${answeredpaperStat.count} == ${studentStat.count})? none:all">      
+				        <tbody data-jsv-df="" class="item">
+				        	<tr data-jsv="#41^#28_#78_" class="report-item">
+				        	<td style="width:30px;">
+				            <label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
+							<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
+							<i class="fa fa-check-square fa-stack-1x check"></i></span>
+				                <input type="checkbox" data-link="_selected">
+				            </label>
+					        </td>
+					        
+					        <td style="width: 30px;">
+					            <img class="img-circle candidate-portrait"  src="reportdir/portrait_default_9.png" th:src="@{static/pages/reportdir/portrait_default_9.png}" width="40px" height="40px">
+					        </td>
+					        
+					        <td style="width:10%;text-align:left;">
+					            <a class="btn btn-link candidate-name fb" target="_blank" title="" th:text="${student.name}">哈哈哈</a>
+					        </td>
+					        
+					        <td style="min-width:135px" th:text="${report.endTimestamp}">2019-06-14 16:18</td>
+					        <td  style="width: 60px;" th:text="${report.acquiredScore}"> 30</td>
+					        
+					        <td style="width:30%;" th:text="${report.totalScore}">30
+					        </td>
+					        
+					        <td th:text="(${answeredpaper.isModifiedByTeacher} == '1')? '是':'否'">是
+					        </td>
+					        
+					        <td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">
+					            <a data-action="pdf" class="btn btn-default btn-dowload-pdf-single" title="下载PDF报告">
+					                <i class="fa fa-download"></i>
+					                <i class="text-bittersweet fa fa-file-pdf-o"></i>
+					            </a>
+					        </td>
+				        </tr>
+				        </tbody>
+		        		</div>
+		        	</div>
+		        	</div>
+ 		        </div>
+		        <!--<tbody data-jsv-df="" class="item">
 		        	<tr data-jsv="#41^#28_#78_" class="report-item">
 		        	<td style="width:30px;">
 		            <label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
@@ -223,7 +231,7 @@
 			        </td>
 		        </tr>
 		        </tbody>
-		    </table>
+		    </table>-->
 		    
 		    
 		    <div class="list-footer">		        	

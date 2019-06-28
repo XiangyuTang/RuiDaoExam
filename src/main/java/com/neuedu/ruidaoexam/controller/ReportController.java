@@ -20,6 +20,8 @@ import com.neuedu.ruidaoexam.entity.ForJudgeQuestion;
 import com.neuedu.ruidaoexam.entity.ForTianKongQuestion;
 import com.neuedu.ruidaoexam.entity.ForWenDaQuestion;
 import com.neuedu.ruidaoexam.entity.Report;
+import com.neuedu.ruidaoexam.entity.ReportandAnswered;
+import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.service.impl.PaperServiceimpl;
 import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
 
@@ -158,13 +160,72 @@ public class ReportController {
 	@RequestMapping("/getRepotsAndAnsweredpaper")
 	public String getRepotsAndAnsweredpaper(Integer paper_id,Model m) {
 		HashMap<String, Object> hashMap = reportServiceimpl.getReportsByPaperId(1);
+//		for (int i = 0; i <10; i++) {
+//			System.out.println(1);
+//		}
+		
+//		List<AnsweredPaper> answeredPapers = (List<AnsweredPaper>) hashMap.get("answeredpapers");
+//		List<Report> reports = (List<Report>) hashMap.get("reports");
+//		List<Student> students = (List<Student>) hashMap.get("students");
+//		for (AnsweredPaper answeredPaper:answeredPapers) {
+//			System.out.println(answeredPaper.getAnsPaperId());
+//		}
+//		for (Report report:reports) {
+//			System.out.println(report.getReportId());
+//		}
+//		for (Student student:students) {
+//			System.out.println(student.getName());
+//		}
+//		List<ReportandAnswered> reportandAnswereds = new ArrayList<ReportandAnswered>();
+//		for (AnsweredPaper answeredPaper:answeredPapers) {
+//		ReportandAnswered reportandAnswered = new ReportandAnswered();
+		
+//		System.out.println(answeredPaper.getAnsPaperId());
+//		System.out.println(answeredPaper.getStuId());
+////		System.out.println(answeredPaper.getAnsPaperId());
+//		System.out.println(answeredPaper.getIsModifiedByTeacher());
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWW");
+		
+//		reportandAnswered.setAnsweredpaper_id(answeredPaper.getAnsPaperId());
+//		reportandAnswered.setPaper_id(paper_id);
+//		reportandAnswered.setStudent_id(answeredPaper.getStuId());
+//		reportandAnswered.setModify(answeredPaper.getIsModifiedByTeacher());
+//		reportandAnswereds.add(reportandAnswered);
+//	}
+//	for (Report report:reports) {
+//		System.out.println(report.getAcquiredScore());
+//		int i = 0;
+//		ReportandAnswered reportandAnswered = reportandAnswereds.get(i);
+//		reportandAnswereds.get(i).setReport_id(report.getReportId());
+//		reportandAnswereds.get(i).setEndtime(report.getEndTimestamp());
+//		reportandAnswereds.get(i).setAcquiredScore(report.getAcquiredScore());
+//		reportandAnswereds.get(i).setTotalScore(report.getTotalScore());
+////		System.out.println(reportandAnswereds.get(i).getAcquiredScore());
+//		i++;
+//	}
+//	for (Student student:students) {
+//		int j = 0;
+//		reportandAnswereds.get(j).setStudentname(student.getName());
+////		System.out.println(student.getName());
+////		System.out.println(reportandAnswereds.get(j).getStudentname());
+////		System.out.println(reportandAnswereds.get(j).getAcquiredScore());
+//		j++;
+//	}
+//	for (ReportandAnswered reportandAnswered:reportandAnswereds) {
+//		System.out.println(reportandAnswered.getStudentname());
+//		System.out.println(reportandAnswered.getAcquiredScore());
+//	}
+//		for (ReportandAnswered reportandAnswered:reportandAnswereds) {
+//			System.out.println(reportandAnswered.getStudentname());
+//			System.out.println(reportandAnswered.getAcquiredScore());
+//		}
 //		for (Report report:reports) {
 //			System.out.println(report.getReportId());
 //		}
 //		for (AnsweredPaper answeredPaper:answeredpapers) {
 //			System.out.println(answeredPaper.getAnsPaperId());
 //		}
-		m.addAttribute("map", hashMap);
+		m.addAttribute("hashMap", hashMap);
 		return "reportlist";
 	}
 }

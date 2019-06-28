@@ -6,11 +6,18 @@ public class ReportandAnswered {
 	private Integer report_id;
 	private Integer answeredpaper_id;
 	private Integer paper_id;
+	private Integer student_id;
+	public Integer getStudent_id() {
+		return student_id;
+	}
+	public void setStudent_id(Integer student_id) {
+		this.student_id = student_id;
+	}
 	private String studentname;
 	private Date endtime;
 	private Integer acquiredScore;
 	private Integer totalScore;
-	private Integer modify;
+	private String modify;
 	public ReportandAnswered() {
 		
 	}
@@ -56,10 +63,10 @@ public class ReportandAnswered {
 	public void setTotalScore(Integer totalScore) {
 		this.totalScore = totalScore;
 	}
-	public Integer getModify() {
+	public String getModify() {
 		return modify;
 	}
-	public void setModify(Integer modify) {
+	public void setModify(String modify) {
 		this.modify = modify;
 	}
 }
