@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.neuedu.ruidaoexam.entity.AnsweredQuestion;
 import com.neuedu.ruidaoexam.entity.MsgOfUpdateQuestion;
 import com.neuedu.ruidaoexam.service.AnsweredQuestionService;
+import com.neuedu.ruidaoexam.service.QueryAbilityService;
 import com.neuedu.ruidaoexam.service.QuestionService;
 import com.neuedu.ruidaoexam.service.ReportService;
 import com.neuedu.ruidaoexam.service.impl.QuestionServiceimpl;
@@ -33,6 +34,8 @@ public class AjaxController {
 	ReportService reportService;
 	@Autowired
 	AnsweredQuestionService answeredQuestionService;
+	@Autowired
+	QueryAbilityService queryAbilityService;
 	/**
 	 * 教师发布报告评语
 	 * @return
@@ -131,7 +134,14 @@ public class AjaxController {
 		return "666";
 	}
 	
+
+	/**
+	 * 呈现答题情况
+	 * @return
+	 */
+
 	@RequestMapping(value = "/ajaxModifyScore1", method = RequestMethod.POST)
+
 	@ResponseBody
 	public String modifyScore1(@RequestBody Map val, HttpServletRequest request) {
 //		System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
@@ -145,6 +155,9 @@ public class AjaxController {
 		String getScore = val.get("getScore").toString();
 		String zongScore = val.get("zongScore").toString();
 		
+
+		List<test> list = new ArrayList<test>();
+
 		int getScore1 = Integer.parseInt(getScore);
 		int oldScore1 = Integer.parseInt(oldScore);
 		int newScore1 = Integer.parseInt(newScore);
@@ -155,17 +168,62 @@ public class AjaxController {
 		if (newScore1 == zongScore1) {
 			isCorrect = 1;
 		}
-		
+
+		/*test test = new test();
+		test.setEmail("erwerwetwetwt");
+		list.add(test);
+		HashMap map = new HashMap();
+		map.put("shitiList", list);
+		String str = JSON.toJSONString(map);
+		return str;*/
+		return "";
 //		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 //		System.out.println(newScore+oldScore);
 //		System.out.println(getReportId+getAnsPaperId+getStuId);
 //		System.out.println(getChoiceTypeId+getChoiceId);
 //		System.out.println(getScore1 +" "+ isCorrect);
 		
-		return "";
 		
+
 	}
 	
+
+	@RequestMapping(value="/querydata",method = RequestMethod.POST)
+	@ResponseBody
+	public List<Double> querydata(HttpSession session) {
+		
+		Integer stu_id = Integer.parseInt(String.valueOf(session.getAttribute("uid")).trim());
+		System.out.println(stu_id);
+		//int stu_id = 6;
+		int rightsingle = queryAbilityService.getTotalRightQues(stu_id, 1);
+		int rightmultiple = queryAbilityService.getTotalRightQues(stu_id, 2);
+		int rightJudge = queryAbilityService.getTotalRightQues(stu_id, 4);
+		int rightTiankong = queryAbilityService.getTotalRightQues(stu_id, 5);
+		int rightJianda = queryAbilityService.getTotalRightQues(stu_id, 3);
+		
+		int totalsingle = queryAbilityService.getTotalQues(stu_id, 1);
+		int totalmultiple = queryAbilityService.getTotalQues(stu_id, 2);
+		int totalJudge = queryAbilityService.getTotalQues(stu_id, 4);
+		int totalTiankong = queryAbilityService.getTotalQues(stu_id, 5);
+		int totalJianda = queryAbilityService.getTotalQues(stu_id, 3);
+		
+		Double rate1 = (double) (rightsingle/totalsingle);
+		Double rate2 = (double) (rightmultiple/totalmultiple);
+		Double rate3 = (double) (rightJudge/totalJudge);
+		Double rate4 = (double) (rightTiankong/totalTiankong);
+		Double rate5 = (double) (rightJianda/totalJianda);
+		ArrayList<Double> arrayList = new ArrayList<Double>();
+		arrayList.add(rate1);
+		arrayList.add(rate2);
+		arrayList.add(rate3);
+		arrayList.add(rate4);
+		arrayList.add(rate5);
+		
+		return arrayList;
+	}
+	
+	
+
 	@RequestMapping(value = "/ajaxModifyScore2", method = RequestMethod.POST)
 	@ResponseBody
 	public String modifyScore2(@RequestBody Map val, HttpServletRequest request) {
@@ -299,4 +357,5 @@ public class AjaxController {
 //		
 ////		return val.get("val").toString();
 //	}
+
 }

@@ -14,8 +14,129 @@
     <link rel="stylesheet" href="../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}"
         media="all">
     <link rel="stylesheet" href="../css/time.css" th:href="@{static/css/time.css}">
-    <script src="../js/echarts.min.js" th:src="@{static/js/echarts.min.js}"></script>
-
+    <script type="text/javascript" src="../js/echarts.js" th:src="@{static/js/echarts.js}"></script>
+    <!--<script src="../js/echarts.min.js" th:src="@{static/js/echarts.min.js}"></script>-->
+    <script type="text/javascript" src="examOver_files/jquery.js" th:src="@{static/pages/examOver_files/jquery.js}"></script>
+    <script>
+    	
+   window.onload=function(){ 	
+		   	var myCanvas = echarts.init(document.getElementById('main2'));
+		   	myCanvas.showLoading();
+		   	var tmp = "";
+		   	var data = [];
+		   	$.ajax({
+        	type:"post",
+        	url:"querydata",
+        	async:true,
+        	dataType:'json',//'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+			data:tmp,//将json对象转换成字符串,再向后台传递
+			success:function(result){
+				if(result)
+				{
+					for(var i=0;i<result.length;i++){
+						data.push(result[i]);
+					}
+						option = {
+					    title : {
+					        text: '能力雷达',
+					        subtext: '个人实况数据'
+					    },
+					    tooltip : {
+					        trigger: 'axis'
+					    },
+					    legend: {
+					        x : 'center',
+					        data:['正确率']
+					    },
+					    toolbox: {
+					        show : true,
+					        feature : {
+					            mark : {show: true},
+					            /*dataView : {show: true, readOnly: false}*/
+					        }
+					    },
+					    calculable : true,
+					    polar : [
+					        {
+					            indicator : [
+					                {text : '单选', max  : 1},
+					                {text : '多选', max  : 1},
+					                {text : '判断', max  : 1},
+					                {text : '填空', max  : 1},
+					                {text : '简答', max  : 1}
+					            ],
+					            radius : 80
+					        }
+					    ],
+					    series : [
+					        {
+					            name: '个人实况能力数据',
+					            type: 'radar',
+					            itemStyle: {
+					                normal: {
+					                    areaStyle: {
+					                        type: 'default'
+					                    }
+					                }
+					            },
+					            data : [
+					                {
+					                    value : data,
+					                    name : '正确率'
+					                }
+					                
+					            ]
+					        }
+					    ]
+					};
+					myCanvas.hideLoading();//隐藏上面加载的动画
+					myCanvas.setOption(option);
+				}
+					
+			},
+			error:function(e){
+				console.log(e);
+				layui.use(['layer', 'form'], function(){
+			  		var layer = layui.layer
+			  			,form = layui.form;
+			  			layer.msg('出错了');
+				});
+			}
+        });
+		   	
+		   	
+		   	
+		    
+		
+	}
+   // 图表随着浏览器窗体变化而变化
+   window.onresize = function(){
+		mychars.resize();
+	}
+    </script>
+<!--<script>
+	window.onload=function(){
+	//1.定义画布
+	var myCanvas = echarts.init(document.getElementById('main1'));
+	
+	//2.定义数据
+	var option={
+		title:{text:'echarts图表'},//图表的标题
+		tooltip:{trigger:'axis'},//鼠标滑动到图表上的效果 :axis轴级触发   :item 点级触发
+		legend:{data:['销量']}, // 图形说明
+		xAxis:{data:['衬衫','羊毛衫','夹克','裤子','运动鞋','袜子']},//横坐标
+		yAxis:{},//纵坐标,通常根据数据量自动生成
+		series:[{
+			type:'line',// 图表类型 , 可以切换柱状图bar,折线图line,饼图pie ,点状图 scatter
+			name:'销量',
+			data:[5,10,25,15,3,0]
+		}] // 图形类型,数据值
+	};
+	
+	//3.将数据绑定在画布上
+	myCanvas.setOption(option);
+}
+</script>-->
 </head>
 
 <style>
@@ -38,10 +159,29 @@
 
     <div class="layui-fluid">
         <div class="layui-row layui-col-space15">
-            <div class="layui-col-md9">
+        	 <div class="layui-col-md4">
+                <div class="layui-card" style="height: 266px;">
+                    <div class="layui-card-body">
+						<!--style="width:600px; height:400px"-->
+
+ 					<div id="main2" style="width:356px; height:266px"></div>
+					<!--<div class="chart_box">
+					      <div class="" id='chinesechart'>
+					      </div>
+					</div>-->
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="layui-col-md4">
                 <div class="layui-card" id="datasource">
                     <div class="layui-card-body">
-
+						
 
 
 
@@ -54,14 +194,14 @@
 
             </div>
 
-            <div class="layui-col-md3">
+            <div class="layui-col-md4">
                 <div class="layui-card" style="height: 123px">
 
                     <div class="layui-card-body">
                         <div style="margin-top:10px">
                             <span style="font-size: 20px;color:orange;">
                                 <i class="layui-icon layui-icon-flag"></i>
-                                待作答
+                                	待作答
                             </span>
                             <span style="font-size: 20px;color:orange;margin-left: 20px" id="numberOfNotAnswered"> </span>
                             <br> <br>
@@ -279,6 +419,7 @@
             index: 'lib/index' //主入口模块
         }).use(['index', 'senior']);
     </script>
+   
 </body>
 
 </html>

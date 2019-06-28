@@ -1,6 +1,8 @@
 package com.neuedu.ruidaoexam.entity;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable{
     private Integer studentId;
 
     private String name;

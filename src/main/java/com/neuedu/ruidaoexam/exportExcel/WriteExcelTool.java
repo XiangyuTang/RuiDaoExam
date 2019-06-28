@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -45,9 +45,9 @@ public class WriteExcelTool {
             File file=new File("/Users/liyitong/"+fileName+".xls");
         	try {
         		file.createNewFile();
-        		FileOutputStream stream=FileUtils.openOutputStream(file);
-        		wb.write(stream);
-        		stream.close();
+        		//FileOutputStream stream=FileUtils.openOutputStream(file);
+        		//wb.write(stream);
+        		//stream.close();
         	} catch (IOException e) {
         		// TODO Auto-generated catch block
         		e.printStackTrace();

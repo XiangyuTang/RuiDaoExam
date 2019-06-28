@@ -459,4 +459,29 @@
  	 select * from answered_question
  	 where paper_result_id = #{paperresultid} and (ques_type = 3)
   </select>
+  
+  <select id="getTotalRightQues" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where isCorrect = 1
+    and ques_type=#{ques_type}
+    and paper_result_id in (
+    	select ans_paper_id
+    	from answered_paper
+    	where stu_id=#{stu_id}
+    )
+  </select>
+  
+  <select id="getTotalQues" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from answered_question
+    where ques_type=#{ques_type}
+    and paper_result_id in (
+    	select ans_paper_id
+    	from answered_paper
+    	where stu_id=#{stu_id}
+    )
+  </select>
+  
+  
 </mapper>

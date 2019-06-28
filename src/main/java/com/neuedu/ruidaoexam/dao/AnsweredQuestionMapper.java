@@ -72,4 +72,9 @@ public interface AnsweredQuestionMapper {
 	int selectPrimeKey(Integer paperResultId, Integer quesType, Integer quesId);
 	
 	int selectAcquiredScore(Integer paperResultId);
+	
+	Integer getTotalRightQues(Integer stu_id,Integer ques_type);
+	
+	Integer getTotalQues(Integer stu_id,Integer ques_type);
+	
 }

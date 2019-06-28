@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{static/layuiadmin/layui/css/layui.css}" media="all">
   <link rel="stylesheet" href="../layuiadmin/style/admin.css" th:href="@{static/layuiadmin/style/admin.css}" media="all">
-  
+  <script type="text/javascript" src="../js/echarts.js" th:src="@{static/js/echarts.js}"></script>
   <script>
   ///^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
   </script>
@@ -285,7 +285,30 @@
       </div>
     </div>
   </div>
-
+  <div id="main" style="width:600px; height:400px"></div>
+<script>
+	window.onload=function(){
+	//1.定义画布
+	var myCanvas = echarts.init(document.getElementById('main'));
+	
+	//2.定义数据
+	var option={
+		title:{text:'echarts图表'},//图表的标题
+		tooltip:{trigger:'axis'},//鼠标滑动到图表上的效果 :axis轴级触发   :item 点级触发
+		legend:{data:['销量']}, // 图形说明
+		xAxis:{data:['衬衫','羊毛衫','夹克','裤子','运动鞋','袜子']},//横坐标
+		yAxis:{},//纵坐标,通常根据数据量自动生成
+		series:[{
+			type:'line',// 图表类型 , 可以切换柱状图bar,折线图line,饼图pie ,点状图 scatter
+			name:'销量',
+			data:[5,10,25,15,3,0]
+		}] // 图形类型,数据值
+	};
+	
+	//3.将数据绑定在画布上
+	myCanvas.setOption(option);
+}
+</script>
 <script src="../layuiadmin/layui/layui.js"  th:src="@{static/layuiadmin/layui/layui.js}" ></script>
   <script>
   layui.config({
@@ -294,7 +317,56 @@
     index: 'lib/index' //主入口模块
   }).use(['index', 'sample']);
 </script>
-  
+  <script>
+  	$(function(){
+	  		var mychars = echarts.init(document.getElementById('echarts_div'));
+		
+				mychars.showLoading();//数据加载完之前,显示一段简单的动画
+				
+				//定义2个数组
+				var names=[];// 专门存放类型
+				var shuliang=[];//专门存放数据
+				
+				$.ajax({
+					type:'get',
+					url:'/querydata',
+					async : true, //强制将异步提交方法变为同步提交,(相当于用户要等待这个方法执行回调完毕后,才能操作其他功能)
+					dataType:'json',
+					success:function(result){
+						if(result){
+							for(var i=0;i<result.length;i++){
+								names.push(result[i].name);
+								shuliang.push(result[i].num);
+							}
+							mychars.hideLoading();//隐藏上面加载的动画
+							// 图表插件动态转载数据的方法
+							mychars.setOption({
+								title:{text:'echarts图表'},
+								tooltip:{trigger:'axis'},//鼠标滑动到图表上的效果
+								legend:{data:['销量']}, // 图形说明
+								xAxis:{data:names},//横坐标
+								yAxis:{},
+								series:[{
+									name:'销量',
+									type:'line',// 图表类型 , 可以切换柱状图bar,折线图line
+									data:shuliang
+								}] // 图形类型,数据值
+							});
+						}
+						
+					},
+					error:function(){
+						alert("图表数据请求失败");
+						mychars.hideLoading();//隐藏上面加载的动画
+					}
+				});
+				
+				// 图表随着浏览器窗体变化而变化
+				window.onresize = function(){
+					mychars.resize();
+				}
+  	})
+  </script>
 </body>
 </html>
 
