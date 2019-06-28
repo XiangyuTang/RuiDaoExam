@@ -36,4 +36,6 @@ public interface ReportService {
 	
 	//通过paper_id选取对应的report
     HashMap<String, Object> getReportsByPaperId(Integer paper_id);
+    
+    void modified(ArrayList<String> modifiedArray);		//提交判卷结果
 }

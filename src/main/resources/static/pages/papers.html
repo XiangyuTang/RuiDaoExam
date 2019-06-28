@@ -119,7 +119,7 @@
 <!--								</a>-->
 								<div class="paper-item-bottom">
 									<div class="item-center">
-										<a class="toreport" style="font-size: 14px;" th:href="@{/getRepotsAndAnsweredpaper}">
+										<a class="toreport" style="font-size: 14px;" th:href="@{/getRepotsAndAnsweredpaper(paper_id=${createpaper.paperId})}">
 											<i class="fa fa-file-text-o"></i>查看报告
 										</a>
 										<a class="toinvite" style="font-size: 14px;" th:href="@{/toinvite(paper_id=${createpaper.paperId})}">
@@ -181,7 +181,7 @@
 <!--								</a>-->
 								<div class="paper-item-bottom">
 									<div class="item-center">
-										<a class="toreport" style="font-size: 14px;" th:href="@{/getRepotsAndAnsweredpaper}">
+										<a class="toreport" style="font-size: 14px;" th:href="@{/getRepotsAndAnsweredpaper(paper_id=${buypaper.paperId})}">
 											<i class="fa fa-file-text-o"></i>查看报告
 										</a>
 										<a class="toinvite" style="font-size: 14px;" th:href="@{/toinvite(paper_id=${buypaper.paperId})}">
