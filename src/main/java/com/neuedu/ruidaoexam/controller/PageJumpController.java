@@ -51,17 +51,13 @@ public class PageJumpController {
 			return "redirect:tologin";
 		}
 	}
-	//考生录入界面
-//	@RequestMapping("/toinvite")
-//	public String toinvite() {
-//		return "invite";
-//	}
-//
-//	//考试结束页面
-//	@RequestMapping("/toExamOver")
-//	public String toExamOver() {
-//		return "examOver";
-//	}
+	
+	@RequestMapping("/tophoto")
+	public String takephoto()
+	{
+		return "TakePhoto";
+	}
+
 	// 注册页
 	@RequestMapping("/toRegister")
 	public String toRegister() {
