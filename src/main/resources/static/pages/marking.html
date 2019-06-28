@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title> 不服就来做它报告 </title>
+<title >教师判卷</title>
 <!--<base href="http://www.101test.com/">--><base href=".">
 
 <meta name="keywords" content="考试系统,在线考试系统,网上考试系统,手机考试系统,防作弊考试系统,企业考试系统,微信考试系统,在线考试,资格证模考,模考试卷/题库,知识竞赛系统,校园招聘考试,电子作业系统云平台">
@@ -181,16 +181,20 @@
     <div class="report-basic" id="report-basic">
     <!--<hr id="jibenxinxi" style="height:1px;border:none;border-top:1px solid #555555;" />-->
     <!--<span id="jibenxinxi">&nbsp;</span>-->
-    <h3 id="jibenxinxi" class="tc fn report-title" th:text="${session.paperTitle}"></h3>
+    <h3 id="jibenxinxi" class="tc fn report-title" th:text="${paperTitle}"></h3>
     <div class="head-info">
         <img class="avator" src="../css/marking_files/portrait_default.png" th:src="@{static/css/marking_files/portrait_default.png}">
         <div class="info-wrapper">
             <div class="name-wrapper" th:text="${sName}"></div>
-            <div>邮箱 <span th:text=${session.sEmail}></span></div>
+            <div>邮箱 <span th:text=${sEmail}></span></div>
         </div>
-        <div class="text-bittersweet score-wrapper" _v-b40dfc58=""> 
-        	<span class="report-marked no" _v-b40dfc58="">（未判卷）</span> 
-        	<span class="score" _v-b40dfc58="" th:text=${session.sScore}></span> 分 
+        <div class="text-bittersweet score-wrapper" style="color: green;" th:if="${isModified==1}"> 
+        	<span class="report-marked no">（已判卷）</span> 
+        	<span class="score" th:text=${sScore}></span> 分 
+        </div>
+         <div class="text-bittersweet score-wrapper" th:if="${isModified==0}"> 
+        	<span class="report-marked no">（未判卷）</span> 
+        	<span class="score" th:text=${sScore}></span> 分 
         </div>
     </div>
 
@@ -206,13 +210,17 @@
 
     </div>   
     <div class="report-summary" id="report-summary">
+    	<input id="reportId" style="display: none;" th:value="${reportId}" />
+    	<input id="ansPaperId" style="display: none;" th:value="${ansPaperId}" />
+    	<input id="stuId" style="display: none;" th:value="${stuId}" />
+    	<input id="score" style="display: none;" th:value="${sScore}" /> 
     	<div class="section-title"><a id="quanmiangaikuo">全面概括</a></div>
-    	<p class="pb5 f16">试卷共 <span class="pb5 f16" th:text="${session.shiTiNum}"></span> 道题，考生共答 <span class="pb5 f16" th:text="${session.shiTiNum}"></span> 道题</p>
+    	<p class="pb5 f16">试卷共 <span class="pb5 f16" th:text="${shiTiNum}"></span> 道题，考生共答 <span class="pb5 f16" th:text="${shiTiNum}"></span> 道题</p>
     	<a class="btn btn-link p0">
     	<i class="layui-icon layui-icon-log">考试时间 </i>
-        <i th:text="${session.beginTime}"></i>
+        <i th:text="${beginTime}"></i>
 		<i>至 </i>   
-		<i th:text="${session.endTime}"></i>     
+		<i th:text="${endTime}"></i>     
 		</a>
         
     <div> 
@@ -236,30 +244,30 @@
     		<div class="s-row"> 
     			<div class="s-col overview" style="width: 18%"> 
     				<ul> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet" th:text="${session.keGuanTiNum}"></span> 道</li> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet">30</span> 分</li> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet">20</span> 分</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet" th:text="${keGuanTiNum}"></span> 道</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet" th:text="${keGuanTiTotalScore}">30</span> 分</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet" th:text="${keGuanTiScore}">20</span> 分</li> 
     				</ul> 
     			</div> 
     			<div class="s-col skill-list"> 
     				<div class="s-table"> 
 	    				<div class="s-row skill-row"> 
 	    					<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
-	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
+	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> Java</span>  
 	    					</div> 
 	    					<div class="s-col" style="width: 20%"> <span>选择题</span></div> 
-	    					<div class="s-col" style="width: 15%">3</div> 
-	    					<div class="s-col error-count" style="width: 15%">1</div> 
-	    					<div class="s-col skill-score" style="width: 20%">20</div>
+	    					<div class="s-col" style="width: 15%" th:text="${xuanZeTiNum}"></div> 
+	    					<div class="s-col error-count" style="width: 15%" th:text="${xuanZeTiWrongNum}"></div> 
+	    					<div class="s-col skill-score" style="width: 20%" th:text="${xuanZeTiScore}"></div>
 	    				</div>  
 	    				<div class="s-row skill-row"> 
 	    					<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
-	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
+	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> C语言</span>  
 	    					</div> 
 	    					<div class="s-col" style="width: 20%"> <span>判断题</span></div> 
-	    					<div class="s-col" style="width: 15%">3</div> 
-	    					<div class="s-col error-count" style="width: 15%">1</div> 
-	    					<div class="s-col skill-score" style="width: 20%">20</div>
+	    					<div class="s-col" style="width: 15%" th:text="${panDuanTiNum}">3</div> 
+	    					<div class="s-col error-count" style="width: 15%" th:text="${panDuanTiWrongNum}"></div> 
+	    					<div class="s-col skill-score" style="width: 20%" th:text="${panDuanTiScore}"></div>
 	    				</div>  
     				</div> 
     			</div> 
@@ -285,9 +293,9 @@
     		<div class="s-row"> 
     			<div class="s-col overview" style="width: 18%"> 
     				<ul> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet">2</span> 道</li> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet">20</span> 分</li> 
-    					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet">0</span> 分</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 题目 <span class="text-bittersweet" th:text="${zhuGuanTiNum}"></span> 道</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 总分 <span class="text-bittersweet" th:text="${zhuGuanTiTotalScore}"></span> 分</li> 
+    					<li><i class="layui-icon layui-icon-fire"></i> 得分 <span class="text-bittersweet" th:text="${zhuGuanTiScore}"></span> 分</li> 
     				</ul> 
     			</div> 
     			<div class="s-col skill-list"> 
@@ -297,18 +305,18 @@
     							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> PHP</span>  
     						</div> 
     						<div class="s-col" style="width: 20%"> <span>填空题</span>  </div> 
-    						<div class="s-col" style="width: 15%">2</div> 
-    						<div class="s-col error-count" style="width: 15%">2</div> 
-    						<div class="s-col skill-score" style="width: 20%">0</div> 
+    						<div class="s-col" style="width: 15%" th:text="${tianKongTiNum}"></div> 
+    						<div class="s-col error-count" style="width: 15%" th:text="${tianKongTiWrongNum}"></div> 
+    						<div class="s-col skill-score" style="width: 20%" th:text="${tianKongTiScore}"></div> 
     					</div>  
     					<div class="s-row skill-row"> 
     						<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> PHP</span>  
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> Ajax</span>  
     						</div> 
     						<div class="s-col" style="width: 20%"> <span>问答题</span>  </div> 
-    						<div class="s-col" style="width: 15%">2</div> 
-    						<div class="s-col error-count" style="width: 15%">2</div> 
-    						<div class="s-col skill-score" style="width: 20%">0</div> 
+    						<div class="s-col" style="width: 15%" th:text="${wenDaTiNum}"></div> 
+    						<div class="s-col error-count" style="width: 15%" th:text="${wenDaTiWrongNum}"></div> 
+    						<div class="s-col skill-score" style="width: 20%" th:text="${wenDaTiScore}"></div> 
     					</div>
     				</div> 
     			</div> 
@@ -320,201 +328,337 @@
 <div class="report-answer" id="report-answer">
     <div class="section-title"><a id="datiqingkuang">答题情况</a></div>
     <div id="xunhuan"></div>
-<!--        <div class="part-title">单选题（共3道题）</div>
+<div th:if="${#objects.nullSafe(forChoiceQuestionInList,default)}">
+    <div class="part-title">
+    	选择题（共
+    	<span th:text="${xuanZeTiNum}"></span>
+    	道题）
+    </div>
+    	<div id="111" th:each="forChoiceQuestionInList:${forChoiceQuestionInList}">
+    		<input id="choiceTypeId" style="display:none" th:value="${forChoiceQuestionInList.quesTypeId}"/>
+        	<input id="choiceId" style="display:none" th:value="${forChoiceQuestionInList.choiceQuesId}"/>
         	<div class="question ">
-				<div class="q-panel wrong"> 1、 <span class="q-type">[ 判断题 ]</span> 
-					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
+				<div class="q-panel wrong" th:if="${forChoiceQuestionInList.iscorrect==0}"> 
+					<i style="font-style:normal" th:text="${forChoiceQuestionInListStat.count}"></i>.  <span class="q-type">[ 选择题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forChoiceQuestionInList.abilityType}">未指定技能</span>   
 					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
-						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
-							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
-							<div class="q-remark" style="display: none;"> 
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forChoiceQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forChoiceQuestionInList.totalScore}"></i> </span> 
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+						</a> 
+						<div class="q-remark" style="display: none;"> 
 							<form> 
-								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<div class="tr"> 
-										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-									</div> 
+								<div class="form-group form-group-sm"> <input id="modifyScore" type="text" class="form-control" placeholder="修改得分"> </div> 
+								<div class="tr"> 
+									<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+									<button id="save" type="button" class="btn btn-primary btn-sm" th:xuan="xuanze">保存 </button> 
+								</div> 
 							</form> 
-							</div> 
+						</div>
+						</div> 
+					</div> 
+				
+				</div>
+				
+				<div class="q-panel right" th:if="${forChoiceQuestionInList.iscorrect==1}">
+					<i style="font-style:normal" th:text="${forChoiceQuestionInListStat.count}"></i>.  <span class="q-type">[ 选择题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forChoiceQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forChoiceQuestionInList.score}" name="defentag"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forChoiceQuestionInList.totalScore}"></i> </span> 
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+						</a> 
+						<div class="q-remark" style="display: none;"> 
+							<form> 
+								<div class="form-group form-group-sm"> <input id="modifyScore" type="text" class="form-control" placeholder="修改得分"> </div> 
+								<div class="tr"> 
+									<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+									<button id="save" type="button" class="btn btn-primary btn-sm" th:xuan="xuanze">保存 </button> 
+								</div> 
+							</form> 
+						</div>
 						</div> 
 					</div> 
 				</div>
 
- 				<div class="q-subject unselectable">
+ 				<div class="q-subject unselectable" th:text="${forChoiceQuestionInList.content}">
         			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
  				</div>
  				
 				<ul class="q-options unselectable">
                     <li class="q-option">
-                        <i class="layui-icon layui-icon-radio text-medium-gray"></i> <span class="q-index">A、</span>正确
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'A')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'A')}"></i>
+                        <!-- <i class="layui-icon layui-icon-circle text-medium-gray" th:remove="(${forChoiceQuestionInList.answer})?none:block"></i> -->
+                        <i style="font-style:normal" th:text="${forChoiceQuestionInList.choice1}"></i>
                     </li>
                     <li class="q-option">
-                        <i class="layui-icon layui-icon-circle text-medium-gray"></i> <span class="q-index">B、</span>错误
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'B')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'B')}"></i>
+                        <i style="font-style:normal" th:text="${forChoiceQuestionInList.choice2}"></i>
+                    </li>
+                    <li class="q-option">
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'C')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'C')}"></i>
+                        <i style="font-style:normal" th:text="${forChoiceQuestionInList.choice3}"></i>
+                    </li>
+                    <li class="q-option">
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'D')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forChoiceQuestionInList.answer,'D')}"></i>
+                        <i style="font-style:normal" th:text="${forChoiceQuestionInList.choice4}"></i>
                     </li>
                 </ul>
     
                 <div class="q-text cand">
-            		<p>考生答案：</p>A
+            		<p>考生答案：</p>
+            		<i style="font-style:normal" th:text="${forChoiceQuestionInList.answer}"></i>
                 </div>
                 
                 <div class="q-text">
                 	<p>正确答案：</p>
-                	<pre>B</pre>
+                	<i style="font-style:normal" th:text="${forChoiceQuestionInList.rightAnswer}"></i>
             	</div>
         	</div>
-                                                        
-			<div class="question ">
-				<div class="q-panel wrong"> 1、 <span class="q-type">[ 判断题 ]</span> 
-					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
+      </div>
+    </div>
+    
+    <div th:if="${#objects.nullSafe(forJudgeQuestionInList,default)}">
+      <div class="part-title">
+    	判断题（共
+    	<span th:text="${panDuanTiNum}"></span>
+    	道题）
+      </div>
+      <div id="222" th:each="forJudgeQuestionInList:${forJudgeQuestionInList}">
+      	<input id="judgeTypeId" style="display:none" th:value="${forJudgeQuestionInList.quesTypeId}"/>
+        <input id="judgeId" style="display:none" th:value="${forJudgeQuestionInList.judgeQuesId}"/>
+      	<div class="question ">
+				<div class="q-panel wrong" th:if="${forJudgeQuestionInList.iscorrect==0}"> 
+					<i style="font-style:normal" th:text="${forJudgeQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forJudgeQuestionInList.abilityType}">未指定技能</span>   
 					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
-						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
-							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
-							<div class="q-remark" style="display: none;"> 
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forJudgeQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forJudgeQuestionInList.totalScore}"></i> </span> 
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+						</a> 
+						<div class="q-remark" style="display: none;"> 
 							<form> 
-								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<div class="tr"> 
-										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-									</div> 
+								<div class="form-group form-group-sm"> <input id="modifyScore" type="text" class="form-control" placeholder="修改得分"> </div> 
+								<div class="tr"> 
+									<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+									<button id="save" type="button" class="btn btn-primary btn-sm" th:pan="panduan">保存 </button> 
+								</div> 
 							</form> 
-							</div> 
+						</div>
+						</div> 
+					</div> 
+				
+				</div>
+				<div class="q-panel right" th:if="${forJudgeQuestionInList.iscorrect==1}">
+					<i style="font-style:normal" th:text="${forJudgeQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forJudgeQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forJudgeQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forJudgeQuestionInList.totalScore}"></i> </span> 
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+						</a> 
+						<div class="q-remark" style="display: none;"> 
+							<form> 
+								<div class="form-group form-group-sm"> <input id="modifyScore" type="text" class="form-control" placeholder="修改得分"> </div> 
+								<div class="tr"> 
+									<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+									<button id="save" type="button" class="btn btn-primary btn-sm" th:pan="panduan">保存 </button> 
+								</div> 
+							</form> 
+						</div>
 						</div> 
 					</div> 
 				</div>
 
- 				<div class="q-subject unselectable">
+ 				<div class="q-subject unselectable" th:text="${forJudgeQuestionInList.content}">
         			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
  				</div>
  				
 				<ul class="q-options unselectable">
                     <li class="q-option">
-                        <i class="layui-icon layui-icon-radio text-medium-gray"></i> <span class="q-index">A、</span>正确
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forJudgeQuestionInList.answer,'A')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forJudgeQuestionInList.answer,'A')}"></i>
+                        <!-- <i class="layui-icon layui-icon-circle text-medium-gray" th:remove="(${forJudgeQuestionInList.answer})?none:block"></i> -->
+                        <i style="font-style:normal" th:text="${forJudgeQuestionInList.choice1}"></i>
                     </li>
                     <li class="q-option">
-                        <i class="layui-icon layui-icon-circle text-medium-gray"></i> <span class="q-index">B、</span>错误
+                        <i class="layui-icon layui-icon-radio text-medium-gray" th:if="${#strings.containsIgnoreCase(forJudgeQuestionInList.answer,'B')}"></i>
+                        <i class="layui-icon layui-icon-circle text-medium-gray" th:unless="${#strings.containsIgnoreCase(forJudgeQuestionInList.answer,'B')}"></i>
+                        <i style="font-style:normal" th:text="${forJudgeQuestionInList.choice2}"></i>
                     </li>
                 </ul>
     
                 <div class="q-text cand">
-            		<p>考生答案：</p>A
+            		<p>考生答案：</p>
+            		<i style="font-style:normal" th:text="${forJudgeQuestionInList.answer}"></i>
                 </div>
                 
                 <div class="q-text">
                 	<p>正确答案：</p>
-                	<pre>B</pre>
+                	<i style="font-style:normal" th:text="${forJudgeQuestionInList.rightAnswer}"></i>
             	</div>
         	</div>
-        	
-			<div class="question ">
-				<div class="q-panel right"> 1、 <span class="q-type">[ 判断题 ]</span> 
-					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
-					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span> 
-						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
-							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
-							<div class="q-remark" style="display: none;"> 
+      </div>
+    </div>
+    
+    <div th:if="${#objects.nullSafe(forTianKongQuestionInList,default)}">
+      <div class="part-title">
+    	填空题（共
+    	<span th:text="${tianKongTiNum}"></span>
+    	道题）
+      </div>
+      <div id="333" th:each="forTianKongQuestionInList:${forTianKongQuestionInList}">
+      	<input id="tianKongTypeId" style="display:none" th:value="${forTianKongQuestionInList.quesTypeId}"/>
+        <input id="tianKongId" style="display:none" th:value="${forTianKongQuestionInList.tianKongQuesId}"/>
+      	<div class="question ">
+				<div class="q-panel wrong" th:if="${forTianKongQuestionInList.iscorrect==0}"> 
+					<i style="font-style:normal" th:text="${forTianKongQuestionInListStat.count}"></i>.  <span class="q-type">[ 填空题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forTianKongQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forTianKongQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forTianKongQuestionInList.totalScore}"></i> </span> 
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+						</a> 
+						<div class="q-remark" style="display: none;"> 
 							<form> 
-								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<div class="tr"> 
-										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-									</div> 
+								<div class="form-group form-group-sm"> <input id="modifyScore" type="text" class="form-control" placeholder="修改得分"> </div> 
+								<div class="tr"> 
+									<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+									<button id="save" type="button" class="btn btn-primary btn-sm" th:tian="tiankong">保存 </button> 
+								</div> 
 							</form> 
-							</div> 
+						</div>
+						</div> 
+					</div> 
+				
+				</div>
+				<div class="q-panel right" th:if="${forTianKongQuestionInList.iscorrect==1}">
+					<i style="font-style:normal" th:text="${forTianKongQuestionInListStat.count}"></i>.  <span class="q-type">[ 填空题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forTianKongQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forTianKongQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forTianKongQuestionInList.totalScore}"></i> </span> 
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+						</a> 
+						<div class="q-remark" style="display: none;"> 
+							<form> 
+								<div class="form-group form-group-sm"> <input id="modifyScore" type="text" class="form-control" placeholder="修改得分"> </div> 
+								<div class="tr"> 
+									<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+									<button id="save" type="button" class="btn btn-primary btn-sm" th:tian="tiankong">保存 </button> 
+								</div> 
+							</form> 
+						</div>
 						</div> 
 					</div> 
 				</div>
 
- 				<div class="q-subject unselectable">
+ 				<div class="q-subject unselectable" th:text="${forTianKongQuestionInList.content}">
         			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
  				</div>
- 				
-				<ul class="q-options unselectable">
-                    <li class="q-option">
-                        <i class="layui-icon layui-icon-radio text-medium-gray"></i> <span class="q-index">A、</span>正确
-                    </li>
-                    <li class="q-option">
-                        <i class="layui-icon layui-icon-circle text-medium-gray"></i> <span class="q-index">B、</span>错误
-                    </li>
-                </ul>
-    
+				    
                 <div class="q-text cand">
-            		<p>考生答案：</p>A
+            		<p>考生答案：</p>
+            		<i style="font-style:normal" th:text="${forTianKongQuestionInList.answer}"></i>
                 </div>
                 
                 <div class="q-text">
                 	<p>正确答案：</p>
-                	<pre>B</pre>
+                	<i style="font-style:normal" th:text="${forTianKongQuestionInList.rightAnswer}"></i>
             	</div>
         	</div>
-                                                        
-	<div class="part-title">简答题（共2道题）</div>
-        <div class="question ">
-			<div class="q-panel wrong"> 1、 <span class="q-type">[ 问答题 ]</span> 
-				<span class="label skill hint--top hint--rounded" data-hint="PHP" title="PHP">PHP</span>   
-				<div class="pull-right">  
-					<div class="score-wrapper"> <span class="score-none"> 未打分 </span>  <span class="point">满分: 10 </span>
-						<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
+      </div>
+    </div>
+    
+    <div th:if="${#objects.nullSafe(forWenDaQuestionInList,default)}">
+      <div class="part-title">
+    	问答题（共
+    	<span th:text="${wenDaTiNum}"></span>
+    	道题）
+      </div>
+      <div id="444" th:each="forWenDaQuestionInList:${forWenDaQuestionInList}">
+      	<input id="wenDaTypeId" style="display:none" th:value="${forWenDaQuestionInList.quesTypeId}"/>
+        <input id="wenDaId" style="display:none" th:value="${forWenDaQuestionInList.wenDaQuesId}"/>
+      	<div class="question ">
+				<div class="q-panel wrong" th:if="${forWenDaQuestionInList.iscorrect==0}"> 
+					<i style="font-style:normal" th:text="${forWenDaQuestionInListStat.count}"></i>.  <span class="q-type">[ 问答题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forWenDaQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forWenDaQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forWenDaQuestionInList.totalScore}"></i> </span> 
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+						</a> 
 						<div class="q-remark" style="display: none;"> 
-						<form> 
-							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div>
-							<div class="tr"> 
-								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-							</div> 
-						</form>
+							<form> 
+								<div class="form-group form-group-sm"> <input id="modifyScore" type="text" class="form-control" placeholder="修改得分"> </div> 
+								<div class="tr"> 
+									<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+									<button id="save" type="button" class="btn btn-primary btn-sm" th:wen="wenda">保存 </button> 
+								</div> 
+							</form> 
 						</div>
-					</div>
-				</div> 
-			</div>
-	
-	        <div class="q-subject unselectable">表单中get与post提交方法的区别    </div>
-				<div class="q-text cand">
-	            	<p>考生答案：</p>
-	                <pre>不知道</pre>
-	            </div>
-	            <div class="q-text unselectable">
-	                <p>参考答案：</p>
-	                <pre>cookie机制采用的是在客户端保持状态的方案，而session机制采用的是在服务器端保持状态的方案</pre>
-	            </div>
-				<div class="q-text explain unselectable">
-	            	<p>题目解析：</p>
-	                <pre>这么简单都不会！！</pre>        
+						</div> 
+					</div> 
+				
 				</div>
-        </div>
-                                                        
-		<div class="question ">
-			<div class="q-panel wrong"> 1、 <span class="q-type">[ 问答题 ]</span> 
-				<span class="label skill hint--top hint--rounded" data-hint="PHP" title="PHP">PHP</span>   
-				<div class="pull-right">  
-					<div class="score-wrapper"> <span class="score-none"> 未打分 </span>  <span class="point">满分: 10 </span>
-						<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
+				<div class="q-panel right" th:if="${forWenDaQuestionInList.iscorrect==1}">
+					<i style="font-style:normal" th:text="${forWenDaQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<span class="label skill hint--top hint--rounded" th:text="${forWenDaQuestionInList.abilityType}">未指定技能</span>   
+					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
+						<div class="score-wrapper"> 
+						<span class="score">得分: <i style="font-style:normal" th:text="${forWenDaQuestionInList.score}"></i> </span> 
+						<span class="point">满分: <i style="font-style:normal" th:text="${forWenDaQuestionInList.totalScore}"></i> </span> 
+						<a class="btn btn-link hint--top hint--rounded" data-hint="打分">
+						<i class="layui-icon layui-icon-edit"></i>
+						</a> 
 						<div class="q-remark" style="display: none;"> 
-						<form> 
-							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div>
-							<div class="tr"> 
-								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-							</div> 
-						</form>
+							<form> 
+								<div class="form-group form-group-sm"> <input id="modifyScore" type="text" class="form-control" placeholder="修改得分"> </div> 
+								<div class="tr"> 
+									<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
+									<button id="save" type="button" class="btn btn-primary btn-sm" th:wen="wenda">保存 </button> 
+								</div> 
+							</form> 
 						</div>
-					</div>
-				</div> 
-			</div>
-	
-	        <div class="q-subject unselectable">表单中get与post提交方法的区别    </div>
-				<div class="q-text cand">
-	            	<p>考生答案：</p>
-	                <pre>不知道</pre>
-	            </div>
-	            <div class="q-text unselectable">
-	                <p>参考答案：</p>
-	                <pre>cookie机制采用的是在客户端保持状态的方案，而session机制采用的是在服务器端保持状态的方案</pre>
-	            </div>
-				<div class="q-text explain unselectable">
-	            	<p>题目解析：</p>
-	                <pre>这么简单都不会！！</pre>        
+						</div> 
+					</div> 
 				</div>
-        </div>-->
+
+ 				<div class="q-subject unselectable" th:text="${forWenDaQuestionInList.content}">
+        			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
+ 				</div>
+				    
+                <div class="q-text cand">
+            		<p>考生答案：</p>
+            		<i style="font-style:normal" th:text="${forWenDaQuestionInList.answer}"></i>
+                </div>
+                
+                <div class="q-text">
+                	<p>正确答案：</p>
+                	<i style="font-style:normal" th:text="${forWenDaQuestionInList.rightAnswer}"></i>
+            	</div>
+        	</div>
+      </div>
+    </div>
+    
 </div>
 <div>
 	<div class="section-title"><a id="baogaopingyu">报告评语</a>
@@ -526,11 +670,15 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button type="button" class="layui-btn layui-btn-normal layui-btn-sm"><i class="layui-icon"></i></button></div>
-	<ul class="log-list">
+	<ul class="log-list" th:remove="(${comment}==null)? all:none">
+        <li id="comment" class="mb5" th:text="${comment}">
+        </li>
+    </ul>
+    <ul class="log-list" th:remove="(${comment}==null)? none:all">
         <li id="comment" class="mb5">
         	暂无评语
         </li>
-   </ul>
+    </ul>
    <div style="display: none; background-color:white;" id="comment"><!--该div为即将加载的comment的div-->
 		<div id="writecomment">
 			<div style="height: 60px;">
@@ -556,25 +704,25 @@
 <div class="report-logs" id="report-logs">
 <div class="section-title"><a id="ceshirizhi">测试日志</a></div>
     <ul class="log-list">
-        <li class="mb5">浏览器   chrome</li>
-        <li class="mb5">IP 地址   211.137.23.194</li>
-        <li class="mb5">操作系统   Win32</li>
+<!--        <li class="mb5">浏览器   chrome</li>
+        <li class="mb5">IP 地址   211.137.23.194</li>-->
+        <li class="mb5">操作系统   Win64</li>
         <li class="mb5 ">
-                <span class="log-time">2019-06-18 10:57</span>
+                <span class="log-time" th:text="${beginTime}">2019-06-18 10:57</span>
                 <span class="ml30">开始测试</span>
-                            </li>
-                                <li class="mb5 ">
+        </li>
+<!--        <li class="mb5 ">
                 <span class="log-time">2019-06-18 10:57</span>
                 <span class="ml30">开始部分--&gt;单选题</span>
-                            </li>
-                                <li class="mb5 ">
+        </li>
+        <li class="mb5 ">
                 <span class="log-time">2019-06-18 10:57</span>
                 <span class="ml30">开始部分--&gt;简答题</span>
-                            </li>
-                                <li class="mb5 ">
-                <span class="log-time">2019-06-18 10:57</span>
+        </li>-->
+        <li class="mb5 ">
+                <span class="log-time" th:text="${endTime}">2019-06-18 10:57</span>
                 <span class="ml30">结束测试</span>
-                            </li>
+        </li>
     </ul>
 </div>
 </div>
@@ -590,7 +738,7 @@
        	 	</div> 
        	 	<div class="mt10">
        	 		<div class="btn-group"> 
-       	 			<a   class="btn btn-default hint--top hint--rounded" data-hint="评语"> <i class="layui-icon layui-icon-survey"></i></a> 
+       	 			<a   class="btn btn-default hint--top hint--rounded" data-hint="评语" href="marking#baogaopingyu"> <i class="layui-icon layui-icon-survey"></i></a> 
        	 			<a id="xiazai" class="btn btn-default hint--top hint--rounded" data-hint="下载"> <i class="layui-icon layui-icon-file"></i></a> 
        	 			<a class="btn btn-default hint--top hint--rounded" data-hint="归档"> <i class="layui-icon layui-icon-list"></i> </a>
        	 			<a id="shanchu" class="btn btn-default hint--top hint--rounded" data-hint="删除"> <i class="layui-icon layui-icon-close-fill"></i></a> 
@@ -636,6 +784,10 @@
 	            </div>
 	        </div>
 	     </div>
+	     
+	     <div class="panel panel-default">
+	     	<button type="button" class="layui-btn layui-btn-lg layui-btn-normal">大型按钮</button>
+	     </div>
 		</div> 
 	</div> 
 </div>
@@ -643,7 +795,7 @@
 </div>
 </div>
 
-<script>
+<!--<script>
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -651,7 +803,7 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-</script>
+</script>-->
     
 <script src="../css/marking_files/lib.10ef5.js.下载" th:src="@{static/css/marking_files/lib.10ef5.js.下载}"></script>
 <script src="../css/marking_files/vendor.18558.js.下载" th:src="@{static/css/marking_files/vendor.18558.js.下载}"></script>
@@ -705,7 +857,177 @@
 </script>-->
 
 <script>
-/*	$(function(){
+	/*$(function(){
+		$('#save').click(function(){
+			var newScore = $('#modifyScore').val();
+			if(newScore == null){
+				
+			}else{
+				$('#')
+			}
+		})
+		
+	})*/
+</script>
+<script>
+					$(function(){
+							$("button[xuan='xuanze']").live('click',function(){
+							var oldScore = $(this).parents('.score-wrapper').find('i:eq(0)').html();
+							var newScore = $(this).parent().parent().find('#modifyScore').val();
+							var getReportId = $('#reportId').val();
+							var getAnsPaperId = $('#ansPaperId').val();
+							var getStuId = $('#stuId').val();
+							var getChoiceTypeId = $(this).parents('#111').find('input:eq(0)').val();
+							var getChoiceId = $(this).parents('#111').find('input:eq(1)').val();
+							var getScore = $('#score').val();
+							var zongScore = $(this).parents('.score-wrapper').find('i:eq(1)').html();
+							
+							var params = {'oldScore':oldScore,
+										  'newScore':newScore,
+										  'getReportId':getReportId,
+										  'getAnsPaperId':getAnsPaperId,
+										  'getStuId':getStuId,
+										  'getChoiceTypeId':getChoiceTypeId,
+										  'getChoiceId':getChoiceId,
+										  'getScore':getScore,
+										  'zongScore':zongScore};
+							$(this).parents('.score-wrapper').find('i:eq(0)').html(newScore);
+							$(this).parent().parent().parent().css("display","none");
+							
+							$.ajax({
+								url:'/ajaxModifyScore1',
+								type:'POST',
+								traditional:true,
+								contentType:'application/json;charset=UTF-8',
+								data:JSON.stringify(params),
+								dataType:"json",
+								
+								success:function(e){
+								},
+								error:{
+								}
+							});
+						})
+						
+						$("button[pan='panduan']").live('click',function(){
+							var oldScore = $(this).parents('.score-wrapper').find('i:eq(0)').html();
+							var newScore = $(this).parent().parent().find('#modifyScore').val();
+							var getReportId = $('#reportId').val();
+							var getAnsPaperId = $('#ansPaperId').val();
+							var getStuId = $('#stuId').val();
+							var getJudgeTypeId = $(this).parents('#222').find('input:eq(0)').val();
+							var getJudgeId = $(this).parents('#222').find('input:eq(1)').val();
+							var getScore = $('#score').val();
+							var zongScore = $(this).parents('.score-wrapper').find('i:eq(1)').html();
+							
+							var params = {'oldScore':oldScore,
+										  'newScore':newScore,
+										  'getReportId':getReportId,
+										  'getAnsPaperId':getAnsPaperId,
+										  'getStuId':getStuId,
+										  'getJudgeTypeId':getJudgeTypeId,
+										  'getJudgeId':getJudgeId,
+										  'getScore':getScore,
+										  'zongScore':zongScore};
+							$(this).parents('.score-wrapper').find('i:eq(0)').html(newScore);
+							$(this).parent().parent().parent().css("display","none");
+							
+							$.ajax({
+								url:'/ajaxModifyScore2',
+								type:'POST',
+								traditional:true,
+								contentType:'application/json;charset=UTF-8',
+								data:JSON.stringify(params),
+								dataType:"json",
+								
+								success:function(e){
+								},
+								error:{
+								}
+							});
+						})
+        
+        				$("button[tian='tiankong']").live('click',function(){
+							var oldScore = $(this).parents('.score-wrapper').find('i:eq(0)').html();
+							var newScore = $(this).parent().parent().find('#modifyScore').val();
+							var getReportId = $('#reportId').val();
+							var getAnsPaperId = $('#ansPaperId').val();
+							var getStuId = $('#stuId').val();
+							var getTianKongTypeId = $(this).parents('#333').find('input:eq(0)').val();
+							var getTianKongId = $(this).parents('#333').find('input:eq(1)').val();
+							var getScore = $('#score').val();
+							var zongScore = $(this).parents('.score-wrapper').find('i:eq(1)').html();
+							
+							var params = {'oldScore':oldScore,
+										  'newScore':newScore,
+										  'getReportId':getReportId,
+										  'getAnsPaperId':getAnsPaperId,
+										  'getStuId':getStuId,
+										  'getTianKongTypeId':getTianKongTypeId,
+										  'getTianKongId':getTianKongId,
+										  'getScore':getScore,
+										  'zongScore':zongScore};
+//							$(this).parents('.score-wrapper').find('i[name=defentag]').html(hh);
+							$(this).parents('.score-wrapper').find('i:eq(0)').html(newScore);
+							$(this).parent().parent().parent().css("display","none");
+							
+							$.ajax({
+								url:'/ajaxModifyScore3',
+								type:'POST',
+								traditional:true,
+								contentType:'application/json;charset=UTF-8',
+								data:JSON.stringify(params),
+								dataType:"json",
+								
+								success:function(e){
+								},
+								error:{
+								}
+							});
+						})	
+						
+						$("button[wen='wenda']").live('click',function(){
+							var oldScore = $(this).parents('.score-wrapper').find('i:eq(0)').html();
+							var newScore = $(this).parent().parent().find('#modifyScore').val();
+							var getReportId = $('#reportId').val();
+							var getAnsPaperId = $('#ansPaperId').val();
+							var getStuId = $('#stuId').val();
+							var getWenDaTypeId = $(this).parents('#444').find('input:eq(0)').val();
+							var getWenDaId = $(this).parents('#444').find('input:eq(1)').val();
+							var getScore = $('#score').val();
+							var zongScore = $(this).parents('.score-wrapper').find('i:eq(1)').html();
+							
+							var params = {'oldScore':oldScore,
+										  'newScore':newScore,
+										  'getReportId':getReportId,
+										  'getAnsPaperId':getAnsPaperId,
+										  'getStuId':getStuId,
+										  'getWenDaTypeId':getWenDaTypeId,
+										  'getWenDaId':getWenDaId,
+										  'getScore':getScore,
+										  'zongScore':zongScore};
+							$(this).parents('.score-wrapper').find('i:eq(0)').html(newScore);
+							$(this).parent().parent().parent().css("display","none");
+							
+							$.ajax({
+								url:'/ajaxModifyScore4',
+								type:'POST',
+								traditional:true,
+								contentType:'application/json;charset=UTF-8',
+								data:JSON.stringify(params),
+								dataType:"json",
+								
+								success:function(e){
+								},
+								error:{
+								}
+							});
+						})
+					})
+					
+</script>
+<script>
+	$(function(){
 		$('[class="layui-icon layui-icon-edit"]').click(function(){
 			$(this).parent().next().css("display","block")
 	})
@@ -714,7 +1036,7 @@
 		$('[class="btn btn-default btn-sm mr10"]').click(function(){
 			$(this).parent().parent().parent().css("display","none")
 	})
-	})*/
+	})
 	
 	$(function(){
 		$('[class="layui-btn layui-btn-normal layui-btn-sm"]').click(function(){
@@ -759,6 +1081,8 @@
 		  		async : false,
 		  		dataType: "text",		  		
 		  		success:function(e){//e变量就是后台返回的Map对象
+//		  			var b = $(input).val();
+//		  			$("#defen").val(b);
 		  		},
 		  		error:function(e){
 		  		}
@@ -860,6 +1184,7 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 	        ,btnAlign: 'r' //按钮居中
 	        ,shade: 0.6 //不显示遮罩
 	        ,yes: function(){
+	        	var name = $('#jibenxinxi').text();
 	        	var pdf = new jsPDF('p','pt','a4');
 				 pdf.internal.scaleFactor = 2;
 				 var options = {
@@ -868,7 +1193,7 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 	      		};
 	      		var printHtml = $('#PDF').get(0);
 	      		pdf.addHTML(printHtml,15, 15, options,function() {
-	          		pdf.save('目标.pdf');
+	          		pdf.save(name + '.pdf');
 	     		});
 	     		layer.closeAll();
 		    }
@@ -957,7 +1282,7 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 	
 </script>
 
-<script type="text/html" id="template_shiti">
+<!--<script type="text/html" id="template_shiti">
 	{{each shitiList as shiti}}
 	<div class="question ">
 		<div class="q-panel right"> 1、 <span class="q-type">[ 判断题 ]</span> 
@@ -974,10 +1299,10 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 					<div class="q-remark" style="display: none;"> 
 						<form> 
 							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-							<!--<div class="form-group form-group-sm"> <textarea class="form-control remark-input" placeholder="输入评语"></textarea> </div>--> 
+							<div class="form-group form-group-sm"> <textarea class="form-control remark-input" placeholder="输入评语"></textarea> </div> 
 							<div class="tr"> 
 								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
+								<button type="button" class="btn btn-primary btn-sm">保存 </button> 
 							</div> 
 						</form> 
 					</div> 
@@ -1020,9 +1345,9 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 		})
 		})
     </script>
-</script>
+</script>-->
 
-<script>
+<!--<script>
 	$(function(){
 		var report_id = '1';
 	    var pararms ={'val':report_id};// 定义一个js对象
@@ -1048,7 +1373,7 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 			}
 		});
 	})
-</script>
+</script>-->
 <style>
 	.form-control11 { 
 		display: block;

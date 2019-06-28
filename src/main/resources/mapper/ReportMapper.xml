@@ -321,5 +321,10 @@ select * from report where paper_id = #{paper_id}
   	where paper_id = #{paperId,jdbcType=INTEGER}
   	and stu_id = #{stuId,jdbcType=INTEGER}
  </select>
-  
+  <select id="getReportsInList" resultMap="BaseResultMap">
+  	select * from report where paper_id in
+  	<foreach collection="list" item="ans_paper_id" open="(" close=")" separator=",">
+  		#{ans_paper_id}
+  	</foreach>
+  </select>
 </mapper>

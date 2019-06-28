@@ -1,12 +1,16 @@
 package com.neuedu.ruidaoexam.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import com.neuedu.ruidaoexam.entity.ForChoiceQuestion;
 import com.neuedu.ruidaoexam.entity.ForJudgeQuestion;
 import com.neuedu.ruidaoexam.entity.ForTianKongQuestion;
 import com.neuedu.ruidaoexam.entity.ForWenDaQuestion;
 
 import com.neuedu.ruidaoexam.entity.Report;
+import com.neuedu.ruidaoexam.entity.ReportandAnswered;
 
 public interface ReportService {
 	void addComment(ArrayList<String> reportArray);	//教师发布报告评语
@@ -29,4 +33,7 @@ public interface ReportService {
 	ArrayList<ForTianKongQuestion> getTianKongDaTiQingKuang(int report_id);	//呈现填空题答题情况
 	
 	ArrayList<ForWenDaQuestion> getWenDaDaTiQingKuang(int report_id);	//呈现问答题答题情况
+	
+	//通过paper_id选取对应的report
+    HashMap<String, Object> getReportsByPaperId(Integer paper_id);
 }

@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -110,6 +111,8 @@ public class ReportServiceimpl implements ReportService{
 		
 		int stuId = report.getStuId();
 		int ansPaperId = report.getPaperId();
+		String stuIdTag = report.getStuId().toString();
+		String ansPaperIdTag = report.getPaperId().toString();
 //		Date beginTime = report.getBeginTimestamp();
 //		Date endTime = report.getEndTimestamp();
 		
@@ -131,6 +134,8 @@ public class ReportServiceimpl implements ReportService{
 		String comment = report.getComment();
 		studentInfoArrayList.add(comment);
 		studentInfoArrayList.add(answeredPaper.getIsModifiedByTeacher().toString());
+		studentInfoArrayList.add(ansPaperIdTag);
+		studentInfoArrayList.add(stuIdTag);
 		
 		return studentInfoArrayList;
 	}
@@ -657,6 +662,29 @@ public class ReportServiceimpl implements ReportService{
 //		}
 		
 		return forWenDaQuestionInList;
+	}
+
+	@Override
+	public HashMap<String, Object> getReportsByPaperId(Integer paper_id) {
+		List<AnsweredPaper> answeredPapers = answeredPaperMapper.getAnsweredPaperByPaper_id(paper_id);
+		ArrayList<Integer> ans_paper_list = new ArrayList<Integer>();
+		for (AnsweredPaper answeredPaper : answeredPapers) {
+//			System.out.println(answeredPaper.getAnsPaperId());
+			if (answeredPaper.getAnsPaperId() != null) {
+				ans_paper_list.add(answeredPaper.getAnsPaperId());
+			}
+		}
+		List<Report> reports = reportMapper.getReportsInList(ans_paper_list);
+		if (!ans_paper_list.isEmpty()) {
+			reports = reportMapper.getReportsInList(ans_paper_list);
+		}
+//		for (Report report : reports) {
+//			System.out.println(report.getPaperId());
+//		}
+		HashMap<String,Object> hashMap = new HashMap<String,Object>();
+		hashMap.put("answeredpapers", answeredPapers);
+		hashMap.put("reports", reports);
+		return hashMap;
 	}
 
 //	@Override

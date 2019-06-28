@@ -37,5 +37,7 @@ public interface AnsweredPaperMapper {
     List<AnsweredPaper> selectByPaperId(int paper_id);
     
     AnsweredPaper selectAnsPaperId(Integer paperId, Integer stuId);	//根据paper_id和stu_id取*
-
+    
+    //通过卷子id选出答卷
+    List<AnsweredPaper> getAnsweredPaperByPaper_id(Integer paper_id);
 }

@@ -50,4 +50,6 @@ public interface StudentMapper {
     Student selectByNamePassword(String name,String password);
     
     List<Paper> showNotAnswered(Integer stuid);//19/06/24 by lb 获得未答试卷的列表
+    //选取studentid在student_idlist中的对象
+    List<Student> getStudentsinList(List<Integer> student_idList);
 }

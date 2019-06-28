@@ -134,25 +134,60 @@ public class AjaxController {
 		return "666";
 	}
 	
+
 	/**
 	 * 呈现答题情况
 	 * @return
 	 */
-	@RequestMapping(value = "/getDaTiQingKuang", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/ajaxModifyScore1", method = RequestMethod.POST)
+
 	@ResponseBody
-	public String getDaTiQingKuang(@RequestBody Map val, HttpServletRequest request) {
+	public String modifyScore1(@RequestBody Map val, HttpServletRequest request) {
+//		System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+		String oldScore = val.get("oldScore").toString();
+		String newScore = val.get("newScore").toString();
+		String getReportId = val.get("getReportId").toString();
+		String getAnsPaperId = val.get("getAnsPaperId").toString();
+		String getStuId = val.get("getStuId").toString();
+		String getChoiceTypeId = val.get("getChoiceTypeId").toString();
+		String getChoiceId = val.get("getChoiceId").toString();
+		String getScore = val.get("getScore").toString();
+		String zongScore = val.get("zongScore").toString();
 		
+
 		List<test> list = new ArrayList<test>();
+
+		int getScore1 = Integer.parseInt(getScore);
+		int oldScore1 = Integer.parseInt(oldScore);
+		int newScore1 = Integer.parseInt(newScore);
+		int zongScore1 = Integer.parseInt(zongScore);
+		getScore1 = getScore1 + (newScore1-oldScore1);
 		
-		test test = new test();
+		int isCorrect = 0;
+		if (newScore1 == zongScore1) {
+			isCorrect = 1;
+		}
+
+		/*test test = new test();
 		test.setEmail("erwerwetwetwt");
 		list.add(test);
 		HashMap map = new HashMap();
 		map.put("shitiList", list);
 		String str = JSON.toJSONString(map);
-		return str;
+		return str;*/
+		return "";
+//		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+//		System.out.println(newScore+oldScore);
+//		System.out.println(getReportId+getAnsPaperId+getStuId);
+//		System.out.println(getChoiceTypeId+getChoiceId);
+//		System.out.println(getScore1 +" "+ isCorrect);
+		
+		
+
 	}
 	
+
 	@RequestMapping(value="/querydata",method = RequestMethod.POST)
 	@ResponseBody
 	public List<Double> querydata(HttpSession session) {
@@ -188,4 +223,139 @@ public class AjaxController {
 	}
 	
 	
+
+	@RequestMapping(value = "/ajaxModifyScore2", method = RequestMethod.POST)
+	@ResponseBody
+	public String modifyScore2(@RequestBody Map val, HttpServletRequest request) {
+//		System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+		String oldScore = val.get("oldScore").toString();
+		String newScore = val.get("newScore").toString();
+		String getReportId = val.get("getReportId").toString();
+		String getAnsPaperId = val.get("getAnsPaperId").toString();
+		String getStuId = val.get("getStuId").toString();
+		String getJudgeTypeId = val.get("getJudgeTypeId").toString();
+		String getJudgeId = val.get("getJudgeId").toString();
+		String getScore = val.get("getScore").toString();
+		String zongScore = val.get("zongScore").toString();
+		
+		int getScore1 = Integer.parseInt(getScore);
+		int oldScore1 = Integer.parseInt(oldScore);
+		int newScore1 = Integer.parseInt(newScore);
+		int zongScore1 = Integer.parseInt(zongScore);
+		getScore1 = getScore1 + (newScore1-oldScore1);
+		
+		int isCorrect = 0;
+		if (newScore1 == zongScore1) {
+			isCorrect = 1;
+		}
+		
+//		System.out.println("huilaile-------------------"+newScore+oldScore+getReportId+getAnsPaperId+getStuId);
+//		System.out.println(getJudgeTypeId+getJudgeId);
+//		System.out.println(getScore1 +" "+ isCorrect);
+		
+		return "";
+		
+	}
+	
+	
+	@RequestMapping(value = "/ajaxModifyScore3", method = RequestMethod.POST)
+	@ResponseBody
+	public String modifyScore3(@RequestBody Map val, HttpServletRequest request) {
+//		System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+		String oldScore = val.get("oldScore").toString();
+		String newScore = val.get("newScore").toString();
+		String getReportId = val.get("getReportId").toString();
+		String getAnsPaperId = val.get("getAnsPaperId").toString();
+		String getStuId = val.get("getStuId").toString();
+		String getTianKongTypeId = val.get("getTianKongTypeId").toString();
+		String getTianKongId = val.get("getTianKongId").toString();
+		String getScore = val.get("getScore").toString();
+		String zongScore = val.get("zongScore").toString();
+		
+		int getScore1 = Integer.parseInt(getScore);
+		int oldScore1 = Integer.parseInt(oldScore);
+		int newScore1 = Integer.parseInt(newScore);
+		int zongScore1 = Integer.parseInt(zongScore);
+		getScore1 = getScore1 + (newScore1-oldScore1);
+		
+		int isCorrect = 0;
+		if (newScore1 == zongScore1) {
+			isCorrect = 1;
+		}
+		
+//		System.out.println("huilaile-------------------"+newScore+oldScore+getReportId+getAnsPaperId+getStuId);
+//		System.out.println(getTianKongTypeId+getTianKongId);
+//		System.out.println(getScore1 +" "+ isCorrect);
+		
+		return "";
+		
+	}
+	
+	@RequestMapping(value = "/ajaxModifyScore4", method = RequestMethod.POST)
+	@ResponseBody
+	public String modifyScore4(@RequestBody Map val, HttpServletRequest request) {
+//		System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+		String oldScore = val.get("oldScore").toString();
+		String newScore = val.get("newScore").toString();
+		String getReportId = val.get("getReportId").toString();
+		String getAnsPaperId = val.get("getAnsPaperId").toString();
+		String getStuId = val.get("getStuId").toString();
+		String getWenDaTypeId = val.get("getWenDaTypeId").toString();
+		String getWenDaId = val.get("getWenDaId").toString();
+		String getScore = val.get("getScore").toString();
+		String zongScore = val.get("zongScore").toString();
+		
+		int getScore1 = Integer.parseInt(getScore);
+		int oldScore1 = Integer.parseInt(oldScore);
+		int newScore1 = Integer.parseInt(newScore);
+		int zongScore1 = Integer.parseInt(zongScore);
+		getScore1 = getScore1 + (newScore1-oldScore1);
+		
+		int isCorrect = 0;
+		if (newScore1 == zongScore1) {
+			isCorrect = 1;
+		}
+		
+//		System.out.println("huilaile-------------------"+newScore+oldScore+getReportId+getAnsPaperId+getStuId);
+//		System.out.println(getWenDaTypeId+getWenDaId);
+//		System.out.println(getScore1 +" "+ isCorrect);
+		
+		return "";
+		
+	}
+	
+//	/**
+//	 * 呈现答题情况
+//	 * @return
+//	 */
+//	@RequestMapping(value = "/getDaTiQingKuang", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String getDaTiQingKuang(@RequestBody Map val, HttpServletRequest request) {
+//		
+////		request.getSession().setAttribute("report_id", val.get("val").toString());
+////	    String reportId = request.getSession().getAttribute("report_id").toString();
+////	    int report_id = Integer.parseInt(reportId);
+////		reportServiceimpl.getDaTiQingKuang(report_id);
+//		
+//		List<test> list = new ArrayList<test>();
+//		
+//		test test = new test();
+//		test.setEmail("erwerwetwetwt");
+//		list.add(test);
+//		HashMap map = new HashMap();
+//		map.put("shitiList", list);
+//		String str = JSON.toJSONString(map);
+//		return str;
+//		
+//		//int id = 1;
+//		//List<Object> shitiList = new ArrayList<Object>();
+//		//shitiList.add(id);
+//		//HashMap map = new HashMap();
+//		//map.put("shitiList", shitiList);
+//		//String str = JSON.toJSONString(map); // 利用fastjson转换字符串
+//		//return str; //返回字符串
+//		
+////		return val.get("val").toString();
+//	}
+
 }

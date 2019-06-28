@@ -37,4 +37,7 @@ public interface ReportMapper {
     int updateAndInsert(Report record);
     
     int selectPrimeKey(int paperId,int stuId);
+    
+  //通过ans_paper_id的list选取对应的report
+    List<Report> getReportsInList(List<Integer> ans_paper_idlist);
 }

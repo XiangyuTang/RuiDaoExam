@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title> 不服就来做它报告 </title>
+<title> 学生查看报告 </title>
 <!--<base href="http://www.101test.com/">--><base href=".">
 
 <meta name="keywords" content="考试系统,在线考试系统,网上考试系统,手机考试系统,防作弊考试系统,企业考试系统,微信考试系统,在线考试,资格证模考,模考试卷/题库,知识竞赛系统,校园招聘考试,电子作业系统云平台">
@@ -176,8 +176,8 @@
     <div  class="container report-detail-wrapper pure-pre pt20" style="margin-top: -10px;">
     <div class="row">
     <div class=" col-md-10 ">
-    <div class="panel panel-default mb0">
-    <div id="PDF" class="panel-body">
+    <div id="PDF" class="panel panel-default mb0">
+    <div class="panel-body">
     <div class="report-basic" id="report-basic">
     <!--<hr id="jibenxinxi" style="height:1px;border:none;border-top:1px solid #555555;" />-->
     <!--<span id="jibenxinxi">&nbsp;</span>-->
@@ -249,7 +249,7 @@
     				<div class="s-table"> 
 	    				<div class="s-row skill-row"> 
 	    					<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
-	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
+	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> Java</span>  
 	    					</div> 
 	    					<div class="s-col" style="width: 20%"> <span>选择题</span></div> 
 	    					<div class="s-col" style="width: 15%" th:text="${xuanZeTiNum}"></div> 
@@ -258,7 +258,7 @@
 	    				</div>  
 	    				<div class="s-row skill-row"> 
 	    					<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
-	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> 未指定技能</span>  
+	    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray fa mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> C语言</span>  
 	    					</div> 
 	    					<div class="s-col" style="width: 20%"> <span>判断题</span></div> 
 	    					<div class="s-col" style="width: 15%" th:text="${panDuanTiNum}">3</div> 
@@ -307,7 +307,7 @@
     					</div>  
     					<div class="s-row skill-row"> 
     						<div class="s-col skill-name text-ellipsis" style="width: 30%"> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> PHP</span>  
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="text-medium-gray mr5"></i>  <span class="layui-icon layui-icon-ok-circle text-medium-gray"> Ajax</span>  
     						</div> 
     						<div class="s-col" style="width: 20%"> <span>问答题</span>  </div> 
     						<div class="s-col" style="width: 15%" th:text="${wenDaTiNum}"></div> 
@@ -549,201 +549,7 @@
         	</div>
       </div>
     </div>
-<!--        <div class="part-title">单选题（共3道题）</div>
-        	<div class="question ">
-				<div class="q-panel wrong"> 1、 <span class="q-type">[ 判断题 ]</span> 
-					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
-					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
-						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
-							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
-							<div class="q-remark" style="display: none;"> 
-							<form> 
-								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<div class="tr"> 
-										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-									</div> 
-							</form> 
-							</div> 
-						</div> 
-					</div> 
-				</div>
 
- 				<div class="q-subject unselectable">
-        			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
- 				</div>
- 				
-				<ul class="q-options unselectable">
-                    <li class="q-option">
-                        <i class="layui-icon layui-icon-radio text-medium-gray"></i> <span class="q-index">A、</span>正确
-                    </li>
-                    <li class="q-option">
-                        <i class="layui-icon layui-icon-circle text-medium-gray"></i> <span class="q-index">B、</span>错误
-                    </li>
-                </ul>
-    
-                <div class="q-text cand">
-            		<p>考生答案：</p>A
-                </div>
-                
-                <div class="q-text">
-                	<p>正确答案：</p>
-                	<pre>B</pre>
-            	</div>
-        	</div>
-                                                        
-			<div class="question ">
-				<div class="q-panel wrong"> 1、 <span class="q-type">[ 判断题 ]</span> 
-					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
-					<div class="pull-right"> <i class="layui-icon layui-icon-close" style="color: red;"></i> <span class="divider"></span> 
-						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
-							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
-							<div class="q-remark" style="display: none;"> 
-							<form> 
-								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<div class="tr"> 
-										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-									</div> 
-							</form> 
-							</div> 
-						</div> 
-					</div> 
-				</div>
-
- 				<div class="q-subject unselectable">
-        			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
- 				</div>
- 				
-				<ul class="q-options unselectable">
-                    <li class="q-option">
-                        <i class="layui-icon layui-icon-radio text-medium-gray"></i> <span class="q-index">A、</span>正确
-                    </li>
-                    <li class="q-option">
-                        <i class="layui-icon layui-icon-circle text-medium-gray"></i> <span class="q-index">B、</span>错误
-                    </li>
-                </ul>
-    
-                <div class="q-text cand">
-            		<p>考生答案：</p>A
-                </div>
-                
-                <div class="q-text">
-                	<p>正确答案：</p>
-                	<pre>B</pre>
-            	</div>
-        	</div>
-        	
-			<div class="question ">
-				<div class="q-panel right"> 1、 <span class="q-type">[ 判断题 ]</span> 
-					<span class="label skill hint--top hint--rounded" data-hint="未指定技能" title="未指定技能">未指定技能</span>   
-					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span> 
-						<div class="score-wrapper"> <span class="score"> 得分: 0 </span> <span class="point">满分: 10 </span> 
-							<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
-							<div class="q-remark" style="display: none;"> 
-							<form> 
-								<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div> 
-									<div class="tr"> 
-										<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-										<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-									</div> 
-							</form> 
-							</div> 
-						</div> 
-					</div> 
-				</div>
-
- 				<div class="q-subject unselectable">
-        			<pre>考古发现，距今约300万年的建始人化石是中国境内目前已知最早的古人类化石。</pre> 
- 				</div>
- 				
-				<ul class="q-options unselectable">
-                    <li class="q-option">
-                        <i class="layui-icon layui-icon-radio text-medium-gray"></i> <span class="q-index">A、</span>正确
-                    </li>
-                    <li class="q-option">
-                        <i class="layui-icon layui-icon-circle text-medium-gray"></i> <span class="q-index">B、</span>错误
-                    </li>
-                </ul>
-    
-                <div class="q-text cand">
-            		<p>考生答案：</p>A
-                </div>
-                
-                <div class="q-text">
-                	<p>正确答案：</p>
-                	<pre>B</pre>
-            	</div>
-        	</div>
-                                                        
-	<div class="part-title">简答题（共2道题）</div>
-        <div class="question ">
-			<div class="q-panel wrong"> 1、 <span class="q-type">[ 问答题 ]</span> 
-				<span class="label skill hint--top hint--rounded" data-hint="PHP" title="PHP">PHP</span>   
-				<div class="pull-right">  
-					<div class="score-wrapper"> <span class="score-none"> 未打分 </span>  <span class="point">满分: 10 </span>
-						<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
-						<div class="q-remark" style="display: none;"> 
-						<form> 
-							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div>
-							<div class="tr"> 
-								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-							</div> 
-						</form>
-						</div>
-					</div>
-				</div> 
-			</div>
-	
-	        <div class="q-subject unselectable">表单中get与post提交方法的区别    </div>
-				<div class="q-text cand">
-	            	<p>考生答案：</p>
-	                <pre>不知道</pre>
-	            </div>
-	            <div class="q-text unselectable">
-	                <p>参考答案：</p>
-	                <pre>cookie机制采用的是在客户端保持状态的方案，而session机制采用的是在服务器端保持状态的方案</pre>
-	            </div>
-				<div class="q-text explain unselectable">
-	            	<p>题目解析：</p>
-	                <pre>这么简单都不会！！</pre>        
-				</div>
-        </div>
-                                                        
-		<div class="question ">
-			<div class="q-panel wrong"> 1、 <span class="q-type">[ 问答题 ]</span> 
-				<span class="label skill hint--top hint--rounded" data-hint="PHP" title="PHP">PHP</span>   
-				<div class="pull-right">  
-					<div class="score-wrapper"> <span class="score-none"> 未打分 </span>  <span class="point">满分: 10 </span>
-						<a class="btn btn-link hint--top hint--rounded" data-hint="打分"><i class="layui-icon layui-icon-edit"></i></a> 
-						<div class="q-remark" style="display: none;"> 
-						<form> 
-							<div class="form-group form-group-sm"> <input type="text" class="form-control" placeholder="修改得分"> </div>
-							<div class="tr"> 
-								<button type="button" class="btn btn-default btn-sm mr10">取消 </button> 
-								<button type="submit" class="btn btn-primary btn-sm">保存 </button> 
-							</div> 
-						</form>
-						</div>
-					</div>
-				</div> 
-			</div>
-	
-	        <div class="q-subject unselectable">表单中get与post提交方法的区别    </div>
-				<div class="q-text cand">
-	            	<p>考生答案：</p>
-	                <pre>不知道</pre>
-	            </div>
-	            <div class="q-text unselectable">
-	                <p>参考答案：</p>
-	                <pre>cookie机制采用的是在客户端保持状态的方案，而session机制采用的是在服务器端保持状态的方案</pre>
-	            </div>
-				<div class="q-text explain unselectable">
-	            	<p>题目解析：</p>
-	                <pre>这么简单都不会！！</pre>        
-				</div>
-        </div>-->
 </div>
 <div>
 	<div class="section-title"><a id="baogaopingyu">报告评语</a>
@@ -789,21 +595,21 @@
 <div class="report-logs" id="report-logs">
 <div class="section-title"><a id="ceshirizhi">测试日志</a></div>
     <ul class="log-list">
-        <li class="mb5">浏览器   chrome</li>
-        <li class="mb5">IP 地址   211.137.23.194</li>
+<!--        <li class="mb5">浏览器   chrome</li>
+        <li class="mb5">IP 地址   211.137.23.194</li>-->
         <li class="mb5">操作系统   Win64</li>
         <li class="mb5 ">
                 <span class="log-time" th:text="${beginTime}">2019-06-18 10:57</span>
                 <span class="ml30">开始测试</span>
         </li>
-        <li class="mb5 ">
+<!--        <li class="mb5 ">
                 <span class="log-time">2019-06-18 10:57</span>
                 <span class="ml30">开始部分--&gt;单选题</span>
         </li>
         <li class="mb5 ">
                 <span class="log-time">2019-06-18 10:57</span>
                 <span class="ml30">开始部分--&gt;简答题</span>
-        </li>
+        </li>-->
         <li class="mb5 ">
                 <span class="log-time" th:text="${endTime}">2019-06-18 10:57</span>
                 <span class="ml30">结束测试</span>
@@ -816,6 +622,21 @@
 <div class="col-md-2 p0 hidden-print"><div> 
 	<div class="vue-affix" style="top: 0px; left: 1026px; width: 195px; margin-top: 60px;">
 		<div class="report-toolbar">
+		
+		<div class="panel panel-default">
+       	 	<div class="panel-body"> 
+       	 	<div>
+       	 		<i class="layui-icon layui-icon-set"></i> 
+       	 		<span class="fb text-muted"> 操作</span>
+       	 	</div> 
+       	 	<div class="mt10">
+       	 		<div class="btn-group"> 
+       	 			<a id="xiazai" class="btn btn-default hint--top hint--rounded" data-hint="下载FDF"> <i style="font-style:normal">下载报告文件（PDF）</i></a> 
+       	 		</div>
+       	 	</div>
+       	 	</div>
+       	</div>
+		
         <div class="panel panel-default" _v-719dab47="">
         	<div class="panel-body" _v-719dab47="">
         		<div _v-719dab47="">
@@ -1077,15 +898,16 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 	        ,btnAlign: 'r' //按钮居中
 	        ,shade: 0.6 //不显示遮罩
 	        ,yes: function(){
+	        	var name = $('#jibenxinxi').text();
 	        	var pdf = new jsPDF('p','pt','a4');
 				 pdf.internal.scaleFactor = 2;
-				 var options = {
+				var options = {
 	           		pagesplit: true, //设置是否自动分页
 	          		"background": '#FFFFFF'   //如果导出的pdf为黑色背景，需要将导出的html模块内容背景 设置成白色。
 	      		};
 	      		var printHtml = $('#PDF').get(0);
 	      		pdf.addHTML(printHtml,15, 15, options,function() {
-	          		pdf.save('目标.pdf');
+	          		pdf.save(name + '.pdf');
 	     		});
 	     		layer.closeAll();
 		    }
