@@ -87,13 +87,6 @@
 						cardLi.addClass('hasBeenAnswer');
 						cardLi.removeClass('emptyAnswer');
 					}
-					/*var a=$('[type=checkbox]').length;
-					alert("长度是"+a);
-					for(var i=0;i<a;i++){
-						if($('[type=checkbox]').eq(i).is(':checked')) {
-						    alert(i+1);
-						}
-					}*/
 				}
 				else
 				{
@@ -119,8 +112,6 @@
 				}
 			}
 			else {
-				//alert("不是多选");
-				//这里可能是单选和判断
 				// 设置已答题
 				if(!cardLi.hasClass('hasBeenAnswer')){
 					cardLi.addClass('hasBeenAnswer');
@@ -373,9 +364,7 @@
 	    			var total_score = $("#totalScore").val();
 	    			var comment = "暂无";
 	    			var begin_exam_time = $("#beginTimeStamp").val();
-				   // var date = new Date(begin_exam_time);  
-				   // var date_value=date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' 
-				  //  + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
    
 	    			var switch_time = cheattimes;
 	    			var pararms ={

@@ -20,15 +20,17 @@ public class FaceDetect {
      * https://ai.baidu.com/file/470B3ACCA3FE43788B5A963BF0B625F3
      * 下载
      */
-    public static String detect() {
+    public static String detect(String pic1,String pic2) {
         // 请求url
         //String url = "https://aip.baidubce.com/rest/2.0/face/v3/detect";//人脸识别
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/match";//人脸对比
             try {
 
-                byte[] bytes1 = FileUtil.readFileByBytes("C:\\myEclipseProjects\\RuiDaoExam\\src\\main\\resources\\static\\images\\1.jpg");
-                byte[] bytes2 = FileUtil.readFileByBytes("C:\\myEclipseProjects\\RuiDaoExam\\src\\main\\resources\\static\\images\\2.jpg");
-                String image1 = Base64Util.encode(bytes1);
+                //byte[] bytes1 = FileUtil.readFileByBytes("C:\\myEclipseProjects\\RuiDaoExam\\src\\main\\resources\\static\\images\\1.jpg");
+                //byte[] bytes2 = FileUtil.readFileByBytes("C:\\myEclipseProjects\\RuiDaoExam\\src\\main\\resources\\static\\images\\2.jpg");
+            	byte[] bytes1 = FileUtil.readFileByBytes(pic1);
+                byte[] bytes2 = FileUtil.readFileByBytes(pic2);
+            	String image1 = Base64Util.encode(bytes1);
                 String image2 = Base64Util.encode(bytes2);
                 List<Map<String, Object>> images = new ArrayList<>();
                 Map<String, Object> map1 = new HashMap<>();
@@ -63,7 +65,7 @@ public class FaceDetect {
         return null;
     }
 
-    public static void main(String[] args) {
-        detect();
-    }
+    /*public static void main(String[] args) {
+        //detect();
+    }*/
 }

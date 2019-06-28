@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>基于cropper.js的图片裁剪</title>
-    <script type="text/javascript" src="../js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.3.js" th:src="@{static/js/jquery-1.11.3.js}"></script>
+    <!--<script type="text/javascript" src="../js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>-->
     <script type='text/javascript' src='../js/cropper.min.js' th:src="@{static/js/cropper.min.js}"></script>
     <link rel="stylesheet" type="text/css" href="../css/cropper.min.css" th:href="@{static/css/cropper.min.css}"/>
     <link rel="stylesheet" type="text/css" href="../css/ImgCropping.css" th:href="@{static/css/ImgCropping.css}"/>
+<link rel="stylesheet" href="../css/res/layui/css/layui.css" th:href="@{static/css/res/layui/css/layui.css}" media="all">
+<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 </head>
 <body>
-<button id="replaceImg" class="l-btn">更换图片</button>
+<button id="replaceImg" class="l-btn">录入人脸数据</button>
 
 <!--图片裁剪框 start-->
 <div style="display: none" class="tailoring-container">
     <div class="black-cloth" onclick="closeTailor(this)"></div>
     <div class="tailoring-content">
         <div class="tailoring-content-one">
-            <label title="上传图片" for="chooseImg" class="l2-btn choose-btn">
+           <!-- <label title="上传图片" for="chooseImg" class="l2-btn choose-btn">
                 <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
                 		本地上传
-            </label>
+            </label>-->
             <label title="拍照" class="l2-btn choose-btn" id='capture' style="margin-left: 2%;">拍照</label>
             <label title="重拍" class="l2-btn choose-btn" id='takeAgain' style="margin-left: 2%;">重拍</label>
             <div class="close-tailoring"  onclick="closeTailor(this)">×</div>
@@ -47,7 +50,7 @@
     </div>
 </div>
 <!--图片裁剪框 end-->
-
+				
 <script>
 
     //弹出框水平垂直居中
@@ -66,7 +69,6 @@
             });
         }
     })();
-
 
     //图像上传
     function selectImg(file) {
@@ -135,8 +137,35 @@
     $("#sureCut").on("click",function () {
         var cas = $('#tailoringImg').cropper('getCroppedCanvas');//获取被裁剪后的canvas
         var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
-        base64url=base64url.replace("\r","")
-        $.post("../Info", {op:"takePhoto",base64url:base64url }, function(data) {
+        base64url=base64url.replace("\r","");
+        var datas={"base64url":base64url}
+        $.ajax({
+			url:'doPhoto',
+			type:'post',
+			dataType:'json',
+			async:false,
+			data:datas,
+			success:function(e){
+				alert(e);
+				window.location.href = 'toExamOver';
+			},
+			error:function(e){
+				console.log(e);
+				layui.use(['layer', 'form'], function(){
+			  		var layer = layui.layer
+			  			,form = layui.form;
+			  			layer.msg('出错了！');
+				});
+			}
+		});
+        
+        
+        /*$.post("../Info",
+        {
+        	op:"takePhoto",
+        	base64url:base64url 
+        }, 
+        function(data){
             var result=parseInt($.trim(data.result));
             if(result==-1){
                 $.messager.show({title:"温馨提示",msg:"输入的信息不完整,确认后重新提交。",timeout:3000,showType:'slide'})
@@ -146,7 +175,7 @@
             }else{
                 $.messager.alert("失败提示","头像更新失败，请稍后重试...",'error')
             }
-        }, "JSON");
+        }, "JSON");*/
         //关闭裁剪框
         closeTailor();
     });
