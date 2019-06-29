@@ -36,9 +36,9 @@ public class ReportController {
 	AnsweredPaperMapper answeredPaperMapper;
 	
 	@RequestMapping("/report")
-	public String getJiBenXinXi(HttpServletRequest request,HttpServletResponse response, Model model) throws Exception{
-		
-		int report_id = 1;
+	public String getJiBenXinXi(Integer paper_id,HttpServletRequest request,HttpServletResponse response, Model model) throws Exception{
+		Integer uid = Integer.parseInt(String.valueOf(request.getSession().getAttribute("uid")).trim());
+		int report_id = reportServiceimpl.getReport(paper_id, uid);
 		
 		//获取报告页基本信息数据
 		ArrayList<String> studentInof = reportServiceimpl.getJiBenXinXi(report_id);

@@ -332,7 +332,7 @@
                                     align-items: center;">
                                         <div
                                             style="border:1px solid rgb(239,249,253);width: 130px;height: 40px;margin-top:25px;background-color:rgb(239,249,253);text-align: center">
-                                            <p style="margin-top:7px;">未作答 <a class="layui-icon layui-icon-edit"
+                                            <p style="margin-top:7px;">未作答 <a class="layui-icon layui-icon-edit" lay-href="toentrance" 
                                                     style="color: rgb(0,158,231);font-size: 20px;cursor: pointer;"></a>
                                             </p>
 
@@ -373,6 +373,7 @@
                 async:false,
                 dataType: "json",
                 success: function (data) {
+                    console.log(data)
                     var str = []
                     for (var i = 0; i < data.length; i++) {
                         str.push(`<li class="layui-timeline-item">
@@ -388,8 +389,8 @@
                                     </div>
                                     <div class="gradelist"
                                         style="border:1px solid #e2e2e2;height: 40px;width:60px;margin-left: 15px">
-                                        <i class="layui-icon layui-icon-file-b"
-                                            style="font-size: 20px;color: #FF5722;"></i>
+                                        <a class="layui-icon layui-icon-file-b"
+                                            style="font-size: 20px;color: #FF5722;" href="report?paper_id=${data[i].paper_id}" target="_parent"></a>
                                     </div>
 
 
