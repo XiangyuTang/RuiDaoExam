@@ -137,8 +137,8 @@
             display: flex;
             justify-content: center;
             align-items: center;">
-            <input type="radio" name="character" value="teacher" title="教师">
-            <input type="radio" name="character" value="student" title="学生" checked="">
+            <input type="radio" name="character" value="teacher" title="教师" lay-filter="role">
+            <input type="radio" name="character" value="student" title="学生" lay-filter="role" checked="">
           </div> 
         </div>
         <div class="layui-form-item">
@@ -147,6 +147,7 @@
         <div class="layui-form-item">
           <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">注 册</button>
         </div>
+        <input type="text" id="base64url" style="display: none">
         <div class="layui-trans layui-form-item layadmin-user-login-other">
           <label>社交账号注册</label>
           <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>
@@ -259,18 +260,23 @@
         , router = layui.router();
 
       form.render();
-      form.on('radio(filter)', function(data){
+      form.on('radio(role)', function(data){
 			  console.log(data.elem); //得到radio原始DOM对象
 			  console.log(data.value); //被点击的radio的value值
+        if(data.value=="student"){
+          $("#RegisterFace").show();
+        }else{
+          $("#RegisterFace").hide();
+        }
 			});  
-      $("input[type=radio]").click(function(){
-  		 	alert(233);
-  		 		if ($(this).val()=="student") { //attr("checked")
-  		 			$("#RegisterFace").show();
-  		 		}
-  		 		else
-  		 			$("#RegisterFace").hide();
-  		 		})
+      // $("input[type=radio]").click(function(){
+  		//  	alert(233);
+  		//  		if ($(this).val()=="student") { //attr("checked")
+  		//  			$("#RegisterFace").show();
+  		//  		}
+  		//  		else
+  		//  			$("#RegisterFace").hide();
+  		//  		})
      
       
       $("#getEmailCode").click(function () {
@@ -334,6 +340,9 @@
         if(!checkNickName()){
           return false
         }
+        if(field.character=="student"&($("#base64url").val())==""){
+          return layer.msg("你得照相啊！")
+        }
   
 
         // //请求接口
@@ -356,8 +365,9 @@
         var repass = field.repass
         var nickname = field.nickname
         var character = field.character
+        var base64url=$("#base64url").val()
         if(currentemail != $("#LAY-user-login-cellphone").val()){
-        	layui.msg("请勿更改邮箱！");
+        	layer.msg("请勿更改邮箱！");
         	return false;
         }
         console.log(vercode);
@@ -371,7 +381,8 @@
             "password": password,
             "repass": repass,
             "nickname": nickname,
-            "character": character
+            "character": character,
+            "base64url":base64url
           },
           success: function (data) {
             if (data == 1) {
@@ -453,7 +464,16 @@
 
     //弹框
     $("#RegisterFace").on("click",function () {
-        takeImg()
+      var email=$("#LAY-user-login-cellphone").val()
+      var verifycode=$("#LAY-user-login-vercode").val()
+      var password=$("#LAY-user-login-password").val()
+      var repass=$("#LAY-user-login-repass").val()
+      var nickname=$("#LAY-user-login-nickname").val()
+      if(email==""||verifycode==""||password==""||repass==""||nickname==""){
+        layer.msg("请先全部填完上述信息")
+        return
+      }
+       takeImg()
     });
 
     //旋转
@@ -482,11 +502,13 @@
         var cas = $('#tailoringImg').cropper('getCroppedCanvas');//获取被裁剪后的canvas
         var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
         base64url=base64url.replace("\r","");
+        $("#base64url").val(base64url)
+        console.log(base64url)
         var datas={"base64url":base64url}
         $.ajax({
 			url:'doPhotoRegister',
 			type:'post',
-			dataType:'json',
+			dataType:'text',
 			async:false,
 			data:datas,
 			success:function(e){
@@ -495,11 +517,9 @@
 			},
 			error:function(e){
 				console.log(e);
-				layui.use(['layer', 'form'], function(){
-			  		var layer = layui.layer
-			  			,form = layui.form;
+				
 			  			layer.msg('出错了！');
-				});
+				
 			}
 		});
         

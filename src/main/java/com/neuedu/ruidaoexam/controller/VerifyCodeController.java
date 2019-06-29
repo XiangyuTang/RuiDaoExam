@@ -71,7 +71,7 @@ public class VerifyCodeController {
 	@PostMapping("/checkRegister")
 	@ResponseBody
 	//@RequestParam("receiver")
-	public String checkVerifyemail(String email,String vercode,String password,String nickname,String character, HttpSession session) {
+	public String checkVerifyemail(String email,String vercode,String password,String nickname,String character, String base64url,HttpSession session) {
 		String verifycode = String.valueOf(session.getValue("verifycode"));//验证码的获取
 		if(!vercode.equals(verifycode)) {
 			return "0";	
@@ -83,6 +83,7 @@ public class VerifyCodeController {
 		student.setName(nickname);
 		student.setPassword(MD5Util.md5Encode(password));
 		student.setPoints(100);
+		student.setFaceData(base64url);
 		int i=logandregservice.register(student);
 		System.out.println(character+"表记录+"+i);
 		
