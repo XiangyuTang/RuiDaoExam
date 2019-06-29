@@ -1,27 +1,36 @@
 <!DOCTYPE html>
+<!-- saved from url=(0030)http://www.coolappse.com/news/ -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>教师首页</title>
-<style type="text/css">
-	.show-welcome
-	{
-		width:500px;
-      	margin:100px auto;
-	}
-	.wrap h1{
-	    margin:0;
-	    line-height:150px;
-	    background:#ccc;
-	}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
-</style>
+	<title>CoolApps(e) - We bring you out of this world interfaces!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="googlebot" content="index, follow">
+	<link rel="stylesheet" href="../welcome_files/reset.css" th:href="@{static/pages/welcome_files/reset.css}">
+	<link rel="stylesheet" href="../welcome_files/style.css" th:href="@{static/pages/welcome_files/style.css}">
+	<title>学生欢迎页</title>
+
 </head>
+
 <body>
-	<div class="show-welcome">
-		<h1>亲爱的同学：<span th:text="${session.name}"></span>,</h1>
-		<h1>欢迎进入学生个人中心</h1>
-	</div>
+<figure class="floating-bg">
+	<img class="saturn" src="../welcome_files/planet_1.png" th:src="@{static/pages/welcome_files/planet_1.png}" alt="image-2">
+	<img class="mars" src="../welcome_files/planet_2.png" th:src="@{static/pages/welcome_files/planet_2.png}" alt="image-3">
+	<img class="blue" src="../welcome_files/planet_3.png" th:src="@{static/pages/welcome_files/planet_3.png}" alt="image-3">
+</figure>
+<div class="container">
+	<h1>亲爱的同学：</h1>
+	<h1 th:text="${session.name}"></h1>
+	<p>欢迎来到睿道EXAM!</p><p>
+	</p><p>在这个网站，您可以到商城购买自己喜欢的题库或试卷作为练习，在考试入口输入邀请码和相关信息进入考试，邀请码可以在消息中心查看.</p>
+	<p>In this website, you can go to the mall to buy your favorite question bank or test paper as an exercise, enter the invitation code and relevant information in the entrance of the exam to enter the exam, 
+		the invitation code can be viewed in the message center.
+	</p><br>
+	<p class="over-n-out">Copyright：睿道8组团队</p><br>
+	<!--<p class="coolapps">The <a href="http://coolappse.com/old.html">CoolApps(e)</a> team.</p>-->
+</div>
 
 </body>
+
 </html>

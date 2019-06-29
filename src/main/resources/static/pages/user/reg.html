@@ -269,14 +269,6 @@
           $("#RegisterFace").hide();
         }
 			});  
-      // $("input[type=radio]").click(function(){
-  		//  	alert(233);
-  		//  		if ($(this).val()=="student") { //attr("checked")
-  		//  			$("#RegisterFace").show();
-  		//  		}
-  		//  		else
-  		//  			$("#RegisterFace").hide();
-  		//  		})
      
       
       $("#getEmailCode").click(function () {
@@ -341,7 +333,7 @@
           return false
         }
         if(field.character=="student"&($("#base64url").val())==""){
-          return layer.msg("你得照相啊！")
+          return layer.msg("请上传人脸数据！")
         }
   
 
@@ -512,14 +504,12 @@
 			async:false,
 			data:datas,
 			success:function(e){
-				alert(e);
+				//alert(e);
 				//window.location.href = 'toExamOver';
 			},
 			error:function(e){
 				console.log(e);
-				
-			  			layer.msg('出错了！');
-				
+  			layer.msg('出错了！');
 			}
 		});
         

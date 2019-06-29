@@ -29,4 +29,6 @@ public interface StudentService {
 	//public Student getStudent(Integer stuid);
 	@Cacheable(value="Student")
 	Student getStudent(Integer stuid);
+	
+	Student getStudentByEmail(String email);
 }

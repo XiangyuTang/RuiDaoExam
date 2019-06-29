@@ -49,7 +49,7 @@ public class handlePhotoController {
 		//将字节数组生成图片
 		System.out.println(imgFilePath1);
 		//FaceDetect.detect(pic1, pic2)
-		return "666";
+		return "保存人脸成功！";
 	}
 	
 	public static byte[] base64topng(String imageBase64) {

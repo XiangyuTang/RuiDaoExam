@@ -116,4 +116,10 @@ public class StudentServiceimpl implements StudentService{
 		Student student = stumapper.selectByPrimaryKey(stuid);
 		return student;
 	}
+	@Override
+	public Student getStudentByEmail(String email) {
+		// TODO Auto-generated method stub
+		Student student = stumapper.selectByEmail(email);
+		return student;
+	}
 }

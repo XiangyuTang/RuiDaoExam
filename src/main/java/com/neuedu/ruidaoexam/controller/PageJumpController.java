@@ -92,11 +92,11 @@ public class PageJumpController {
 			session.setAttribute("name", name);
 			session.setAttribute("role", role);
 			if(role.equals("teacher"))
-				return "redirect:toindexteacher";
+				return "indexteacher";
 			else if(role.equals("student"))
-				return "redirect:toindex";
+				return "index";
 			else
-				return "redirect:toRegister";
+				return "toRegister";
 		}
 	}
 	//跳转到组卷界面
@@ -145,6 +145,11 @@ public class PageJumpController {
 	//游客主页
 	@RequestMapping("/")
 	public String tohome() {
+		return "home";
+	}
+	
+	@RequestMapping("/tohome")
+	public String tostuhome() {
 		return "home";
 	}
 	
