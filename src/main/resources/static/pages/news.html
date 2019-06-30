@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>jQuery Tabs滑动选项卡</title>
@@ -28,43 +28,63 @@
 
 <div class="mt-tabpage" js-tab="3">
 	<div class="mt-tabpage-title">
-		<a href="javascript:;" class="mt-tabpage-item mt-tabpage-item-cur">公告</a>
-		<a href="javascript:;" class="mt-tabpage-item">决定</a>
-		<a href="javascript:;" class="mt-tabpage-item">会议</a>
+		<a href="javascript:;" class="mt-tabpage-item mt-tabpage-item-cur">考试</a>
+		<a href="javascript:;" class="mt-tabpage-item">商城</a>
+		<a href="javascript:;" class="mt-tabpage-item">其他</a>
 	</div>
 	<div class="mt-tabpage-count">
 		<ul class="mt-tabpage-cont__wrap">
 			<li class="mt-tabpage-item">
 				<div data-log-from="Notice" class="p-notice-cont w-feed-notice" style="">
 					<div class="w-feed">
-						<div class="w-feed-container">
-							<div class="new-message">
+						<div class="w-feed-container" th:remove="(${newslist} == null)? all:none">
+							<div class="new-message" th:each="news:${newslist}" th:remove="(${news.newsType} == 0 )? none:all">
 								<img src="../img/wenda_logo_9a612b2.png" th:src="@{static/img/wenda_logo_9a612b2.png}" width="40" height="40"  style="float: left;"/>
 								<div class="cont">
-									<p><a href="https://www.wukong.com/answer/6702576044903235844/" target="_blank" data-log="Visit_Answer|From_AnswerLink">adkjhjasdj按时打卡觉得卡巴as</a></p> 
-							 		<div class="datetime">
+									<p><a  th:text="${news.newsContent}">消息内容</a></p> 
+							 		<div class="datetime" th:text="${news.newsTime}">
 							            2019/06/15 20:35
 							        </div>
 								</div>
 							</div>
-					        <div class="new-message">
-					        	<img src="../img/wenda_logo_9a612b2.png" th:src="@{static/img/wenda_logo_9a612b2.png}" width="40" height="40"  style="float: left;"/>  
-					        	<div class="cont">
-					        		<p><a href="https://www.wukong.com/question/6565653745726652680/" target="_blank" data-log="Visit_Question|From_QuestionLink">你收藏的问题新增2个新回答，快去看看吧~</a></p>
-					        		<div class="datetime">
-					            		2019/05/24 20:00
-					       			</div>
-					        	</div>
-					        </div>
-						</div> 
-						<div class="w-feed-loadmore"><span class="w-feed-loadmore-w">没有更多通知</span>
-							
 						</div>
-					</div>
+				</div>
+			</div>
+			</li>
+			<li class="mt-tabpage-item">
+				<div data-log-from="Notice" class="p-notice-cont w-feed-notice" style="">
+					<div class="w-feed">
+						<div class="w-feed-container" th:remove="(${newslist} == null)? all:none">
+							<div class="new-message" th:each="news:${newslist}" th:remove="(${news.newsType} == 1 )? none:all">
+								<img src="../img/wenda_logo_9a612b2.png" th:src="@{static/img/wenda_logo_9a612b2.png}" width="40" height="40"  style="float: left;"/>
+								<div class="cont">
+									<p><a  th:text="${news.newsContent}">消息内容</a></p> 
+							 		<div class="datetime" th:text="${news.newsTime}">
+							            2019/06/15 20:35
+							        </div>
+								</div>
+							</div>
+						</div>
+				</div>
 				</div>
 			</li>
-			<li class="mt-tabpage-item">Cont2</li>
-			<li class="mt-tabpage-item">Cont3</li>
+			<li class="mt-tabpage-item">
+				<div data-log-from="Notice" class="p-notice-cont w-feed-notice" style="">
+					<div class="w-feed">
+						<div class="w-feed-container" th:remove="(${news} == null)? all:none">
+							<div class="new-message" th:each="new:${news}" th:remove="(${new.newsType} == 2 )? none:all">
+								<img src="../img/wenda_logo_9a612b2.png" th:src="@{static/img/wenda_logo_9a612b2.png}" width="40" height="40"  style="float: left;"/>
+								<div class="cont">
+									<p><a data-log="Visit_Answer|From_AnswerLink" th:href="" th:text="${new.newsContent}">消息内容</a></p> 
+							 		<div class="datetime" th:text="${new.newstime}">
+							            2019/06/15 20:35
+							        </div>
+								</div>
+							</div>
+					</div>
+				</div>
+				</div>
+			</li>
 		</ul>
 	</div>
 </div>

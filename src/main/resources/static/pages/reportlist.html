@@ -24,6 +24,7 @@
 		<link rel="stylesheet" href="./reportdir/index.css" th:href="@{/static/pages/reportdir/index.css}" media="all">
 		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
 		<script type="text/javascript" src="../js/echarts.js" th:src="@{static/js/echarts.js}"></script>
+		<link charset="utf-8" rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{/static/layuiadmin/layui/css/layui.css}" media="all">
 		<style>
 			/*.main{
 				margin-left: auto;
@@ -76,7 +77,7 @@
 		<div id="report-list-panel">
 		    <div>
 		    	
-			    <div class="btn-group report-actions m10">
+			    <!--<div class="btn-group report-actions m10">
 			        <button data-action="tag" data-toggle="dropdown" type="button" class="btn btn-default" title="打标记" data-link="disabled{:actionDisabled || updatingTags}" disabled="disabled">
 			            <i class="fa fa-tags"></i>
 			        </button>
@@ -101,10 +102,10 @@
 			   
 			    <a class="btn btn-link text-knewone btn-table-condensed" data-link="visible{:reports^length}" style="display: inline-block;">
 			    	<i data-link="class{:condensed?&#39;fa fa-list&#39;:&#39;fa fa-th-list&#39;}" class="fa fa-th-list"></i>
-			    </a>
+			    </a>-->
 			    
 			    <div class="btn-group export-report">
-			        <button data-export="pdf-chosen" type="button" class="btn btn-default btn-export" title="下载选中PDF报告" data-link="disabled{:actionDisabled||pdfDownload||!showInfo}" disabled="disabled">
+			        <!--<button data-export="pdf-chosen" type="button" class="btn btn-default btn-export" title="下载选中PDF报告" data-link="disabled{:actionDisabled||pdfDownload||!showInfo}" disabled="disabled">
 			            <i class="fa fa-download"></i>
 			        </button>
 			        <button data-export="excel" type="button" title="" class="btn btn-default btn-export btn-export-excel-all" data-link="disabled{:excelDownload || !totalCount}" data-original-title="下载EXCEL汇总成绩">
@@ -115,10 +116,24 @@
 			        </button>
 			        <button data-export="feedback" type="button" title="考试反馈" class="btn btn-default btn-export">
 			            <i class="fa fa-commenting" data-original-title="" title=""></i>
-			        </button>
-			        <button data-export="share-experience" type="button" title="分享经验" class="btn btn-default btn-export">
+			        </button>-->
+			        <!--<button data-export="share-experience" type="button" title="分享经验" class="btn btn-default btn-export" style="vertical-align:middle">
 			            <i class="fa fa-share-alt"></i>
-			        </button>
+			        </button>-->
+			        <div class="layui-btn-group">
+					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
+					    <i class="layui-icon">&#xe654;</i>
+					  </button>
+					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
+					    <i class="layui-icon">&#xe642;</i>
+					  </button>
+					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
+					    <i class="layui-icon layui-icon-file"></i>
+					  </button>
+					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
+					    <i class="layui-icon">&#xe602;</i>
+					  </button>
+					</div>
 			    </div>
 		    
 		    
@@ -166,7 +181,7 @@
 		        		<div th:each="student:${hashMap.students}"  th:remove="(${answeredpaperStat.count} == ${studentStat.count})? none:all">      
 				        <tbody data-jsv-df="" class="item">
 				        	<tr data-jsv="#41^#28_#78_" class="report-item">
-				        	<td style="width:30px;">
+				        	<td style="width:30px;vertical-align:middle;">
 				            <!--<label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
 							<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
 							<i class="fa fa-check-square fa-stack-1x check"></i></span>-->
@@ -178,16 +193,16 @@
 					            <img class="img-circle candidate-portrait"  src="reportdir/portrait_default_9.png" th:src="@{static/pages/reportdir/portrait_default_9.png}" width="40px" height="40px">
 					        </td>
 					        
-					        <td style="width:10%;text-align:left;">
+					        <td style="width:10%;vertical-align:middle;">
 					            <a class="btn btn-link candidate-name fb" target="_blank" title="" th:text="${student.name}" th:href="@{/marking(report_id=${report.reportId},answeredpaper_id=${answeredpaper.ansPaperId})}">哈哈哈</a>
 					        </td>
-					        <td style="min-width:135px" th:text="${report.endTimestamp}">2019-06-14 16:18</td>
-					        <td  style="width: 60px;" th:text="${report.acquiredScore}">&nbsp;30</td>
+					        <td style="min-width:135px;vertical-align:middle;" th:text="${report.endTimestamp}">2019-06-14 16:18</td>
+					        <td  style="width: 60px;vertical-align:middle;" th:text="${report.acquiredScore}">&nbsp;30</td>
 					        
-					        <td style="width:30%;" th:text="${report.totalScore}">&nbsp;30
+					        <td style="width:30%;vertical-align:middle;" th:text="${report.totalScore}">&nbsp;30
 					        </td>
 					        
-					        <td th:text="(${answeredpaper.isModifiedByTeacher} == '1')? '是':'否'">&nbsp;&nbsp;&nbsp;&nbsp;是
+					        <td style="vertical-align:middle;" th:text="(${answeredpaper.isModifiedByTeacher} == '1')? '是':'否'">&nbsp;&nbsp;&nbsp;&nbsp;是
 					        </td>
 					        
 					        <!--<td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">

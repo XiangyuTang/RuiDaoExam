@@ -27,11 +27,13 @@ public class MarkingController {
 	PaperServiceimpl PaperServiceimpl;
 	
 	@RequestMapping("/marking")
-	public String getJiBenXinXi(HttpServletRequest request,HttpServletResponse response, Model model) throws Exception{
-		
-		int report_id = 1;
-		
+	public String getJiBenXinXi(Integer report_id,Integer answeredpaper_id,  Model model) throws Exception{
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWW");
+//		System.out.println(report_id);
+//		System.out.println(answeredpaper_id);
 		//获取判卷页基本信息数据
+		model.addAttribute("report_id", report_id);
+		model.addAttribute("answeredpaper_id", answeredpaper_id);
 		ArrayList<String> studentInof = reportServiceimpl.getJiBenXinXi(report_id);
 		String sName = studentInof.get(0);
 		String sEmail = studentInof.get(1);
@@ -153,11 +155,11 @@ public class MarkingController {
 		model.addAttribute("forWenDaQuestionInList", forWenDaQuestionInList);
 		
 		//提交判卷结果
-		String ansPaperIdString = "1";
+//		String ansPaperIdString = "1";
 		String isModifiedByTeacher = "1";
-				 
+		String answeredpaper_idString = answeredpaper_id.toString();		 
 		ArrayList<String> modifiedArray = new ArrayList<String>();
-		modifiedArray.add(ansPaperIdString);
+		modifiedArray.add(answeredpaper_idString);
 		modifiedArray.add(isModifiedByTeacher);
 				
 		reportServiceimpl.modified(modifiedArray);
