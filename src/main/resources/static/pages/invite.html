@@ -217,7 +217,7 @@
             </div>
         </div>
         <input type="hidden" class="paper_id" id="paper_id" th:value="${paper_id}">
-         <input type="hidden" id="teacher_id" th:value="${uid}">
+         <input type="hidden" id="teacher_id" th:value="${session.uid}">
 	</body>
 	<script type="text/html" id="template1">
 	{{each informedList as student}}	

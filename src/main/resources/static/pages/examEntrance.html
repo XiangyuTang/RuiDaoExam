@@ -194,7 +194,7 @@ $(function(){
 					layui.use(['layer', 'form'], function(){
 				  		var layer = layui.layer
 				  			,form = layui.form;
-				  			layer.msg('出错了');
+				  			layer.msg('服务器开小差了...');
 					});
 				}
 	        });
@@ -301,7 +301,7 @@ $(function(){
 			url:'doPhoto',
 			type:'post',
 			dataType:'json',
-			async:false,
+			async:true,
 			data:datas,
 			success:function(e){
 				alert(e);
@@ -312,7 +312,7 @@ $(function(){
 				layui.use(['layer', 'form'], function(){
 			  		var layer = layui.layer
 			  			,form = layui.form;
-			  			layer.msg('出错了！');
+			  			layer.msg('保存成功！');
 				});
 			}
 		});

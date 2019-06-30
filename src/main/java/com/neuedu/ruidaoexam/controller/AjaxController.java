@@ -330,23 +330,23 @@ public class AjaxController {
 		if(totalsingle==0)
 			rate1 = 0.0;
 		else
-			rate1 = (double) (rightsingle/totalsingle);
+			rate1 = (double) rightsingle/totalsingle;
 		if(totalmultiple==0)
 			rate2 = 0.0;
 		else
-			rate2 = (double) (rightmultiple/totalmultiple);
+			rate2 = (double) rightmultiple/totalmultiple;
 		if(totalJudge==0)
 			rate3 = 0.0;
 		else
-			rate3 = (double) (rightJudge/totalJudge);
+			rate3 = (double) rightJudge/totalJudge;
 		if(totalTiankong==0)
 			rate4 = 0.0;
 		else
-			rate4 = (double) (rightTiankong/totalTiankong);
+			rate4 = (double) rightTiankong/totalTiankong;
 		if(totalJianda==0)
 			rate5 = 0.0;
 		else
-			rate5 = (double) (rightJianda/totalJianda);
+			rate5 = (double) rightJianda/totalJianda;
 		ArrayList<Double> arrayList = new ArrayList<Double>();
 		arrayList.add(rate1);
 		arrayList.add(rate2);
