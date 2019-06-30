@@ -12,6 +12,8 @@
 		<link rel="stylesheet" href="../../layuiadmin/style/template.css" th:href="@{static/layuiadmin/style/template.css}" media="all">
 		<link rel="stylesheet" href="../../layuiadmin/style/teacher/myLibraryTch.css" th:href="@{static/layuiadmin/style/teacher/myLibraryTch.css}" media="all">
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  		<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
+		<script type="text/javascript" src="../js/template.js" th:src="@{static/js/template.js}"></script>
 		<!--变量定义-->
 		<script type="text/javascript">
 			var papers = new Array();
@@ -360,7 +362,7 @@
 
 						<div class="item-intro">
 							<p><span>6</span>道题</p>
-							<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">
+							<button type="button"  class="layui-btn layui-btn-sm layui-btn-normal">
 										<i class="layui-icon layui-icon-add-1"></i>
 							        	发布考试
 									</button>
@@ -408,6 +410,7 @@
 							console.log("obj:");
 							console.log(obj);
 							console.log(papers);
+							var toinvite = 'toinvite';
 							var arr = [],
 								thisData = papers.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
 							layui.each(thisData, function(index, item) {
@@ -431,7 +434,8 @@
 									'<div class="cmdlist-text">' +
 									'<div class="item-intro">' +
 									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
-									'<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">' +
+									'<button type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick=javascrtpt:jump()>' +
+									'<input type="hidden" id="click_paperId" th:value="${item.paperId}">'+
 									'<i class="layui-icon layui-icon-add-1"></i>' +
 									'发布考试' +
 									'</button>' +
@@ -455,7 +459,47 @@
 				});
 			});
 		</script>
+<script>
+	
+	$(function(){
+		$("button").click(function(){
+			alert(233);
+			jump();
+		})
+		/*$("button").live('click',function(){
+			alert(233);
+			jump();
+		})*/
+	})
+	
+	function jump(){
+		window.location.href="toinvite";
+	}	
+
+</script>
 
 	</body>
 
 </html>
+
+/*var datas={"base64url":base64url}
+        $.ajax({
+			url:'doPhoto',
+			type:'post',
+			dataType:'json',
+			async:false,
+			data:datas,
+			success:function(e){
+				
+				alert(e);
+				//window.location.href = 'toExamOver';
+			},
+			error:function(e){
+				console.log(e);
+				layui.use(['layer', 'form'], function(){
+			  		var layer = layui.layer
+			  			,form = layui.form;
+			  			layer.msg('出错了！');
+				});
+			}
+		});*/

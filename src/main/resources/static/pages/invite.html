@@ -217,6 +217,7 @@
             </div>
         </div>
         <input type="hidden" class="paper_id" id="paper_id" th:value="${paper_id}">
+         <input type="hidden" id="teacher_id" th:value="${uid}">
 	</body>
 	<script type="text/html" id="template1">
 	{{each informedList as student}}	
@@ -248,7 +249,7 @@
 				var begintime = $('#begintime').val();
 				var endtime = $('#endtime').val();
 				var cheattimes = $('#cheattimes').val();
-				var teacher_id = 1;//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
+				var teacher_id = $('#teacher_id').val();//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
 				var paper_id = $("[type='hidden'][class='paper_id']").val();//先写死
 				//判断是否需要通过邮件进行批量通知
 				var informflag;
@@ -308,8 +309,8 @@
 				var begintime = $('#begintime').val();
 				var endtime = $('#endtime').val();
 				var cheattimes = $('#cheattimes').val();
-				var teacher_id = 1;//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
-				var paper_id = 1;//先写死
+				var teacher_id = $('#teacher_id').val();//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
+				var paper_id = $('#paper_id').val();//先写死
 				var pararms ={"name":sname,
 							  "email":semail,
 							  "begintime":begintime,
