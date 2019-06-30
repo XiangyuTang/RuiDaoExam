@@ -27,4 +27,16 @@ public interface NewsMapper {
     int updateByPrimaryKeySelective(News record);
 
     int updateByPrimaryKey(News record);
+    //查询学生是否有新消息
+    int countStudentReceiveNews(Integer receive_student_id);
+    //查询老师是否有新消息
+    int countTeacherReceiveNews(Integer receive_teacher_id);
+    //查询所有老师的消息
+    List<News> getAllTeacherNews(Integer receive_teacher_id);
+    //查询所有学生的消息
+    List<News> getAllStudentNews(Integer receive_student_id);
+    //根据教师id改变其信息的未读状态
+    int updateIsReadByTeacher_id(Integer receive_teacher_id);
+    //根据学生id改变其信息未读状态
+    int updateIsReadByStudent_id(Integer receive_student_id);
 }

@@ -351,4 +351,30 @@
       reserve2 = #{reserve2,jdbcType=INTEGER}
     where news_id = #{newsId,jdbcType=INTEGER}
   </update>
+  <select id="countStudentReceiveNews" resultType="java.lang.Integer">
+  	select count(*) from news
+  	where receive_student_id = #{receive_student_id} and is_read = 0
+  </select>
+  <select id="countTeacherReceiveNews" resultType="java.lang.Integer">
+  	select count(*) from news
+  	where receive_teacher_id = #{receive_teacher_id} and is_read = 0
+  </select>
+  <select id="getAllTeacherNews" resultMap="BaseResultMap">
+  	select * from news
+  	where receive_teacher_id = #{receive_teacher_id} order by news_id desc
+  </select>
+  <select id="getAllStudentNews" resultMap="BaseResultMap">
+  	select * from news
+  	where receive_student_id = #{receive_student_id} order by news_id desc
+  </select>
+  <select id = "updateIsReadByTeacher_id" resultType="java.lang.Integer">
+   	update news
+   	set is_read = 1
+   	where receive_teacher_id = #{receive_teacher_id}
+  </select>
+  <select id = "updateIsReadByStudent_id" resultType="java.lang.Integer">
+   	update news
+   	set is_read = 1
+   	where receive_student_id = #{receive_student_id}
+  </select>
 </mapper>

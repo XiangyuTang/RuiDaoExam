@@ -6,7 +6,10 @@ body {
 	color: #333;
 	background-color: #E4E1E1;
 }
-a, a:hover { text-decoration: none; color: #333; }
+a, a:hover {
+	/* text-decoration: none; */
+	/* color: #333;*/ 
+	 }
 ul, li { list-style: none; }
 svg{
 	fill: currentColor;
