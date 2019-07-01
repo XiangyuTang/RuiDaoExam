@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="examOver_files/sets.css" th:href="@{static/pages/examOver_files/sets.css}">
 <link rel="stylesheet" href="examOver_files/style.css" th:href="@{static/pages/examOver_files/style.css}">
 <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}" />
-
+<script src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
 <script type="text/javascript" src="examOver_files/jquery.js" th:src="@{static/pages/examOver_files/jquery.js}"></script>
 <script type="text/javascript" src="examOver_files/sea.js" id="seajsnode" th:src="@{static/pages/examOver_files/sea.js}"></script>
 <script type="text/javascript" src="examOver_files/seajs-preload.js" th:src="@{static/pages/examOver_files/seajs-preload.js}"></script>
@@ -36,6 +36,15 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
+    
+    //获得URL中的参数方法
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r != null) return decodeURI(r[2]);
+		return null;
+	}
+	
 </script>
 
 <script>
@@ -153,8 +162,8 @@
                     				</p>
                     <p class="summary">*以上仅显示单选题，多选题与判断题的得分*</p>
                                                 <div class="exam-end-btn">
-                                            <a class="btn btn-re" href="http://localhost:8080/tohome">回到首页</a>
-                                             <a onlyforsharer="" share-action="check-report" class="btn btn-warning btn-report" href="https://www.101test.com/share/irrevocable?employerId=678542&amp;url=%2FreportDetail%2F44968666%3Fsync%3Dtrue%26paperId%3D450608%26candidateId%3D12217252%26reportThreshold%3D14&amp;sign=zvRrmfvtaCysaAvbXw9HnA&amp;expiredAt=1592888971222">查看对错</a>
+                                            <a class="btn btn-re" href="toindex" th:href="@{toindex}">回到首页</a>
+                                             <a onlyforsharer="" share-action="check-report" class="btn btn-warning btn-report" >查看对错</a>
                                            <!-- <a class="btn feedback-trigger btn-success">在线反馈</a>-->
                 </div>
                 <div class="title">点<a href="http://localhost:8080/tohome">首页</a>注册可查成绩报告；或去<a href="http://118.24.55.226:8080/RuiDaoQA/index.jsp">睿道问答社区</a>提问；或将成绩分享到 
@@ -223,7 +232,16 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+<script>
+	$(function(){
+		$("a[share-action='check-report']").click(function(){
+			var ans_paper_id = GetQueryString("paper_id");
+			window.location.href="report?paper_id="+ans_paper_id;
+		})
+			
+	})
 
+</script>
 
 
 

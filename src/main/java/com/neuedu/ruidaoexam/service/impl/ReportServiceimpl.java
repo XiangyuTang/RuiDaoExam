@@ -230,9 +230,9 @@ public class ReportServiceimpl implements ReportService{
 		return quanMianGaiKuoList;
 	}
 	
-	public ArrayList<ForChoiceQuestion> getXuanZeDaTiQingKuang(int report_id) {
+	public ArrayList<ForChoiceQuestion> getXuanZeDaTiQingKuang(int ans_paper_id) {
 		
-		List<AnsweredQuestion> answeredQuestionInList = answeredQuestionMapper.getAnsweredQuestionsByPaperResultId(1);
+		List<AnsweredQuestion> answeredQuestionInList = answeredQuestionMapper.getAnsweredQuestionsByPaperResultId(ans_paper_id);
 		if (answeredQuestionInList.size()==0) {
 			return null;
 		}
@@ -300,6 +300,9 @@ public class ReportServiceimpl implements ReportService{
 				break;
 			case "1 1 1 1":
 				answer = "ABCD";
+				break;
+			case "null":
+				answer = "未作答";
 				break;
 			}
 			switch (getRightAnswerString) {
@@ -414,7 +417,7 @@ public class ReportServiceimpl implements ReportService{
 	@Override
 	public ArrayList<ForJudgeQuestion> getPanDuanDaTiQingKuang(int report_id) {
 
-		List<AnsweredQuestion> answeredQuestionInList = answeredQuestionMapper.getJudgeQuestionsByPaperResultId(1);
+		List<AnsweredQuestion> answeredQuestionInList = answeredQuestionMapper.getJudgeQuestionsByPaperResultId(report_id);
 		if (answeredQuestionInList.size()==0) {
 			return null;
 		}
@@ -449,6 +452,9 @@ public class ReportServiceimpl implements ReportService{
 				break;
 			case "0":
 				rightAnswer = "B";
+				break;
+			case "null":
+				answer = "未作答";
 				break;
 			}
 			String choice1 = "正确";
@@ -516,7 +522,7 @@ public class ReportServiceimpl implements ReportService{
 
 	@Override
 	public ArrayList<ForTianKongQuestion> getTianKongDaTiQingKuang(int report_id) {
-		List<AnsweredQuestion> answeredQuestionInList = answeredQuestionMapper.getTianKongQuestionsByPaperResultId(1);
+		List<AnsweredQuestion> answeredQuestionInList = answeredQuestionMapper.getTianKongQuestionsByPaperResultId(report_id);
 		if (answeredQuestionInList.size()==0) {
 			return null;
 		}
@@ -533,6 +539,11 @@ public class ReportServiceimpl implements ReportService{
 			ForTianKongQuestion forTianKongQuestion = new ForTianKongQuestion();
 			
 			forTianKongQuestion.setQuesTypeId(ans.getQuesType());
+			String answerString = ans.getAnswer();
+			if (answerString == null) {
+				answerString = "未作答";
+			}
+			forTianKongQuestion.setAnswer(answerString);
 			forTianKongQuestion.setAnswer(ans.getAnswer());
 			forTianKongQuestion.setRightAnswer(ans.getRightAnswer());
 			forTianKongQuestion.setScore(ans.getScore());
@@ -591,7 +602,7 @@ public class ReportServiceimpl implements ReportService{
 
 	@Override
 	public ArrayList<ForWenDaQuestion> getWenDaDaTiQingKuang(int report_id) {
-		List<AnsweredQuestion> answeredQuestionInList = answeredQuestionMapper.getWenDaQuestionsByPaperResultId(1);
+		List<AnsweredQuestion> answeredQuestionInList = answeredQuestionMapper.getWenDaQuestionsByPaperResultId(report_id);
 		if (answeredQuestionInList.size()==0) {
 			return null;
 		}
@@ -608,7 +619,11 @@ public class ReportServiceimpl implements ReportService{
 			ForWenDaQuestion forWenDaQuestion = new ForWenDaQuestion();
 			
 			forWenDaQuestion.setQuesTypeId(ans.getQuesType());
-			forWenDaQuestion.setAnswer(ans.getAnswer());
+			String answerString = ans.getAnswer();
+			if (answerString == null) {
+				answerString = "未作答";
+			}
+			forWenDaQuestion.setAnswer(answerString);
 			forWenDaQuestion.setRightAnswer(ans.getRightAnswer());
 			forWenDaQuestion.setScore(ans.getScore());
 			forWenDaQuestion.setTotalScore(ans.getTotalScore());

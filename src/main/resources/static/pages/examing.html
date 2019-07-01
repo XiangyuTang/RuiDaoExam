@@ -382,7 +382,7 @@
 						async:false,
 						data:JSON.stringify(pararms),
 						success:function(e){
-							window.location.href = 'toExamOver';
+							window.location.href = 'toExamOver?paper_id='+paper_id;
 						},
 						error:function(e){
 							console.log(e);
@@ -421,7 +421,7 @@
 					async:false,
 					data:JSON.stringify(pararms),
 					success:function(e){
-						window.location.href = 'toExamOver';
+						window.location.href = 'toExamOver?paper_id='+paper_id;
 					},
 					error:function(e){
 						console.log(e);

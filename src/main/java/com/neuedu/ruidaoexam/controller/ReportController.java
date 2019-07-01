@@ -109,7 +109,7 @@ public class ReportController {
 		model.addAttribute("shiTiNum", shiTiNum);
 		
 //		//获取报告页选择题答题情况数据
-		ArrayList<ForChoiceQuestion> forChoiceQuestionInList = reportServiceimpl.getXuanZeDaTiQingKuang(report_id);
+		ArrayList<ForChoiceQuestion> forChoiceQuestionInList = reportServiceimpl.getXuanZeDaTiQingKuang(paper_id);
 		
 		model.addAttribute("forChoiceQuestionInList", forChoiceQuestionInList);
 		
@@ -140,17 +140,17 @@ public class ReportController {
 ////		model.addAttribute("abilityType", abilityType);
 
 		//获取报告页判断题答题情况数据
-		ArrayList<ForJudgeQuestion> forJudgeQuestionInList = reportServiceimpl.getPanDuanDaTiQingKuang(report_id);
+		ArrayList<ForJudgeQuestion> forJudgeQuestionInList = reportServiceimpl.getPanDuanDaTiQingKuang(paper_id);
 		
 		model.addAttribute("forJudgeQuestionInList", forJudgeQuestionInList);
 		
 		//获取报告页填空题答题情况数据
-		ArrayList<ForTianKongQuestion> forTianKongQuestionInList = reportServiceimpl.getTianKongDaTiQingKuang(report_id);
+		ArrayList<ForTianKongQuestion> forTianKongQuestionInList = reportServiceimpl.getTianKongDaTiQingKuang(paper_id);
 		
 		model.addAttribute("forTianKongQuestionInList", forTianKongQuestionInList);
 		
 		//获取报告页问答题答题情况数据
-		ArrayList<ForWenDaQuestion> forWenDaQuestionInList = reportServiceimpl.getWenDaDaTiQingKuang(report_id);
+		ArrayList<ForWenDaQuestion> forWenDaQuestionInList = reportServiceimpl.getWenDaDaTiQingKuang(paper_id);
 				
 		model.addAttribute("forWenDaQuestionInList", forWenDaQuestionInList);
 		
