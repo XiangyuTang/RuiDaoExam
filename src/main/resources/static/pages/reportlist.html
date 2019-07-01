@@ -64,6 +64,10 @@
 /*				background-color:#E2E2E2;*/
 				background-color: #EDEDED;
 			}
+			a:link {color:#000000;}    /* unvisited link */
+			a:visited {color:#000000;} /* visited link */
+			a:hover {color:#858585}   /* mouse over link */
+			a:active {color:#204D74;}
 			/*.item{
 				border: 1px;
 				border-color: #000000;
@@ -125,10 +129,16 @@
 					    <i class="layui-icon">&#xe654;</i>
 					  </button>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
+					  	<a href="/export1" th:href="@{/export1(paper_id=${paper_id},paper_name=${paper_name})}">
 					    <i class="layui-icon">&#xe642;</i>
+					    <span>导出考试汇总表</span>
+					    </a>
 					  </button>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
-					    <i class="layui-icon layui-icon-file"></i>
+					  	<a href="/export" th:href="@{/export(paper_id=${paper_id},paper_name=${paper_name})}">
+					    <i class="layui-icon">&#xe621</i>
+					    <span>导出考试详情表</span>
+					    </a>
 					  </button>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
 					    <i class="layui-icon">&#xe602;</i>
@@ -281,50 +291,50 @@
 		</div>
 		</div>
 		
-		<div class="main-right">
+		<!--<div class="main-right">
 			<div id="main1" style="width:400px; height:300px"></div>
 			
-		</div>
+		</div>-->
 		
 		</div>
 		<input type="hidden" id="length" th:value='${hashMap.students.size()}'>
 		<input type="hidden" id="students" th:value='${hashMap.students}'>
 		<input type="hidden" id="reports" th:value='${hashMap.reports}'>
 	<script>
-	  	$(function(){
-		  		var mychars = echarts.init(document.getElementById('main1'));
-			
-				mychars.showLoading();//数据加载完之前,显示一段简单的动画
-				//定义2个数组
-				var names=[];// 专门存放类型
-				var scores=[];//专门存放数据
-				var length = $("#length").val();
-				var student = $("#students").val();
-				var reports = $("#reports").val();
-				for(var i=0;i<length;i++){
-					names.push(student[i].name);
-					scores.push(reports[i].acquiredScore);
-				}
-				mychars.hideLoading();//隐藏上面加载的动画
-				// 图表插件动态转载数据的方法
-				mychars.setOption({
-					title:{text:'学生成绩分布'},
-					tooltip:{trigger:'axis'},//鼠标滑动到图表上的效果
-					legend:{data:['成绩']}, // 图形说明
-					xAxis:{data:names},//横坐标
-					yAxis:{},
-					series:[{
-						name:'成绩',
-						type:'bar',// 图表类型 , 可以切换柱状图bar,折线图line
-						data:scores
-					}] // 图形类型,数据值
-				});
-					
-				// 图表随着浏览器窗体变化而变化
-				window.onresize = function(){
-					mychars.resize();
-				}
-	  	})
+//	  	$(function(){
+//		  		var mychars = echarts.init(document.getElementById('main1'));
+//			
+//				mychars.showLoading();//数据加载完之前,显示一段简单的动画
+//				//定义2个数组
+//				var names=[];// 专门存放类型
+//				var scores=[];//专门存放数据
+//				var length = $("#length").val();
+//				var student = $("#students").val();
+//				var reports = $("#reports").val();
+//				for(var i=0;i<length;i++){
+//					names.push(student[i].name);
+//					scores.push(reports[i].acquiredScore);
+//				}
+//				mychars.hideLoading();//隐藏上面加载的动画
+//				// 图表插件动态转载数据的方法
+//				mychars.setOption({
+//					title:{text:'学生成绩分布'},
+//					tooltip:{trigger:'axis'},//鼠标滑动到图表上的效果
+//					legend:{data:['成绩']}, // 图形说明
+//					xAxis:{data:names},//横坐标
+//					yAxis:{},
+//					series:[{
+//						name:'成绩',
+//						type:'bar',// 图表类型 , 可以切换柱状图bar,折线图line
+//						data:scores
+//					}] // 图形类型,数据值
+//				});
+//					
+//				// 图表随着浏览器窗体变化而变化
+//				window.onresize = function(){
+//					mychars.resize();
+//				}
+//	  	})
   </script>
 	</body>
 </html>

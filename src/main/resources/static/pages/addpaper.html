@@ -55,19 +55,27 @@
 						dataType:"text",
 						data:{'papername':papername,'papertime':papertime},
 						success:function(e){
-							alert(1);
 							if(e == "false1"){
-								alert("未选择题目，添加失败")
+								layui.use(['layer'], function(){
+		  							var layer = layui.layer
+		  							layer.msg('未选择题目，添加失败');
+									});
 								window.parent.layer.closeAll();
 							}else{
-								alert("添加成功，请前往我的考试界面查看！");
+								layui.use(['layer'], function(){
+		  							var layer = layui.layer
+		  							layer.msg('添加成功，请前往我的考试界面查看！');
+									});
 								window.parent.layer.closeAll();
 							}
 
 						},
  						
 						error:function(e){
-							alert(2);
+							var layer = layui.layer
+  							layer.msg('系统异常');
+							window.parent.layer.closeAll();
+							});
 						} 
 					});
 /* 					alert("添加成功，请前往我的考试界面查看！");

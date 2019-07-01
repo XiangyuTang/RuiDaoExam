@@ -23,9 +23,9 @@ public class NewsController {
 	public String tonews(HttpServletRequest request,Model model) {
 		String role = (String) request.getSession().getAttribute("role");
 		Integer uid = (Integer) request.getSession().getAttribute("uid");
-		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWW");
-		System.out.println(role);
-		System.out.println(uid);
+//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWW");
+//		System.out.println(role);
+//		System.out.println(uid);
 		if (role.equals("teacher")) {			
 			List<News> teacherNews = newsService.getTeacherNews(uid);
 //			for (News news:teacherNews) {

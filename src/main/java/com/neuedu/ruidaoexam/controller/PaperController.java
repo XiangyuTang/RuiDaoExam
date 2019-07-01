@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,7 +64,7 @@ public class PaperController {
 	//添加试卷，此处可以尝试使用activemq
 	@RequestMapping("/addpaper")
 	@ResponseBody
-	public String addpaper(String papername, Integer papertime) {
+	public String addpaper(String papername, Integer papertime, HttpServletRequest request) {
 		Integer total_score = 0;
 //		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 		if (Mappers.isEmpty()) {
@@ -73,8 +75,11 @@ public class PaperController {
 			total_score += score;
 		}
 		Paper paper = new Paper();
+		paper.setPaperType(2);
+		paper.setPointPrice(0);
 		paper.setPaperName(papername);
-		paper.setCreatedbyteacherid(1);//此处teaceherid应当由session中取得
+		Integer uid = (Integer) request.getSession().getAttribute("uid");
+		paper.setCreatedbyteacherid(uid);//此处teaceherid应当由session中取得
 		paper.setPaperTime(papertime);
 		paper.setTotalScore(total_score);
 		Integer paperid = paperService.addPaper(paper);

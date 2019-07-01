@@ -31,6 +31,7 @@
 					$.ajax({
 			          url: "/keywordSearchPaper",
 			          type: "POST",
+			          async:false,
 			          dataType: "json",
 			          xhrFields: {
 			          	withCredentials: true
@@ -165,6 +166,7 @@
 		</script>
 		<script type="text/javascript">
 			$(function(){
+				initPapers();
 				layui.config({
 				base: '/static/layuiadmin/' //静态资源所在路径
 			}).extend({
@@ -226,7 +228,7 @@
 					}
 				});
 			});
-				initPapers();
+				
 				//Enter键提交搜索关键字事件
 		    	$(document).keypress(function(event){
 			  		if(event.keyCode=="13"){
