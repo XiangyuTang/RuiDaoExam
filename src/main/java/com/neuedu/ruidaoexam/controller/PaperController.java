@@ -66,7 +66,9 @@ public class PaperController {
 	@ResponseBody
 	public String addpaper(String papername, Integer papertime, HttpServletRequest request) {
 		Integer total_score = 0;
-//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+		Integer uid = (Integer) request.getSession().getAttribute("uid");
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+		System.out.println(uid);
 		if (Mappers.isEmpty()) {
 			return "false1";
 		}
@@ -77,8 +79,8 @@ public class PaperController {
 		Paper paper = new Paper();
 		paper.setPaperType(2);
 		paper.setPointPrice(0);
+		System.out.println(paper.getPaperType());
 		paper.setPaperName(papername);
-		Integer uid = (Integer) request.getSession().getAttribute("uid");
 		paper.setCreatedbyteacherid(uid);//此处teaceherid应当由session中取得
 		paper.setPaperTime(papertime);
 		paper.setTotalScore(total_score);

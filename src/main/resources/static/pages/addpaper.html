@@ -47,6 +47,7 @@
 				$("[class='am-btn am-btn-success']").click(function(){
 					var papername = $("[id='doc-vld-pwd-1']").val();
 					var papertime = $("[id='doc-vld-pwd-2']").val();
+					alert(1);
 					alert(papername);
 					$.ajax({
 						type:"get",
@@ -56,26 +57,17 @@
 						data:{'papername':papername,'papertime':papertime},
 						success:function(e){
 							if(e == "false1"){
-								layui.use(['layer'], function(){
-		  							var layer = layui.layer
-		  							layer.msg('未选择题目，添加失败');
-									});
+								alert('未选择题目，添加失败');
 								window.parent.layer.closeAll();
-							}else{
-								layui.use(['layer'], function(){
-		  							var layer = layui.layer
-		  							layer.msg('添加成功，请前往我的考试界面查看！');
-									});
+							}else{								
+								alert('添加成功，请前往我的考试界面查看！');
 								window.parent.layer.closeAll();
 							}
 
 						},
  						
 						error:function(e){
-							var layer = layui.layer
-  							layer.msg('系统异常');
 							window.parent.layer.closeAll();
-							});
 						} 
 					});
 /* 					alert("添加成功，请前往我的考试界面查看！");

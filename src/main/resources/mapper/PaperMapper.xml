@@ -245,7 +245,7 @@
    		<selectKey order="AFTER" keyProperty="paperId" resultType="int">
    			select LAST_INSERT_ID()
    		</selectKey>
-   		insert into paper (paper_name, createdByTeacherId, paper_time, total_score) values(#{paperName},#{createdbyteacherid},#{paperTime},#{totalScore})
+   		insert into paper (paper_name, paper_type, createdByTeacherId, paper_time, total_score, point_price) values(#{paperName},#{paperType},#{createdbyteacherid},#{paperTime},#{totalScore},#{pointPrice})
   </insert>
   <update id="cancelSellPaper">
   
