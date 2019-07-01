@@ -39,5 +39,12 @@ public class NewsServiceimpl implements NewsService {
 		int i = newsMapper.countStudentReceiveNews(receive_student_id);
 		return i;
 	}
+
+	@Override
+	public int insertNews(News news) {
+		// TODO Auto-generated method stub
+		int i = newsMapper.insert(news);
+		return i;
+	}
 	
 }

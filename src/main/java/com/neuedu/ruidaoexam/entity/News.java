@@ -31,7 +31,32 @@ public class News {
 
     private Integer reserve2;
 
-    public Integer getNewsId() {
+    public News() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public News(Integer newsId, Integer receiveTypeId, Integer receiveTeacherId, Integer receiveStudentId,
+			Integer sendTypeId, Integer sendTeacherId, Integer sendStudentId, String sendName, Integer newsType,
+			Date newsTime, String newsContent, Integer isRead, String reserve1, Integer reserve2) {
+		super();
+		this.newsId = newsId;
+		this.receiveTypeId = receiveTypeId;
+		this.receiveTeacherId = receiveTeacherId;
+		this.receiveStudentId = receiveStudentId;
+		this.sendTypeId = sendTypeId;
+		this.sendTeacherId = sendTeacherId;
+		this.sendStudentId = sendStudentId;
+		this.sendName = sendName;
+		this.newsType = newsType;
+		this.newsTime = newsTime;
+		this.newsContent = newsContent;
+		this.isRead = isRead;
+		this.reserve1 = reserve1;
+		this.reserve2 = reserve2;
+	}
+
+	public Integer getNewsId() {
         return newsId;
     }
 

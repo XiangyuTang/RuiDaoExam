@@ -9,4 +9,5 @@ public interface NewsService {
 	List<News> getStudentNews(Integer receive_student_id);
 	Integer countTeacherReceiveNews(Integer receive_teacher_id);
 	Integer countStudentReceiveNews(Integer receive_student_id);
+	int insertNews(News news);
 }

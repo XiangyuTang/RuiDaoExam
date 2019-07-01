@@ -1,16 +1,21 @@
 package com.neuedu.ruidaoexam.jms.queue;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.neuedu.ruidaoexam.dao.InviteStudentMapper;
+import com.neuedu.ruidaoexam.dao.NewsMapper;
 import com.neuedu.ruidaoexam.dao.PaperMapper;
 import com.neuedu.ruidaoexam.dao.StudentMapper;
 import com.neuedu.ruidaoexam.dao.TeacherMapper;
 import com.neuedu.ruidaoexam.entity.InviteStudent;
 import com.neuedu.ruidaoexam.entity.MsgOfInvite;
+import com.neuedu.ruidaoexam.entity.News;
 import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Student;
 import com.neuedu.ruidaoexam.entity.Teacher;
@@ -37,6 +42,9 @@ public class Consumer2 {
 	StudentMapper studentMapper;
 	
 	@Autowired
+	NewsMapper newsMapper;
+	
+	@Autowired
 	InviteStudentMapper inviteStudentMapper; 
 	
 	@Autowired
@@ -57,7 +65,7 @@ public class Consumer2 {
 		TempObject to = JSON.parseObject(text , new TypeReference<TempObject>(){});
 		MsgOfInvite msg = to.getMsg();
 		String invitecode = to.getInvitecode();
-		System.out.println("以下是消费者2处理得到的消息");
+		System.out.println("以下是消费者1处理得到的消息");
 		System.out.println(msg.getName()+"---"+msg.getEmail());
 		System.out.println(msg.getBegintime()+"---"+msg.getEndtime()+"---"+msg.getCheattimes());
 		Student s = studentMapper.getStudentByEmail(msg.getEmail());
@@ -65,6 +73,14 @@ public class Consumer2 {
 		Paper p = paperMapper.selectByPrimaryKey(msg.getPaperid());
 		InviteStudent inviteStudent = new InviteStudent(null,
 				p.getPaperId(),t.getTeacherId(),s.getStudentId(),msg.getBegintime(),msg.getEndtime(),invitecode,0,msg.getCheattimes());
+		Date time = new Date();
+		String exam_time = msg.getDatePoor(msg.getEndtime(), msg.getBegintime());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh时mm分"); 
+		String timeFormat = sdf.format(msg.getBegintime());
+		String newsContent = "教师"+t.getName()+"邀请您在"+timeFormat+"参与考试,考试时间共计"+exam_time+",您的邀请码为："+invitecode+",请及时参加！";
+		String link = "toentrance";
+		News news = new News(null,0,null,s.getStudentId(),1,t.getTeacherId(),null,t.getName(),0,time,newsContent,0,link,null);
+		newsMapper.insert(news);
 		inviteStudentMapper.insert(inviteStudent);
 		
 	}
