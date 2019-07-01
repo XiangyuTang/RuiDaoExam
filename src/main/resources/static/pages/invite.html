@@ -257,7 +257,33 @@
 				var cheattimes = $('#cheattimes').val();
 				var teacher_id = $('#teacher_id').val();//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
 				var paper_id = GetQueryString("paper_id");
-				
+				if(begintime==""||endtime=="")
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('考试时间不能为空！');
+					});
+					return;
+				}
+				if(cheattimes=="")
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('作弊次数不能为空！');
+					});
+					return;
+				}
+				if(endtime-begintime<=0)
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('非法的考试时间段！');
+					});
+					return;
+				}
 				//判断是否需要通过邮件进行批量通知
 				var informflag;
 				if($("#sendemail").prev().is(":checked")){
@@ -326,7 +352,42 @@
 							  "teacherid":teacher_id,
 							  "paperid":paper_id
 				};// 定义一个js对象
-				
+				if(begintime==""||endtime=="")
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('考试时间不能为空！');
+					});
+					return;
+				}
+				if(cheattimes=="")
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('作弊次数不能为空！');
+					});
+					return;
+				}
+				if(sname==""||semail=="")
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('考生信息不能为空！');
+					});
+					return;
+				}
+				if(endtime-begintime<=0)
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('非法的考试时间段！');
+					});
+					return;
+				}
 				if($("#sendemail").prev().is(":checked")){
 			        $.ajax({
 						url:'sendEmail',
