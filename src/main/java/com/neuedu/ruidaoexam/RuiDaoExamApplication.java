@@ -31,6 +31,7 @@ public class RuiDaoExamApplication {
 		return new ActiveMQQueue("EmailsQueue");
 	}
 	
+	
 	/*@Bean
 	public Topic topic(){
 		//定义一个主题模式队列  ,名称为EmailsTopic 
