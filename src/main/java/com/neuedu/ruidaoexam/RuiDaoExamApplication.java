@@ -30,6 +30,7 @@ public class RuiDaoExamApplication {
 		//定义一个点对点队列  ,名称为EmailsQueue
 		return new ActiveMQQueue("EmailsQueue");
 	}
+	
 	/*@Bean
 	public Topic topic(){
 		//定义一个主题模式队列  ,名称为EmailsTopic 
