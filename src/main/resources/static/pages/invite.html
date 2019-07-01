@@ -229,7 +229,12 @@
 	{{/each}}
 	</script>
 	<script type="text/javascript" th:inline="javascript">
-		//datetimepicker初始化
+		//比较两个日期的大小
+		function CompareDate(d1,d2)
+		{
+		  return ((new Date(d1.replace(/-/g,"\/"))) > (new Date(d2.replace(/-/g,"\/"))));
+		}
+		//获得URL中的参数方法
 		function GetQueryString(name) {
 			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 			var r = window.location.search.substr(1).match(reg);
@@ -237,6 +242,7 @@
 			return null;
 		}
 		$(function(){
+			//datetimepicker初始化
 			$('.form_datetime').datetimepicker({
 			    weekStart: 0, //一周从哪一天开始
 			    todayBtn:  1, //
@@ -257,12 +263,22 @@
 				var cheattimes = $('#cheattimes').val();
 				var teacher_id = $('#teacher_id').val();//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
 				var paper_id = GetQueryString("paper_id");
+				//alert(CompareDate(endtime,begintime));
 				if(begintime==""||endtime=="")
 				{
 					layui.use(['layer', 'form'], function(){
 				  		var layer = layui.layer
 				  			,form = layui.form;
 				  			layer.msg('考试时间不能为空！');
+					});
+					return;
+				}
+				if(!CompareDate(endtime,begintime))
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('非法的考试时间段！');
 					});
 					return;
 				}
@@ -275,15 +291,8 @@
 					});
 					return;
 				}
-				if(endtime-begintime<=0)
-				{
-					layui.use(['layer', 'form'], function(){
-				  		var layer = layui.layer
-				  			,form = layui.form;
-				  			layer.msg('非法的考试时间段！');
-					});
-					return;
-				}
+				
+				
 				//判断是否需要通过邮件进行批量通知
 				var informflag;
 				if($("#sendemail").prev().is(":checked")){
@@ -344,6 +353,7 @@
 				var cheattimes = $('#cheattimes').val();
 				var teacher_id = $('#teacher_id').val();//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
 				var paper_id = GetQueryString("paper_id");
+				//alert(CompareDate(endtime,begintime));
 				var pararms ={"name":sname,
 							  "email":semail,
 							  "begintime":begintime,
@@ -358,6 +368,15 @@
 				  		var layer = layui.layer
 				  			,form = layui.form;
 				  			layer.msg('考试时间不能为空！');
+					});
+					return;
+				}
+				if(!CompareDate(endtime,begintime))
+				{
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('非法的考试时间段！');
 					});
 					return;
 				}
@@ -379,15 +398,7 @@
 					});
 					return;
 				}
-				if(endtime-begintime<=0)
-				{
-					layui.use(['layer', 'form'], function(){
-				  		var layer = layui.layer
-				  			,form = layui.form;
-				  			layer.msg('非法的考试时间段！');
-					});
-					return;
-				}
+				
 				if($("#sendemail").prev().is(":checked")){
 			        $.ajax({
 						url:'sendEmail',
