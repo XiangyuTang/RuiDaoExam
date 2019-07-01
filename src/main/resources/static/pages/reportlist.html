@@ -129,13 +129,13 @@
 					    <i class="layui-icon">&#xe654;</i>
 					  </button>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
-					  	<a href="/export1" th:href="@{/export1(paper_id=${paper_id})}">
+					  	<a href="/export1" th:href="@{/export1(paper_id=${paper_id},paper_name=${paper_name})}">
 					    <i class="layui-icon">&#xe642;</i>
 					    <span>导出考试汇总表</span>
 					    </a>
 					  </button>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
-					  	<a href="/export" th:href="@{/export(paper_id=${paper_id})}">
+					  	<a href="/export" th:href="@{/export(paper_id=${paper_id},paper_name=${paper_name})}">
 					    <i class="layui-icon">&#xe621</i>
 					    <span>导出考试详情表</span>
 					    </a>

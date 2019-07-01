@@ -122,4 +122,9 @@ public class PaperServiceimpl implements PaperService{
 			List<Paper> papers = paperMapper.selectByExample(paperExample);
 			return papers;
 		}
+		@Override
+		public Paper getPaperByPaperId(Integer paper_id) {
+			Paper paper = paperMapper.selectByPrimaryKey(paper_id);
+			return paper;
+		}
 }

@@ -21,4 +21,6 @@ public interface PaperService {
 	List<Paper> getCertainTypeSelledPapers(Integer type,Integer stuid); //0626 lb 商城展示页 展示特定类别要卖出的卷子
 
 	List<Paper> keywordSearchPaper(String keyword,Integer teacherid);//关键字搜索
+	
+	Paper getPaperByPaperId(Integer paper_id);
 }

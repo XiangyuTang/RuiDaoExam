@@ -19,6 +19,7 @@ import com.neuedu.ruidaoexam.entity.ForChoiceQuestion;
 import com.neuedu.ruidaoexam.entity.ForJudgeQuestion;
 import com.neuedu.ruidaoexam.entity.ForTianKongQuestion;
 import com.neuedu.ruidaoexam.entity.ForWenDaQuestion;
+import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportandAnswered;
 import com.neuedu.ruidaoexam.entity.Student;
@@ -160,6 +161,8 @@ public class ReportController {
 	@RequestMapping("/getRepotsAndAnsweredpaper")
 	public String getRepotsAndAnsweredpaper(Integer paper_id,Model m) {
 		HashMap<String, Object> hashMap = reportServiceimpl.getReportsByPaperId(paper_id);
+		Paper paper = PaperServiceimpl.getPaperByPaperId(paper_id);
+//		System.out.println(paper.getPaperName());
 //		for (int i = 0; i <10; i++) {
 //			System.out.println(1);
 //		}
@@ -227,6 +230,7 @@ public class ReportController {
 //		}
 		m.addAttribute("hashMap", hashMap);
 		m.addAttribute("paper_id", paper_id);
+		m.addAttribute("paper_name", paper.getPaperName());
 		return "reportlist";
 	}
 }
