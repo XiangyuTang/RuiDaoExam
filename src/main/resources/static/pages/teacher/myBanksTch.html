@@ -271,6 +271,75 @@
 				var $=layui.$
 			
 			$(function() {
+				layui.config({
+				base: '/static/layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index']);
+			layui.use(['laypage', 'layer', 'form'], function() {
+				var laypage = layui.laypage,
+					layer = layui.layer,
+					form = layui.form;
+				form.render();
+				//调用分页
+				laypage.render({
+					elem: 'demo0',
+					count: banks.length,
+					limit: 6,
+					jump: function(obj) {
+						//此处是必要的，当banks内容变更（增删题库）时，需要重新给count赋值以免页数不对
+						obj.count = banks.length;
+						//模拟渲染
+						document.getElementById('item').innerHTML = function() {
+							console.log("obj:");
+							console.log(obj);
+							console.log(banks);
+							var arr = [],
+								thisData = banks.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+							layui.each(thisData, function(index, item) {
+								var str =
+									'<div id="item-list" class="layui-col-md4 layui-col-sm4">' +
+									'<div class="cmdlist-container">' +
+									'<div id="itemID-' + item.quesBankId + '" class="item-top">' +
+									'<div class="item-menu"></div>' +
+									'<input type="checkbox" id="item-check-1" class="gcs-checkbox">' +
+									'<label class="gcs-checkbox-label"></label>' + // for="item-check-1"
+									'<div class="top-line"></div>' +
+									'</div>' +
+									'<div class="item-title">' +
+									'<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选题库">' +
+									item.quesBankName +
+									'<p>' +
+									'类型：<span>' + filed[item.quesBankFiled-1] + '</span>' +
+									'</p>' +
+									'</a>' +
+									'</div>' +
+									'<div class="cmdlist-text">' +
+									'<div class="item-intro">' +
+									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
+									'<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">' +
+									'<i class="layui-icon layui-icon-add-1"></i>' +
+									'添加题目' +
+									'</button>' +
+									'</div>' +
+									'</div>' +
+									'<div class="item-menu-list">' +
+									'<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑题库</a>' +
+									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售题库</a>' +
+									'<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除题库</a>' +
+									'</div>' +
+									'</div>' +
+									'</div>';
+								arr.push(str);
+							});
+
+							return arr.join('');
+						}();
+						//初始化事件
+						initJqueryFunc();
+					}
+				});
+			});
 				initBanks();
 				//多选删除
 			$("#delete-all").click(function() {
@@ -398,75 +467,7 @@
 		</div>
 
 		<script>
-			layui.config({
-				base: '/static/layuiadmin/' //静态资源所在路径
-			}).extend({
-				index: 'lib/index' //主入口模块
-			}).use(['index']);
-			layui.use(['laypage', 'layer', 'form'], function() {
-				var laypage = layui.laypage,
-					layer = layui.layer,
-					form = layui.form;
-				form.render();
-				//调用分页
-				laypage.render({
-					elem: 'demo0',
-					count: banks.length,
-					limit: 6,
-					jump: function(obj) {
-						//此处是必要的，当banks内容变更（增删题库）时，需要重新给count赋值以免页数不对
-						obj.count = banks.length;
-						//模拟渲染
-						document.getElementById('item').innerHTML = function() {
-							console.log("obj:");
-							console.log(obj);
-							console.log(banks);
-							var arr = [],
-								thisData = banks.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
-							layui.each(thisData, function(index, item) {
-								var str =
-									'<div id="item-list" class="layui-col-md4 layui-col-sm4">' +
-									'<div class="cmdlist-container">' +
-									'<div id="itemID-' + item.quesBankId + '" class="item-top">' +
-									'<div class="item-menu"></div>' +
-									'<input type="checkbox" id="item-check-1" class="gcs-checkbox">' +
-									'<label class="gcs-checkbox-label"></label>' + // for="item-check-1"
-									'<div class="top-line"></div>' +
-									'</div>' +
-									'<div class="item-title">' +
-									'<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选题库">' +
-									item.quesBankName +
-									'<p>' +
-									'类型：<span>' + filed[item.quesBankFiled-1] + '</span>' +
-									'</p>' +
-									'</a>' +
-									'</div>' +
-									'<div class="cmdlist-text">' +
-									'<div class="item-intro">' +
-									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
-									'<button type="button" class="layui-btn layui-btn-sm layui-btn-normal">' +
-									'<i class="layui-icon layui-icon-add-1"></i>' +
-									'添加题目' +
-									'</button>' +
-									'</div>' +
-									'</div>' +
-									'<div class="item-menu-list">' +
-									'<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑题库</a>' +
-									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售题库</a>' +
-									'<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除题库</a>' +
-									'</div>' +
-									'</div>' +
-									'</div>';
-								arr.push(str);
-							});
-
-							return arr.join('');
-						}();
-						//初始化事件
-						initJqueryFunc();
-					}
-				});
-			});
+			
 		</script>
 
 	</body>

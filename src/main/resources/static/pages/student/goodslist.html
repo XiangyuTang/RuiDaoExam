@@ -15,6 +15,7 @@
 		<link rel="stylesheet" href="../../layuiadmin/style/goodslist.css" th:href="@{static/layuiadmin/style/goodslist.css}" media="all"/>
 		<link rel="stylesheet" href="../../layuiadmin/style/teacher/myLibraryTch.css" th:href="@{static/layuiadmin/style/teacher/myLibraryTch.css}" media="all">
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<!--变量定义-->
 		<script type="text/javascript">
 			var papers = new Array();
@@ -164,6 +165,67 @@
 		</script>
 		<script type="text/javascript">
 			$(function(){
+				layui.config({
+				base: '/static/layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index']);
+			layui.use(['laypage', 'layer', 'form'], function() {
+				var laypage = layui.laypage,
+					layer = layui.layer,
+					form = layui.form;
+				form.render();
+				//调用分页
+				laypage.render({
+					elem: 'demo0',
+					count: papers.length,
+					limit: 6,
+					jump: function(obj) {
+						//此处是必要的，当papers内容变更（增删题库）时，需要重新给count赋值以免页数不对
+						obj.count = papers.length;
+						//模拟渲染
+						document.getElementById('item').innerHTML = function() {
+							console.log("obj:");
+							console.log(obj);
+							console.log(papers);
+							var arr = [],
+								thisData = papers.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+							layui.each(thisData, function(index, item) {
+								var str =
+									'<div id="item-list" class="layui-col-md4 layui-col-sm4">' +
+									'<div class="cmdlist-container">' +
+									'<div id="itemID-' + item.paperId + '" class="item-top">' +
+									'<div class="top-line"></div>' +
+									'</div>' +
+									'<div class="item-title">' +
+									'<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选题库">' +
+									item.paperName +
+									'<p>' +
+									'类型：<span>' + filed[item.paperType-1] + '</span>' +
+									'</p>' +
+									'</a>' +
+									'</div>' +
+									'<div class="cmdlist-text">' +
+									'<div class="item-intro">' +
+									'<p>价格：<span>' + item.pointPrice + '</span>积分</p>' +
+									'<button id="itemButtonID-' + item.paperId + '" type="button" class="layui-btn layui-btn-sm layui-btn-normal">' +
+									'<i class="layui-icon layui-icon-add-1"></i>' +
+									'购买考卷' +
+									'</button>' +
+									'</div>' +
+									'</div>' +
+									'</div>' +
+									'</div>';
+								arr.push(str);
+							});
+
+							return arr.join('');
+						}();
+						//初始化事件
+						initJqueryFunc();
+					}
+				});
+			});
 				initPapers();
 				//Enter键提交搜索关键字事件
 		    	$(document).keypress(function(event){
@@ -439,69 +501,9 @@
 			</div>
 		</div>
 
-<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
-		<script>
-			layui.config({
-				base: '/static/layuiadmin/' //静态资源所在路径
-			}).extend({
-				index: 'lib/index' //主入口模块
-			}).use(['index']);
-			layui.use(['laypage', 'layer', 'form'], function() {
-				var laypage = layui.laypage,
-					layer = layui.layer,
-					form = layui.form;
-				form.render();
-				//调用分页
-				laypage.render({
-					elem: 'demo0',
-					count: papers.length,
-					limit: 6,
-					jump: function(obj) {
-						//此处是必要的，当papers内容变更（增删题库）时，需要重新给count赋值以免页数不对
-						obj.count = papers.length;
-						//模拟渲染
-						document.getElementById('item').innerHTML = function() {
-							console.log("obj:");
-							console.log(obj);
-							console.log(papers);
-							var arr = [],
-								thisData = papers.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
-							layui.each(thisData, function(index, item) {
-								var str =
-									'<div id="item-list" class="layui-col-md4 layui-col-sm4">' +
-									'<div class="cmdlist-container">' +
-									'<div id="itemID-' + item.paperId + '" class="item-top">' +
-									'<div class="top-line"></div>' +
-									'</div>' +
-									'<div class="item-title">' +
-									'<a href="javascript:;" class="item-name" title="《五年编程三年脱发》精选题库">' +
-									item.paperName +
-									'<p>' +
-									'类型：<span>' + filed[item.paperType-1] + '</span>' +
-									'</p>' +
-									'</a>' +
-									'</div>' +
-									'<div class="cmdlist-text">' +
-									'<div class="item-intro">' +
-									'<p>价格：<span>' + item.pointPrice + '</span>积分</p>' +
-									'<button id="itemButtonID-' + item.paperId + '" type="button" class="layui-btn layui-btn-sm layui-btn-normal">' +
-									'<i class="layui-icon layui-icon-add-1"></i>' +
-									'购买考卷' +
-									'</button>' +
-									'</div>' +
-									'</div>' +
-									'</div>' +
-									'</div>';
-								arr.push(str);
-							});
 
-							return arr.join('');
-						}();
-						//初始化事件
-						initJqueryFunc();
-					}
-				});
-			});
+		<script>
+			
 		</script>
 	</body>
 

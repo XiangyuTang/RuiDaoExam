@@ -15,6 +15,7 @@
   		<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<script type="text/javascript" src="../js/template.js" th:src="@{static/js/template.js}"></script>
 		<script src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
+		<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<!--变量定义-->
 		<script type="text/javascript">
 			var papers = new Array();
@@ -267,8 +268,79 @@
 		<!--初始化数据及绑定交互事件-->
 		<script type="text/javascript">
 			$(function() {
-				console.log(filed[3]);
-				console.log(filed);
+				layui.config({
+				base: '/static/layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index']);
+			layui.use(['laypage', 'layer', 'form'], function() {
+				var laypage = layui.laypage,
+					layer = layui.layer,
+					form = layui.form;
+				form.render();
+				//调用分页
+				laypage.render({
+					elem: 'demo0',
+					count: papers.length,
+					limit: 6,
+					jump: function(obj) {
+						//此处是必要的，当papers内容变更（增删卷子）时，需要重新给count赋值以免页数不对
+						obj.count = papers.length;
+						//模拟渲染
+						document.getElementById('item').innerHTML = function() {
+							console.log("obj:");
+							console.log(obj);
+							console.log(papers);
+							var toinvite = 'toinvite';
+							var arr = [],
+								thisData = papers.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+							layui.each(thisData, function(index, item) {
+								var str =
+									'<div id="item-list" class="layui-col-md4 layui-col-sm4">' +
+									'<div class="cmdlist-container">' +
+									'<div id="itemID-' + item.paperId + '" class="item-top">' +
+									'<div class="item-menu"></div>' +
+									'<input type="checkbox" id="item-check-1" class="gcs-checkbox">' +
+									'<label class="gcs-checkbox-label"></label>' + // for="item-check-1"
+									'<div class="top-line"></div>' +
+									'</div>' +
+									'<div class="item-title">' +
+									'<a href="/getRepotsAndAnsweredpaper?paper_id='+item.paperId+'" class="item-name" title="《五年编程三年脱发》精选卷子">' +
+									item.paperName +
+									'<p>' +
+									'类型：<span>' + filed[item.paperType-1] + '</span>' +
+									'</p>' +
+									'</a>' +
+									'</div>' +
+									'<div class="cmdlist-text">' +
+									'<div class="item-intro">' +
+									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
+									'<button type="button" class="releasepaper layui-btn layui-btn-sm layui-btn-normal" >' +/*onclick=javascrtpt:jump()*/
+									'<input type="hidden" id="click_paperId" value='+item.paperId+'>'+
+									'<i class="layui-icon layui-icon-add-1"></i>' +
+									'发布考试' +
+									'</button>' +
+									'</div>' +
+									'</div>' +
+									'<div class="item-menu-list">' +
+									'<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑卷子</a>' +
+									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售卷子</a>' +
+									'<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除卷子</a>' +
+									'</div>' +
+									'</div>' +
+									'</div>';
+								arr.push(str);
+							});
+
+							return arr.join('');
+						}();
+						
+						//初始化事件
+						initJqueryFunc();
+						
+					}
+				});
+			});
 				initBooks();
 				//多选删除
 			$("#delete-all").click(function() {
@@ -394,81 +466,9 @@
 				<div id="demo0"></div>
 			</div>
 		</div>
-		<script src="../../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
+		
 		<script>
-			layui.config({
-				base: '/static/layuiadmin/' //静态资源所在路径
-			}).extend({
-				index: 'lib/index' //主入口模块
-			}).use(['index']);
-			layui.use(['laypage', 'layer', 'form'], function() {
-				var laypage = layui.laypage,
-					layer = layui.layer,
-					form = layui.form;
-				form.render();
-				//调用分页
-				laypage.render({
-					elem: 'demo0',
-					count: papers.length,
-					limit: 6,
-					jump: function(obj) {
-						//此处是必要的，当papers内容变更（增删卷子）时，需要重新给count赋值以免页数不对
-						obj.count = papers.length;
-						//模拟渲染
-						document.getElementById('item').innerHTML = function() {
-							console.log("obj:");
-							console.log(obj);
-							console.log(papers);
-							var toinvite = 'toinvite';
-							var arr = [],
-								thisData = papers.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
-							layui.each(thisData, function(index, item) {
-								var str =
-									'<div id="item-list" class="layui-col-md4 layui-col-sm4">' +
-									'<div class="cmdlist-container">' +
-									'<div id="itemID-' + item.paperId + '" class="item-top">' +
-									'<div class="item-menu"></div>' +
-									'<input type="checkbox" id="item-check-1" class="gcs-checkbox">' +
-									'<label class="gcs-checkbox-label"></label>' + // for="item-check-1"
-									'<div class="top-line"></div>' +
-									'</div>' +
-									'<div class="item-title">' +
-									'<a href="/getRepotsAndAnsweredpaper?paper_id='+item.paperId+'" class="item-name" title="《五年编程三年脱发》精选卷子">' +
-									item.paperName +
-									'<p>' +
-									'类型：<span>' + filed[item.paperType-1] + '</span>' +
-									'</p>' +
-									'</a>' +
-									'</div>' +
-									'<div class="cmdlist-text">' +
-									'<div class="item-intro">' +
-									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
-									'<button type="button" class="releasepaper layui-btn layui-btn-sm layui-btn-normal" >' +/*onclick=javascrtpt:jump()*/
-									'<input type="hidden" id="click_paperId" value='+item.paperId+'>'+
-									'<i class="layui-icon layui-icon-add-1"></i>' +
-									'发布考试' +
-									'</button>' +
-									'</div>' +
-									'</div>' +
-									'<div class="item-menu-list">' +
-									'<a href="javascript:;" id="item-edit" class="item-menu-list-item">编辑卷子</a>' +
-									'<a href="javascript:;" id="item-sale" class="item-menu-list-item">出售卷子</a>' +
-									'<a href="javascript:;" id="item-delete" class="item-menu-list-item">删除卷子</a>' +
-									'</div>' +
-									'</div>' +
-									'</div>';
-								arr.push(str);
-							});
-
-							return arr.join('');
-						}();
-						
-						//初始化事件
-						initJqueryFunc();
-						
-					}
-				});
-			});
+			
 		</script>
 
 
