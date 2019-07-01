@@ -230,6 +230,12 @@
 	</script>
 	<script type="text/javascript" th:inline="javascript">
 		//datetimepicker初始化
+		function GetQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) return decodeURI(r[2]);
+			return null;
+		}
 		$(function(){
 			$('.form_datetime').datetimepicker({
 			    weekStart: 0, //一周从哪一天开始
@@ -250,7 +256,8 @@
 				var endtime = $('#endtime').val();
 				var cheattimes = $('#cheattimes').val();
 				var teacher_id = $('#teacher_id').val();//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
-				var paper_id = $("[type='hidden'][class='paper_id']").val();//先写死
+				var paper_id = GetQueryString("paper_id");
+				
 				//判断是否需要通过邮件进行批量通知
 				var informflag;
 				if($("#sendemail").prev().is(":checked")){
@@ -310,7 +317,7 @@
 				var endtime = $('#endtime').val();
 				var cheattimes = $('#cheattimes').val();
 				var teacher_id = $('#teacher_id').val();//注意script标签加th:,var teacher_id=[[${session.teacherid}]]; 后台sesson的key=teacherid
-				var paper_id = $('#paper_id').val();//先写死
+				var paper_id = GetQueryString("paper_id");
 				var pararms ={"name":sname,
 							  "email":semail,
 							  "begintime":begintime,
@@ -321,8 +328,6 @@
 				};// 定义一个js对象
 				
 				if($("#sendemail").prev().is(":checked")){
-					
-					
 			        $.ajax({
 						url:'sendEmail',
 						type:'post',

@@ -14,6 +14,7 @@
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   		<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<script type="text/javascript" src="../js/template.js" th:src="@{static/js/template.js}"></script>
+		<script src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
 		<!--变量定义-->
 		<script type="text/javascript">
 			var papers = new Array();
@@ -50,6 +51,14 @@
 			}
 			//初始化元素的事件
 			function initJqueryFunc() {
+				
+				$("button[class='releasepaper layui-btn layui-btn-sm layui-btn-normal']").on("click",function(e){
+					//alert(233);
+					var pid = $(this).find("input").val();
+					//alert(pid);
+					window.location.href="toinvite?paper_id="+pid;
+				})
+				
 				//item（单个卷子）右侧子菜单伸缩事件
 				$(".item-menu").on('click', function(e) {
 					//清空复选框选中
@@ -434,8 +443,8 @@
 									'<div class="cmdlist-text">' +
 									'<div class="item-intro">' +
 									'<p>原作者ID：<span>' + item.createdbyteacherid + '</span></p>' +
-									'<button type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick=javascrtpt:jump()>' +
-									'<input type="hidden" id="click_paperId" th:value="${item.paperId}">'+
+									'<button type="button" class="releasepaper layui-btn layui-btn-sm layui-btn-normal" >' +/*onclick=javascrtpt:jump()*/
+									'<input type="hidden" id="click_paperId" value='+item.paperId+'>'+
 									'<i class="layui-icon layui-icon-add-1"></i>' +
 									'发布考试' +
 									'</button>' +
@@ -453,53 +462,17 @@
 
 							return arr.join('');
 						}();
+						
 						//初始化事件
 						initJqueryFunc();
+						
 					}
 				});
 			});
 		</script>
-<script>
-	
-	$(function(){
-		$("button").click(function(){
-			alert(233);
-			jump();
-		})
-		/*$("button").live('click',function(){
-			alert(233);
-			jump();
-		})*/
-	})
-	
-	function jump(){
-		window.location.href="toinvite";
-	}	
 
-</script>
 
 	</body>
 
 </html>
 
-/*var datas={"base64url":base64url}
-        $.ajax({
-			url:'doPhoto',
-			type:'post',
-			dataType:'json',
-			async:false,
-			data:datas,
-			success:function(e){
-				
-				alert(e);
-				//window.location.href = 'toExamOver';
-			},
-			error:function(e){
-				console.log(e);
-				layui.use(['layer', 'form'], function(){
-			  		var layer = layui.layer
-			  			,form = layui.form;
-			  			layer.msg('出错了！');
-				});
-			}
-		});*/
