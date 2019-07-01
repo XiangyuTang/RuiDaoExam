@@ -18,8 +18,10 @@ public class excelExportController {
 	ExcelExportServiceimpl  excelExportServiceimpl;
 	
 	@RequestMapping("/export")
-	public String exportExcel() {//把试卷的名字和ID传进来,导出考试详情
-		int paper_id = 1;
+	public String exportExcel(Integer paper_id) {//把试卷的名字和ID传进来,导出考试详情
+//		int paper_id = 1;
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+		System.out.println(paper_id);
 		ArrayList<String> sheetNames = excelExportServiceimpl.sheetNames();
 		ArrayList<HeadName> headNames = excelExportServiceimpl.headNames();
 		ArrayList<dataName> dataNames = excelExportServiceimpl.dataNames(paper_id);
@@ -33,8 +35,10 @@ public class excelExportController {
 	}
 	
 	@RequestMapping("/export1")
-	public String exportExcel1() {//导出考试总结
-		int paper_id = 1;
+	public String exportExcel1(Integer paper_id) {//导出考试总结
+//		int paper_id = 1;
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+		System.out.println(paper_id);
 		WriteExcelTool wet = new WriteExcelTool();
 		ArrayList<String> sheetNames1 = excelExportServiceimpl.allSheetNames();
 		ArrayList<HeadName> headName1 = excelExportServiceimpl.allHeadNames();

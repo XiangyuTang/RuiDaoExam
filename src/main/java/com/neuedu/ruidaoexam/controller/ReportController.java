@@ -226,6 +226,7 @@ public class ReportController {
 //			System.out.println(answeredPaper.getAnsPaperId());
 //		}
 		m.addAttribute("hashMap", hashMap);
+		m.addAttribute("paper_id", paper_id);
 		return "reportlist";
 	}
 }
