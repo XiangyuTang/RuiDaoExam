@@ -18,18 +18,27 @@ public class excelExportController {
 	ExcelExportServiceimpl  excelExportServiceimpl;
 	
 	@RequestMapping("/export")
-	public String exportExcel() {//把试卷的名字和ID传进来
+	public String exportExcel() {//把试卷的名字和ID传进来,导出考试详情
 		int paper_id = 1;
 		ArrayList<String> sheetNames = excelExportServiceimpl.sheetNames();
 		ArrayList<HeadName> headNames = excelExportServiceimpl.headNames();
 		ArrayList<dataName> dataNames = excelExportServiceimpl.dataNames(paper_id);
 		
-		ArrayList<String> sheetNames1 = excelExportServiceimpl.allSheetNames();
-		ArrayList<HeadName> headName1 = excelExportServiceimpl.allHeadNames();
-		ArrayList<dataName> dataNames1 = excelExportServiceimpl.allDataNames(paper_id);
+		
 		System.out.println("testststststststststststst"+dataNames.get(0).getDatas().size());
 		WriteExcelTool wet = new WriteExcelTool();
 		wet.createXslsWithSheet(sheetNames, headNames, dataNames, "diyiciceshi");
+		
+		return "addQuestion";
+	}
+	
+	@RequestMapping("/export1")
+	public String exportExcel1() {//导出考试总结
+		int paper_id = 1;
+		WriteExcelTool wet = new WriteExcelTool();
+		ArrayList<String> sheetNames1 = excelExportServiceimpl.allSheetNames();
+		ArrayList<HeadName> headName1 = excelExportServiceimpl.allHeadNames();
+		ArrayList<dataName> dataNames1 = excelExportServiceimpl.allDataNames(paper_id);
 		wet.createXslsWithSheet(sheetNames1, headName1, dataNames1, "dierciceshi");
 		return "addQuestion";
 	}

@@ -31,6 +31,7 @@
 				$.ajax({
 					url: "/getPapersTch",
 					type: "POST",
+					async:false,
 					dataType: "json",
 					xhrFields: {
 						withCredentials: true
@@ -268,6 +269,7 @@
 		<!--初始化数据及绑定交互事件-->
 		<script type="text/javascript">
 			$(function() {
+				initBooks();
 				layui.config({
 				base: '/static/layuiadmin/' //静态资源所在路径
 			}).extend({
@@ -341,7 +343,7 @@
 					}
 				});
 			});
-				initBooks();
+				
 				//多选删除
 			$("#delete-all").click(function() {
 				console.log("delete");
