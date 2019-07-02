@@ -79,51 +79,8 @@
 		<div class="main">
 		<div class="main-left">
 		<div id="report-list-panel">
-		    <div>
-		    	
-			    <!--<div class="btn-group report-actions m10">
-			        <button data-action="tag" data-toggle="dropdown" type="button" class="btn btn-default" title="打标记" data-link="disabled{:actionDisabled || updatingTags}" disabled="disabled">
-			            <i class="fa fa-tags"></i>
-			        </button>
-			        <ul class="dropdown-menu tags-selecter" role="menu" data-jsv-df=""><form data-jsv="#30_" class="report-tag-wrapper">
-				还没有任何标记
-				<hr>
-					<span class="pr" data-link="class{merge:tagErr toggle=&#39;has-error&#39;}">
-						<input type="text" placeholder="添加一个标记" class="form-control input-sm inline-block input-add-tag" data-link="{:newTag trigger=true:trim} disabled{:savingTag}">
-					</span>
-					<span class="text-knewone" data-link="visible{:savingTag}" style="display: none;"><i class="fa fa-spinner fa-spin"></i> 保存中...</span>
-					<span class="text-error f12"></span>
-				<a class="btn btn-success btn-sm pull-right btn-confirm">确定</a>
-				<a class="btn btn-link btn-sm pull-right mr5 btn-cancel">取消</a>
-				</form></ul>
-			        <button data-action="delete" type="button" class="btn btn-default" title="删除" data-link="disabled{:actionDisabled}" style="margin-left: -1px" disabled="disabled">
-			            <i class="fa fa-trash"></i>
-			        </button>
-			        <button data-action="archive" type="button" class="btn btn-default btn-group-last" title="归档" data-link="disabled{:actionDisabled} class{merge:!isActivity toggle=&#39;btn-group-last&#39;}" disabled="disabled">
-			            <i class="fa fa-archive"></i>
-			        </button>
-			   </div>
-			   
-			    <a class="btn btn-link text-knewone btn-table-condensed" data-link="visible{:reports^length}" style="display: inline-block;">
-			    	<i data-link="class{:condensed?&#39;fa fa-list&#39;:&#39;fa fa-th-list&#39;}" class="fa fa-th-list"></i>
-			    </a>-->
-			    
+		    <div>			    
 			    <div class="btn-group export-report">
-			        <!--<button data-export="pdf-chosen" type="button" class="btn btn-default btn-export" title="下载选中PDF报告" data-link="disabled{:actionDisabled||pdfDownload||!showInfo}" disabled="disabled">
-			            <i class="fa fa-download"></i>
-			        </button>
-			        <button data-export="excel" type="button" title="" class="btn btn-default btn-export btn-export-excel-all" data-link="disabled{:excelDownload || !totalCount}" data-original-title="下载EXCEL汇总成绩">
-			            <i class="fa fa-file-excel-o"></i>
-			        </button>
-			        <button data-export="excel-stat" type="button" title="" class="btn btn-default btn-export btn-export-stat" data-link="disabled{:statDownload || !totalCount}" data-original-title="下载Excel答题详情">
-			            <i class="moon moon-report-stat"></i>
-			        </button>
-			        <button data-export="feedback" type="button" title="考试反馈" class="btn btn-default btn-export">
-			            <i class="fa fa-commenting" data-original-title="" title=""></i>
-			        </button>-->
-			        <!--<button data-export="share-experience" type="button" title="分享经验" class="btn btn-default btn-export" style="vertical-align:middle">
-			            <i class="fa fa-share-alt"></i>
-			        </button>-->
 			        <div class="layui-btn-group">
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
 					    <i class="layui-icon">&#xe654;</i>
@@ -144,23 +101,7 @@
 					    <i class="layui-icon">&#xe602;</i>
 					  </button>
 					</div>
-			    </div>
-		    
-		    
-		       <!-- <div class="btn-group pull-right report-pagination">
-		            <button type="button" data-action="prev" class="btn btn-default" data-link="disabled{:currentPage==1 || loadingTotalCount || loadingList}" disabled="disabled">
-		                <i class="fa fa-chevron-left"></i>
-		            </button>
-		            <button type="button" data-action="next" class="btn btn-default" data-link="disabled{:~isLastPage(currentPage, totalCount) || loadingTotalCount || loadingList}" disabled="disabled">
-		                <i class="fa fa-chevron-right"></i>
-		            </button>
-		        </div>
-			<span class="result-hint pull-right">
-					<label class="label label-default label-average-score">
-						平均分：<span>30.0</span>
-					</label>
-					第 <span class="fb">1</span> 个，共 <span class="fb">1</span> 个
-			</span>-->			
+			    </div>			
 		    </div>
 		    
 		    
@@ -187,16 +128,11 @@
  		        <div th:remove="(${hashMap.answeredpapers} == null)? all:none">
 		        	<div th:each="answeredpaper:${hashMap.answeredpapers}" >
 		        	<div th:each="report:${hashMap.reports}"  th:remove="(${answeredpaperStat.count} == ${reportStat.count})? none:all">
-<!-- 		        	<input th:value="answered"> -->
 		        		<div th:each="student:${hashMap.students}"  th:remove="(${answeredpaperStat.count} == ${studentStat.count})? none:all">      
 				        <tbody data-jsv-df="" class="item">
 				        	<tr data-jsv="#41^#28_#78_" class="report-item">
 				        	<td style="width:30px;vertical-align:middle;">
-				            <!--<label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
-							<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
-							<i class="fa fa-check-square fa-stack-1x check"></i></span>-->
 				                <input type="checkbox" data-link="_selected">
-<!--				            </label>-->
 					        </td>
 					        
 					        <td style="width: 30px;">

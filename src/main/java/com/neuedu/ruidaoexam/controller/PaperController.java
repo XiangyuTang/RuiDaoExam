@@ -32,7 +32,6 @@ public class PaperController {
 	@RequestMapping("/addquestomapper")
 	@ResponseBody
 	public String addquestomapper(Integer questype, Integer quesid, String score) {
-//		System.out.println("wwwwwwwwwwwwwwwwwwwwwwwww");
 		for (Ques_Paper_Mapper mapper:Mappers) {
 			System.out.println(mapper.getQuesType());
 			if (mapper.getQuesType() == questype && (mapper.getCqId()==quesid || mapper.getEqId()==quesid || mapper.getJqId()==quesid)) {
@@ -64,11 +63,9 @@ public class PaperController {
 	//添加试卷，此处可以尝试使用activemq
 	@RequestMapping("/addpaper")
 	@ResponseBody
-	public String addpaper(String papername, Integer papertime, HttpServletRequest request) {
+	public String addpaper(String papername, Integer papertime,Integer papertype, HttpServletRequest request) {
 		Integer total_score = 0;
 		Integer uid = (Integer) request.getSession().getAttribute("uid");
-		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-		System.out.println(uid);
 		if (Mappers.isEmpty()) {
 			return "false1";
 		}
@@ -77,7 +74,7 @@ public class PaperController {
 			total_score += score;
 		}
 		Paper paper = new Paper();
-		paper.setPaperType(2);
+		paper.setPaperType(papertype);
 		paper.setPointPrice(0);
 		System.out.println(paper.getPaperType());
 		paper.setPaperName(papername);
@@ -90,7 +87,6 @@ public class PaperController {
 			paperMapperService.addMapper(mapper);
 		}
 		Mappers.clear();
-//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 		return "true";
 	}
 	
@@ -98,10 +94,6 @@ public class PaperController {
 	public String getPapers(Model model) {
 		HashMap<String, Object> papers = paperService.getPaperByTeacherId(1);
 		model.addAttribute("papers", papers);
-//		model.addAttribute("xiao", "hahaha");
-//		for (Paper paper:papers.g) {
-//			
-//		}
 		return "papers";
 	}
 }

@@ -3,9 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-	    <link rel="stylesheet" href="static/css/amazeui.min.css" th:href="@{/static/css/amazeui.min.css}" media="all">
-		<link rel="stylesheet" href="static/css/admin.css" th:href="@{/static/css/admin.css}" media="all">
-		<link rel="stylesheet" href="static/css/app.css" th:href="@{/static/css/app.css}" media="all">
+	    <link rel="stylesheet" href="../css/amazeui.min.css" th:href="@{/static/css/amazeui.min.css}" media="all">
+		<link rel="stylesheet" href="../css/admin.css" th:href="@{/static/css/admin.css}" media="all">
+		<link rel="stylesheet" href="../css/app.css" th:href="@{/static/css/app.css}" media="all">
+		<link rel="stylesheet" type="text/css" href="../layuiadmin/layui/css/layui.css" th:href="@{/static/layuiadmin/layui/css/layui.css}" media="all">
 		<link rel="stylesheet" type="text/css" href="../layuiadmin/layui/css/layui.css" th:href="@{/static/layuiadmin/layui/css/layui.css}" media="all">
 		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
 		<script src="../layuiadmin/layui/layui.js" th:src="@{/static/layuiadmin/layui/layui.js}" charset="utf-8" type="text/javascript"></script>
@@ -47,14 +48,16 @@
 				$("[class='am-btn am-btn-success']").click(function(){
 					var papername = $("[id='doc-vld-pwd-1']").val();
 					var papertime = $("[id='doc-vld-pwd-2']").val();
-					alert(1);
-					alert(papername);
+					var papertype = $("[id='papertype']").val();
+					alert(papertype)
+//					alert(1);
+//					alert(papername);
 					$.ajax({
 						type:"get",
 						url:"addpaper",
 						async:false,
 						dataType:"text",
-						data:{'papername':papername,'papertime':papertime},
+						data:{'papername':papername,'papertime':papertime,"papertype":papertype},
 						success:function(e){
 							if(e == "false1"){
 								alert('未选择题目，添加失败');
@@ -82,7 +85,7 @@
 		<div class="admin-content">
 			<div class="admin-content-body">
 				<div class="am-g">
-					<form class="am-form am-form-horizontal" method="post" style="padding-top:30px;" data-am-validator >
+					<form class="am-form am-form-horizontal" method="post" style="padding-top:20px;" data-am-validator >
 						<div class="am-form-group" align="left" >
 							<label for="user-name" class="am-u-sm-3 am-form-label">
 							试卷名: </label>
@@ -91,7 +94,7 @@
 									style="width: 300px;" name="papername"> <small></small>
 							</div>
 						</div>
-						<div class="am-form-group" align="left" style="margin-top: 10%">
+						<div class="am-form-group" align="left" style="margin-top: 8%">
 							<label for="user-name" class="am-u-sm-3 am-form-label">
 								考试时长:</label>
 							<div class="am-u-sm-9">
@@ -99,7 +102,23 @@
 									 style="width: 300px;" name="papertime" > <small></small>
 							</div>
 						</div>
-						<div class="am-form-group" style="margin-left: 20%; margin-top: 10%">
+						<div class="am-form-group" align="left" style="margin-top: 8%">
+							<label for="user-name" class="am-u-sm-3 am-form-label">
+								试卷类型:</label>
+							<div class="am-u-sm-9">
+								<select name="city" lay-verify=""  style="width: 300px;" id="papertype">
+								  <option value="1">请选择试卷类型</option>
+								  <option value="1">IT技术</option>
+								  <option value="2">IQ&EQ</option>
+								  <option value="3">招聘真题</option>
+								  <option value="4">资格证书</option>
+								  <option value="5">学历教育</option>
+								  <option value="6">培训学习</option>
+								  <option value="7">综合测试</option>
+								</select>
+							</div>
+						</div>
+						<div class="am-form-group" style="margin-left: 20%; margin-top: 8%">
 							<div class="am-u-sm-9 am-u-sm-push-3">
 								<input type="submit" class="am-btn am-btn-success" value="确认添加" />
 							</div>
