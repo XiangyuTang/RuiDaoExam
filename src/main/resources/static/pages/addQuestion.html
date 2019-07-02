@@ -653,7 +653,7 @@ window.DBL_CLICK = true;
                 	时间：2019-06-17
                 	描述：需要动态的改变题目
                 -->
-                <script type="jsv#98^"></script><script type="jsv#24_"></script>添加<script type="jsv/24_"></script><script type="jsv/98^"></script>题目<span class="text-mint ml5"><script type="jsv#99^"></script>IT测试题<script type="jsv/99^"></script></span>
+                <script type="jsv#98^"></script><script type="jsv#24_"></script>添加<script type="jsv/24_"></script><script type="jsv/98^"></script>题目<span class="text-mint ml5"><script type="jsv#99^"></script><span th:text='${bank_name}'></span><script type="jsv/99^"></script></span>
                 <script type="jsv/23_"></script><script type="jsv/100^"></script>
             </h4>
         </div>
@@ -684,7 +684,7 @@ window.DBL_CLICK = true;
         
         <div class="form-group">
           <label >能力</label>
-                    <select id="testSelect1" name="abilityName" style="width:100px;font-size:80px;height: 50px;" >
+                    <select id="testSelect1" name="abilityName" style="width:200px;font-size:80px" >
                     		<option title="请选择能力" value="0">请选择能力</option>
                     		<option  value="1" title="表达能力">
                             表达能力
@@ -968,17 +968,61 @@ window.DBL_CLICK = true;
 </form>
 
 
-<a href="test.html" class="layui-btn layui-btn-danger" style="margin-left: 1000px; margin-top: 50px;" >退出</a>
-<a href="test.html" class="layui-btn layui-btn-danger" style="margin-left: 800px; margin-top: -60px;" >添加题目</a>
-                
-                
+<a href="/tomyBanksTch" class="layui-btn layui-btn-danger" style="margin-left: 1000px; margin-top: 50px;">退出</a>
+
+<form method="post" action="" enctype="multipart/form-data" id="fileform">
+	<input id="ofbankId" value="1"  style="display: none" />
+	<input id="the_file" type="file" name="file"><br>
+	<!--<span id="ajaxsubmit" class="uploadText">-->
+	<input type="button" id="ajaxsubmit" value="提交">
+	<!-- </span>-->
+</form>
+                 
             </ul>
         </div>
     </div>
     <div class="sub-question-wrapper">
         <script type="jsv#120^"></script><script type="jsv/120^"></script>
     </div>
-    
+   
+ <script type="text/javascript">
+ 	$(function(){
+ 		alert('kkkk');
+ 		$('#ajaxsubmit').click(function(){
+ 			var filedata = new FormData();
+ 			var BankId = $('#ofbankId').val();
+ 			var file = $("#the_file")[0].files[0];
+ 			alert($("#the_file")[0].files[0]);
+ 			alert($('#ofbankId').val());
+ 			if(file!="")
+			{
+				filedata.append("file",file);
+			}
+			filedata.append("BankId",BankId);
+			alert('daole');
+			$.ajax({
+				url:'/importexcel',
+				type:'post',
+				processData:false,
+				contentType:false,
+				data:filedata,
+				success:function(e){
+					alert('批量导入成功');
+				},
+				error:function(e) {
+					alert('批量导入失败');
+				}
+			})
+ 		})
+ 	})
+ 
+ 
+ </script>
+   
+   
+   
+   
+ 
 <script type="jsv/22_"></script>
     <script type="jsv/21_"></script><script type="jsv/121^"></script>
 <script type="jsv/20_"></script></div>

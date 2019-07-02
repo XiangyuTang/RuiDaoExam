@@ -29,9 +29,9 @@ public class excelExportController {
 		
 		System.out.println("testststststststststststst"+dataNames.get(0).getDatas().size());
 		WriteExcelTool wet = new WriteExcelTool();
-		wet.createXslsWithSheet(sheetNames, headNames, dataNames, paper_name);
-		
-		return "addQuestion";
+		wet.createXslsWithSheet(sheetNames, headNames, dataNames, paper_name+"考试详情");
+		System.out.println("datadtatdtatdtatdtatdtatdtatdt"+dataNames.get(0).getDatas().size());
+		return "reportlist";
 	}
 	
 	@RequestMapping("/export1")
@@ -39,11 +39,12 @@ public class excelExportController {
 //		int paper_id = 1;
 		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 		System.out.println(paper_name);
-		WriteExcelTool wet = new WriteExcelTool();
+		
 		ArrayList<String> sheetNames1 = excelExportServiceimpl.allSheetNames();
 		ArrayList<HeadName> headName1 = excelExportServiceimpl.allHeadNames();
 		ArrayList<dataName> dataNames1 = excelExportServiceimpl.allDataNames(paper_id);
-		wet.createXslsWithSheet(sheetNames1, headName1, dataNames1, paper_name);
-		return "addQuestion";
+		WriteExcelTool wet = new WriteExcelTool();
+		wet.createXslsWithSheet(sheetNames1, headName1, dataNames1, paper_name+"考试总结");
+		return "reportlist";
 	}
 }

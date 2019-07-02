@@ -25,13 +25,18 @@ import com.alibaba.fastjson.JSON;
 import com.neuedu.ruidaoexam.entity.MsgOfInvite;
 import com.neuedu.ruidaoexam.excel.ExcelUtil;
 import com.neuedu.ruidaoexam.excel.PersonDTO;
+import com.neuedu.ruidaoexam.excel.QuestionDTO;
 import com.neuedu.ruidaoexam.service.InviteService;
+import com.neuedu.ruidaoexam.service.impl.addQuestionServiceimpl;
 
 @Controller
 public class ExcelController {
 
 	@Autowired
 	InviteService inviteService;
+	
+	@Autowired
+	addQuestionServiceimpl aqsi;
 	
 	@RequestMapping("/toexceltest")
 	public String test1(){
@@ -40,13 +45,105 @@ public class ExcelController {
 	
 	@RequestMapping("/importexcel")
     @ResponseBody
-    public Object test2(Model m,@RequestParam("file") MultipartFile file,HttpServletRequest request) {
-		List<Object> list = ExcelUtil.readExcel(file, new PersonDTO(),1);
+    public String test2(@RequestParam(value = "file", required = false) MultipartFile file,int BankId) {
+		String result = "ttttttttttttttttttttttttttttt失败";
+		System.out.println(result);
+		List<Object> list = ExcelUtil.readExcel(file, new QuestionDTO(),1);
+		System.out.println("lallaallaalalalall");
 		for (Object o : list) {
 			System.out.println(o.toString());
+			QuestionDTO q = (QuestionDTO) o;
+			ArrayList<String> questionsArray = new ArrayList<String>();
+			if(Integer.parseInt(q.getQuestion_type())==1) {
+				//加入单选择题
+				String atNum = q.getAbility_type_id();
+				String qtNum = q.getQuestion_type();
+				String tigan = q.getContent();
+				String xuanxiangA = q.getChoice1();
+				String xuanxiangB = q.getChoice2();
+				String xuanxiangC = q.getChoice3();
+				String xuanxiangD = q.getChoice4();
+				String jiexi = q.getAnalysis();
+				String daan = q.getAnswer();
+				String nandu = q.getDifficulty();
+				questionsArray.add(qtNum);
+				questionsArray.add(tigan);
+				questionsArray.add(xuanxiangA);
+				questionsArray.add(xuanxiangB);
+				questionsArray.add(xuanxiangC);
+				questionsArray.add(xuanxiangD);
+				questionsArray.add(daan);
+				questionsArray.add(nandu);
+				questionsArray.add(jiexi);
+				questionsArray.add(atNum);
+				aqsi.addChoiceQuestion(questionsArray,BankId);
+			}else if(Integer.parseInt(q.getQuestion_type())==2) {
+				//加入多项
+				String atNum = q.getAbility_type_id();
+				String qtNum = q.getQuestion_type();
+				String tigan = q.getContent();
+				String xuanxiangA = q.getChoice1();
+				String xuanxiangB = q.getChoice2();
+				String xuanxiangC = q.getChoice3();
+				String xuanxiangD = q.getChoice4();
+				String jiexi = q.getAnalysis();
+				String daan = q.getAnswer();
+				String nandu = q.getDifficulty();
+				questionsArray.add(qtNum);
+				questionsArray.add(tigan);
+				questionsArray.add(xuanxiangA);
+				questionsArray.add(xuanxiangB);
+				questionsArray.add(xuanxiangC);
+				questionsArray.add(xuanxiangD);
+				questionsArray.add(daan);
+				questionsArray.add(nandu);
+				questionsArray.add(jiexi);
+				questionsArray.add(atNum);
+				aqsi.addChoiceQuestion(questionsArray,BankId);
+			}else if(Integer.parseInt(q.getQuestion_type())==3){
+				//加入问答
+				String atNum = q.getAbility_type_id();
+				String qtNum = q.getQuestion_type();
+				String tigan = q.getContent();
+				String daan = q.getAnswer();
+				String nandu = q.getDifficulty();
+				questionsArray.add(qtNum);
+				questionsArray.add(tigan);
+				questionsArray.add(daan);
+				questionsArray.add(nandu);
+				questionsArray.add(atNum);
+				aqsi.addEssayQuestion(questionsArray,BankId);
+			}else if(Integer.parseInt(q.getQuestion_type())==4) {
+				//加入判断
+				String atNum = q.getAbility_type_id();
+				String qtNum = q.getQuestion_type();
+				String tigan = q.getContent();
+				String daan = q.getAnswer();
+				String nandu = q.getDifficulty();
+				questionsArray.add(qtNum);
+				questionsArray.add(tigan);
+				questionsArray.add(daan);
+				questionsArray.add(nandu);
+				questionsArray.add(atNum);
+				aqsi.addJudgeQuestion(questionsArray,BankId);
+			}else {
+				//加入填空
+				String atNum = q.getAbility_type_id();
+				String qtNum = q.getQuestion_type();
+				String tigan = q.getContent();
+				String daan = q.getAnswer();
+				String nandu = q.getDifficulty();
+				questionsArray.add(qtNum);
+				questionsArray.add(tigan);
+				questionsArray.add(daan);
+				questionsArray.add(nandu);
+				questionsArray.add(atNum);
+				aqsi.addEssayQuestion(questionsArray,BankId);
+			}
 		}
-		
-		return "exceltest-import-success";
+		result = "tttttttttttttttttttttttttt成功";
+		System.out.println("我爱王一"+result);
+		return result;
     }
 	
 	@RequestMapping("/importexcel2")
