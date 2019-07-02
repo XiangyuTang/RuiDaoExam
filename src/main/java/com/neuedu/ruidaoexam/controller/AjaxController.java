@@ -50,11 +50,12 @@ public class AjaxController {
 		System.out.println(val.get("val").toString());
 		request.getSession().setAttribute("pingyu", val.get("val").toString());
 		
-		String reportId = "1";
+//		String reportId = "1";
 //		String paperId = "1";
 //		String stuId = "1";
 //		String acquiredScore = "10";
 //		String totalScore = "20";
+		String getReportId = val.get("reportId").toString();
 	    String comment = request.getSession().getAttribute("pingyu").toString();
 //	    String beginTimestamp = "2019-06-22 14:00:00";
 //	    String endTimestamp = "2019-06-22 15:00:00";
@@ -62,7 +63,7 @@ public class AjaxController {
 //	    String  isAllowedToSee = "1";
 	    
 		ArrayList<String> reportArray = new ArrayList<String>();
-		reportArray.add(reportId);
+		reportArray.add(getReportId);
 //		reportArray.add(paperId);
 //		reportArray.add(stuId);
 //		reportArray.add(acquiredScore);
