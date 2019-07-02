@@ -181,7 +181,7 @@
     <div class="report-basic" id="report-basic">
     <!--<hr id="jibenxinxi" style="height:1px;border:none;border-top:1px solid #555555;" />-->
     <!--<span id="jibenxinxi">&nbsp;</span>-->
-    <h3 id="jibenxinxi" class="tc fn report-title" th:text="${paperTitle}"></h3>
+    <h3 id="jibenxinxi" name="jibenxinxi" class="tc fn report-title" th:text="${paperTitle}"></h3>
     <div class="head-info">
         <img class="avator" src="../css/marking_files/portrait_default.png" th:src="@{static/css/marking_files/portrait_default.png}">
         <div class="info-wrapper">
@@ -214,6 +214,8 @@
     	<input id="ansPaperId" style="display: none;" th:value="${ansPaperId}" />
     	<input id="stuId" style="display: none;" th:value="${stuId}" />
     	<input id="score" style="display: none;" th:value="${sScore}" /> 
+    	<input id="report_id" style="display: none;" th:value="${report_id}" />
+    	<input id="answeredpaper_id" style="display: none;" th:value="${answeredpaper_id}" />
     	<div class="section-title"><a id="quanmiangaikuo">全面概括</a></div>
     	<p class="pb5 f16">试卷共 <span class="pb5 f16" th:text="${shiTiNum}"></span> 道题，考生共答 <span class="pb5 f16" th:text="${shiTiNum}"></span> 道题</p>
     	<a class="btn btn-link p0">
@@ -326,7 +328,7 @@
 </div>
 
 <div class="report-answer" id="report-answer">
-    <div class="section-title"><a id="datiqingkuang">答题情况</a></div>
+    <div class="section-title"><a id="datiqingkuang" name="datiqingkuang">答题情况</a></div>
     <div id="xunhuan"></div>
 <div th:if="${#objects.nullSafe(forChoiceQuestionInList,default)}">
     <div class="part-title">
@@ -622,7 +624,7 @@
 				
 				</div>
 				<div class="q-panel right" th:if="${forWenDaQuestionInList.iscorrect==1}">
-					<i style="font-style:normal" th:text="${forWenDaQuestionInListStat.count}"></i>.  <span class="q-type">[ 判断题 ]</span> 
+					<i style="font-style:normal" th:text="${forWenDaQuestionInListStat.count}"></i>.  <span class="q-type">[ 问答题 ]</span> 
 					<span class="label skill hint--top hint--rounded" th:text="${forWenDaQuestionInList.abilityType}">未指定技能</span>   
 					<div class="pull-right"> <i class="layui-icon layui-icon-ok" style="color: limegreen;"></i> <span class="divider"></span>
 						<div class="score-wrapper"> 
@@ -740,7 +742,7 @@
        	 	</div> 
        	 	<div class="mt10">
        	 		<div class="btn-group"> 
-       	 			<a   class="btn btn-default hint--top hint--rounded" data-hint="评语" href="marking#baogaopingyu"> <i class="layui-icon layui-icon-survey"></i></a> 
+       	 			<a class="btn btn-default hint--top hint--rounded" data-hint="评语" th:href="@{'marking?report_id='+${report_id}+'&answeredpaper_id='+${answeredpaper_id}+'#baogaopingyu'}"> <i class="layui-icon layui-icon-survey"></i></a> 
        	 			<a id="xiazai" class="btn btn-default hint--top hint--rounded" data-hint="下载"> <i class="layui-icon layui-icon-file"></i></a> 
        	 			<a class="btn btn-default hint--top hint--rounded" data-hint="归档"> <i class="layui-icon layui-icon-list"></i> </a>
        	 			<a id="shanchu" class="btn btn-default hint--top hint--rounded" data-hint="删除"> <i class="layui-icon layui-icon-close-fill"></i></a> 
@@ -777,11 +779,11 @@
 	            </div>
 	            <div class="mt10">
 	                <ul class="links">
-	                    <li><a href="marking#jibenxinxi">基本信息</a></li>
-	                    <li><a href="marking#quanmiangaikuo">全面概括</a></li>
-	                    <li><a href="marking#datiqingkuang">答题情况</a></li>
-	                    <li><a href="marking#baogaopingyu">报告评语</a></li>
-	                    <li><a href="marking#ceshirizhi">测试日志</a></li>
+	                    <li><a th:href="@{'marking?report_id='+${report_id}+'&answeredpaper_id='+${answeredpaper_id}+'#jibenxinxi'}">基本信息</a></li>
+	                    <li><a th:href="@{'marking?report_id='+${report_id}+'&answeredpaper_id='+${answeredpaper_id}+'#quanmiangaikuo'}">全面概括</a></li>
+	                    <li><a th:href="@{'marking?report_id='+${report_id}+'&answeredpaper_id='+${answeredpaper_id}+'#datiqingkuang'}">答题情况</a></li>
+	                    <li><a th:href="@{'marking?report_id='+${report_id}+'&answeredpaper_id='+${answeredpaper_id}+'#baogaopingyu'}">报告评语</a></li>
+	                    <li><a th:href="@{'marking?report_id='+${report_id}+'&answeredpaper_id='+${answeredpaper_id}+'#ceshirizhi'}">测试日志</a></li>
 	                 </ul>
 	            </div>
 	        </div>
@@ -1056,8 +1058,10 @@
 	})
 	$(function(){
 		$('[class="layui-btn layui-btn-normal"]').click(function(){
+	        var getReportId = $('#reportId').val();
 	        var comment = $('#wenbenkuang').val();
-	        var pararms ={'val':comment};// 定义一个js对象
+	        var pararms ={'val':comment,
+	        			  'reportId':getReportId};// 定义一个js对象
 	        $.ajax({
 		  		url:'addComment',
 		  		type:'POST',
@@ -1176,8 +1180,8 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 	        ,btnAlign: 'r' //按钮居中
 	        ,shade: 0.6 //不显示遮罩
 	        ,yes: function(){
-	        	var report_id = '2';
-	        	var pararms ={'val':report_id};// 定义一个js对象
+	        	var getReportId = $('#reportId').val();
+	        	var pararms ={'val':getReportId};// 定义一个js对象
 		        $.ajax({
 			  		url:'deleteReport',
 			  		type:'POST',
@@ -1192,7 +1196,7 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 			  		}
   				});
 	        	layer.closeAll();
-	        	self.location='home';
+//	        	self.location='home';
 	        }
 	        ,btn2: function(index, layero){
 		    	layer.closeAll();
@@ -1230,7 +1234,23 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 		})
 	})
 	$('[class="layui-btn layui-btn-fluid layui-btn-normal"]').click(function(){
-		window.location.href="/marking";
+		layer.open({
+		    type: 1
+		    ,title: '提交判卷结果'
+	        ,offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+	        ,area: ['300px', '157px']
+	        ,content: '<div style="padding: 20px 10px; text-align: center"><p> 确认提交判卷结果？ </p></div>'
+	        ,btn: ['是', '否']
+	        ,btnAlign: 'r' //按钮居中
+	        ,shade: 0.6 //不显示遮罩
+	        ,yes: function(){
+	        	layer.closeAll();
+	        	window.location.reload();
+	        }
+	        ,btn2: function(index, layero){
+		    	layer.closeAll();
+		  	}
+		})
 	})
 })
 	

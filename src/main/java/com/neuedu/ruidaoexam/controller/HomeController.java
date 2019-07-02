@@ -15,7 +15,7 @@ public class HomeController {
 	@Autowired
 	HomeGetNumServiceimpl homeGetNumServiceimpl;
 	
-	@RequestMapping("/home")
+	@RequestMapping("/Home")
 	public String getNum(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
 		int i = homeGetNumServiceimpl.getStudentNum();

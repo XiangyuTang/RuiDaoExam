@@ -61,6 +61,7 @@ public class ModifyPaperServiceimpl implements ModifyPaperService{
 		Report r = new Report();
 		r.setReportId(reportId);
 		r.setAcquiredScore(acquireScore);
+		System.out.println("dddddddddddddddddddddddddddddddddd"+r.getAcquiredScore());
 		reportMapper.updateByPrimaryKeySelective(r);
 		System.out.println("111111111111111111111111111111111");
 		answeredQuestionMapper.updateChoiceQuestionIsCorrect(isCorrect, score, answerPaperId, quesId);
