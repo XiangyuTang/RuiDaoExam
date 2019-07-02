@@ -9,12 +9,14 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.neuedu.ruidaoexam.dao.AnsweredPaperMapper;
+import com.neuedu.ruidaoexam.dao.NewsMapper;
 import com.neuedu.ruidaoexam.dao.PaperMapper;
 import com.neuedu.ruidaoexam.dao.ReportMapper;
 import com.neuedu.ruidaoexam.dao.StudentMapper;
 import com.neuedu.ruidaoexam.dao.TeacherMapper;
 import com.neuedu.ruidaoexam.dao.TradeRecordMapper;
 import com.neuedu.ruidaoexam.entity.AnsweredPaperExample;
+import com.neuedu.ruidaoexam.entity.News;
 import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportExample;
@@ -32,6 +34,7 @@ public class StudentServiceimpl implements StudentService{
     @Autowired TeacherMapper teachermapper;
     @Autowired TradeRecordMapper traderecordmapper;
     @Autowired PaperMapper papermapper;
+    @Autowired NewsMapper newsmapper;
 
 	@Override
 	public int registStudent(Student stu) {
@@ -104,7 +107,18 @@ public class StudentServiceimpl implements StudentService{
 		record.setBuyerType(2);
 		record.setBuyerSId(stuid);
 		int o=traderecordmapper.insertSelective(record);
-		if(i!=0&&j!=0&&o!=0) {
+		News news=new News();
+		news.setReceiveTypeId(1);
+		news.setReceiveTeacherId(teacher_id);
+		news.setSendTypeId(0);
+		news.setSendStudentId(stuid);
+		news.setSendName(stumapper.selectByPrimaryKey(stuid).getName());
+		news.setNewsType(1);
+		news.setNewsTime(new Date());
+		news.setNewsContent("学生发送");
+		news.setIsRead(0);
+		int x=newsmapper.insertSelective(news);
+		if(i!=0&&j!=0&&o!=0&&x!=0) {
 			return true;
 		}
 		return false;

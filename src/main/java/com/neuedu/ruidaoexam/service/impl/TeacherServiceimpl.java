@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.neuedu.ruidaoexam.dao.NewsMapper;
 import com.neuedu.ruidaoexam.dao.PaperMapper;
 import com.neuedu.ruidaoexam.dao.QuestionBankMapper;
 import com.neuedu.ruidaoexam.dao.TeacherMapper;
 import com.neuedu.ruidaoexam.dao.TradeRecordMapper;
+import com.neuedu.ruidaoexam.entity.News;
 import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.PaperExample;
 import com.neuedu.ruidaoexam.entity.Ques_Bank_Mapper;
@@ -27,6 +29,7 @@ public class TeacherServiceimpl implements TeacherService{
     @Autowired PaperMapper paperMapper;
     @Autowired BankMapperServiceimpl bankmapperservice;
     @Autowired TradeRecordMapper traderecordmapper;
+    @Autowired NewsMapper newsmapper;
 	@Override
 	public int registTeacher(Teacher teacher) {
 		// TODO Auto-generated method stub
@@ -114,7 +117,18 @@ public class TeacherServiceimpl implements TeacherService{
 		record.setBuyerType(1);
 		record.setBuyerTId(buyer_id);
 		int i=traderecordmapper.insertSelective(record);
-		if(copyMapper&&i!=0)
+		News news=new News();
+		news.setReceiveTypeId(1);
+		news.setReceiveTeacherId(seller_id);
+		news.setSendTypeId(1);
+		news.setSendTeacherId(buyer_id);
+		news.setSendName(mapper.selectByPrimaryKey(buyer_id).getName());
+		news.setNewsType(1);
+		news.setNewsTime(new Date());
+		news.setNewsContent("老师发送");
+		news.setIsRead(0);
+		int j=newsmapper.insertSelective(news);
+		if(copyMapper&&i!=0&&j!=0)
 			return true;
 		
 		return false;
