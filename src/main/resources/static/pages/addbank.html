@@ -46,24 +46,24 @@
 				var layer = layui.layer, form = layui.form, element = layui.element
 				$ = layui.$
 				$("[class='am-btn am-btn-success']").click(function(){
-					var papername = $("[id='doc-vld-pwd-1']").val();
-					var papertime = $("[id='doc-vld-pwd-2']").val();
-					var papertype = $("[id='papertype']").val();
+					var bankname = $("[id='doc-vld-pwd-1']").val();
+/* 					var papertime = $("[id='doc-vld-pwd-2']").val(); */
+					var banktype = $("[id='papertype']").val();
 /* 					alert(papertype) */
 //					alert(1);
 //					alert(papername);
 					$.ajax({
 						type:"get",
-						url:"addpaper",
+						url:"addbank",
 						async:false,
 						dataType:"text",
-						data:{'papername':papername,'papertime':papertime,"papertype":papertype},
+						data:{'bankname':bankname,"banktype":banktype},
 						success:function(e){
 							if(e == "false1"){
-								alert('未选择题目，添加失败');
+								alert('添加失败');
 								window.parent.layer.closeAll();
 							}else{								
-								alert('添加成功，请前往我的考试界面查看！');
+								alert('添加成功！');
 								window.parent.layer.closeAll();
 							}
 
@@ -87,26 +87,26 @@
 					<form class="am-form am-form-horizontal" method="post" style="padding-top:20px;" data-am-validator >
 						<div class="am-form-group" align="left" >
 							<label for="user-name" class="am-u-sm-3 am-form-label">
-							试卷名: </label>
+							题库名: </label>
 							<div class="am-u-sm-9">
-								<input type="text" id="doc-vld-pwd-1" required placeholder="请输入试卷名称" 
+								<input type="text" id="doc-vld-pwd-1" required placeholder="请输入题库名称" 
 									style="width: 300px;" name="papername"> <small></small>
 							</div>
 						</div>
-						<div class="am-form-group" align="left" style="margin-top: 8%">
+						<!--<div class="am-form-group" align="left" style="margin-top: 8%">
 							<label for="user-name" class="am-u-sm-3 am-form-label">
 								考试时长:</label>
 							<div class="am-u-sm-9">
 								<input type="text" id="doc-vld-pwd-2" required placeholder="请输入考试时长（以分钟为单位）" 
 									 style="width: 300px;" name="papertime" > <small></small>
 							</div>
-						</div>
+						</div>-->
 						<div class="am-form-group" align="left" style="margin-top: 8%">
 							<label for="user-name" class="am-u-sm-3 am-form-label">
-								试卷类型:</label>
+								题库类型:</label>
 							<div class="am-u-sm-9">
 								<select name="city" lay-verify=""  style="width: 300px;" id="papertype">
-								  <option value="1">请选择试卷类型</option>
+								  <option value="1">请选择题库类型</option>
 								  <option value="1">IT技术</option>
 								  <option value="2">IQ&EQ</option>
 								  <option value="3">招聘真题</option>
