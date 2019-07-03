@@ -82,6 +82,65 @@
 				border-color: #000000;
 			}*/
 		</style>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#export1").click(function(){
+/* 				alert(1) */
+				var paper_id = $(this).next().val();
+				var paper_name = $(this).next().attr("title");
+/* 				alert(paper_id)
+				alert(paper_name) */
+				$.ajax({
+					type:"get",
+					url:"/export1",
+					async:true,
+					data:{
+						"paper_id":paper_id,
+						"paper_name":paper_name
+					},
+					dataType:"text",
+					success:function(e){
+						if(e == "true"){
+							alert("导出成功，请前往桌面查看")
+						}else{
+							alert("导出失败，请稍后再试")
+						}
+					},
+					error:function(e){
+						alert("系统异常！")
+					}
+				});
+			})
+			$("#export").click(function(){
+/* 				alert(1) */
+				var paper_id = $(this).prev().val();
+				var paper_name = $(this).prev().attr("title");
+//				alert(paper_id)
+//				alert(paper_name)
+				$.ajax({
+					type:"get",
+					url:"/export",
+					async:true,
+					data:{
+						"paper_id":paper_id,
+						"paper_name":paper_name
+					},
+					dataType:"text",
+					success:function(e){
+						if(e == "true"){
+							alert("导出成功，请前往桌面查看")
+						}else{
+							alert("导出失败，请稍后再试")
+						}
+					},
+					error:function(e){
+						alert("系统异常！")
+					}
+				});
+			})
+			})
+		</script>
 	</head>
 	<body>
 		<div class="main">
@@ -93,17 +152,18 @@
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
 					    <i class="layui-icon">&#xe654;</i>
 					  </button>
-					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
-					  	<a href="/export1" th:href="@{/export1(paper_id=${paper_id},paper_name=${paper_name})}">
+					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary" id="export1">
+<!-- 					  	<a href="/export1" th:href="@{/export1(paper_id=${paper_id},paper_name=${paper_name})}"> -->
 					    <i class="layui-icon">&#xe642;</i>
 					    <span>导出考试汇总表</span>
-					    </a>
+<!-- 					    </a> -->
 					  </button>
-					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
-					  	<a href="/export" th:href="@{/export(paper_id=${paper_id},paper_name=${paper_name})}">
+					  <input type="hidden" th:value="${paper_id}" th:title="${paper_name}"/>
+					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary" id="export">
+<!--					  	<a href="/export" th:href="@{/export(paper_id=${paper_id},paper_name=${paper_name})}">-->
 					    <i class="layui-icon">&#xe621</i>
 					    <span>导出考试详情表</span>
-					    </a>
+<!--					    </a>-->
 					  </button>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
 					    <i class="layui-icon">&#xe602;</i>

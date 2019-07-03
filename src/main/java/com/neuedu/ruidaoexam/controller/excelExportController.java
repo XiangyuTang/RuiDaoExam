@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neuedu.ruidaoexam.exportExcel.HeadName;
 import com.neuedu.ruidaoexam.exportExcel.WriteExcelTool;
@@ -18,6 +19,7 @@ public class excelExportController {
 	ExcelExportServiceimpl  excelExportServiceimpl;
 	
 	@RequestMapping("/export")
+	@ResponseBody
 	public String exportExcel(Integer paper_id,String paper_name) {//把试卷的名字和ID传进来,导出考试详情
 //		int paper_id = 1;
 		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
@@ -31,10 +33,11 @@ public class excelExportController {
 		WriteExcelTool wet = new WriteExcelTool();
 		wet.createXslsWithSheet(sheetNames, headNames, dataNames, paper_name+"考试详情");
 		System.out.println("datadtatdtatdtatdtatdtatdtatdt"+dataNames.get(0).getDatas().size());
-		return "reportlist";
+		return "true";
 	}
 	
 	@RequestMapping("/export1")
+	@ResponseBody
 	public String exportExcel1(Integer paper_id,String paper_name) {//导出考试总结
 //		int paper_id = 1;
 		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
@@ -45,6 +48,6 @@ public class excelExportController {
 		ArrayList<dataName> dataNames1 = excelExportServiceimpl.allDataNames(paper_id);
 		WriteExcelTool wet = new WriteExcelTool();
 		wet.createXslsWithSheet(sheetNames1, headName1, dataNames1, paper_name+"考试总结");
-		return "reportlist";
+		return "true";
 	}
 }
