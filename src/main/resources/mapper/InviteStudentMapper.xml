@@ -106,10 +106,10 @@
   <insert id="insert" parameterType="com.neuedu.ruidaoexam.entity.InviteStudent" >
     insert into invite_student (invite_id, paper_id, teacher_id, 
       student_id, begin_time, end_time, 
-      invite_code, isReaded)
+      invite_code, isReaded,allowedCheatTimes)
     values (#{inviteId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
       #{studentId,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{inviteCode,jdbcType=VARCHAR}, #{isreaded,jdbcType=INTEGER})
+      #{inviteCode,jdbcType=VARCHAR}, #{isreaded,jdbcType=INTEGER},#{allowedCheatTimes,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.ruidaoexam.entity.InviteStudent" >
     insert into invite_student

@@ -8,7 +8,7 @@ import com.neuedu.ruidaoexam.entity.Paper;
 public interface PaperService {
 	//添加卷子并返回其id号
 	Integer addPaper(Paper paper);
-	String getPaper_name(Integer paper_id);
+	String getPaper_name(Integer answered_paper_id);
 	//根据教师的id选择其创建和购买的卷子
 	HashMap<String, Object> getPaperByTeacherId(Integer TeacherId);
 	//获取教师所有的卷子

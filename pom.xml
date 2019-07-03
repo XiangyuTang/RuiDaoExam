@@ -124,7 +124,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 		</dependency>
 		
         <!--短信接口-->
@@ -165,6 +165,7 @@
 	</dependencies>
 
 	<build>
+	<defaultGoal>compile</defaultGoal>
 	<finalName>RuiDaoExam</finalName>
 		<plugins>
 			<plugin>
