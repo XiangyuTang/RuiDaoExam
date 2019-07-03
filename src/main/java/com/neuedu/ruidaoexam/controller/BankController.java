@@ -23,10 +23,11 @@ public class BankController {
 	Trade_recordService trade_recordService;
 	
 	@RequestMapping("/toMyBank")
-	public String toMyBanks(Model model) {
+	public String toMyBanks(Model model,HttpServletRequest request) {
 		// 此处的teacher_id应该是session中的内容
-		List<QuestionBank> questionBanks = questionBankService.getQusetionBankByTeacherid(1);
-		List<QuestionBank> questionBanks2 = trade_recordService.getQusetionBankByTeacherid(1);
+		Integer uid = (Integer) request.getSession().getAttribute("uid");
+		List<QuestionBank> questionBanks = questionBankService.getQusetionBankByTeacherid(uid);
+		List<QuestionBank> questionBanks2 = trade_recordService.getQusetionBankByTeacherid(uid);
 		for (QuestionBank questionbank : questionBanks2) {
 			questionBanks.add(questionbank);
 		}
