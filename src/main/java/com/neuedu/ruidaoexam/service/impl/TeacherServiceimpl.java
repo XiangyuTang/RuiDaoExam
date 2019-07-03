@@ -149,6 +149,7 @@ public class TeacherServiceimpl implements TeacherService{
 	public List<Paper> getUnselledPaperByTeacherid(Integer teacher_id) {
 		PaperExample paperExample = new PaperExample();
 		com.neuedu.ruidaoexam.entity.PaperExample.Criteria paperCriteria = paperExample.createCriteria();
+		paperExample.setOrderByClause("paper_id desc");
 		paperCriteria.andCreatedbyteacheridEqualTo(teacher_id);
 		paperCriteria.andPointPriceEqualTo(0);
 		List<Paper> selledPapers=paperMapper.selectByExample(paperExample);
