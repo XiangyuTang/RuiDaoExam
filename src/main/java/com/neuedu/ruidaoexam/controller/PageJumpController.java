@@ -326,6 +326,10 @@ public class PageJumpController {
 		public String tozhuce() {
 			return "user/reg";
 		}
+		@RequestMapping("/toaddbank")
+		public String toaddbank() {
+			return "addbank";
+		}
 
 }
 

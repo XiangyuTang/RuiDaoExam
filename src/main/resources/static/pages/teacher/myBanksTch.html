@@ -390,6 +390,23 @@
 
 			})
 			})
+			$(function(){
+//				$("[id='add-bank']").live("click",function(){
+//					alert(1)
+//				})
+			layui.use(['layer', 'form', 'element', 'flow', 'laypage'], function () {
+			var layer=layui.layer
+			$("[id='add-bank']").on("click", function (e) {
+				layer.open({
+				type: 2,
+				offset:['20%','30%'],
+				area: ['40%', '50%'],
+				content: 'toaddbank',//这里content是一个普通的String,
+			}
+			);
+		})
+		})
+			})
 		</script>
 
 	</head>

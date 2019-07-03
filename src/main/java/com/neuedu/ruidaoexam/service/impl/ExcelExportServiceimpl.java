@@ -36,11 +36,12 @@ public class ExcelExportServiceimpl implements ExcelExportService{
 	@Override
 	public ArrayList<ArrayList<String>> sIdAndAPId(int paper_id) {
 		// TODO Auto-generated method stub
-		ArrayList<String> array = new ArrayList<String>();
+		
 		ArrayList<ArrayList<String>> saa = new ArrayList<ArrayList<String>>();
 		List<AnsweredPaper> ap = answeredPaperMapper.selectByPaperId(paper_id);
 		System.out.println("ppppppppppppppppppppppp"+ap.size());
 		for(int i=0; i<ap.size();i++) {
+			ArrayList<String> array = new ArrayList<String>();
 			array.add(0,ap.get(i).getStuId().toString());
 			System.out.println("eeeeeeeee"+ap.get(i).getStuId().toString());
 			array.add(1,ap.get(i).getAnsPaperId().toString());
@@ -149,10 +150,11 @@ public class ExcelExportServiceimpl implements ExcelExportService{
 //		dataName dn1 = new dataName();
 		ArrayList<ArrayList<String>> result1 = new ArrayList<ArrayList<String>>();
 		ArrayList<ArrayList<String>> siapi = sIdAndAPId(paper_id);
-		
+		System.out.println("siapi的answered——paperID是"+siapi.get(0).get(1));
+		System.out.println("siapi的answered——paperID是"+siapi.get(1).get(1));
 		for(int i=0; i<siapi.size(); i++) {
 			Student s = studentMapper.selectByPrimaryKey(Integer.parseInt(siapi.get(i).get(0)));
-			List<Report> reports = reportMapper.selectByPaperId(paper_id);
+			List<Report> reports = reportMapper.selectByPaperId(Integer.parseInt(siapi.get(i).get(1)));
 			ArrayList<String> array = new ArrayList<String>();
 			for(int j=0; j<reports.size();j++) {
 				if(s.getStudentId()==reports.get(j).getStuId()) {
