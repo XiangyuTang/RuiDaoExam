@@ -29,7 +29,7 @@ public class MarkingController {
 	@RequestMapping("/marking")
 	public String getJiBenXinXi(Integer report_id,Integer answeredpaper_id,  Model model) throws Exception{
 //		System.out.println("WWWWWWWWWWWWWWWWWWWWWWW");
-//		System.out.println(report_id);
+		System.out.println(report_id);
 //		System.out.println(answeredpaper_id);
 		//获取判卷页基本信息数据
 		model.addAttribute("report_id", report_id);
@@ -135,22 +135,22 @@ public class MarkingController {
 		model.addAttribute("shiTiNum", shiTiNum);
 		
 		//获取报告页选择题答题情况数据
-		ArrayList<ForChoiceQuestion> forChoiceQuestionInList = reportServiceimpl.getXuanZeDaTiQingKuang(report_id);
+		ArrayList<ForChoiceQuestion> forChoiceQuestionInList = reportServiceimpl.getXuanZeDaTiQingKuang(answeredpaper_id);
 				
 		model.addAttribute("forChoiceQuestionInList", forChoiceQuestionInList);
 		
 		//获取报告页判断题答题情况数据
-		ArrayList<ForJudgeQuestion> forJudgeQuestionInList = reportServiceimpl.getPanDuanDaTiQingKuang(report_id);
+		ArrayList<ForJudgeQuestion> forJudgeQuestionInList = reportServiceimpl.getPanDuanDaTiQingKuang(answeredpaper_id);
 				
 		model.addAttribute("forJudgeQuestionInList", forJudgeQuestionInList);
 				
 		//获取报告页填空题答题情况数据
-		ArrayList<ForTianKongQuestion> forTianKongQuestionInList = reportServiceimpl.getTianKongDaTiQingKuang(report_id);
+		ArrayList<ForTianKongQuestion> forTianKongQuestionInList = reportServiceimpl.getTianKongDaTiQingKuang(answeredpaper_id);
 				
 		model.addAttribute("forTianKongQuestionInList", forTianKongQuestionInList);
 				
 		//获取报告页问答题答题情况数据
-		ArrayList<ForWenDaQuestion> forWenDaQuestionInList = reportServiceimpl.getWenDaDaTiQingKuang(report_id);
+		ArrayList<ForWenDaQuestion> forWenDaQuestionInList = reportServiceimpl.getWenDaDaTiQingKuang(answeredpaper_id);
 						
 		model.addAttribute("forWenDaQuestionInList", forWenDaQuestionInList);
 		
