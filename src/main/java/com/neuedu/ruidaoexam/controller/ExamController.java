@@ -79,7 +79,7 @@ public class ExamController {
 		
 		InviteStudent inviteStudent = inviteService.verifyPerson(email,invitecode);
 		if(inviteStudent==null)
-			return "-1";
+			return "-3";
 		int compareTobegin = now.compareTo(inviteStudent.getBeginTime());//当前时间大于开始时间返回1
 		int compareToEnd = now.compareTo(inviteStudent.getEndTime());//当前时间小于结束时间返回-1
 		if(compareTobegin==1&&compareToEnd==-1)
@@ -99,7 +99,6 @@ public class ExamController {
 				
 				JSONObject jsonObject = JSON.parseObject(result);
 		        //JSONObject jsonObject1 = JSONObject.parseObject(JSON_OBJ_STR); //因为JSONObject继承了JSON，所以这样也是可以的
-				//if(jsonObject.getInteger("error_code")==222202&&jsonObject.getString("error_msg").equals("pic not has face"))
 				
 		        System.out.println(jsonObject.getString("error_msg")+":"+jsonObject.getString("result"));
 		        if(jsonObject.getString("error_msg").equals("SUCCESS"))
@@ -119,6 +118,32 @@ public class ExamController {
 		        	str="-2";//图片清晰度太低，或者没有人脸
 		        }
 		        session.setAttribute("inviteStudent", inviteStudent);
+			}
+		}
+		else
+			str="0";//代表当前时间不在考试范围内
+		return str;
+	}
+	
+	//为了浏览器跨域，降低安全性验证，跳过人脸对比验证
+	@RequestMapping(value="/verifyintoexam1",method = RequestMethod.POST)
+    @ResponseBody
+    public String verifyIntoExam1(String email,String invitecode,String base64url,HttpSession session,HttpServletRequest request) {
+
+		String str="";
+		Date now = new Date();// new Date()为获取当前系统时间
+		
+		InviteStudent inviteStudent = inviteService.verifyPerson(email,invitecode);
+		if(inviteStudent==null)
+			return "-1";
+		int compareTobegin = now.compareTo(inviteStudent.getBeginTime());//当前时间大于开始时间返回1
+		int compareToEnd = now.compareTo(inviteStudent.getEndTime());//当前时间小于结束时间返回-1
+		if(compareTobegin==1&&compareToEnd==-1)
+		{
+			if(inviteStudent!=null)
+			{
+		        session.setAttribute("inviteStudent", inviteStudent);
+		        str="1";
 			}
 		}
 		else

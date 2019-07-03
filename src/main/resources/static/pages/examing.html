@@ -37,7 +37,41 @@
 	    	document.title='切换屏幕'+cheattimes+'次';
 	    	alert("*警告：您已切换屏幕"+cheattimes+"次，本次考试累计切换屏幕"+acts+"次，系统将自动交卷。")
 	    	if(cheattimes>=acts)
-	    		$("form[id='paper']").submit();
+    		{
+	    		var paper_id = $("#ansPaperId").val();
+    			var s_id = $("#student_id").val();
+    			var total_score = $("#totalScore").val();
+    			var comment = "暂无";
+    			var begin_exam_time = $("#beginTimeStamp").val();
+    			var switch_time = cheattimes;
+    			var pararms ={
+					  "paper_id":paper_id,
+					  "stu_id":s_id,
+					  "totalScores":total_score,
+					  "comment":comment,
+					  "beginTimeStamp":begin_exam_time,
+					  "switch_time":switch_time
+				};
+    			$.ajax({
+					url:'analysePaper',
+					type:'post',
+					contentType:'application/json;charset=UTF-8',
+					async:false,
+					data:JSON.stringify(pararms),
+					success:function(e){
+						window.location.href = 'toExamOver?paper_id='+paper_id;
+					},
+					error:function(e){
+						console.log(e);
+						layui.use(['layer', 'form'], function(){
+					  		var layer = layui.layer
+					  			,form = layui.form;
+					  			layer.msg('修改数据库出错！');
+						});
+					}
+				});
+    		}
+	    		//$("form[id='paper']").submit();
 	    }  
 	    else  
 	    	document.title=normal_title;  
@@ -925,7 +959,38 @@
      
      function tijiao(){
      	alert("考试时间结束，系统自动提交！");
-        $("form[id='paper']").submit();
+     	var paper_id = $("#ansPaperId").val();
+		var s_id = $("#student_id").val();
+		var total_score = $("#totalScore").val();
+		var comment = "暂无";
+		var begin_exam_time = $("#beginTimeStamp").val();
+		var switch_time = cheattimes;
+		var pararms ={
+			  "paper_id":paper_id,
+			  "stu_id":s_id,
+			  "totalScores":total_score,
+			  "comment":comment,
+			  "beginTimeStamp":begin_exam_time,
+			  "switch_time":switch_time
+		};
+		$.ajax({
+			url:'analysePaper',
+			type:'post',
+			contentType:'application/json;charset=UTF-8',
+			async:false,
+			data:JSON.stringify(pararms),
+			success:function(e){
+				window.location.href = 'toExamOver?paper_id='+paper_id;
+			},
+			error:function(e){
+				console.log(e);
+				layui.use(['layer', 'form'], function(){
+			  		var layer = layui.layer
+			  			,form = layui.form;
+			  			layer.msg('修改数据库出错！');
+				});
+			}
+		});
         
      }
      

@@ -332,10 +332,10 @@
         if(!checkNickName()){
           return false
         }
-        if(field.character=="student"&($("#base64url").val())==""){
-          return layer.msg("请上传人脸数据！")
-        }
-  
+        //降低安全性验证
+//      if(field.character=="student"&($("#base64url").val())==""){
+//        return layer.msg("请上传人脸数据！")
+//      }
 
         // //请求接口
         // admin.req({
