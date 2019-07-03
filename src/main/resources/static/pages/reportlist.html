@@ -39,16 +39,25 @@
 				background-color: #BDBDBD;
 			}*/
 			.main{
-				margin-top: 20px;
+				margin-top: 30px;
 /*				border:3px solid #AFB9C3;*/
 			}
-			.main-left{
-/*				display: inline;*/
-/*        		height: 2000px;*/
+			/*.main-left{
+				display: inline;
+        		height: 2000px;
 				float: left;
 				margin-left: 4%;
 				width: 60%;
 				margin-right: 10px;
+				border:3px solid #C3BFBF;
+			}*/
+			.main-center{
+/*				display: inline;*/
+/*        		height: 2000px;*/
+/*				float: left;*/
+				margin-left:auto;
+				margin-right: auto;
+				width: 60%;
 				border:3px solid #C3BFBF;
 			}
 			.main-right{
@@ -75,9 +84,8 @@
 		</style>
 	</head>
 	<body>
-<!--		<div class="top"></div>-->
 		<div class="main">
-		<div class="main-left">
+		<div class="main-center">
 		<div id="report-list-panel">
 		    <div>			    
 			    <div class="btn-group export-report">
@@ -150,88 +158,14 @@
 					        
 					        <td style="vertical-align:middle;" th:text="(${answeredpaper.isModifiedByTeacher} == '1')? '是':'否'">&nbsp;&nbsp;&nbsp;&nbsp;是
 					        </td>
-					        
-					        <!--<td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">
-					            <a data-action="pdf" class="btn btn-default btn-dowload-pdf-single" title="下载PDF报告">
-					                <i class="fa fa-download"></i>
-					                <i class="text-bittersweet fa fa-file-pdf-o"></i>
-					            </a>
-					        </td>-->
 				        </tr>
 				        </tbody>
 		        		</div>
 		        	</div>
 		        	</div>
- 		        </div>
-		        <!--<tbody data-jsv-df="" class="item">
-		        	<tr data-jsv="#41^#28_#78_" class="report-item">
-		        	<td style="width:30px;">
-		            <label class="mt10 check-box inline-block" data-link="class{merge:_selected toggle=&#39;active&#39;}">
-					<span class="fa-stack check-icon"> <i class="fa fa-square-o fa-stack-2x"></i>
-					<i class="fa fa-check-square fa-stack-1x check"></i></span>
-		                <input type="checkbox" data-link="_selected">
-		            </label>
-			        </td>
-			        
-			        <td style="width: 30px;">
-			            <img class="img-circle candidate-portrait" data-link="src{:(portrait||~getPortrait(testId))}" src="./reportdir/portrait_default_9.png" width="40px" height="40px">
-			        </td>
-			        
-			        <td style="width:10%;text-align:left;">
-			            <a class="btn btn-link candidate-name fb" target="_blank" data-link="href{:&#39;reportDetail/&#39; + testId + &#39;?paperId=&#39; + ~data.paperId + &#39;&amp;groupId=&#39; + ~data.groupId+ &#39;&amp;candidateId=&#39; + candidateId}" href="http://www.101test.com/reportDetail/43589879?paperId=454435&amp;groupId=&amp;candidateId=12000753" data-original-title="" title="">哈哈哈</a>
-			        </td>
-			        
-			        <td style="min-width:135px">2019-06-14 16:18</td><td data-jsv="#246^#79_" style="width: 60px;"> 30
-			        </td>
-			        
-			        <td style="width:30%;">
-			        </td>
-			        
-			        <td>是
-			        </td>
-			        
-			        <td data-jsv="#249^/249^#250^#81_/81_/250^" style="width:30px;">
-			            <a data-action="pdf" data-link="href{:~data.showInfo?url:&#39;java:void(0)&#39;} disabled{:!~data.showInfo}" class="btn btn-default btn-dowload-pdf-single" title="下载PDF报告" href="https://www.101test.com/share/irrevocable/%E5%93%88%E5%93%88%E5%93%88%EF%BC%882516930455%40qq.com%EF%BC%89-43589879.pdf?employerId=712269&amp;url=%2Freport%2FexportReport%2F43589879%2F%E5%93%88%E5%93%88%E5%93%88%EF%BC%882516930455%40qq.com%EF%BC%89-43589879.pdf&amp;sign=mJCVviTtIIRFccevczBlVg&amp;expiredAt=1593094932185">
-			                <i class="fa fa-download"></i>
-			                <i class="text-bittersweet fa fa-file-pdf-o"></i>
-			            </a>
-			        </td>
-		        </tr>
-		        </tbody>
-		    </table>-->
-		    
-		    
-		    <!--<div class="list-footer">		        	
-		    <div>		    	
-		        <div class="btn-group pull-right report-pagination">
-		            <button type="button" data-action="prev" class="btn btn-default" data-link="disabled{:currentPage==1 || loadingTotalCount || loadingList}" disabled="disabled">
-		                <i class="fa fa-chevron-left"></i>
-		            </button>
-		            <button type="button" data-action="next" class="btn btn-default" data-link="disabled{:~isLastPage(currentPage, totalCount) || loadingTotalCount || loadingList}" disabled="disabled">
-		                <i class="fa fa-chevron-right"></i>
-		            </button>
-		        </div>
-		        
-		        
-				<span class="result-hint pull-right">
-						<label class="label label-default label-average-score">
-							平均分：<span>30.0</span>
-						</label>
-						第 <span class="fb">1</span> 个，共 <span class="fb">1</span> 个
-				</span>
-			
-		    </div>
-		    </div> -->
-		    
-		    
+ 		        </div>		    
 		</div>
 		</div>
-		
-		<!--<div class="main-right">
-			<div id="main1" style="width:400px; height:300px"></div>
-			
-		</div>-->
-		
 		</div>
 		<input type="hidden" id="length" th:value='${hashMap.students.size()}'>
 		<input type="hidden" id="students" th:value='${hashMap.students}'>
