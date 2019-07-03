@@ -987,19 +987,19 @@ window.DBL_CLICK = true;
    
  <script type="text/javascript">
  	$(function(){
- 		alert('kkkk');
+/*  		alert('kkkk'); */
  		$('#ajaxsubmit').click(function(){
  			var filedata = new FormData();
  			var BankId = $('#ofbankId').val();
  			var file = $("#the_file")[0].files[0];
- 			alert($("#the_file")[0].files[0]);
- 			alert($('#ofbankId').val());
+/*  			alert($("#the_file")[0].files[0]);
+ 			alert($('#ofbankId').val()); */
  			if(file!="")
 			{
 				filedata.append("file",file);
 			}
 			filedata.append("BankId",BankId);
-			alert('daole');
+/* 			alert('daole'); */
 			$.ajax({
 				url:'/importexcel',
 				type:'post',
@@ -1712,7 +1712,7 @@ a label {
 	testSelect1.onchange = function(){
 		var valOption = this.options[this.selectedIndex].value;
 		var pararm = {'val1':valOption};
-		alert(valOption);
+/* 		alert(valOption); */
 		
 		$.ajax({
 			
@@ -1738,7 +1738,7 @@ a label {
 	 testSelect.onchange = function() { //当选项改变时触发 单多问判添
           var valOption = this.options[this.selectedIndex].value; //获取option的value
           var pararms ={'val':valOption};// 定义一个js对象
-          alert(valOption);
+/*           alert(valOption); */
           
           $.ajax({
   			url:'/toGetQtNum',
@@ -1864,7 +1864,7 @@ a label {
 		})
 		
 		$('#choose').click(function(){
-		alert(43);
+/* 		alert(43); */
 			$('#chooseDis').attr('style','display: block');
 			$('#duoChooseDis').attr('style','display: none');
 			$('#answerDis').attr('style','display: none');

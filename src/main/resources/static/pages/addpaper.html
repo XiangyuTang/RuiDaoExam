@@ -49,7 +49,7 @@
 					var papername = $("[id='doc-vld-pwd-1']").val();
 					var papertime = $("[id='doc-vld-pwd-2']").val();
 					var papertype = $("[id='papertype']").val();
-					alert(papertype)
+/* 					alert(papertype) */
 //					alert(1);
 //					alert(papername);
 					$.ajax({
@@ -70,11 +70,10 @@
 						},
  						
 						error:function(e){
+							alert('系统异常！');
 							window.parent.layer.closeAll();
 						} 
 					});
-/* 					alert("添加成功，请前往我的考试界面查看！");
-					window.parent.layer.closeAll(); */
 			});				
 			});
 		</script>
