@@ -210,6 +210,7 @@
 
     </div>   
     <div class="report-summary" id="report-summary">
+    <input id="paper_id" style="display: none;" th:value="${ansPaperId}" />
     	<div class="section-title"><a id="quanmiangaikuo">全面概括</a></div>
     	<p class="pb5 f16">试卷共 <span class="pb5 f16" th:text="${shiTiNum}"></span> 道题，考生共答 <span class="pb5 f16" th:text="${shiTiNum}"></span> 道题</p>
     	<a class="btn btn-link p0">
@@ -665,11 +666,11 @@
 	            </div>
 	            <div class="mt10">
 	                <ul class="links">
-	                    <li><a href="report#jibenxinxi">基本信息</a></li>
-	                    <li><a href="report#quanmiangaikuo">全面概括</a></li>
-	                    <li><a href="report#datiqingkuang">答题情况</a></li>
-	                    <li><a href="report#baogaopingyu">报告评语</a></li>
-	                    <li><a href="report#ceshirizhi">测试日志</a></li>
+	                    <li><a th:href="@{'marking?paper_id='+${paper_id}+'#jibenxinxi'}">基本信息</a></li>
+	                    <li><a th:href="@{'marking?paper_id='+${paper_id}+'#quanmiangaikuo'}">全面概括</a></li>
+	                    <li><a th:href="@{'marking?paper_id='+${paper_id}+'#datiqingkuang'}">答题情况</a></li>
+	                    <li><a th:href="@{'marking?paper_id='+${paper_id}+'#baogaopingyu'}">报告评语</a></li>
+	                    <li><a th:href="@{'marking?paper_id='+${paper_id}+'#ceshirizhi'}">测试日志</a></li>
 	                 </ul>
 	            </div>
 	        </div>
