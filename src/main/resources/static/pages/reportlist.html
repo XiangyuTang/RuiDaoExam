@@ -251,7 +251,7 @@
  		        <div th:remove="(${hashMap.answeredpapers} == null)? all:none">
 		        	<div th:each="answeredpaper:${hashMap.answeredpapers}" >
 		        	<div th:each="report:${hashMap.reports}"  th:remove="(${answeredpaperStat.count} == ${reportStat.count})? none:all">
-		        		<div th:each="student:${hashMap.students}"  th:remove="(${answeredpaperStat.count} == ${studentStat.count})? none:all">      
+		        		<div th:each="student:${hashMap.students}"  th:remove="(${answeredpaperStat.count} == ${studentStat.count})? none:all" th:with="datatime=${report.endTimestamp}">      
 				        <tbody data-jsv-df="" class="item">
 				        	<tr data-jsv="#41^#28_#78_" class="report-item">
 				        	<td style="width:30px;vertical-align:middle;">
@@ -265,7 +265,7 @@
 					        <td style="width:10%;vertical-align:middle;">
 					            <a class="btn btn-link candidate-name fb" target="_blank" title="" th:text="${student.name}" th:href="@{/marking(report_id=${report.reportId},answeredpaper_id=${answeredpaper.ansPaperId})}">哈哈哈</a>
 					        </td>
-					        <td style="min-width:135px;vertical-align:middle;" th:text="${report.endTimestamp}">2019-06-14 16:18</td>
+					        <td style="min-width:135px;vertical-align:middle;" th:text="${#dates.format(datatime,'yyyy-MM-dd hh:mm:ss')}">2019-06-14 16:18</td>
 					        <td  style="width: 60px;vertical-align:middle;" th:text="${report.acquiredScore}">&nbsp;30</td>
 					        
 					        <td style="width:30%;vertical-align:middle;" th:text="${report.totalScore}">&nbsp;30
