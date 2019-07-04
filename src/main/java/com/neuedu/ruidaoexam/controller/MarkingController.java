@@ -15,6 +15,7 @@ import com.neuedu.ruidaoexam.entity.ForChoiceQuestion;
 import com.neuedu.ruidaoexam.entity.ForJudgeQuestion;
 import com.neuedu.ruidaoexam.entity.ForTianKongQuestion;
 import com.neuedu.ruidaoexam.entity.ForWenDaQuestion;
+import com.neuedu.ruidaoexam.service.PreviewService;
 import com.neuedu.ruidaoexam.service.impl.PaperServiceimpl;
 import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
 
@@ -25,6 +26,8 @@ public class MarkingController {
 	ReportServiceimpl reportServiceimpl;
 	@Autowired
 	PaperServiceimpl PaperServiceimpl;
+	@Autowired
+	PreviewService previewService;
 	
 	@RequestMapping("/marking")
 	public String getJiBenXinXi(Integer report_id,Integer answeredpaper_id,  Model model) throws Exception{
@@ -46,8 +49,10 @@ public class MarkingController {
 		int isModified = Integer.parseInt(sIsModified);
 		String ansPaperIdTag = studentInof.get(8);
 		String stuIdTag = studentInof.get(9);
+		String paperIdString = studentInof.get(10);
 		int ansPaperId = Integer.parseInt(ansPaperIdTag);
 		int stuId = Integer.parseInt(stuIdTag);
+		int paperId = Integer.parseInt(paperIdString);
 //		request.getSession().setAttribute("sName", sName);
 //		request.getSession().setAttribute("sEmail", sEmail);
 //		request.getSession().setAttribute("sScore", sScore);
@@ -66,7 +71,6 @@ public class MarkingController {
 		model.addAttribute("reportId", report_id);
 		model.addAttribute("ansPaperId", ansPaperId);
 		model.addAttribute("stuId", stuId);
-		
 		//获取判卷页全面概括数据
 		ArrayList<String> quanMianGaiKuo = reportServiceimpl.getQuanMianGaiKuo(report_id);
 		
@@ -94,6 +98,18 @@ public class MarkingController {
 		
 		String shiTiNum = quanMianGaiKuo.get(18);
 		
+		
+		ArrayList<String> getNum = previewService.getNum(paperId);
+		String getXuanZeNum = getNum.get(0);
+		String getPanDuanNum = getNum.get(1);
+		String getTianKongNum = getNum.get(2);
+		String getWenDaNum = getNum.get(3);
+		int getXuanZe = Integer.parseInt(getXuanZeNum);
+		int getPanDuan = Integer.parseInt(getPanDuanNum);
+		int getTianKong = Integer.parseInt(getTianKongNum);
+		int getWenDa = Integer.parseInt(getWenDaNum);
+		int num = getXuanZe + getPanDuan + getTianKong + getWenDa;
+		model.addAttribute("num", num);
 //		request.getSession().setAttribute("keGuanTiNum", keGuanTiNum);
 //		request.getSession().setAttribute("keGuanTiScore", keGuanTiScore);
 //		request.getSession().setAttribute("keGuanTiTotalScore", keGuanTiTotalScore);

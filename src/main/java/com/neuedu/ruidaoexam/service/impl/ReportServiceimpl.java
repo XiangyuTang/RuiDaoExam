@@ -113,6 +113,7 @@ public class ReportServiceimpl implements ReportService{
 		studentInfoArrayList.add(answeredPaper.getIsModifiedByTeacher().toString());
 		studentInfoArrayList.add(ansPaperIdTag);
 		studentInfoArrayList.add(stuIdTag);
+		studentInfoArrayList.add(answeredPaper.getPaperId().toString());
 		
 		return studentInfoArrayList;
 	}

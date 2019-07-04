@@ -27,6 +27,7 @@ import com.neuedu.ruidaoexam.entity.Paper;
 import com.neuedu.ruidaoexam.entity.Report;
 import com.neuedu.ruidaoexam.entity.ReportandAnswered;
 import com.neuedu.ruidaoexam.entity.Student;
+import com.neuedu.ruidaoexam.service.PreviewService;
 import com.neuedu.ruidaoexam.service.impl.PaperServiceimpl;
 import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
 
@@ -39,6 +40,8 @@ public class ReportController {
 	PaperServiceimpl PaperServiceimpl;
 	@Autowired
 	AnsweredPaperMapper answeredPaperMapper;
+	@Autowired
+	PreviewService previewService;
 	
 	@RequestMapping(value="/searchScore",method = RequestMethod.POST)
     @ResponseBody
@@ -74,7 +77,9 @@ public class ReportController {
 		String comment = studentInof.get(6);
 		String sIsModified = studentInof.get(7);
 		int isModified = Integer.parseInt(sIsModified);
-
+		String paperIdString = studentInof.get(10);
+		int paperId = Integer.parseInt(paperIdString);
+		
 		model.addAttribute("sName", sName);
 		model.addAttribute("sEmail", sEmail);
 		model.addAttribute("sScore", sScore);
@@ -130,6 +135,18 @@ public class ReportController {
 		model.addAttribute("wenDaTiWrongNum", wenDaTiWrongNum);
 		model.addAttribute("wenDaTiScore", wenDaTiScore);
 		model.addAttribute("shiTiNum", shiTiNum);
+		
+		ArrayList<String> getNum = previewService.getNum(paperId);
+		String getXuanZeNum = getNum.get(0);
+		String getPanDuanNum = getNum.get(1);
+		String getTianKongNum = getNum.get(2);
+		String getWenDaNum = getNum.get(3);
+		int getXuanZe = Integer.parseInt(getXuanZeNum);
+		int getPanDuan = Integer.parseInt(getPanDuanNum);
+		int getTianKong = Integer.parseInt(getTianKongNum);
+		int getWenDa = Integer.parseInt(getWenDaNum);
+		int num = getXuanZe + getPanDuan + getTianKong + getWenDa;
+		model.addAttribute("num", num);
 		
 //		//获取报告页选择题答题情况数据
 		ArrayList<ForChoiceQuestion> forChoiceQuestionInList = reportServiceimpl.getXuanZeDaTiQingKuang(paper_id);
