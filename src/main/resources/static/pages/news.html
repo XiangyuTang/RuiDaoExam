@@ -41,7 +41,7 @@
 							<div class="new-message" th:each="news:${newslist}" th:remove="(${news.newsType} == 0 )? none:all">
 								<img src="../img/wenda_logo_9a612b2.png" th:src="@{static/img/wenda_logo_9a612b2.png}" width="40" height="40"  style="float: left;"/>
 								<div class="cont">
-									<p><a  th:text="${news.newsContent}">消息内容</a></p> 
+									<p><a  th:text="${news.newsContent}" th:href="toentrance">消息内容</a></p> 
 							 		<div class="datetime" th:text="${news.newsTime}">
 							            2019/06/15 20:35
 							        </div>
