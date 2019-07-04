@@ -49,10 +49,24 @@
 					var papername = $("[id='doc-vld-pwd-1']").val();
 					var papertime = $("[id='doc-vld-pwd-2']").val();
 					var papertype = $("[id='papertype']").val();
+					var flag = true;
 /* 					alert(papertype) */
 //					alert(1);
 //					alert(papername);
-					$.ajax({
+					if(papername == ""){
+						alert("请输入试卷名!")
+						flag = false;
+					}
+					if(papertime == ""){
+						alert("请输入考试时间!")
+						flag = false;
+					}
+					if(papertype == 0){
+						alert("请选择试卷类型!")
+						flag = false;
+					}
+					if(flag){
+						$.ajax({
 						type:"get",
 						url:"addpaper",
 						async:false,
@@ -67,13 +81,13 @@
 								window.parent.layer.closeAll();
 							}
 
-						},
- 						
+						}, 						
 						error:function(e){
 							alert('系统异常！');
 							window.parent.layer.closeAll();
 						} 
 					});
+					}
 			});				
 			});
 		</script>
@@ -106,7 +120,7 @@
 								试卷类型:</label>
 							<div class="am-u-sm-9">
 								<select name="city" lay-verify=""  style="width: 300px;" id="papertype">
-								  <option value="1">请选择试卷类型</option>
+								  <option value="0">请选择试卷类型</option>
 								  <option value="1">IT技术</option>
 								  <option value="2">IQ&EQ</option>
 								  <option value="3">招聘真题</option>

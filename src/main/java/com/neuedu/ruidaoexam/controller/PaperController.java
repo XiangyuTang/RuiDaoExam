@@ -32,7 +32,7 @@ public class PaperController {
 	@ResponseBody
 	public String addquestomapper(Integer questype, Integer quesid, String score) {
 		for (Ques_Paper_Mapper mapper:Mappers) {
-			System.out.println(mapper.getQuesType());
+//			System.out.println(mapper.getQuesType());
 			if (mapper.getQuesType() == questype && (mapper.getCqId()==quesid || mapper.getEqId()==quesid || mapper.getJqId()==quesid)) {
 				return "false";
 			}
@@ -57,6 +57,20 @@ public class PaperController {
 			Mappers.add(ques_Paper_Mapper);
 		}
 		return "true";
+	}
+	
+	@RequestMapping("/deletequestomapper")
+	@ResponseBody
+	public String deletequestomapper(Integer questype, Integer quesid, String score) {
+		int i = 0;
+		for (Ques_Paper_Mapper mapper:Mappers) {
+			i++;
+			if (mapper.getQuesType() == questype && (mapper.getCqId()==quesid || mapper.getEqId()==quesid || mapper.getJqId()==quesid)) {
+				Mappers.remove(i);
+				return "true";
+			}
+		}
+		return "false";
 	}
 	
 	//添加试卷，此处可以尝试使用activemq

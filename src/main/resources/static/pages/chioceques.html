@@ -19,8 +19,12 @@
   					var questype = $(this).parent().prev().attr("questype");
   					var quesid = $(this).parent().prev().attr("quesid");
   					var score = $(this).parent().parent().find("input[id=quesscore]").val();
-  					$.ajax({
+  					var ischioce = $(this).is(":checked")
+//					alert(ischioce)
+  					if(ischioce){
+  						$.ajax({
   						type:"get",
+  						async:"false",
   						url:"/addquestomapper",
   						data:{
   							"questype":questype,
@@ -39,6 +43,29 @@
   							}
   						}
   					})
+  					}else{
+  						$.ajax({
+  						type:"get",
+  						url:"/deletequestomapper",
+  						async:"false",
+  						data:{
+  							"questype":questype,
+  							"quesid":quesid,
+  							"score":score
+  						},
+  						dataType:"text",
+  						success:function(e){
+  							if(e == 'true'){
+  								
+  							}else{
+								layui.use(['layer'], function(){
+	  							var layer = layui.layer
+	  							layer.msg('系统异常');
+								});
+  							}
+  						}
+  					})
+  					}
 /*   					alert(quesid);
   					alert(questype);
   					alert(score); */
