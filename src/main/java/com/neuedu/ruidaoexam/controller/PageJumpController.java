@@ -330,7 +330,7 @@ public class PageJumpController {
 		public String toaddbank() {
 			return "addbank";
 		}
-
+		
 }
 
 

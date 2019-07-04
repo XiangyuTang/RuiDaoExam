@@ -38,11 +38,11 @@
 				<div data-log-from="Notice" class="p-notice-cont w-feed-notice" style="">
 					<div class="w-feed">
 						<div class="w-feed-container" th:remove="(${newslist} == null)? all:none">
-							<div class="new-message" th:each="news:${newslist}" th:remove="(${news.newsType} == 0 )? none:all">
+							<div class="new-message" th:each="news:${newslist}" th:remove="(${news.newsType} == 0 )? none:all" th:with="newstime=${news.newsTime}">
 								<img src="../img/wenda_logo_9a612b2.png" th:src="@{static/img/wenda_logo_9a612b2.png}" width="40" height="40"  style="float: left;"/>
 								<div class="cont">
 									<p><a  th:text="${news.newsContent}" th:href="toentrance">消息内容</a></p> 
-							 		<div class="datetime" th:text="${news.newsTime}">
+							 		<div class="datetime" th:text="${#dates.format(newstime,'yyyy-MM-dd hh:mm:ss')}">
 							            2019/06/15 20:35
 							        </div>
 								</div>
@@ -55,11 +55,11 @@
 				<div data-log-from="Notice" class="p-notice-cont w-feed-notice" style="">
 					<div class="w-feed">
 						<div class="w-feed-container" th:remove="(${newslist} == null)? all:none">
-							<div class="new-message" th:each="news:${newslist}" th:remove="(${news.newsType} == 1 )? none:all">
+							<div class="new-message" th:each="news:${newslist}" th:remove="(${news.newsType} == 1 )? none:all" th:with="newstime=${news.newsTime}">
 								<img src="../img/wenda_logo_9a612b2.png" th:src="@{static/img/wenda_logo_9a612b2.png}" width="40" height="40"  style="float: left;"/>
 								<div class="cont">
 									<p><a  th:text="${news.newsContent}">消息内容</a></p> 
-							 		<div class="datetime" th:text="${news.newsTime}">
+							 		<div class="datetime" th:text="${#dates.format(newstime,'yyyy-MM-dd hh:mm:ss')}">
 							            2019/06/15 20:35
 							        </div>
 								</div>
@@ -72,11 +72,11 @@
 				<div data-log-from="Notice" class="p-notice-cont w-feed-notice" style="">
 					<div class="w-feed">
 						<div class="w-feed-container" th:remove="(${news} == null)? all:none">
-							<div class="new-message" th:each="new:${news}" th:remove="(${new.newsType} == 2 )? none:all">
+							<div class="new-message" th:each="new:${news}" th:remove="(${new.newsType} == 2 )? none:all" th:with="newstime=${news.newsTime}">
 								<img src="../img/wenda_logo_9a612b2.png" th:src="@{static/img/wenda_logo_9a612b2.png}" width="40" height="40"  style="float: left;"/>
 								<div class="cont">
 									<p><a data-log="Visit_Answer|From_AnswerLink" th:href="" th:text="${new.newsContent}">消息内容</a></p> 
-							 		<div class="datetime" th:text="${new.newstime}">
+							 		<div class="datetime" th:text="${#dates.format(newstime,'yyyy-MM-dd hh:mm:ss')}">
 							            2019/06/15 20:35
 							        </div>
 								</div>
