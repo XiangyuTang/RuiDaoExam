@@ -163,7 +163,7 @@
                     <p class="summary">*以上仅显示单选题，多选题与判断题的得分*</p>
                                                 <div class="exam-end-btn">
                                             <a class="btn btn-re" href="toindex" th:href="@{toindex}">回到首页</a>
-                                             <a onlyforsharer="" share-action="check-report" class="btn btn-warning btn-report" >查看对错</a>
+                                            <a onlyforsharer="" share-action="check-report" class="btn btn-warning btn-report" th:href="@{/report(paper_id=${paper_id})}" target="_blank">查看对错</a>
                                            <!-- <a class="btn feedback-trigger btn-success">在线反馈</a>-->
                 </div>
                 <div class="title">点<a href="http://localhost:8080/tohome">首页</a>注册可查成绩报告；或去<a href="http://118.24.55.226:8080/RuiDaoQA/index.jsp">睿道问答社区</a>提问；或将成绩分享到 
@@ -233,13 +233,14 @@
     })();
 </script>
 <script>
-	$(function(){
-		$("a[share-action='check-report']").click(function(){
-			var ans_paper_id = GetQueryString("paper_id");
-			window.location.href="report?paper_id="+ans_paper_id;
-		})
-			
-	})
+//	$(function(){
+//		$("a[share-action='check-report']").click(function(){
+//			var ans_paper_id = GetQueryString("paper_id");
+//			window.location.href="report?paper_id="+ans_paper_id;
+////			window.open("report?paper_id="+ans_paper_id,"_blank");
+//		})
+//			
+//	})
 
 </script>
 
