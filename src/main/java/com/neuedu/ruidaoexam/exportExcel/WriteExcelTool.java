@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.filechooser.FileSystemView;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -40,9 +42,11 @@ public class WriteExcelTool {
             		row.createCell(m).setCellValue(dn.getDatas().get(j).get(m));
             	}
             }
-            	
+            FileSystemView fsv = FileSystemView.getFileSystemView();
+   		 	File com=fsv.getHomeDirectory(); 
+   		 	String path1 = com.toString();	
             //输出Excel文件
-            File file=new File("C:\\Users\\18940\\Desktop\\"+fileName+".xls");
+            File file=new File(path1+"\\"+fileName+".xls");
         	try {
         		file.createNewFile();
         		FileOutputStream stream=FileUtils.openOutputStream(file);
