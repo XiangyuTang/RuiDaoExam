@@ -69,6 +69,7 @@ public class ExamController {
 	@Autowired
 	StudentService studentService;
 	
+
 	@RequestMapping(value="/verifyintoexam",method = RequestMethod.POST)
     @ResponseBody
     public String verifyIntoExam(String email,String invitecode,String base64url,HttpSession session,HttpServletRequest request) {

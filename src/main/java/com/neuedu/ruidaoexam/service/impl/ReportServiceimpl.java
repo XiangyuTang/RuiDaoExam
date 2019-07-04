@@ -61,32 +61,9 @@ public class ReportServiceimpl implements ReportService{
 		
 		Report report = new Report();
 		report.setReportId(Integer.parseInt(reportArray.get(0)));
-//		report.setPaperId(Integer.parseInt(reportArray.get(1)));
-//		report.setStuId(Integer.parseInt(reportArray.get(2)));
-//		report.setAcquiredScore(Integer.parseInt(reportArray.get(3)));
-//		report.setTotalScore(Integer.parseInt(reportArray.get(4)));
+
 		report.setComment(reportArray.get(1));
-		
-//		//String类型转换为Date类型
-//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		String sBeginTimestamp = reportArray.get(6);
-//        Date dsBeginTimestamp = null;
-//		try {
-//			dsBeginTimestamp = simpleDateFormat.parse(sBeginTimestamp);
-//		} catch (ParseException e1) {
-//		}
-//        String sEndTimestamp = reportArray.get(7);
-//        Date dEndTimestamp = null;
-//		try {
-//			dEndTimestamp = simpleDateFormat.parse(sEndTimestamp);
-//		} catch (ParseException e) {
-//		}
-//        
-//		report.setBeginTimestamp(dsBeginTimestamp);
-//		report.setEndTimestamp(dEndTimestamp);
-//		report.setSwitchTimes(Integer.parseInt(reportArray.get(8)));
-//		report.setIsAllowedToSee(Integer.parseInt(reportArray.get(9)));
-		
+
 		reportMapper.updateByPrimaryKeySelective(report);
 		
 	}
@@ -403,12 +380,7 @@ public class ReportServiceimpl implements ReportService{
 			
 			index++;
 		}
-		
-//		int i = forChoiceQuestionInList.size();
-//		for (int j = 0; j < i; j++) {
-//			System.out.println("pppppppppppppppppppppppppppppppp" + forChoiceQuestionInList.get(j).getIscorrect());
-//			System.out.println("pppppppppppppppppppppppppppppppp" + forChoiceQuestionInList.get(j).getScore());
-//		}
+
 		
 		return forChoiceQuestionInList;
 		
@@ -704,51 +676,6 @@ public class ReportServiceimpl implements ReportService{
 		if (!student_idList.isEmpty()) {
 			students = studentMapper.getStudentsinList(student_idList);
 		}
-//		for (Student student:students) {
-//			System.out.println(student.getName());
-//		}
-//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-//		for (Report report:reports) {
-//			System.out.println(report.getAcquiredScore());
-//		}
-//		for (Student student:students) {
-//			System.out.println(student.getName());
-//		}
-//		for (AnsweredPaper answeredPaper:answeredPapers) {
-//			ReportandAnswered reportandAnswered = new ReportandAnswered();
-//			System.out.println(answeredPaper.getAnsPaperId());
-//			System.out.println(answeredPaper.getStuId());
-////			System.out.println(answeredPaper.getAnsPaperId());
-//			System.out.println(answeredPaper.getIsModifiedByTeacher());
-//			System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWW");
-//			reportandAnswered.setAnsweredpaper_id(answeredPaper.getAnsPaperId());
-//			reportandAnswered.setPaper_id(paper_id);
-//			reportandAnswered.setStudent_id(answeredPaper.getStuId());
-//			reportandAnswered.setModify(answeredPaper.getIsModifiedByTeacher());
-//			reportandAnswereds.add(reportandAnswered);
-//		}
-//		for (Report report:reports) {
-//			System.out.println(report.getAcquiredScore());
-//			int i = 0;
-//			ReportandAnswered reportandAnswered = reportandAnswereds.get(i);
-//			reportandAnswereds.get(i).setReport_id(report.getReportId());
-//			reportandAnswereds.get(i).setEndtime(report.getEndTimestamp());
-//			reportandAnswereds.get(i).setAcquiredScore(report.getAcquiredScore());
-//			reportandAnswereds.get(i).setTotalScore(report.getTotalScore());
-//			System.out.println(reportandAnswereds.get(i).getAcquiredScore());
-//			i++;
-//		}
-//		for (Student student:students) {
-//			int j = 0;
-//			reportandAnswereds.get(j).setStudentname(student.getName());
-//			System.out.println(student.getName());
-//			System.out.println(reportandAnswereds.get(j).getStudentname());
-//			System.out.println(reportandAnswereds.get(j).getAcquiredScore());
-//			j++;
-//		}
-//		for (Report report : reports) {
-//			System.out.println(report.getPaperId());
-//		}
 		
 		HashMap<String,Object> hashMap = new HashMap<String,Object>();
 		hashMap.put("answeredpapers", answeredPapers);
@@ -768,42 +695,7 @@ public class ReportServiceimpl implements ReportService{
 		
 	}
 
-//	@Override
-//	public ArrayList<ForChoiceQuestion> getXuanZeDaTiQingKuang(int report_id) {
-//		Report report = reportMapper.selectByPrimaryKey(report_id);
-//		int paperResultId = report.getPaperId();
-//		
-//		AnsweredQuestion answeredQuestion = answeredQuestionMapper.selectByPaperResultId(paperResultId);
-//		int cpId = answeredQuestion.getCqId();
-//		
-//		
-//		ChoiceQuestion choiceQuestion = choiceQuestionMapper.selectByPrimaryKey(cpId);
-//		int abilityTypeId = choiceQuestion.getAbilityTypeId();
-//		
-////		QuestionType questionType = questionTypeMapper.selectByPrimaryKey(quesTypeId);
-//		AbilityType abilityType = abilityTypeMapper.selectByPrimaryKey(abilityTypeId);
-//		
-//		ArrayList<ForChoiceQuestion> forChoiceQuesntionList = new ArrayList<>();
-//		int i = forChoiceQuesntionList.size();
-//		ForChoiceQuestion forChoiceQuestion = new ForChoiceQuestion();
-//		for (int j = 0; j < i; j++) {
-//			forChoiceQuestion.setChoiceQuesId(choiceQuestion.getChoiceQuesId());
-//			forChoiceQuestion.setQuesTypeId(choiceQuestion.getQuesTypeId());
-//			forChoiceQuestion.setContent(choiceQuestion.getContent());
-//			forChoiceQuestion.setChoice1(choiceQuestion.getChoice1());
-//			forChoiceQuestion.setChoice2(choiceQuestion.getChoice2());
-//			forChoiceQuestion.setChoice3(choiceQuestion.getChoice3());
-//			forChoiceQuestion.setChoice4(choiceQuestion.getChoice4());
-//			forChoiceQuestion.setAnswer(answeredQuestion.getAnswer());
-//			forChoiceQuestion.setRightAnswer(answeredQuestion.getRightAnswer());
-//			forChoiceQuestion.setAnalysis(choiceQuestion.getAnalysis());
-//			forChoiceQuestion.setScore(answeredQuestion.getScore());
-//			forChoiceQuestion.setTotalScore(answeredQuestion.getTotalScore());
-//			forChoiceQuestion.setAbilityType(abilityType.getAbilityType());
-//			forChoiceQuestion.setIscorrect(answeredQuestion.getIscorrect());
-//		}
-//		
-//		return forChoiceQuesntionList;
-//	}
+	
+
 
 }

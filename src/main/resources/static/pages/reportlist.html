@@ -25,6 +25,10 @@
 		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
 		<script type="text/javascript" src="../js/echarts.js" th:src="@{static/js/echarts.js}"></script>
 		<link charset="utf-8" rel="stylesheet" href="../layuiadmin/layui/css/layui.css" th:href="@{/static/layuiadmin/layui/css/layui.css}" media="all">
+		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" th:src="@{static/js/jquery-1.9.1.min.js}"></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<link rel="stylesheet" href="../css/res/layui/css/layui.css" th:href="@{static/css/res/layui/css/layui.css}" media="all">
+		<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 		<style>
 			/*.main{
 				margin-left: auto;
@@ -144,6 +148,49 @@
 	</head>
 	<body>
 		<div class="main">
+			  <div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<div class="modal-body">
+									<h4 class="modal-title" align="center">查询成绩区间</h4>
+									<br/>
+									<form class="form-horizontal" role="form">
+										<div class="form-group">
+											<label for="name" class="col-sm-offset-2 col-sm-2 control-label">起始成绩</label>
+											<div class="col-sm-5">
+												<input type="text" class="form-control" id="beginscore" placeholder="请输入起始成绩">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="password" class="col-sm-offset-2 col-sm-2 control-label">终止成绩</label>
+											<div class="col-sm-5">
+												<input type="text" class="form-control" id="endscore" placeholder="请输入终止成绩">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-4 col-sm-5">
+												<button id="submitBtn" type="button" class="btn btn-default btn-block btn-primary">查询</button>
+											</div>
+										</div>
+										</form>
+							</div>
+							<div class="modal-footer">
+								<input id="stu_num" type="hidden" th:value="${stu_num}" th:title="${stu_num}"/>
+								<center>
+								<div id="loading" style="display: none;">
+									该成绩分段总人数占：
+									<span id="num_result" ></span>
+									人
+								</div>
+								</center>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
 		<div class="main-center">
 		<div id="report-list-panel">
 		    <div>			    
@@ -165,6 +212,14 @@
 					    <span>导出考试详情表</span>
 <!--					    </a>-->
 					  </button>
+					  
+					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary" id="tbox">
+<!--					  	<a href="/export" th:href="@{/export(paper_id=${paper_id},paper_name=${paper_name})}">-->
+					    <i class="layui-icon">&#xe615</i>
+					    <span>查询成绩分段</span>
+<!--					    </a>-->
+					 </button>
+
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
 					    <i class="layui-icon">&#xe602;</i>
 					  </button>
@@ -266,5 +321,61 @@
 //				}
 //	  	})
   </script>
+
+
+<script type="text/javascript">
+$(function(){
+
+	$("#tbox").click(function(){
+		$('#myModal').modal('show') //显示模态框
+	})
+	
+	$("#submitBtn").click(function(){
+		var beginscore = $('#beginscore').val();
+		var endscore = $('#endscore').val();
+		//var reports = $('#reports').val();
+		if(beginscore==""||endscore=="")
+		{
+			layui.use(['layer', 'form'], function(){
+		  		var layer = layui.layer
+		  			,form = layui.form;
+		  			layer.msg('请补全成绩区间...');
+			});
+			return;
+		}
+		if(beginscore<0||endscore>200||beginscore>endscore)
+		{
+			layui.use(['layer', 'form'], function(){
+		  		var layer = layui.layer
+		  			,form = layui.form;
+		  			layer.msg('非法的成绩区间...');
+			});
+			return;
+		}
+		var datas={"beginscore":beginscore,"endscore":endscore};
+		$.ajax({
+	        	type:"post",
+	        	url:"searchScore",
+	        	async:true,
+	        	dataType:'json',//'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
+				data:datas,//将json对象转换成字符串,再向后台传递
+				success:function(result){
+					//alert(result);
+					$("#num_result").html(result);
+					$("#loading").css("display","block"); 
+				},
+				error:function(result){
+					console.log(e);
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('服务器开小差了...');
+					});
+				}
+	        });
+	})
+});
+
+</script>
 	</body>
 </html>

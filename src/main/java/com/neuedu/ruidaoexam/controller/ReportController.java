@@ -6,13 +6,17 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.xmlbeans.impl.jam.mutable.MPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.neuedu.ruidaoexam.configUtils.SegmentTree;
 import com.neuedu.ruidaoexam.dao.AnsweredPaperMapper;
 import com.neuedu.ruidaoexam.entity.AnsweredPaper;
 import com.neuedu.ruidaoexam.entity.ForChoiceQuestion;
@@ -36,10 +40,28 @@ public class ReportController {
 	@Autowired
 	AnsweredPaperMapper answeredPaperMapper;
 	
+	@RequestMapping(value="/searchScore",method = RequestMethod.POST)
+    @ResponseBody
+    public Integer searchScore(Integer beginscore,Integer endscore,HttpSession session,HttpServletRequest request) {
+		System.out.println(beginscore+"-----------"+endscore);
+		List<Report> reports = (List<Report>) session.getAttribute("reports");
+		//int size = reports.size();
+		int score[] = new int[201];
+		for(int i=1;i<=200;i++)
+			score[i] = 0;
+		for(Report r:reports)
+		{
+			score[r.getAcquiredScore()] ++ ;
+		}
+		int num = SegmentTree.searchSum(score, 200, beginscore, endscore);
+		return num;
+	}
+	
 	@RequestMapping("/report")
 	public String getJiBenXinXi(Integer paper_id,HttpServletRequest request,HttpServletResponse response, Model model) throws Exception{
 		Integer uid = Integer.parseInt(String.valueOf(request.getSession().getAttribute("uid")).trim());
 		int report_id = reportServiceimpl.getReport(paper_id, uid);
+		model.addAttribute("paper_id", paper_id);
 		
 		//获取报告页基本信息数据
 		ArrayList<String> studentInof = reportServiceimpl.getJiBenXinXi(report_id);
@@ -52,7 +74,7 @@ public class ReportController {
 		String comment = studentInof.get(6);
 		String sIsModified = studentInof.get(7);
 		int isModified = Integer.parseInt(sIsModified);
-		
+
 		model.addAttribute("sName", sName);
 		model.addAttribute("sEmail", sEmail);
 		model.addAttribute("sScore", sScore);
@@ -159,75 +181,12 @@ public class ReportController {
 		
 	}
 	@RequestMapping("/getRepotsAndAnsweredpaper")
-	public String getRepotsAndAnsweredpaper(Integer paper_id,Model m) {
+	public String getRepotsAndAnsweredpaper(Integer paper_id,Model m,HttpSession session) {
 		HashMap<String, Object> hashMap = reportServiceimpl.getReportsByPaperId(paper_id);
+		List<Report> reports = (List<Report>) hashMap.get("reports");
+		session.setAttribute("reports", reports);
 		Paper paper = PaperServiceimpl.getPaperByPaperId(paper_id);
-//		System.out.println(paper.getPaperName());
-//		for (int i = 0; i <10; i++) {
-//			System.out.println(1);
-//		}
-		
-//		List<AnsweredPaper> answeredPapers = (List<AnsweredPaper>) hashMap.get("answeredpapers");
-//		List<Report> reports = (List<Report>) hashMap.get("reports");
-//		List<Student> students = (List<Student>) hashMap.get("students");
-//		for (AnsweredPaper answeredPaper:answeredPapers) {
-//			System.out.println(answeredPaper.getAnsPaperId());
-//		}
-//		for (Report report:reports) {
-//			System.out.println(report.getReportId());
-//		}
-//		for (Student student:students) {
-//			System.out.println(student.getName());
-//		}
-//		List<ReportandAnswered> reportandAnswereds = new ArrayList<ReportandAnswered>();
-//		for (AnsweredPaper answeredPaper:answeredPapers) {
-//		ReportandAnswered reportandAnswered = new ReportandAnswered();
-		
-//		System.out.println(answeredPaper.getAnsPaperId());
-//		System.out.println(answeredPaper.getStuId());
-////		System.out.println(answeredPaper.getAnsPaperId());
-//		System.out.println(answeredPaper.getIsModifiedByTeacher());
-//		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWW");
-		
-//		reportandAnswered.setAnsweredpaper_id(answeredPaper.getAnsPaperId());
-//		reportandAnswered.setPaper_id(paper_id);
-//		reportandAnswered.setStudent_id(answeredPaper.getStuId());
-//		reportandAnswered.setModify(answeredPaper.getIsModifiedByTeacher());
-//		reportandAnswereds.add(reportandAnswered);
-//	}
-//	for (Report report:reports) {
-//		System.out.println(report.getAcquiredScore());
-//		int i = 0;
-//		ReportandAnswered reportandAnswered = reportandAnswereds.get(i);
-//		reportandAnswereds.get(i).setReport_id(report.getReportId());
-//		reportandAnswereds.get(i).setEndtime(report.getEndTimestamp());
-//		reportandAnswereds.get(i).setAcquiredScore(report.getAcquiredScore());
-//		reportandAnswereds.get(i).setTotalScore(report.getTotalScore());
-////		System.out.println(reportandAnswereds.get(i).getAcquiredScore());
-//		i++;
-//	}
-//	for (Student student:students) {
-//		int j = 0;
-//		reportandAnswereds.get(j).setStudentname(student.getName());
-////		System.out.println(student.getName());
-////		System.out.println(reportandAnswereds.get(j).getStudentname());
-////		System.out.println(reportandAnswereds.get(j).getAcquiredScore());
-//		j++;
-//	}
-//	for (ReportandAnswered reportandAnswered:reportandAnswereds) {
-//		System.out.println(reportandAnswered.getStudentname());
-//		System.out.println(reportandAnswered.getAcquiredScore());
-//	}
-//		for (ReportandAnswered reportandAnswered:reportandAnswereds) {
-//			System.out.println(reportandAnswered.getStudentname());
-//			System.out.println(reportandAnswered.getAcquiredScore());
-//		}
-//		for (Report report:reports) {
-//			System.out.println(report.getReportId());
-//		}
-//		for (AnsweredPaper answeredPaper:answeredpapers) {
-//			System.out.println(answeredPaper.getAnsPaperId());
-//		}
+
 		m.addAttribute("hashMap", hashMap);
 		m.addAttribute("paper_id", paper_id);
 		m.addAttribute("paper_name", paper.getPaperName());
