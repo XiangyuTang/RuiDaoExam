@@ -35,4 +35,20 @@ public interface Ques_Paper_MapperMapper {
     int countKeGuanQuestionNum(Integer paperId);	//取试卷中客观题总数
     
     int countZhuGuanQuestionNum(Integer paperId);	//取试卷中主观题总数
+    
+    List<Ques_Paper_Mapper> selectXuanZeByPaperId(Integer paperId);
+    
+    List<Ques_Paper_Mapper> selectPanDuanByPaperId(Integer paperId);
+    
+    List<Ques_Paper_Mapper> selectTianKongByPaperId(Integer paperId);
+    
+    List<Ques_Paper_Mapper> selectWenDaByPaperId(Integer paperId);
+    
+    int countXuanZeNum(Integer paperId);
+    
+    int countPanDuanNum(Integer paperId);
+    
+    int countTianKongNum(Integer paperId);
+    
+    int countWenDaNum(Integer paperId);
 }
