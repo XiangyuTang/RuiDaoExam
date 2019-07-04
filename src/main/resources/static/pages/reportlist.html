@@ -183,7 +183,9 @@
 								<div id="loading" style="display: none;">
 									该成绩分段总人数占：
 									<span id="num_result" ></span>
-									人
+									人, 占比：
+									<span id="num_rate" ></span>
+									%
 								</div>
 								</center>
 							</div>
@@ -214,10 +216,8 @@
 					  </button>
 					  
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary" id="tbox">
-<!--					  	<a href="/export" th:href="@{/export(paper_id=${paper_id},paper_name=${paper_name})}">-->
 					    <i class="layui-icon">&#xe615</i>
 					    <span>查询成绩分段</span>
-<!--					    </a>-->
 					 </button>
 
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
@@ -255,7 +255,6 @@
 				        <tbody data-jsv-df="" class="item">
 				        	<tr data-jsv="#41^#28_#78_" class="report-item">
 				        	<td style="width:30px;vertical-align:middle;">
-				                <!--<input type="checkbox" data-link="_selected">-->
 					        </td>
 					        
 					        <td style="width: 30px;">
@@ -333,7 +332,7 @@ $(function(){
 	$("#submitBtn").click(function(){
 		var beginscore = $('#beginscore').val();
 		var endscore = $('#endscore').val();
-		//var reports = $('#reports').val();
+		var totalnum = $('#length').val();
 		if(beginscore==""||endscore=="")
 		{
 			layui.use(['layer', 'form'], function(){
@@ -343,7 +342,7 @@ $(function(){
 			});
 			return;
 		}
-		if(beginscore<0||endscore>200||beginscore>endscore)
+		if(beginscore<0||endscore<0||beginscore>200||endscore>200||beginscore>endscore)
 		{
 			layui.use(['layer', 'form'], function(){
 		  		var layer = layui.layer
@@ -360,8 +359,8 @@ $(function(){
 	        	dataType:'json',//'application/json;charset=UTF-8',//request请求的类型是json类型,字符编码是utf-8
 				data:datas,//将json对象转换成字符串,再向后台传递
 				success:function(result){
-					//alert(result);
 					$("#num_result").html(result);
+					$('#num_rate').html((result*1.0/totalnum)*100);
 					$("#loading").css("display","block"); 
 				},
 				error:function(result){
