@@ -202,24 +202,31 @@
 					    <i class="layui-icon">&#xe654;</i>
 					  </button>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary" id="export1">
-<!-- 					  	<a href="/export1" th:href="@{/export1(paper_id=${paper_id},paper_name=${paper_name})}"> -->
+					  	<a>
 					    <i class="layui-icon">&#xe642;</i>
 					    <span>导出考试汇总表</span>
-<!-- 					    </a> -->
+					    </a> 
 					  </button>
 					  <input type="hidden" th:value="${paper_id}" th:title="${paper_name}"/>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary" id="export">
-<!--					  	<a href="/export" th:href="@{/export(paper_id=${paper_id},paper_name=${paper_name})}">-->
+					  	<a>
 					    <i class="layui-icon">&#xe621</i>
 					    <span>导出考试详情表</span>
-<!--					    </a>-->
+					    </a>
 					  </button>
 					  
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary" id="tbox">
+					  	<a>
 					    <i class="layui-icon">&#xe615</i>
 					    <span>查询成绩分段</span>
+					    </a>
 					 </button>
-
+					 <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary" id="">
+					  	<a href="/export" th:href="@{/preview(paper_id=${paper_id})}">
+					    <i class="layui-icon">&#xe621</i>
+					    <span>查看试卷详情</span>
+					    </a>
+					  </button>
 					  <button type="button" class="layui-btn layui-btn-sm  layui-btn-primary">
 					    <i class="layui-icon">&#xe602;</i>
 					  </button>

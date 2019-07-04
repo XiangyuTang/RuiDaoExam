@@ -23,9 +23,10 @@ public class PreviewController {
 	
 	@RequestMapping("/preview")
 	public String getDaTiQingKuang(Integer paper_id, Model model) throws Exception{
-		
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+		System.out.println(paper_id);
 //		model.addAttribute("paper_id", paper_id);
-		int paperId = 1;
+		int paperId = paper_id;
 		
 		//获取报告页选择题答题情况数据
 		ArrayList<String> getNum = previewService.getNum(paperId);
