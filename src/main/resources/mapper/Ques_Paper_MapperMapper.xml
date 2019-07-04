@@ -255,4 +255,44 @@
       score = #{score,jdbcType=VARCHAR}
     where mapper_id = #{mapperId,jdbcType=INTEGER}
   </update>
+  <select id="countXuanZeNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from ques_paper_mapper
+    where paper_id = #{paperId} and (ques_type = 1 or ques_type = 2)
+  </select>
+  <select id="countPanDuanNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from ques_paper_mapper
+    where paper_id = #{paperId} and (ques_type = 4)
+  </select>
+  <select id="countTianKongNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from ques_paper_mapper
+    where paper_id = #{paperId} and (ques_type = 5)
+  </select>
+  <select id="countWenDaNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  	select count(*)
+    from ques_paper_mapper
+    where paper_id = #{paperId} and (ques_type = 3)
+  </select>
+  <select id="selectXuanZeByPaperId" resultMap="BaseResultMap" >
+    select * 
+    from ques_paper_mapper
+ 	where paper_id = #{paperId} and (ques_type = 1 or ques_type = 2)
+  </select>
+  <select id="selectPanDuanByPaperId" resultMap="BaseResultMap" >
+    select * 
+    from ques_paper_mapper
+ 	where paper_id = #{paperId} and (ques_type = 4)
+  </select>
+  <select id="selectTianKongByPaperId" resultMap="BaseResultMap" >
+    select * 
+    from ques_paper_mapper
+ 	where paper_id = #{paperId} and (ques_type = 5)
+  </select>
+  <select id="selectWenDaByPaperId" resultMap="BaseResultMap" >
+    select * 
+    from ques_paper_mapper
+ 	where paper_id = #{paperId} and (ques_type = 3)
+  </select>
 </mapper>
