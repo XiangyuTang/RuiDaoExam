@@ -22,7 +22,8 @@
 
 <link rel="bookmark" href="https://www.101test.com/assets/img/favicon.ico">
 <link rel="shortcut icon" href="https://www.101test.com/assets/img/favicon.ico">
-
+<link rel="stylesheet" href="../css/res/layui/css/layui.css" th:href="@{static/css/res/layui/css/layui.css}" media="all">
+<script src="../layuiadmin/layui/layui.js" th:src="@{static/layuiadmin/layui/layui.js}"></script>
 <link rel="stylesheet" href="/static/pages/添加题目 第三章中国历史文化_files/layuiadmin/layui/css/layui.css" media="all">
 
 <link rel="stylesheet" href="/static/pages/添加题目 第三章中国历史文化_files/sets.min.css">
@@ -1008,10 +1009,18 @@ window.DBL_CLICK = true;
 				contentType:false,
 				data:filedata,
 				success:function(e){
-					alert('批量导入成功');
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('批量导入成功，请前往我的题库查看！');
+					});
 				},
 				error:function(e) {
-					alert('批量导入失败');
+					layui.use(['layer', 'form'], function(){
+				  		var layer = layui.layer
+				  			,form = layui.form;
+				  			layer.msg('批量导入失败！');
+					});
 				}
 			})
  		})
