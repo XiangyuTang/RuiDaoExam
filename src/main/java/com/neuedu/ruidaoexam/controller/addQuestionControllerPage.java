@@ -18,7 +18,8 @@ public class addQuestionControllerPage {
 	
 	@RequestMapping("/submitForm")
 	public String submitForm(HttpServletRequest request) {
-		int bank_id = 1;
+		int bank_id = Integer.parseInt(request.getParameter("bank_id").toString());
+;
 		ArrayList<String> questionsArray = new ArrayList<String>();
 		String atNum = request.getSession().getAttribute("atNum").toString();
 		String qtNum = request.getSession().getAttribute("qtNum").toString();
