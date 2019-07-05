@@ -23,6 +23,7 @@ import com.neuedu.ruidaoexam.service.ModifyPaperService;
 import com.neuedu.ruidaoexam.service.QueryAbilityService;
 import com.neuedu.ruidaoexam.service.QuestionService;
 import com.neuedu.ruidaoexam.service.ReportService;
+import com.neuedu.ruidaoexam.service.SensitiveWordService;
 import com.neuedu.ruidaoexam.service.impl.QuestionServiceimpl;
 import com.neuedu.ruidaoexam.service.impl.ReportServiceimpl;
 import com.neuedu.ruidaoexam.entity.Student;
@@ -39,6 +40,8 @@ public class AjaxController {
 	QueryAbilityService queryAbilityService;
 	@Autowired
 	ModifyPaperService modifyPaperService;
+	@Autowired
+	SensitiveWordService sensitiveWordService; 
 	/**
 	 * 教师发布报告评语
 	 * @return
@@ -118,8 +121,9 @@ public class AjaxController {
 		}
 		else
 		{
+			String return_text = sensitiveWordService.replaceBadWord(msg.getAnswer(), 2, "*");//敏感词过滤，2代表最大匹配原则，将敏感词替换为*
 			aq = new AnsweredQuestion(null,msg.getPaperResultId(),msg.getQuestype(),null,msg.getQuesid(),null,
-					msg.getAnswer(),msg.getRightanswer(),msg.getScore(),msg.getTotalScore(),msg.getIscorrect());
+					return_text,msg.getRightanswer(),msg.getScore(),msg.getTotalScore(),msg.getIscorrect());
 		}
 		int i = 0;
 		try {
