@@ -47,22 +47,34 @@
 				$ = layui.$
 				$("[class='am-btn am-btn-success']").click(function(){
 					var papername = $("[id='doc-vld-pwd-1']").val();
-					var papertime = $("[id='doc-vld-pwd-2']").val();
+					var papertime = 10;
 					var papertype = $("[id='papertype']").val();
 					var flag = true;
 /* 					alert(papertype) */
 //					alert(1);
 //					alert(papername);
 					if(papername == ""){
-						alert("请输入试卷名!")
+/* 						layui.use(['layer'], function(){
+  							var layer = layui.layer
+  							layer.msg('系统异常');
+							}); */
+/* 						alert("请输入试卷名!") */
 						flag = false;
 					}
 					if(papertime == ""){
-						alert("请输入考试时间!")
+/* 						layui.use(['layer'], function(){
+  							var layer = layui.layer
+  							layer.msg('请输入考试时间!');
+							}); */
+/* 						alert("请输入考试时间!") */
 						flag = false;
 					}
 					if(papertype == 0){
-						alert("请选择试卷类型!")
+						layui.use(['layer'], function(){
+  							var layer = layui.layer
+  							layer.msg('请选择试卷类型!');
+							});
+/* 						alert("请选择试卷类型!") */
 						flag = false;
 					}
 					if(flag){
@@ -107,14 +119,14 @@
 									style="width: 300px;" name="papername"> <small></small>
 							</div>
 						</div>
-						<div class="am-form-group" align="left" style="margin-top: 8%">
+<!-- 						<div class="am-form-group" align="left" style="margin-top: 8%">
 							<label for="user-name" class="am-u-sm-3 am-form-label">
 								考试时长:</label>
 							<div class="am-u-sm-9">
 								<input type="text" id="doc-vld-pwd-2" required placeholder="请输入考试时长（以分钟为单位）" 
 									 style="width: 300px;" name="papertime" > <small></small>
 							</div>
-						</div>
+						</div> -->
 						<div class="am-form-group" align="left" style="margin-top: 8%">
 							<label for="user-name" class="am-u-sm-3 am-form-label">
 								试卷类型:</label>

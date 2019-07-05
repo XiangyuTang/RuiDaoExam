@@ -62,13 +62,17 @@ public class PaperController {
 	@RequestMapping("/deletequestomapper")
 	@ResponseBody
 	public String deletequestomapper(Integer questype, Integer quesid, String score) {
+		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
 		int i = 0;
 		for (Ques_Paper_Mapper mapper:Mappers) {
-			i++;
+//			System.out.println(i);
+//			i++;
 			if (mapper.getQuesType() == questype && (mapper.getCqId()==quesid || mapper.getEqId()==quesid || mapper.getJqId()==quesid)) {
 				Mappers.remove(i);
+			System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
 				return "true";
 			}
+			i++;
 		}
 		return "false";
 	}
