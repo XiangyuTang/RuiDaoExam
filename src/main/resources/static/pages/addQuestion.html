@@ -1010,10 +1010,16 @@ window.DBL_CLICK = true;
 				contentType:false,
 				data:filedata,
 				success:function(e){
-					alert('批量导入成功');
+					layui.use(['layer'], function(){
+							var layer = layui.layer
+							layer.msg('批量导入成功!');
+						});
 				},
 				error:function(e) {
-					alert('批量导入失败');
+					layui.use(['layer'], function(){
+							var layer = layui.layer
+							layer.msg('批量导入失败!');
+						});
 				}
 			})
  		})
