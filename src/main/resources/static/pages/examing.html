@@ -701,7 +701,7 @@
 											<div class="test_content_nr_main">
 												<ul>
 														<li class="option">
-																<input type="radio" class="radioOrCheck" th:name="|answer${judgeQuestion.indexOf(judge_question)+1}|"
+																<input type="radio" class="radioOrCheck" th:name="|judge_answer${judgeQuestion.indexOf(judge_question)+1}|"
 																	th:id="|2_answer_${judgeQuestion.indexOf(judge_question)+1}_option_1|"
 																	th:que_type="${judge_question.getQuesTypeId()}"
 																	th:que_id="${judge_question.getJudgeId()}"
@@ -716,7 +716,7 @@
 														</li>
 													
 														<li class="option">
-																<input type="radio" class="radioOrCheck" th:name="|answer${judgeQuestion.indexOf(judge_question)+1}|"
+																<input type="radio" class="radioOrCheck" th:name="|judge_answer${judgeQuestion.indexOf(judge_question)+1}|"
 																	th:id="|2_answer_${judgeQuestion.indexOf(judge_question)+1}_option_2|"
 																	th:que_type="${judge_question.getQuesTypeId()}"
 																	th:que_id="${judge_question.getJudgeId()}"
