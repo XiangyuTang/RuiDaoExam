@@ -52,7 +52,7 @@ public class addQuestionServiceimpl implements addQuestionService{
 		if(character.indexOf("D")!=(-1)||character.indexOf("d")!=(-1)) {
 			Fourth ="1";
 		}
-		result = first+Second+Third+Fourth;
+		result = first+" "+Second+" "+Third+" "+Fourth;
 		System.out.println("jkjjkjkjkjkjjkjkjkjjjkj"+result);
 		return result;
 	}

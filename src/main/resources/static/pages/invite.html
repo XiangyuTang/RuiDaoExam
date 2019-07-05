@@ -306,10 +306,16 @@
 				filedata.append("teacherid",teacher_id);
 				filedata.append("paperid",paper_id);
 				filedata.append("informflag",informflag);
+				layui.use(['layer', 'form'], function(){
+			  		var layer = layui.layer
+			  			,form = layui.form;
+			  			layer.msg('批量通知成功！');
+				});
 				//var a = {'file':data};
 				$.ajax({
 				url:'/importexcel2',
 				type:'post',
+				async:true,
 				processData:false,
 				contentType:false,
 				data:filedata,
@@ -317,11 +323,7 @@
 					var obj = JSON.parse(e);//将字符串转换成json对象
 					var new_html= template("template1",obj);//将json对象绑定到artTemplate模板上
 					$('#listGroup1').append(new_html);
-					layui.use(['layer', 'form'], function(){
-				  		var layer = layui.layer
-				  			,form = layui.form;
-				  			layer.msg('批量通知成功！');
-					});
+					
 				},
 						error:function(e){
 							console.log(e);

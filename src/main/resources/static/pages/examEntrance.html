@@ -133,7 +133,7 @@ $(function(){
 		var invitecode = $('#invitecode').val();
 		//alert(email+invitecode);
 		
-		/*if($("#base64url").val()==""){
+		if($("#base64url").val()==""){
           	layui.use(['layer', 'form'], function(){
 		  		var layer = layui.layer
 		  			,form = layui.form;
@@ -141,7 +141,7 @@ $(function(){
 			});
         }
 		else
-		{*/
+		{
 			var base64url = $("#base64url").val();
 			var datas={"email":email,"invitecode":invitecode,"base64url":base64url};
 			$.ajax({
@@ -166,22 +166,21 @@ $(function(){
 					}
 					else if(e=="-1")
 					{
-						parent.location.href = 'importpaper';//降低安全性操作
-						/*layui.use(['layer', 'form'], function(){
+						//parent.location.href = 'importpaper';//降低安全性操作
+						layui.use(['layer', 'form'], function(){
 					  		var layer = layui.layer
 					  			,form = layui.form;
 					  			layer.msg('人脸不匹配！请重新录入人脸数据！');
-						});*/
+						});
 					}
 					else if(e=="-2")
 					{
-						parent.location.href = 'importpaper';//降低安全性操作
-						/*parent.location.href = 'importpaper';//降低安全性操作
+						//parent.location.href = 'importpaper';//降低安全性操作
 						layui.use(['layer', 'form'], function(){
 					  		var layer = layui.layer
 					  			,form = layui.form;
 					  			layer.msg('系统没有检测到人脸！请重新录入人脸数据！');
-						});*/
+						});
 					}
 					else if(e=="-3")
 					{
@@ -210,7 +209,7 @@ $(function(){
 					});
 				}
 	        });
-		//}
+		}
 		
 	})
 	

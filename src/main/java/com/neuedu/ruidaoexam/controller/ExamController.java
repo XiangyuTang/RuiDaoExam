@@ -273,7 +273,12 @@ public class ExamController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int acquired_score = answeredQuestionService.selectScores(msg.getPaper_id());
+		int acquired_score;
+		try {
+			acquired_score = answeredQuestionService.selectScores(msg.getPaper_id());
+		}catch(org.apache.ibatis.binding.BindingException e){
+			acquired_score = 0 ;
+		}
 		Report r = new Report(null,msg.getPaper_id(),msg.getStu_id(),acquired_score,msg.getTotalScores(),msg.getComment(),begin_time,end_time,msg.getSwitch_time(),1);
 		int flag = 0;
 		int pk = 0;
