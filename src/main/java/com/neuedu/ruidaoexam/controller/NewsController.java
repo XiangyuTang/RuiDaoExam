@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neuedu.ruidaoexam.entity.News;
 import com.neuedu.ruidaoexam.service.NewsService;
@@ -41,4 +42,36 @@ public class NewsController {
 		}
 		return "news";
 	}
+	@RequestMapping("/count")
+	@ResponseBody
+	public String count(HttpServletRequest request) {
+		String role = (String) request.getSession().getAttribute("role");
+		Integer uid = (Integer) request.getSession().getAttribute("uid");
+//		newsService.countTeacherReceiveNews(receive_teacher_id);
+		if (role.equals("teacher")) {			
+			Integer i = newsService.countTeacherReceiveNews(uid);
+			if (i == 0) {
+				return "false";
+			}else {
+				return "true";
+			}
+		}else {
+			Integer j = newsService.countStudentReceiveNews(uid);
+			if (j == 0) {
+				return "false";
+			}else {
+				return "true";
+			}
+		}
+	}
+//	@RequestMapping("/test1")
+//	public String test() {
+//		Integer countStudentReceiveNews = newsService.countStudentReceiveNews(1);
+//		System.out.println("WWWWWWWWWWWWWWWWWWW");
+//		System.out.println(countStudentReceiveNews);
+//		Integer countTeacherReceiveNews = newsService.countTeacherReceiveNews(1);
+//		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMM");
+//		System.out.println(countTeacherReceiveNews);
+//		return "home";
+//	}
 }
