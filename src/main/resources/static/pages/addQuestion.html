@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="/static/pages/添加题目 第三章中国历史文化_files/app.css">
 <link rel="stylesheet" href="/static/pages/添加题目 第三章中国历史文化_files/font-awesome.min.css">
 <link rel="stylesheet" href="/static/pages/添加题目 第三章中国历史文化_files/moon.css">
+<script src="../layuiadmin/layui/layui.js" th:src="@{/static/layuiadmin/layui/layui.js}"></script>
 <script charset="utf-8" src="/static/pages/添加题目 第三章中国历史文化_files/v.js.下载"></script><script src="/static/pages/添加题目 第三章中国历史文化_files/hm.js.下载"></script><script>
     Object.create = Object.create || function (o) {
                 function F() {
@@ -972,6 +973,7 @@ window.DBL_CLICK = true;
 <a href="/tomyBanksTch" class="layui-btn layui-btn-danger" style="margin-left: 1000px; margin-top: 50px;">退出</a>
 
 <form method="post" action="" enctype="multipart/form-data" id="fileform">
+	<input id="tanchukuang" type="hidden" th:value="${flag}"/>
 	<input id="ofbankId" th:value="${bank_id}"  style="display: none" />
 	<input id="the_file" type="file" name="file"><br>
 	<!--<span id="ajaxsubmit" class="uploadText">-->
@@ -1015,8 +1017,14 @@ window.DBL_CLICK = true;
 				}
 			})
  		})
+ 		var flag = $("#tanchukuang").val();
+ 	if(flag == "true"){
+ 		layui.use(['layer'], function(){
+  							var layer = layui.layer
+  							layer.msg('添加成功!');
+							});
+ 	}
  	})
- 
  </script>
    
    
