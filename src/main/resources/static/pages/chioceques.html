@@ -24,7 +24,7 @@
   					if(ischioce){
   						$.ajax({
   						type:"get",
-  						async:"false",
+  						async:false,
   						url:"/addquestomapper",
   						data:{
   							"questype":questype,
@@ -48,7 +48,7 @@
   						$.ajax({
   						type:"get",
   						url:"/deletequestomapper",
-  						async:"false",
+  						async:false,
   						data:{
   							"questype":questype,
   							"quesid":quesid,

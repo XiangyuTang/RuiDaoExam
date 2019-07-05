@@ -32,7 +32,52 @@
     		window.location.href="toShop?haskey=1";
     	});
     	
+    	
   })
+      setInterval("test()",5000);
+    function test(){
+/*     	var flag = $("#xiaoyuandian").attr("class") */
+/*     	if (flag == "layui-badge-dot") { */
+//  		$.ajax({
+//	    		type:"get",
+//	    		async:true,
+//	    		url:"/count",
+//	    		success:function(e){
+//	    			if(e == 'true'){
+//	/*     				alert(e); */
+//	    				$("#xiaoyuandian").addClass("layui-badge-dot")
+//	    			}else{
+//	    				$("#xiaoyuandian").removeClass("layui-badge-dot")
+//	/*     				alert(1); */
+//	    			}
+//	    		}
+//	    	})
+/* 		}else{ */
+			$.ajax({
+	    		type:"get",
+	    		async:true,
+	    		url:"/count",
+	    		success:function(e){
+	    			if(e == 'true'){
+/* 	    				alert(1); */
+	/*     				alert(e); */
+	    				$("#xiaoyuandian").addClass("layui-badge-dot")
+	    			}else{
+/* 	    				alert(2); */
+	    				$("#xiaoyuandian").removeClass("layui-badge-dot")
+	/*     				alert(1); */
+	    			}
+	    		}
+	    	})
+/* 		} */
+    }
+    $(function(){
+    	$('#xiaoxi').click(function(){
+/*     		alert(1); */
+    		$("#xiaoyuandian").removeClass("layui-badge-dot")
+    	})
+    	
+    })
   </script>
 </head>
 <body class="layui-layout-body">
@@ -68,11 +113,11 @@
           </li>
         </ul>
         <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
-          <li class="layui-nav-item" lay-unselect>
+          <li class="layui-nav-item" id="xiaoxi">
             <a  lay-text="消息中心" href="/tonews" th:href="@{/tonews}" target="_blank">
               <i class="layui-icon layui-icon-notice"></i>
               <!-- 如果有新消息，则显示小圆点 -->
-              <span class="layui-badge-dot"></span>
+              <span class="" id="xiaoyuandian"></span>
             </a>
           </li>
           
