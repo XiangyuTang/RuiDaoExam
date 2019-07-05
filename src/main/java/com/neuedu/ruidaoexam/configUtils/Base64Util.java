@@ -1,5 +1,4 @@
 package com.neuedu.ruidaoexam.configUtils;
-
 /**
  * Base64 工具类
  */

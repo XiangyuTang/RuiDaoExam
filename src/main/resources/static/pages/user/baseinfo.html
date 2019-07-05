@@ -42,23 +42,13 @@
                 </div>
                 <div class="layui-form-mid layui-word-aux">不可修改</div>
               </div>
-              <div class="layui-form-item">
-                <label class="layui-form-label">头像</label>
-                <div class="layui-input-inline">
-                  <input name="" lay-verify="required" id="LAY_avatarSrc" placeholder="图片地址" value="http://cdn.layui.com/avatar/168.jpg" class="layui-input">
-                </div>
-                <div class="layui-input-inline layui-btn-container" style="width: auto;">
-                  <button type="button" class="layui-btn layui-btn-primary" id="LAY_avatarUpload">
-                    <i class="layui-icon">&#xe67c;</i>上传图片
-                  </button>
-                  <button class="layui-btn layui-btn-primary" layadmin-event="avartatPreview">查看图片</button >
-                </div>
-             </div>
+ 
               <div class="layui-form-item">
                 <label class="layui-form-label">可用积分</label>
                 <div class="layui-input-inline">
                   <input type="text" name="points" id="points"  readonly class="layui-input">
                 </div>
+                 <button class="layui-btn layui-btn-primary" id="recharge">充值积分</button >
               </div>
               
        
@@ -78,6 +68,27 @@
     index: 'lib/index' //主入口模块
   }).use(['index', 'set'],function(){
     var $=layui.$
+   $("#recharge").on('click',function(){
+   	layer.open({
+   		type:2,
+   		content:"/static/pages/cao.html"
+   	})
+//    layer.prompt({
+//formType: 0,
+//title: '请输入要充值的积分数量',
+//area: ['200px', '100px'] //自定义文本域宽高
+//}, function(value, index, elem){
+//alert(value); //得到value
+//$.ajax({
+//  url:"/paypal/pay",
+//  type:"post",
+//  data:{"value":value}
+//  
+//})
+//layer.close(index);
+//
+//});
+    })
     $.ajax({
       url:"/showInfo",
       type:"POST",

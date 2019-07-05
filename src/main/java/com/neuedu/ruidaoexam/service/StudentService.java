@@ -3,6 +3,7 @@ package com.neuedu.ruidaoexam.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.neuedu.ruidaoexam.entity.Paper;
@@ -27,7 +28,7 @@ public interface StudentService {
 	 * 最后决定使用后者的getStudent
 	 */
 	//public Student getStudent(Integer stuid);
-	@Cacheable(value="Student")
+	@CacheEvict(value="Student")
 	Student getStudent(Integer stuid);
 	
 	Student getStudentByEmail(String email);
