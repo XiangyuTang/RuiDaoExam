@@ -70,7 +70,7 @@ public class MailConfig {
 		String exam_time = msg.getDatePoor(msg.getEndtime(), msg.getBegintime());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh时mm分"); 
 		String timeFormat = sdf.format(msg.getBegintime());
-		message.setContent("<font style='color:red'>请您在"+timeFormat+"参与考试,考试时间共计"+exam_time+",您的邀请码为："+inviteCode+",请及时参加！</font><br><a href='http://localhost:8080//toentrance' >点击进入考试入口</a>", "text/html;charset=UTF-8");
+		message.setContent("<font style='color:red'>请您在"+timeFormat+"参与考试,考试时间共计"+exam_time+",您的邀请码为："+inviteCode+",请及时参加！</font><br><a href='http://10.25.40.46:8080//toentrance' >点击进入考试入口</a>", "text/html;charset=UTF-8");
 		// 返回创建好的邮件对象
 		return message;
 	}

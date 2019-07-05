@@ -24,9 +24,6 @@ public class BaseInfoController {
 			return teacherservice.getTeacher(uid);
 		}else {
 			return studentservice.getStudent(uid);
-			
-			
-			
 		}
 	}
 }

@@ -46,6 +46,10 @@ public class StudentIndexController {
 			vo.setPaper_name(paperservice.getPaper_name(reportservice.getPaper_id(report.getReportId())));
 			vo.setPaper_id(report.getPaperId());
 			vo.setScore(report.getAcquiredScore()+"");
+			SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy:MM:dd HH:mm:ss" ); 
+			 String str = sdf.format(report.getEndTimestamp()); 
+			vo.setDate(str);
+			
 			voInfos.add(vo);
 		}
 		return voInfos;
@@ -95,9 +99,7 @@ public class StudentIndexController {
 			        String str = sdf.format(map.getValue()); 
 					map.setValue(str);
 				}
-				
-					
-				
+
 			}
 			resultList.add(maps);
 		}
