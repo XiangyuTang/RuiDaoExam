@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.neuedu.ruidaoexam.service.impl.addQuestionServiceimpl;
@@ -17,9 +18,9 @@ public class addQuestionControllerPage {
 	addQuestionServiceimpl aqsi;
 	
 	@RequestMapping("/submitForm")
-	public String submitForm(HttpServletRequest request) {
+	public String submitForm(HttpServletRequest request,Model m) {
 		int bank_id = Integer.parseInt(request.getParameter("bank_id").toString());
-;
+		m.addAttribute("flag","true");
 		ArrayList<String> questionsArray = new ArrayList<String>();
 		String atNum = request.getSession().getAttribute("atNum").toString();
 		String qtNum = request.getSession().getAttribute("qtNum").toString();
