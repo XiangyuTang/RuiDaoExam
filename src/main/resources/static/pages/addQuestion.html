@@ -972,7 +972,7 @@ window.DBL_CLICK = true;
 <a href="/tomyBanksTch" class="layui-btn layui-btn-danger" style="margin-left: 1000px; margin-top: 50px;">退出</a>
 
 <form method="post" action="" enctype="multipart/form-data" id="fileform">
-	<input id="ofbankId" value="1"  style="display: none" />
+	<input id="ofbankId" th:value="${bank_id}"  style="display: none" />
 	<input id="the_file" type="file" name="file"><br>
 	<!--<span id="ajaxsubmit" class="uploadText">-->
 	<input type="button" id="ajaxsubmit" value="提交">
